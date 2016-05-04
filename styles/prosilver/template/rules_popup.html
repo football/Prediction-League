@@ -1,0 +1,70 @@
+<!-- INCLUDE simple_header.html -->
+
+
+<div class="panel">
+	<br />
+	<div class="navbar football_bg">
+		<div class="maintitle">{L_FOOTBALL_RULES} <br /> {LEAGUENAME} {SEASONNAME}</div>
+	</div>
+	<br />
+<!-- IF S_DATA_RULES -->
+	<p style="font-size=:4.0em;font-weight:bold">
+	<!-- IF S_RULES_POST_ID -->
+	{LINK_RULES}
+	<!-- ELSE -->
+	{L_NO_LINK_RULES}
+	<!-- ENDIF -->
+	</p>
+	{L_RULES_EXPLAIN}
+	<br />
+	
+	<h2>{L_JOIN_MODE}</h2>
+	{JOIN_MODE}<br />	
+	
+	<h2>{L_POINTS}</h2>
+	{POINTS_HIT}	
+	{POINTS_DIFF}
+	{POINTS_TENDENCY}
+	{POINTS_LAST}
+	
+	<h2>{L_DELIVERY}</h2>
+	<!-- IF S_BET_IN_TIME -->
+	{L_BET_IN_TIME}
+	<!-- ELSE -->
+	{L_BET_UNTIL_DELIVERY}
+	<!-- ENDIF -->
+	<!-- BEGIN wintable -->
+	<h2>{wintable.WIN_DESC}</h2>
+	<div style="width:120px">
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_PLACE}</th>
+						<th style="text-align: right;">{WIN_NAME}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN entry -->
+					<tr class="{wintable.entry.ROW_CLASS}">
+						<td class="td_team">{wintable.entry.RANK}</td>
+						<td class="td_wins">{wintable.entry.WIN}</td>
+					</tr>
+				<!-- END entry -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both" />
+	<!-- END wintable -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{S_ERROR_MESSAGE}</div>
+	<br />
+<!-- ENDIF -->
+	<br />
+	<div style="text-align:center">
+		<a href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a>
+	</div>
+</div>
+<!-- INCLUDE simple_footer.html -->

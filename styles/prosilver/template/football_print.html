@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="phpBB3 Football Extension by football" />
+<meta name="keywords" content="phpBB3, Football, Extension, Tipprunde, Prediction, League, Soccer" />
+<meta name="description" content="" />
+<meta name="robots" CONTENT="noindex" />
+{META}
+<title>{SITENAME} &bull; {PAGE_TITLE}</title>
+<link href="./../../ext/football/football/styles/prosilver/theme/football_print.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="phpbb" style="width:100%">
+<div id="wrap">
+	<a id="top" accesskey="t"></a>
+
+	<div id="page-header">
+	<!-- IF S_DISPLAY_BANK -->
+		<h2><a href="{U_SIDE_LINK}">{S_SIDENAME}</a> &bull; {S_SEASON_NAME} &bull; {S_LEAGUE_NAME}</h2>
+	<!-- ELSE -->
+		<h2><a href="{U_SIDE_LINK}">{S_SIDENAME}</a> &bull; {S_SEASON_NAME} &bull; {S_LEAGUE_NAME} &bull; {S_MATCHDAY_NAME}</h2>
+		<p>{S_DELIVERY}</p>
+	<!-- ENDIF -->
+	</div>
+
+	<div id="page-body">
+		<div class="page-number">{PAGE_NUMBER}</div>
+		<!-- IF S_DISPLAY_BET -->
+			<!-- INCLUDE bet.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ALL_BETS -->
+			<table class="football">
+				<tr>
+					style="vertical-align: top;"
+					<!-- INCLUDE all_bets.html -->
+					</td>
+					<td style="width:4px; vertical-align: top;"></td>
+					<td style="width:{FOOTBALL_RIGHT_COLUMN}px; vertical-align: top;">
+					<!-- IF S_DISPLAY_RANK_TOTAL -->
+						<!-- INCLUDE rank_total.html -->
+					<!-- ENDIF -->
+					</td>
+				</tr>
+			</table>
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RESULTS -->
+			<!-- INCLUDE results.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RANKS_MATCHDAY -->
+			<!-- INCLUDE ranks.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RANKS_TOTAL -->
+			<!-- INCLUDE ranks.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_TABLE -->
+			<!-- INCLUDE table.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ODDS -->
+			<!-- INCLUDE odds.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_BETS -->
+			<!-- INCLUDE my_bets.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_POINTS -->
+			<!-- INCLUDE my_points.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_TABLE -->
+			<!-- INCLUDE my_table.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_RANK -->
+			<!-- INCLUDE my_rank.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_CHART -->
+			<!-- INCLUDE my_chart.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_KOEFF -->
+			<!-- INCLUDE my_koeff.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_STAT_RESULTS -->
+			<!-- INCLUDE stat_results.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_STAT_POINTS -->
+			<!-- INCLUDE stat_points.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_BANK -->
+			<!-- INCLUDE bank.html -->
+		<!-- ENDIF -->
+
+		</div>
+
+	<div id="page-footer">
+		<div class="copyright">		
+			<!-- IF S_FOOTBALL_COPY --><br />{S_FOOTBALL_COPY}<!-- ENDIF -->
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+/* -----------------------------------------------------------------------------------------
+ * @package phpBB Extension - Football Football
+ * @copyright (c) 2016 football (http://football.bplaced.net)
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ * ----------------------------------------------------------------------------------------- */
+
+.football-table-scroll { 
+    overflow-x:auto;
+    overflow-y:visible;
+	width: 100%;
+}
+ 
+#football-links {
+	margin: 0 7px 0 0;
+}
+
+#football-links a.responsive-menu-link {
+	display: block;
+	font-size: inherit;
+	line-height: inherit;
+	margin: 0;
+	width: auto;
+}
+
+#football-links a.responsive-menu-link:before {
+	font-size: 16px;
+	line-height: 16.5px;
+}
+
+.compact #football-links a.responsive-menu-link {
+	font-size: 0;
+}
+
+
+span.small-icon {
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	width: 16px;
+	height: 14px;
+}
+
+.icon-allbets		{ background-image: url("./images/icon_allbets.gif"); }
+.icon-ball			{ background-image: url("./images/icon_ball.gif"); }
+.icon-ball2			{ background-image: url("./images/icon_ball2.gif"); }
+.icon-bet			{ background-image: url("./images/icon_bet.gif"); }
+.icon-bookmark		{ background-image: url("./images/icon_bookmark.gif"); }
+.icon-download		{ background-image: url("./images/icon_download.gif"); }
+.icon-football		{ background-image: url("./images/icon_football.gif"); background-repeat: no-repeat; }
+.icon-info			{ background-image: url("./images/icon_info.gif"); }
+.icon-list			{ background-image: url("./images/icon_list.gif"); }
+.icon-mark			{ background-image: url("./images/icon_mark.gif"); }
+.icon-odds			{ background-image: url("./images/icon_odds.gif"); }
+.icon-points		{ background-image: url("./images/icon_points.gif"); }
+.icon-print			{ background-image: url("./images/icon_print.gif"); }
+.icon-rank			{ background-image: url("./images/icon_rank.gif"); }
+.icon-results		{ background-image: url("./images/icon_results.gif"); }
+.icon-rules			{ background-image: url("./images/icon_rules.gif"); }
+.icon-statistics	{ background-image: url("./images/icon_statistics.gif"); }
+.icon-xml			{ background-image: url("./images/icon_xml.gif"); }
+
+/**
+* Replacement for table layout
+*/
+#football-left, #football-right {
+	position: relative;
+	float: left;
+}
+
+.football-inner-left, .football-inner-right {
+	position: relative;
+	float: left;
+	width: 50%;
+}
+
+.football-inner-left .forabg {
+	margin-right: 4px;
+}
+
+.football-inner-right .forabg {
+	margin-left: 4px;
+}
+
+.rtl .football-inner-left .forabg {
+	margin-left: 4px;
+}
+
+.rtl .football-inner-right .forabg {
+	margin-right: 4px;
+}
+
+.rtl #football-left, .rtl #football-right, .rtl .football-inner-left, .rtl .football-inner-right {
+	float: right;
+}
+
+#football-center-wrapper {
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+.rtl #football-center-wrapper {
+	float: right;
+}
+
+#football-left {
+	margin-left: -100%;
+}
+
+.rtl #football-left {
+	margin-right: -100%;
+	margin-left: 0;
+}
+
+#football-body {
+	padding-top: 0px;
+	width: 100%;
+}
+
+#football-body .panel {
+	margin-bottom: 4px;
+}
+
+#football-body {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+@media only screen and (max-width: 1125px), only screen and (max-device-width: 1125px)
+{
+	div#football-right { width: 50% !important; float: right; }
+	div#football-left { clear: both; width: 50% !important; float: left; margin-left: 0 !important; }
+	.football-inner-left { clear: both; width: 100% !important; margin: 0 !important; }
+	.football-inner-right { clear: both; width: 100% !important; margin: 0 !important; }
+	.football-inner-left .forabg, .football-inner-right .forabg {margin-left: 0px; margin-right: 0px;}
+	div#football-center {
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+		padding-right: 0 !important;
+		padding-left: 0 !important;
+	}
+	#football-right .panel {
+		margin-left: 2px;
+	}
+	#football-left .panel {
+		margin-right: 2px;
+	}
+}
+
+div.info {
+	background-color: #0094FF;
+	color: #fff;
+	margin: 4px 0;
+	font-size: 1.1em;
+	padding: 5px 10px;
+	border-radius: 7px;
+}
+
+.construction {
+	background-image: url("./images/under_construction.gif");
+	background-repeat: no-repeat;
+	height: 135px;
+	width: 155px;
+}
+
+.football_bg {
+	margin-bottom: 5px;
+	padding: 0 5px;
+	clear: both; 
+}
+
+.football-h3 {
+	/* Sub-headers (also used as post headers, but defined later) */
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1.05em;
+}
+
+/* Table for rank in a box */
+table.rank 							{ font-size: 0.9em; padding: 2px !important; vertical-align: middle; border-collapse:separate; border-radius: 0px; border-spacing: 0px; width: 100%; }
+table.rank thead th 				{ font-weight: normal; text-transform: uppercase; color: #FFFFFF; padding: 0 2px 1px 2px; vertical-align: middle; }
+table.rank tbody tr 				{ border: 1px solid #cfcfcf; }
+table.rank tbody tr:hover, 
+table.rank tbody tr.hover  			{ background-color: #FFFFFF; color: #000000; }
+table.rank td 						{ padding: 0 2px; vertical-align: middle; }
+table.rank td.td_rank 				{ text-align: right; }
+table.rank td.td_pts 				{ text-align: right; } 
+table.rank td.td_wins 				{ padding: 0 2px 0 4px; text-align: right; }
+
+/* Table for football data */
+/* Specific column styles */
+table.football_main 				{ font-size: 1em; padding: 0px !important; border-collapse:collapse; border-radius: 0px; border-spacing: 0px; width: 100%; }
+table.football 						{ font-size: 1em; padding: 0px !important; border-collapse:collapse; border-radius: 0px; border-spacing: 0px; width: 100%; }
+table.football th 					{ text-align: center; color: #FFFFFF; vertical-align: middle;}
+table.football thead th				{ font-weight: normal; text-transform: uppercase; line-height: 1.3em; padding: 0 2px 2px 2px; vertical-align: middle;}
+table.football tfoot td 			{ text-align: center; color: #FFFFFF; font-weight: normal; text-transform: uppercase; line-height: 1.3em; padding: 0 2px 2px 2px; vertical-align: middle; }
+table.football thead th span 		{ padding-left: 7px; }
+table.football tbody tr:hover, 
+table.football tbody tr.hover 		{ background-color: #FFFFFF; color: #000000; }
+table.football tbody td 			{ padding: 1px 2px; border-top: 1px solid #FAFAFA; vertical-align: middle;}
+table.football tbody th 			{ padding: 1px 2px; border-top: 1px solid #000000; vertical-align: middle;}
+table.football tbody tr 			{ border: 1px solid #cfcfcf; }
+table.football td 					{ vertical-align: middle; }
+table.football td.td_tendency 		{ padding: 4px 2px 0 2px; font-weight: bold; }
+table.football td.td_pts_total  	{ text-align: right; padding: 4px 4px 0 2px; }
+table.football td.td_rank 			{ text-align: right; }
+table.football td.td_group 			{ text-align: center; }
+table.football td.td_hits 			{ text-align: center; }
+table.football td.td_wins 			{ text-align: right; padding: 0 2px 0 4px; }
+table.football td.td_match_no 		{ text-align: right; }
+table.football td.td_logo 			{ text-align: center; }
+table.football td.td_team 			{ text-align: left; }
+table.football td.td_team_home 		{ text-align: right; width: 155px; }
+table.football td.td_team_guest 	{ text-align: left; width: 155px; }
+table.football td.td_vs 			{ text-align: center; max-width: 1em; padding: 0; }
+table.football td.td_goals_home 	{ text-align: right; max-width: 2em; padding: 0; }
+table.football td.td_goals_guest 	{ text-align: left; max-width: 2em; padding: 0; white-space: nowrap; }
+table.football td.td_pts 			{ text-align: right; padding: 0 2px 0 2px; white-space: nowrap; }
+table.football td.td_button 		{ text-align: right; padding-right: 4px; }
+table.football td.td_result 		{ text-align: center; }
+table.football td.td_season 		{ text-align: center; }
+table.football td.td_league 		{ text-align: center; }
+table.football td.td_pts_total		{ text-align: right; padding: 0 4px 0 2px; }
+table.football td.td_points			{ text-align: right; padding: 0 2em 0 2px; }
+table.football td.td_fp 			{ text-align: center; }
+table.football td.td_matches 		{ text-align: center; }
+table.football td.td_diff 			{ text-align: right; }
+table.football td.td_counter 		{ text-align: right; }
+table.football td.td_name 			{ text-align: left; }
+table.football td.td_edit_right 	{ text-align: right; white-space: nowrap; padding: 0; }
+table.football td.td_edit_left 		{ text-align: left; white-space: nowrap; padding: 0; }
+
+table.rank td.color_finally, table.football .color_finally, .color_finally , table.football .match_win, .match_win { 
+	font-weight: bold; 
+	color: #00AA00; 
+}
+
+table.rank td.color_provisionally, table.football .color_provisionally, .color_provisionally , table.football .match_lost, .match_lost  { 
+	font-weight: bold; 
+	color: #AA0000; 
+}
+
+table.football .match_draw, .match_draw  { 
+	font-weight: bold; 
+	color: #6A6A6A; 
+}
+
+table.rank td.color_not_rated, table.football .color_not_rated, .color_not_rated { 
+	font-weight: bold; 
+	color: purple; 
+}
+
+/* Links for past and future delivery */
+a.pastlink, a.futurelink {
+	font-size: 1.0em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a.pastlink   { color: #CC0000 !important; }
+
+a.futurelink { color: #006600 !important; }
+
+a.pastlink:hover, a.futurelink:hover  { 
+	text-decoration: underline; 
+}
+
+a.football_print {
+	background-image: url("./images/icon_print.gif");
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	width: 16px;
+	height: 14px;
+}
+
+a.match_info {
+	display: block;
+	overflow: hidden;
+	width: 28px;
+	height: 28px;
+	text-indent: -5000px;
+	text-align: left;
+	background-repeat: no-repeat;
+	background-image: url("./images/icon_statistic.gif");
+}
+
+a.prev_matchday {
+	background: transparent url("./images/left_arrow.png") no-repeat scroll 50% 0;
+	display: inline-block;
+	overflow: hidden;
+	width: 16px;
+	height: 16px;
+}
+
+a.next_matchday {
+	background: transparent url("./images/right_arrow.png") no-repeat scroll 0 0;
+	display: inline-block;
+	overflow: hidden;
+	width: 16px;
+	height: 16px;
+}
+
+.message {
+	font-weight: bold;
+	color: #AA0000;
+}
+
+.maintitle {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+	color: #5c81b1; 
+}
+
+/* Background colors where the tables iterate between two colors or mark user*/
+.row_light 		{ background-color: #e1ebf2; }
+.row_dark 		{ background-color: #cadceb; }
+.row_user 		{ background-color: #99CC99; }
+.row_group td	{ background-color: #12A3EB; color: #FFFFFF !important; }
+.row_result 	{ background-color: #BFC1CF; }
+.row_result td 	{ padding: 1px 2px; }

@@ -1,0 +1,430 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_UPDATE_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_UPDATE_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_SUCCESS -->
+		<div class="successbox">
+			<h3>{L_ADVICE}</h3>
+			<p>{SUCCESS_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_SOURCE}</legend>
+	<dl>
+		<dt><label for="xml_season_url">{L_XML_SEASON_URL}:</label><br /><span>{L_XML_SEASON_URL_EXPLAIN}</span></dt>
+		<dd>
+			<input name="xml_season_url" type="text" id="xml_season_url" value="{XML_SEASON_URL}" size="60" maxlength="100" 
+				<!-- IF not S_ALLOW_URL_FOPEN --> DISABLED <!-- ENDIF -->/>
+			<input class="button1" type="submit" id="load_xml_season" name="load_xml_season" value="{L_LOAD}" />&nbsp;
+		<!-- IF not S_ALLOW_URL_FOPEN -->
+			<br /> <span style="color: red;">{L_ALLOW_URL_FOPEN}</span>
+		<!-- ENDIF -->
+		</dd>
+	</dl>
+	</fieldset>
+	</form>
+	
+<!-- IF S_CHOOSE -->
+	
+	<form method="post" action="{U_CHOOSE_ACTION}">
+	<fieldset>
+		<legend>{L_CHOOSE_LEAGUES}</legend>
+	<dl>
+		<dt><label for="xs">{L_SOURCE}:</label></dt>
+		<dd>
+			<div style="display:inline; margin:0; padding:0;">
+				<input type="hidden" name="xml_season_url" value="{XML_SEASON_URL}" />
+				<input type="hidden" name="league_name" value="{S_LEAGUE_NAME}" />
+				<input type="hidden" name="xcode" value="{S_XCODE}" />
+				<select name="xs" id="xs" onchange="this.form.submit();">{S_XSEASON_OPTIONS}</select>
+			</div>
+			<div style="display:inline; margin:0; padding:0;">
+				<select name="xl" id="xl" onchange="this.form.submit();">{S_XLEAGUE_OPTIONS}</select>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="s">{L_TARGET}:</label></dt>
+		<dd>
+			<div style="display:inline; margin:0; padding:0;">
+				<select name="s" id="season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+			</div>
+			<div style="display:inline; margin:0; padding:0;">
+				<select name="l" id="league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+			</div>
+			<div title="{L_NEW_LEAGUE_EXPLAIN}" style="display:inline; margin:0; padding:0;">
+				<input  name="new_league" type="text" id="new_league" value="{NEW_LEAGUE}" size="2" maxlength="2" /> 
+			</div>
+		</dd>
+	</dl>
+	
+	</fieldset>
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<!-- IF S_LEAGUE -->
+			<input class="button1" type="submit" id="team_mapping" name="team_mapping" value="{L_COMPARE_UPDATE}" />&nbsp;
+		<!-- ELSE -->
+			<input class="button1" type="submit" id="load_xml_league" name="load_xml_league" value="{L_SHOW_UPDATE}" />&nbsp;
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+<!-- ENDIF -->
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+<!-- IF S_TEAMS -->
+	<form id="teams" method="post" action="{U_ACTION}">
+	
+	<fieldset>
+		<legend>{L_TEAM_MAPPING}</legend>
+	<!-- IF S_MISSING_TEAMS --><span style="color: red;">{S_MISSING_TEAMS}</span><!-- ENDIF -->
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_TEAM}</th>
+		<th style="width: 25%">{L_TEAM_NAME}</th>
+		<th>{L_TEAM_NAME_SHORT}</th>
+		<th>{L_TEAM_MAPPING}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN teams -->
+		<tr class="{teams.ROW_CLASS}">
+			<td>{teams.TEAM_ID_XML}</td>
+			<td><img src="{teams.TEAM_IMAGE_XML}" id="teamsymbol" alt="{teams.TEAM_NAME_XML}" title="{teams.TEAM_NAME_XML}" />&nbsp;&nbsp;&nbsp;
+				{teams.TEAM_NAME_XML}
+			</td>
+			<td>{teams.TEAM_NAME_SHORT_XML}</td>
+			<td <!-- IF teams.DUPLICATE_TEAM -->title="{L_DUPLICATE_TEAM}" bgcolor=#ECD5D8<!-- ENDIF -->>
+				<select name="team_id_db_{teams.TEAM_ID_XML}" id="team_id_{teams.TEAM_ID_XML}" onchange="this.form.submit();">{teams.TEAM_OPTIONS}</select>
+			</td>
+		</tr>
+	<!-- END teams -->
+	</tbody>
+	</table>
+	</fieldset>
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input type="hidden" name="xml_season_url" value="{XML_SEASON_URL}" />
+		<input type="hidden" name="league_name" value="{S_LEAGUE_NAME}" />
+		<input type="hidden" name="xml_ary" value="{XML_ARY}" />
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<input type="hidden" name="xs" value="{S_XSEASON}" />
+		<input type="hidden" name="xl" value="{S_XLEAGUE}" />
+		<input type="hidden" name="xcode" value="{S_XCODE}" />
+		<input class="button1" type="submit" id="submit" name="map_teams" value="{L_MAP_TEAMS}" />&nbsp;
+		<input class="button1" type="submit" id="submit" name="choose" value="{L_CHOOSE_OTHER_LEAGUE}" />&nbsp;
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+<!-- ENDIF -->
+	
+<!-- IF S_LIST -->
+	<form id="list" method="post" action="{U_ACTION}">
+		<!-- IF S_INSERT_LEAGUE --><h1>{L_INSERT_LEAGUE}</h3><!-- ELSE --><h1>{L_UPDATE_LEAGUE}</h3><!-- ENDIF -->
+	<fieldset>
+	<dl>
+		<dt><label for="xml_season_url">{L_SEASON}:</label></dt>
+		<dd>{S_SEASON}</dd>
+	</dl>
+	<dl>
+		<dt><label for="xml_season_url">{L_LEAGUE}:</label></dt>
+		<dd>{S_LEAGUE}</dd>
+	</dl>
+	<dl>
+		<dt><label for="xml_season_url">{L_LEAGUE_NAME}:</label></dt>
+		<dd>{S_LEAGUE_NAME}</dd>
+	</dl>
+	</fieldset>
+	<!-- IF S_INSERT_SEASON -->
+	<fieldset>
+		<legend>{L_INSERT_SEASON}</legend>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_SEASON}</th>
+		<th>{L_SEASON_NAME}</th>
+		<th>{L_SEASON_SHORT}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN footb_seasons -->
+		{footb_seasons.TPL}
+	<!-- END footb_seasons -->
+	</tbody>
+	</table>
+	</fieldset>
+	<!-- ENDIF -->
+	
+	<!-- IF S_INSERT_LEAGUE -->
+	<fieldset>
+		<legend>{L_INSERT_LEAGUE}</legend>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th style="width: 20%">{L_LEAGUE_NAME}</th>
+		<th>{L_LEAGUE_SHORTCUT}</th>
+		<th>{L_LEAGUE_TYPE}</th>
+		<th>{L_LEAGUE_MATCHDAYS}</th>
+		<th>{L_LEAGUE_MATCHES}</th>
+		<th>{L_LEAGUE_POINTS_MODE}</th>
+		<th>{L_LEAGUE_BET_IN_TIME}</th>
+		<th>{L_BET_TYPE_KO}</th>
+		<th>{L_OTHER_FIELDS}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN footb_leagues -->
+		{footb_leagues.TPL}
+	<!-- END footb_leagues -->
+	</tbody>
+	</table>
+	</fieldset>
+	<!-- ENDIF -->
+	
+	<!-- IF .footb_matchdays -->
+	<fieldset>
+		<legend>{DO_MATCHDAYS}</legend>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHDAYS_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHDAYS_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_MATCHDAY}</th>
+		<th>{L_MATCHDAY_STATUS} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_status" id="update_matchdays_status" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCHDAY_DELIVERY} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_delivery_date" id="update_matchdays_delivery_date" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCHDAY_DELIVERY} 2 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_delivery_date_2" id="update_matchdays_delivery_date_2" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCHDAY_DELIVERY} 3 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_delivery_date_3" id="update_matchdays_delivery_date_3" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th style="width: 25%">{L_MATCHDAY_NAME} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_matchday_name" id="update_matchdays_matchday_name" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCHES} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matchdays_matches" id="update_matchdays_matches" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<!-- IF not S_INSERT_LEAGUE -->
+		<th title="{L_SELECT_EXPLAIN}" style="text-align:center">{L_SELECT}</th>
+		<!-- ENDIF -->
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN footb_matchdays -->
+		{footb_matchdays.TPL}
+	<!-- END footb_matchdays -->
+	</tbody>
+	</table>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHDAYS_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHDAYS_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	</fieldset>
+	<!-- ENDIF -->
+	
+	<!-- IF .footb_teams -->
+	<fieldset>
+		<legend>{DO_TEAMS}</legend>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_TEAMS_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_TEAMS_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_TEAM}</th>
+		<th style="width: 25%">{L_TEAM_NAME} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_teams_team_name" id="update_teams_team_nmae" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_TEAM_NAME_SHORT} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_teams_team_name_short" id="update_teams_team_name_short" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_TEAM_SYMBOL} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_teams_team_symbol" id="update_teams_team_symbol" type="checkbox" class="radio" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_GROUP} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_teams_group_id" id="update_teams_group_id" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCHDAY} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_teams_matchday" id="update_teams_matchday" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<!-- IF not S_INSERT_LEAGUE -->
+		<th title="{L_SELECT_EXPLAIN}" style="text-align:center">{L_SELECT}</th>
+		<!-- ENDIF -->
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN footb_teams -->
+		{footb_teams.TPL}
+	<!-- END footb_teams -->
+	</tbody>
+	</table>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_TEAMS_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_TEAMS_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	</fieldset>
+	<!-- ENDIF -->
+	
+	<!-- IF .footb_matches -->
+	<fieldset>
+		<legend>{DO_MATCHES}</legend>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small"><input name="update_neg_status" id="update_neg_status" type="checkbox" class="radio" {S_CHECK_NEG_STATUS} /> {L_UPDATE_NEG_STATUS}</p>		
+	<p class="small"><input name="update_same_status" id="update_same_status" type="checkbox" class="radio" {S_CHECK_SAME_STATUS} /> {L_UPDATE_SAME_STATUS}</p>		
+	<p class="small"><input name="update_only_final" id="update_only_final" type="checkbox" class="radio" {S_CHECK_ONLY_FINAL} /> {L_UPDATE_ONLY_FINAL}</p>		
+	
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHES_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHES_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_MATCHDAY} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_matchday" id="update_matches_matchday" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			{L_MATCH_NUMBER}		
+		</th>
+		<th>{L_MATCH_BEGIN} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_match_datetime" id="update_matches_match_datetime" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			{L_MATCH_OF_GROUP} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_group_id" id="update_matches_group_id" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_MATCH_HOME} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_team_id_home" id="update_matches_team_id_home" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			{L_MATCH_GUEST} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_team_id_guest" id="update_matches_team_id_guest" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF -->
+		</th>
+		<th>{L_RESULT} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_goals" id="update_matches_goals" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br /> 
+			&nbsp; 
+		</th>
+		<th>{L_EXTRATIME_SHORT} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_goals_overtime" id="update_matches_goals_overtime" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			&nbsp;
+		</th>
+		<th>{L_FORMULA} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_formula" id="update_matches_formula" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			&nbsp;
+		</th>
+		<th>{L_STATUS} 
+			<!-- IF not S_INSERT_LEAGUE -->
+				<input title="{L_UPDATE_THIS}" name="update_matches_status" id="update_matches_status" type="checkbox" class="radio" checked="checked" />
+			<!-- ENDIF --><br />
+			{L_KO}
+		</th>
+		<!-- IF not S_INSERT_LEAGUE -->
+		<th title="{L_SELECT_EXPLAIN}" style="text-align:center">{L_SELECT}<br />
+			&nbsp;
+		</th>
+		<!-- ENDIF -->
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN footb_matches -->
+		{footb_matches.TPL}
+	<!-- END footb_matches -->
+	</tbody>
+	</table>
+	<!-- IF not S_INSERT_LEAGUE -->
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHES_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'FOOTB_MATCHES_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<!-- ENDIF -->
+	</fieldset>
+	<!-- ENDIF -->
+
+	<!-- IF .footb_matchdays or .footb_teams or .footb_matches -->
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input type="hidden" name="xml_ary" value="{XML_ARY}" />
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<input type="hidden" name="league_name" value="{S_LEAGUE_NAME}" />
+		<input type="hidden" name="xcode" value="{S_XCODE}" />
+		<!-- IF S_INSERT_LEAGUE -->
+		<input class="button1" type="submit" id="submit" name="insert" value="{L_INSERT_LEAGUE}" />&nbsp;
+		<!-- ELSE -->
+		<input class="button1" type="submit" id="submit" name="update" value="{L_UPDATE_LEAGUE}" />&nbsp;
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	<!-- ELSE -->
+		<div class="successbox">
+			<h3>{L_ADVICE}</h3>
+			<p>{L_NO_DIFFERENCES}</p>
+		</div>
+	<!-- ENDIF -->
+	</form>
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

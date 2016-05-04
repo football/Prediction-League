@@ -1,0 +1,57 @@
+<!-- INCLUDE simple_header.html -->
+
+
+<div class="panel">
+	<br />
+	<div class="navbar football_bg">
+		<div class="maintitle">{MODE_DESC} {LOGO} {TEAM} <br /> {LEAGUE} {SEASON}</div>
+	</div>
+		<br />
+<!-- IF S_DATA_PLAN -->
+	<span class="match_win">{L_WON}</span> - <span class="match_draw">{L_DRAW}</span> - <span class="match_lost">{L_LOST}</span>
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th>{L_DATE}</th>
+				<!-- IF S_DATA_GROUP -->
+					<th>{L_GR}</th>
+				<!-- ENDIF -->
+					<th colspan="5">{L_VS}</th>
+				<!-- IF S_DATA_RESULTS -->
+					<th colspan="3">{L_RESULT}</th>
+				<!-- ENDIF -->
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN match -->
+				<tr class="{match.ROW_CLASS}">
+					<td>{match.MATCH_TIME}</td>
+				<!-- IF S_DATA_GROUP -->
+					<td class="td_group">{match.GROUP}</td>
+				<!-- ENDIF -->
+					<td class="td_logo">{match.LOGO_HOME}</td>
+					<td class="td_team {match.COLOR_HOME}">{match.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{match.LOGO_GUEST}</td>
+					<td class="td_team {match.COLOR_GUEST}">{match.GUEST_NAME}</td>
+				<!-- IF S_DATA_RESULTS -->
+					<td class="td_goals_home {match.COLOR_GOALS}">{match.GOALS_HOME}</td>
+					<td class="td_vs {match.COLOR_GOALS}">:</td>
+					<td class="td_goals_guest {match.COLOR_GOALS}">{match.GOALS_GUEST}</td>
+				<!-- ENDIF -->
+				</tr>
+			<!-- END match -->
+			</tbody>
+		</table>
+	</div>
+<!-- ELSE -->
+	<br />
+	<div class="message">{S_ERROR_MESSAGE}</div>
+	<br />
+<!-- ENDIF -->
+	<div style="text-align:center">
+		<a href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a>
+	</div>
+</div>
+<!-- INCLUDE simple_footer.html -->

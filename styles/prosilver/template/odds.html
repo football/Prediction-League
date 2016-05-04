@@ -1,0 +1,68 @@
+<!-- IF S_DATA_ODDS -->
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th>{L_DATE}</th>
+				<!-- IF S_DISPLAY_GROUP -->
+					<th>{L_GR}</th>
+				<!-- ENDIF -->
+					<th style="text-align: center;" colspan="5">{L_VS}</th>
+					<th style="text-align: center;" colspan="3">{L_RESULT} ({RESULT_EXPLAIN})</th>
+				<!-- IF S_DISPLAY_KO -->
+					<th style="text-align: center;" colspan="3">{LABEL_FINALRESULT}</th>
+				<!-- ENDIF -->
+					<th>%</th>					
+					<th></th>					
+					<th style="text-align: center;" colspan="3">Quoten</th>
+				</tr>
+			</thead>
+			<tbody>
+		<!-- BEGIN odds -->
+				<tr class="{odds.ROW_CLASS}">
+					<td class="td_datetime">{odds.MATCH_TIME}</td>
+				<!-- IF S_DISPLAY_GROUP -->
+					<td class="td_group">{odds.GROUP}</td>
+				<!-- ENDIF -->
+					<td class="td_logo">{odds.LOGO_HOME}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{odds.U_PLAN_HOME}', 625,625);return false;">
+						{odds.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{odds.LOGO_GUEST}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{odds.U_PLAN_GUEST}', 625,625);return false;">
+						{odds.GUEST_NAME}</td>
+					<td class="td_goals_home {odds.COLOR_STYLE}">{odds.GOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {odds.COLOR_STYLE}">{odds.GOALS_GUEST}</td>
+				<!-- IF S_DISPLAY_KO -->
+					<td class="td_goals_home {odds.COLOR_STYLE}">{odds.KOGOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {odds.COLOR_STYLE}">{odds.KOGOALS_GUEST}</td>
+				<!-- ENDIF -->
+					<td style="text-align: center;">{odds.TREND}</td>
+					<td class="td_button">
+				<!-- IF S_VIEW <> 'print' -->
+						<a class="match_info" title="{L_MATCH_STATS}" href="{odds.U_MATCH_STATS}" onclick="popup(this.href, 818, 450, '_matchstats'); return false;"></a>
+				<!-- ELSE -->	
+						<img src="./../../ext/football/football/images/spacer.gif" alt="" width="28" height="28" />
+				<!-- ENDIF -->
+					</td>
+					<td class="td_group">{odds.ODD_1}</td>
+					<td style="text-align: center;">{odds.ODD_X}</td>
+					<td class="td_group">{odds.ODD_2}</td>
+				</tr>
+		<!-- END odds -->
+			</tbody>
+		</table>
+	</div>
+
+		<div class="right-box" style="margin-bottom:5px; height:2em">
+		</div>
+		<br />
+	<!-- INCLUDE nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_PLAN}</div>
+	<br />
+	<br />
+<!-- ENDIF -->

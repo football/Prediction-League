@@ -1,0 +1,15 @@
+/* -----------------------------------------------------------------------------------------
+ * @package phpBB Extension - Football Football
+ * @copyright (c) 2016 football (http://football.bplaced.net)
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ * ----------------------------------------------------------------------------------------- */
+#wrap {
+	max-width: none !important;
+	margin: 0;
+	padding: 5px !important;
+}
+
+body {
+	padding: 0px !important;
+
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="phpBB3 Football Extension by football" />
+<meta name="keywords" content="phpBB3, Football, Extension, Tipprunde, Prediction, League, Soccer" />
+<meta name="description" content="" />
+<meta name="robots" CONTENT="noindex" />
+{META}
+<title>{SITENAME} &bull; {PAGE_TITLE}</title>
+<link href="./../../ext/football/football/styles/prosilver/theme/football_print.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="phpbb" style="width:100%">
+<div id="wrap">
+	<a id="top" name="top" accesskey="t"></a>
+
+	<div id="page-header">
+		<h2><a href="{U_SIDE_LINK}">{S_SIDENAME}</a> &bull; {S_SEASON_NAME} &bull; {S_LEAGUE_NAME} &bull; {S_MATCHDAY_NAME}</h2>
+		<p>{S_DELIVERY}</p>
+	</div>
+
+	<div id="page-body">
+		<div class="page-number">{PAGE_NUMBER}</div>
+		<!-- IF S_DISPLAY_BET -->
+			<!-- INCLUDE mobile_bet.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ALL_BETS -->
+			<table class="football">
+				<tr>
+					<td style="vertical-align: top;">
+					<!-- INCLUDE mobile_all_bets.html -->
+					</td>
+					<td style="width:4px; vertical-align: top;"></td>
+					<td style="width:{FOOTBALL_RIGHT_COLUMN}px; vertical-align: top;">
+					<!-- IF S_DISPLAY_RANK_TOTAL -->
+						<!-- INCLUDE mobile_rank_total.html -->
+					<!-- ENDIF -->
+					</td>
+				</tr>
+			</table>
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RESULTS -->
+			<!-- INCLUDE mobile_results.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RANKS_MATCHDAY -->
+			<!-- INCLUDE mobile_ranks.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RANKS_TOTAL -->
+			<!-- INCLUDE mobile_ranks.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_TABLE -->
+			<!-- INCLUDE mobile_table.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LAST_USERS -->
+			<!-- INCLUDE mobile_last_users.html -->
+		<!-- ENDIF -->
+					
+		<!-- IF S_DISPLAY_ODDS -->
+			<!-- INCLUDE mobile_odds.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_MY_BETS -->
+			<!-- INCLUDE mobile_my_bets.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_POINTS -->
+			<!-- INCLUDE mobile_my_points.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_TABLE -->
+			<!-- INCLUDE mobile_my_table.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_RANK -->
+			<!-- INCLUDE mobile_my_rank.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_CHART -->
+			<!-- INCLUDE mobile_my_chart.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_MY_KOEFF -->
+			<!-- INCLUDE mobile_my_koeff.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_STAT_RESULTS -->
+			<!-- INCLUDE mobile_stat_results.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_STAT_POINTS -->
+			<!-- INCLUDE mobile_stat_points.html -->
+		<!-- ENDIF -->
+
+		</div>
+
+	<div id="page-footer">
+		<div class="copyright">		
+			<!-- IF S_FOOTBALL_COPY --><br />{S_FOOTBALL_COPY}<!-- ENDIF -->
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+football_main_controller:
+    path: /football/{side}
+    defaults: { _controller: football.football.controller:handle }
+
+football_football_popup:
+    path: /football/{popside}
+    defaults: { _controller:  football.football.controller_popup:handlepopup }
+
+football_football_download:
+    path: /football/{downside}
+    defaults: { _controller:  football.football.controller_download:handledownload }
+
+football_football_xml:
+    path: /football/xml/{xmlside}
+    defaults: { _controller:  football.football.controller_xml:handlexml }
+
+# Redirect to football by default
+football_football_redirect_controller:
+    path: /
+    defaults: { _controller: football.football.main:handle }

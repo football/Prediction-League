@@ -1,0 +1,10 @@
+
+Hallo Tipper {USERNAME},
+Du hast bislang noch nicht den {MATCHDAY}. Spieltag getippt.
+Bitte tipp bis zum {LEAGUE} Abgabetermin {DELIVERY} Uhr.
+
+ 
+Hier geht es zur {SITENAME}: {U_BOARD}.
+
+
+{EMAIL_SIG}

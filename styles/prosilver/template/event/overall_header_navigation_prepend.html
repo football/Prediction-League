@@ -1,0 +1,53 @@
+<!-- IF not S_FOOTBALL_MOBILE -->
+<li id="football-links" class="leftside no-bulletin <!-- IF not S_DISPLAY_FOOTBALL_MENU --> hidden<!-- ENDIF --> " data-skip-responsive="true">
+	<div class="header-profile dropdown-container">
+		<a href="{U_BET}" class="header-avatar dropdown-trigger" title="{L_FOOTBALL_MENU}">
+		<img class="avatar" src="{ROOT_PATH}ext/football/football/styles/prosilver/theme/images/icon_football.gif" alt="Football-Icon"> 
+		<span class="username">{S_FOOTBALL_NAME}</span></a>
+		<div class="dropdown hidden">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents" role="menu">
+			<!-- EVENT navbar_header_football_links_before -->
+			<!-- IF not S_IS_BOT -->
+				<li class="small-icon icon-bet"><a href="{U_BET}" role="menuitem">{L_BET}</a></li>
+				<li class="small-icon icon-allbets"><a href="{U_ALL_BETS}" role="menuitem">{L_ALL_BETS}</a></li>
+				<li class="small-icon icon-results"><a href="{U_RESULTS}" role="menuitem">{L_RESULTS}</a></li>
+				<li class="small-icon icon-list"><a href="{U_TABLE}" role="menuitem">{L_TABLE}</a></li>
+				<li class="small-icon icon-rank"><a href="{U_RANKS_TOTAL}" role="menuitem">{L_RANK_TOTAL}</a></li>
+				<li class="small-icon icon-rank"><a href="{U_RANKS_MATCHDAY}" role="menuitem">{L_RANK_MATCHDAY}</a></li>
+				<li class="small-icon icon-points"><a href="{U_FOOTBALL_BANK}" role="menuitem">{L_FOOTBALL_BANK}</a></li>
+				<li class="small-icon icon-rules"><a href="{U_RULES}" role="menuitem" target="popup" onclick="popup('{U_RULES}', 625,625);return false;">{L_RULES}</a></li>
+				<li class="small-icon icon-download"><a href="{U_EXPORT}" role="menuitem">{L_EXPORT}</a></li>
+				<li class="small-icon icon-odds"><a href="{U_ODDS}" role="menuitem">{L_ODDS}</a></li>
+				<li class="separator"></li>
+				<!-- IF S_MENU_LINK1-->
+				<li class="small-icon icon-xml"><a href="{U_MENU_LINK1}" role="menuitem" target="_blank">{MENU_DESC_LINK1}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_MENU_LINK2-->
+				<li class="small-icon icon-xml"><a href="{U_MENU_LINK2}" role="menuitem" target="_blank">{MENU_DESC_LINK2}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_MENU_LINK3-->
+				<li class="small-icon icon-xml"><a href="{U_MENU_LINK3}" role="menuitem" target="_blank">{MENU_DESC_LINK3}</a></li>
+				<!-- ENDIF -->
+				<li class="separator"></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_BETS}" role="menuitem">{L_MY_BETS}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_POINTS}" role="menuitem">{L_MY_POINTS}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_TABLE}" role="menuitem">{L_MY_TABLE}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_RANK}" role="menuitem">{L_MY_RANK}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_CHART}" role="menuitem">{L_MY_CHART}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_MY_KOEFF}" role="menuitem">{L_MY_KOEFF}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_STAT_POINTS}" role="menuitem">{L_STAT_POINTS}</a></li>
+				<li class="small-icon icon-statistics"><a href="{U_STAT_RESULTS}" role="menuitem">{L_STAT_RESULTS}</a></li>
+			<!-- ENDIF -->
+			<!-- IF S_DISPLAY_FOOTBALL -->
+				<li class="separator"></li>
+				<!-- IF U_TEAM --><li class="small-icon icon-odds"><a href="{U_FOOTBALL_ODDS}" role="menuitem">{L_FOOTBALL_ODDS}</a></li><!-- ENDIF -->
+			<!-- ENDIF -->
+			<li class="separator"></li>
+
+			<!-- EVENT navbar_header_football_links_after -->
+			</ul>
+		</div>
+	</div>
+</li>
+<!-- ENDIF -->

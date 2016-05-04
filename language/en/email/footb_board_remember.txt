@@ -1,0 +1,10 @@
+
+Hallo {SITENAME},
+the following users have received a reminder e-mail:
+
+{REMEMBER_LIST}
+
+
+Link to {SITENAME}: {U_BOARD}.
+
+{EMAIL_SIG}

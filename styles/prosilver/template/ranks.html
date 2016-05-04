@@ -1,0 +1,108 @@
+<!-- IF S_DATA_RANKS --> 
+	<!-- IF S_HEADER -->
+	<div style="text-align:center">
+		<h3>{S_HEADER}</h3>
+	</div>
+	<!-- ENDIF -->
+	<div class="left-box">
+		<span class="color_finally">{L_FINALLY}</span> - <span class="color_provisionally">{L_PROVISIONALLY}</span>
+	</div>
+	<!-- IF S_VIEW <> 'print' -->
+		<!-- IF S_VIEW <> 'print' -->
+			<!-- IF .pagination -->
+			<div class="pagination top-pagination">
+				<!-- INCLUDE pagination.html -->
+			</div>
+			<!-- ENDIF -->	
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<br style="clear:both"/>
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr> 
+					<th>{L_PLACE}</th>
+					<!-- IF not S_HEADER -->
+					<th title="{L_TEND_RANK}">{L_TENDENCY}</th>
+					<!-- ENDIF -->
+					<th style="text-align:left">{L_NAME}</th>
+					<!-- IF S_LINK_RANKING <> '' and S_LINK_ALL_TIME <> '' -->
+					<th>{L_SEASON}</th>
+					<th>{L_PLACE}</th>
+					<!-- ENDIF -->
+					<th title="{L_CNT_BET}">{L_BETS}</th>
+					<th title="{L_CNT_NO_BET}">{L_NO_BET}</th>
+					<th title="{L_CNT_TEND}">{L_TENDENCIES}</th>
+					<th title="{L_CNT_HIT}">{L_DIRECTHITS}</th>
+					<!-- IF not S_HEADER and S_DISPLAY_HITS02 -->
+					<th title="{L_CNT_HIT02}">{L_DIRECTHITS02}</th>
+					<!-- ENDIF -->
+					<th style="text-align: right;">{L_POINTS}</th>
+					<!-- IF S_WIN -->
+					<th style="text-align: right;">{WIN_NAME}</th>
+					<!-- ENDIF -->
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN rankstotal -->
+				<tr class="{rankstotal.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PROFILE}"
+						onclick="window.location.href='{rankstotal.U_PROFILE}';">
+					<td class="td_rank">{rankstotal.RANK}</td>
+					<!-- IF not S_HEADER -->
+					<td><!-- IF S_VIEW == 'print' -->{rankstotal.CHANGE_SIGN}<!-- ELSE -->{rankstotal.CHANGE_IMG}<!-- ENDIF -->{rankstotal.CHANGE_DIFFER}</td>
+					<!-- ENDIF -->
+					<td class="td_name">{rankstotal.USERNAME}</td>
+					<!-- IF S_LINK_RANKING <> '' and S_LINK_ALL_TIME <> '' -->
+					<td class="td_hits">{rankstotal.SEASON}</td>
+					<td class="td_rank">{rankstotal.SEASON_RANK}</td>
+					<!-- ENDIF -->
+					<td class="td_hits">{rankstotal.BETS}</td>
+					<td class="td_hits">{rankstotal.NOBETS}</td>
+					<td class="td_hits">{rankstotal.TENDENCIES}</td>
+					<td class="td_hits">{rankstotal.DIRECTHITS}</td>
+					<!-- IF not S_HEADER and S_DISPLAY_HITS02 -->
+					<td class="td_hits">{rankstotal.DIRECTHITS02}</td>
+					<!-- ENDIF -->
+					<td class="td_pts {rankstotal.COLOR_STYLE}">{rankstotal.POINTS}</td>
+					<!-- IF S_WIN -->
+					<td class="td_wins">{rankstotal.WIN}</td>
+					<!-- ENDIF -->
+				</tr>
+			<!-- END rankstotal -->
+			</tbody>
+		</table>
+	</div>
+	<!-- IF S_SHOW_OTHER_LINKS -->	
+	<div class="left-box">
+		<!-- IF S_LINK_RANKING <> '' -->
+		<a href="{S_LINK_RANKING}" title="{L_TITLE_RANKING}"><strong>{L_RANKING}</strong></a>  &bull; 
+		<!-- ENDIF -->
+		<!-- IF S_LINK_ALL_TIME <> '' -->
+		<a href="{S_LINK_ALL_TIME}" title="{L_TITLE_RANKING_All_TIME}"><strong>{L_RANKING_ALL_TIME}</strong></a>
+		<!-- ENDIF -->
+		<!-- IF S_LINK_ALL_TIME <> '' and S_LINK_COMPARE <> '' --> &bull; <!-- ENDIF -->
+		<!-- IF S_LINK_COMPARE <> '' -->
+		<a href="{S_LINK_COMPARE}" title="{L_TITLE_RANKING_COMPARE}"><strong>{L_RANKING_COMPARE}</strong></a>
+		<!-- ENDIF -->
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_VIEW <> 'print' -->
+		<!-- IF .pagination or TOTAL_USERS -->
+		<div class="pagination">
+			{TOTAL_USERS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				&bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->	
+	<!-- ENDIF -->
+	<!-- INCLUDE nav_delivery.html -->
+
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_RESULTS}</div>
+	<br />
+<!-- ENDIF -->

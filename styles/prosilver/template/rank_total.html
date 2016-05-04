@@ -1,0 +1,37 @@
+<div class="panel">
+	<h3><!-- IF S_VIEW <> 'print' -->
+				<span class="small-icon icon-rank"></span>&nbsp;
+		<!-- ENDIF -->
+		{L_RANK_TOTAL}
+	</h3>
+	<!-- IF S_DATA_RANK_TOTAL -->
+	<table class="forabg rank">
+		<thead>
+			<tr>
+				<th>{L_RANK_SHORT_DOT}</th>
+				<th style="text-align: left;">{L_NAME}</th>
+				<th>{L_POINTS_SHORT_DOT}</th>
+				<!-- IF S_WIN -->
+				<th style="text-align: right;">{WIN_NAME}</th>
+				<!-- ENDIF -->
+			</tr>
+		</thead>
+		<tbody>
+			<!-- BEGIN ranktotal -->
+			<tr class="{ranktotal.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PROFILE}"
+					onclick="window.location.href='{ranktotal.U_PROFILE}';">
+				<td class="td_rank">{ranktotal.RANK}</td>
+				<td class="td_name">{ranktotal.USERNAME}</td>
+				<td class="td_pts {ranktotal.COLOR_STYLE}">{ranktotal.POINTS}</td>
+				<!-- IF S_WIN -->
+				<td class="td_wins">{ranktotal.WIN}</td>
+				<!-- ENDIF -->
+			</tr>
+			<!-- END ranktotal -->
+		</tbody>
+	</table>
+	<!-- ELSE -->
+	<div class="message">{L_NO_RESULTS}</div>
+	<br />
+	<!-- ENDIF -->
+</div>

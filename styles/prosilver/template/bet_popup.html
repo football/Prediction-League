@@ -1,0 +1,92 @@
+<!-- INCLUDE simple_header.html -->
+
+
+<div class="panel">
+	<br />
+	<div class="navbar football_bg">
+		<div class="maintitle">{L_BETS_OF} {S_USER_NAME} {S_FROM}</div>
+	</div>
+		<br />
+<!-- IF S_DATA_BET -->
+	<span class="color_finally">{L_FINALLY}</span> - <span class="color_provisionally">{L_PROVISIONALLY}</span> - <span class="color_not_rated">{L_NOT_RATED}</span><br />
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th>{L_DATE}</th>
+					<th style="text-align: right;">{L_NR}</th>
+				<!-- IF S_DATA_GROUP -->
+					<th>{L_GR}</th>
+				<!-- ENDIF -->
+					<th colspan="5">{L_VS}</th>
+					<th colspan="3">{L_BET_OF}</th>
+					<th colspan="3">{L_RESULT}</th>
+					<th>{L_POINTS}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN bet_view -->
+				<tr class="{bet_view.ROW_CLASS}">
+					<td>{bet_view.MATCH_TIME}</td>
+					<td class="td_match_no">{bet_view.MATCH_NUMBER}</td>
+				<!-- IF S_DATA_GROUP -->
+					<td class="td_group">{bet_view.GROUP}</td>
+				<!-- ENDIF -->
+					<td class="td_logo">{bet_view.LOGO_HOME}</td>
+					<td class="td_team">{bet_view.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{bet_view.LOGO_GUEST}</td>
+					<td class="td_team">{bet_view.GUEST_NAME}</td>
+					<td class="td_goals_home">{bet_view.BET_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest">{bet_view.BET_GUEST}</td>
+					<td class="td_goals_home {bet_view.COLOR_STYLE}">{bet_view.GOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {bet_view.COLOR_STYLE}">{bet_view.GOALS_GUEST}</td>
+					<td class="td_points {bet_view.COLOR_STYLE}">{bet_view.POINTS}</td>
+				</tr>
+			<!-- END bet_view -->
+			</tbody>
+		</table>
+	</div>
+
+	<!-- IF S_EXTRA_BET --> 
+	<br />
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th style="text-align: left;">{L_QUESTION}</th>
+					<th>{L_POSSIBLE_POINTS}</th>
+					<th>{L_EVALUATION}</th>
+					<th>{L_BET_OF}</th>
+					<th>{L_RESULT}</th>
+					<th>{L_POINTS}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN extra_view -->
+				<tr class="{extra_view.ROW_CLASS}">
+					<td>{extra_view.QUESTION}</td>
+					<td style="text-align: center;">{extra_view.EXTRA_POINTS}</td>
+					<td style="text-align: center;" title="{extra_view.EVALUATION_TITLE}">{extra_view.EVALUATION}</td>
+					<td style="text-align: center;">{extra_view.BET}</td>
+					<td style="text-align: center;">{extra_view.RESULT}</td>
+					<td class="td_points {extra_view.COLOR_STYLE}">{extra_view.BET_POINTS}</td>
+				</tr>
+			<!-- END extra_view -->
+			</tbody>
+		</table>
+	</div>
+	<!-- ENDIF -->
+	
+<!-- ELSE -->
+	<br />
+	<div class="message">{S_ERROR_MESSAGE}</div>
+	<br />
+<!-- ENDIF -->
+	<div style="text-align:center">
+		<a href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a>
+	</div>
+</div>
+<!-- INCLUDE simple_footer.html -->

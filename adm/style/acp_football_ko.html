@@ -1,0 +1,85 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_KO_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_KO_MANAGE_EXPLAIN}</p>
+
+	<h1 style="display:inline;">{L_SELECT_LEAGUE}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="match_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="match_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_KO_MATCHDAYS}</legend>
+	<dl>
+		<dt><label for="matchday_from">{L_MATCHDAY_FROM}:</label></dt>
+		<dd><select name="matchday_from" id="matchday_from" >{S_MATCHDAY_FROM_OPTIONS}</select></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_to">{L_MATCHDAY_TO}:</label></dt>
+		<dd><select name="matchday_to" id="matchday_to" >{S_MATCHDAY_TO_OPTIONS}</select></dd>
+	</dl>
+	<input type="hidden" name="s" value="{S_SEASON}" />
+	<input type="hidden" name="l" value="{S_LEAGUE}" />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{L_MATCHDAY_TARGET}</legend>
+	<dl>
+		<dt><label for="matchday_new">{L_MATCHDAY_NEW}:</label></dt>
+		<dd><select name="matchday_new" id="matchday_new" >{S_MATCHDAY_NEW_OPTIONS}</select></dd>
+	</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_KO_GROUP}</legend>
+	<dl>
+		<dt><label for="matchday_new">{L_MANAGE_GROUP}:</label></dt>
+		<dd><input name="check_rank" id="check_rank" type="checkbox" value="1" class="radio" <!-- IF S_CHECK_RANK --> checked="checked"<!-- ENDIF --> /></dd>
+	</dl>
+	<dl>
+		<dt><label for="rank">{L_GROUP_RANK}:</label><br /><span>{L_GROUP_RANK_EXPLAIN}</span></dt>
+		<dd><input name="rank" type="text" id="rank" value="{S_RANK}" size="1" maxlength="1" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="move_rank">{L_MOVE_RANK}:</label><br /><span>{L_MOVE_RANK_EXPLAIN}</span></dt>
+		<dd><input name="move_rank" type="text" id="move_rank" value="{S_MOVE_RANK}" size="1" maxlength="1" /> 
+			{L_MOVE_LEAGUE} 
+			<select name="move_league" id="move_league">{S_MOVE_LEAGUE_OPTIONS}</select>
+			{L_MATCHDAY}
+			<input name="move_matchday" type="text" id="move_matchday" value="{S_MOVE_MATCHDAY}" size="2" maxlength="2" /> 
+		</dd>
+	</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

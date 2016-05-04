@@ -1,0 +1,105 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_SEASONS_MANAGE}</h1>
+	<p>{L_SEASON_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_SEASON_DETAILS}</legend>
+	<dl>
+		<dt><label for="season">{L_SEASON}:</label></dt>
+		<dd><!-- IF not S_ADD_SEASON --><strong>{SEASON}</strong><!-- ENDIF -->
+			<input name="s" type="<!-- IF S_ADD_SEASON -->text<!-- ELSE -->hidden<!-- ENDIF -->" id="season" value="{SEASON}" size="4" maxlength="4"  /></dd>
+	</dl>
+	<dl>
+		<dt><label for="season_name">{L_SEASON_NAME}:</label><br /><span>{L_SEASON_NAME_EXPLAIN}</span></dt>
+		<dd><input name="season_name" type="text" id="season_name" value="{SEASON_NAME}" size="20" maxlength="20" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="season_short">{L_SEASON_SHORT}:</label><br /><span>{L_SEASON_SHORT_EXPLAIN}</span></dt>
+		<dd><input name="season_short" type="text" id="season_short" value="{SEASON_SHORT}" size="10" maxlength="10" /></dd>
+	</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	<!-- IF S_ADD_SEASON -->
+		<input type="hidden" name="add" value="1" />
+	<!-- ENDIF -->
+		<input type="hidden" name="edit" value="1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_SEASONS_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_SEASONS_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="acp_football_seasons" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+		<!-- IF S_SEASON_ADD -->
+			{L_CREATE_SEASON}: <input type="text" name="s" value="" /> <input class="button2" type="submit" name="submit" value="{L_SUBMIT}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<h1>{L_SEASON_DEF}</h1>
+
+	<p>{L_SEASON_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_SEASON}</th>
+		<th style="width: 35%">{L_SEASON_NAME}</th>
+		<th>{L_SEASON_SHORT}</th>
+		<th>{L_LEAGUES}</th>
+		<th>{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .seasons -->
+		<!-- BEGIN seasons -->
+			<tr class="{seasons.ROW_CLASS}">
+				<td style="text-align: center;"><strong>{seasons.SEASON}</strong></td>
+				<td>{seasons.SEASON_NAME}</td>
+				<td>{seasons.SEASON_SHORT}</td>
+				<td style="text-align: center;">{seasons.LEAGUES}</td>
+				<td style="text-align: center;"><a href="{seasons.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align: center;"><!-- IF seasons.U_DELETE --><a href="{seasons.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END seasons -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="4" class="row3">{L_NO_SEASONS_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

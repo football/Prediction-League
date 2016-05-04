@@ -1,0 +1,32 @@
+<div class="panel">
+	<h3><span class="small-icon icon-rank"></span>&nbsp;{L_RANK_MATCHDAY}</h3>
+	<!-- IF S_DATA_RANK_MATCHDAY -->
+	<table class="forabg rank">
+		<thead>
+			<tr>
+				<th>{L_RANK_SHORT_DOT}</th>
+				<th style="text-align: left;">{L_NAME}</th>
+				<th>{L_POINTS_SHORT_DOT}</th>
+				<!-- IF S_WIN -->
+				<th style="text-align: right;">{WIN_NAME}</th>
+				<!-- ENDIF -->
+			</tr>
+		</thead>
+		<tbody>
+			<!-- BEGIN rank -->
+			<tr class="{rank.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_BETS}" onclick="popup('{rank.U_BET_USER}', 725,500,'_{rank.USERNAME}');return false;">
+				<td class="td_rank">{rank.RANK}</td>
+				<td class="td_name">{rank.USERNAME}</td>
+				<td class="td_pts {rank.COLOR_STYLE}">{rank.POINTS}</td>
+				<!-- IF S_WIN -->
+				<td class="td_wins">{rank.WIN}</td>
+				<!-- ENDIF -->
+			</tr>
+			<!-- END rank -->
+		</tbody>
+	</table>
+	<!-- ELSE -->
+	<div class="message">{L_NO_RESULTS}</div>
+	<br />
+	<!-- ENDIF -->
+</div >

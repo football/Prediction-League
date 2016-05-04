@@ -1,0 +1,12 @@
+<!-- IF S_DISPLAY_DELIVERY -->	
+	<!-- BEGIN delivery -->
+	<span style="cursor:pointer;" title="{delivery.TITLE}" onclick="location.href='{delivery.U_BET_LINK}'">
+		<span> <strong style="color:{delivery.COLOR};">{delivery.DELIVERY} </strong></span> <br /> 
+		<strong>{delivery.LEAGUE_SHORT} </strong>{delivery.MATCHDAY_NAME}
+	</span><hr />
+	<!-- END delivery -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_DELIVERY}</div>
+	<br />
+<!-- ENDIF -->

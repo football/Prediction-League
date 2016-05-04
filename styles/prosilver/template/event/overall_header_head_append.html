@@ -1,0 +1,29 @@
+	<!-- IF S_FOOTBALL_FULLSCREEN -->
+	<!-- INCLUDECSS @football_football/fullscreen.css -->
+	<!-- ENDIF -->
+	<!-- IF S_VIEW == 'print' -->
+		<!-- INCLUDECSS @football_football/football_print.css -->
+	<!-- ELSE -->
+		<!-- INCLUDECSS @football_football/football.css -->
+	<!-- ENDIF -->
+	<!-- INCLUDECSS @football_football/football_side.css -->
+<!-- IF S_FOOTBALL_HEADER_ENABLED -->
+<style>
+@media screen and (min-width: 700px){
+	.imageset.site_logo {
+		background-image: url({S_FOOTBALL_EXT_PATH}images/site_logo.gif);
+		padding-left: 0px;
+		padding-top: 0px;
+		height: 52px;
+		width: 52px;
+	}
+	.headerbar 	{
+		background: url({S_FOOTBALL_EXT_PATH}styles/prosilver/theme/images/header{S_FOOTBALL_HEADER_LEAGUE}.gif) 300px 5px no-repeat,
+		url({S_FOOTBALL_EXT_PATH}styles/prosilver/theme/images/header.jpg) 0px 0px;
+		background-color: #12A3EB;
+		margin-bottom: 4px;
+		width: auto;
+	}
+}
+</style>
+<!-- ENDIF -->

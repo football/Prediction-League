@@ -1,0 +1,153 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_BETS_MANAGE}</h1>
+
+	<p>{L_ACP_FOOTBALL_BETS_MANAGE_EXPLAIN}</p>
+
+	<h1 style="display:inline;">{L_SELECT_MATCHDAY}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="match_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="match_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<select name="m" id="match_matchday" onchange="this.form.submit();">{S_MATCHDAY_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<!-- IF S_USERS -->
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<input type="hidden" name="m" value="{S_MATCHDAY}" />
+		<select name="u" id="match_user" onchange="this.form.submit();">{S_USER_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<!-- ENDIF -->
+
+	<!-- IF S_SUCCESS -->
+		<div class="successbox">
+			<h3>{L_ADVICE}</h3>
+			<p>{SUCCESS_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- IF .bet_edit -->
+	<form method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{S_LEGEND}</legend>
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<input type="hidden" name="m" value="{S_MATCHDAY}" />
+		<input type="hidden" name="u" value="{S_USER}" />
+		<table class="type_f">
+			<thead>
+				<tr>
+					<th>{L_DATE}</th>
+					<th style="text-align:right">{L_NR}</th>
+				<!-- IF S_DATA_GROUP -->
+					<th>{L_GR}</th>
+				<!-- ENDIF -->
+					<th></th>
+					<th>{L_HOME}</th>
+					<th></th>
+					<th></th>
+					<th>{L_GUEST}</th>
+					<th style="text-align:right">{L_GOALS_HOME}</th>
+					<th></th>
+					<th>{L_GOALS_GUEST}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN bet_edit -->
+				<tr class="{bet_edit.ROW_CLASS}">
+					<td>{bet_edit.MATCH_TIME}</td>
+					<td class="td_match_no">{bet_edit.MATCH_NUMBER}</td>
+				<!-- IF S_DATA_GROUP -->
+					<td class="td_group">{bet_edit.GROUP}</td>
+				<!-- ENDIF -->
+					<td style="text-align:right; width:32px;">{bet_edit.LOGO_HOME}&nbsp;</td>
+					<td class="td_team">{bet_edit.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td style="text-align:right; width:32px;">{bet_edit.LOGO_GUEST}&nbsp;</td>
+					<td class="td_team">{bet_edit.GUEST_NAME}</td>
+					<td class="td_goals_home"><input style="text-align:right; width:30px;" type="number" 
+													name="goalsh{bet_edit.MATCH_NUMBER}" min="0" max="20" size="2" value="{bet_edit.BET_HOME}" /></td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest"><input style="margin:0; width:30px;" type="number" 
+													name="goalsg{bet_edit.MATCH_NUMBER}" min="0" max="20" size="2" value="{bet_edit.BET_GUEST}" /></td>
+				</tr>
+			<!-- END bet_edit -->
+			</tbody>
+		</table>
+		
+		<!-- IF S_EXTRA_BET --> 
+		<br />
+		<table class="type_f">
+			<thead>
+				<tr>
+					<th style="text-align: left;">{L_QUESTION}</th>
+					<th>{L_POSSIBLE_POINTS}</th>
+					<th>{L_EVALUATION}</th>
+					<th>{L_BET_OF}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN extra_edit -->
+				<tr class="{extra_edit.ROW_CLASS}" style="height:30px">
+					<td>{extra_edit.QUESTION}</td>
+					<td style="text-align: center;">{extra_edit.EXTRA_POINTS}</td>
+					<td style="text-align: center;" title="{extra_edit.EVALUATION_TITLE}">{extra_edit.EVALUATION}</td>
+					<td style="text-align: center;">
+					<!-- IF extra_edit.S_DISPLAY_TYPE == 1 -->
+						<select name="extra{extra_edit.EXTRA_NO}">
+						<!-- BEGIN extra_option -->
+							<option {extra_edit.extra_option.S_SELECTED} value="{extra_edit.extra_option.OPTION_VALUE}">{extra_edit.extra_option.OPTION_NAME}</option>
+						<!-- END extra_option -->
+						</select>
+					<!-- ENDIF -->
+					<!-- IF extra_edit.S_DISPLAY_TYPE == 2 -->
+						<input style="display:inline; margin:0; padding:0;" type="text" name="extra{extra_edit.EXTRA_NO}" size="15" maxlength="255" value="{extra_edit.BET}"> 
+					<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END extra_edit -->
+			</tbody>
+		</table>
+		<!-- ENDIF -->
+		<!-- IF S_CASH_POINTS -->{L_CASH_POINTS} <input name="cash" type="checkbox" class="radio" checked="checked" /> <!-- ENDIF -->
+		
+		<fieldset class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="bet" value="{L_SAVE}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			{S_FORM_TOKEN}
+		</fieldset>
+	</fieldset>
+	</form>
+	<!-- ELSE -->
+	<fieldset>
+		<legend>{S_LEGEND}</legend>
+		<br />
+		<div class="message"><!-- IF S_USERS -->{L_NO_MATCHES_ON_MATCHDAY}<!-- ELSE -->{L_NO_USERS}<!-- ENDIF --></div>
+		<br />
+	</fieldset>
+	<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

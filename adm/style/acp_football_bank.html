@@ -1,0 +1,160 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_LIST -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{PAGE_TYPE} :: {LEAGUE_NAME}</h1>
+	<p>{PAGE_TYPE_EXPLAIN}</p>
+
+	<form id="list" method="post" action="{U_ACTION}">
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="setvalues('list', 'newvalue', 'curvalue', {BET_POINTS}); return false;">{L_SET_DEPOSITS}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'mark', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'mark', false); return false;">{L_UNMARK_ALL}</a></p>		
+
+	<!-- IF .pagination -->
+	<div class="pagination top-pagination">
+		<!-- INCLUDE pagination.html -->
+	</div>
+	<!-- ENDIF -->	
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_USERNAME}</th>
+		<!-- IF POINTS -->
+		<th>{POINTS}</th>
+		<!-- ENDIF -->
+		<th>{TARGET}</th>
+		<th>{ACTUAL}</th>
+		<th>{L_BOOK}</th>
+		<th>{L_MARK}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN member -->
+			<!-- IF member.S_ROW_COUNT is even --><tr class="bg1 row_light"><!-- ELSE --><tr class="bg2 row_dark"><!-- ENDIF -->
+			<td><a href="{member.U_USER_BANK}">{member.USERNAME}</a></td>
+			<!-- IF POINTS -->
+			<td style="text-align: right;">{member.POINTS}</td>
+			<!-- ENDIF -->
+			<td style="text-align: right;">{member.TARGET}</td>
+			<td style="text-align: right;">{member.ACTUAL}<input type="hidden" name="curvalue{member.USER_ID}" id="curvalue{member.USER_ID}" value="{member.ACTUAL}" /></td>
+			<td style="text-align: right;"><input type="text" name="newvalue{member.USER_ID}" value="{member.NEW_VALUE}"
+											onchange="document.getElementById('select_{member.USER_ID}').checked = true;" /></td>
+			<td style="text-align: center;"><input type="checkbox" class="radio" name="mark[]" id="select_{member.USER_ID}" value="{member.USER_ID}" /></td>
+		</tr>
+	<!-- END member -->
+	</tbody>
+	</table>
+	<!-- IF S_CASH_POINTS -->
+	{L_CASH_POINTS} <input name="cash" type="checkbox" class="radio" checked="checked" /> 
+	<!-- ENDIF -->
+	{L_MATCHDAY}: <!-- IF S_SELECT_MATCHDAY --><input type="text" name="m" value="{S_MATCHDAY}" /><!-- ELSE -->
+									<input type="hidden" name="m" value="{S_MATCHDAY}" />{S_MATCHDAY}<!-- ENDIF -->
+	<!-- IF .pagination or TOTAL_MEMBERS -->
+	<div class="pagination">
+		{TOTAL_MEMBERS}
+		<!-- IF .pagination -->
+			<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+			&bull; {PAGE_NUMBER}
+		<!-- ENDIF -->
+	</div>
+	<!-- ENDIF -->	
+
+	<fieldset class="quick">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<input type="hidden" name="t" value="{S_TYPE}" />
+		<input type="hidden" name="start" value="{S_START}" />
+		<select name="action"><option class="sep" value="">{L_SELECT_OPTION}</option>{S_ACTION_OPTIONS}</select>
+		<input class="button2" type="submit" name="update" value="{L_SUBMIT}" />
+	</fieldset>
+
+	{S_FORM_TOKEN}
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_BANK_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_BANK_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<h1 style="display:inline;">{L_SELECT_SEASON}:</h1>
+		<select name="s" id="bank_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<h1>{L_LEAGUE_BANK}</h1>
+
+	<p>{L_LEAGUE_BANK_EXPLAIN}</p>
+	<p><a href="{U_DLOAD_BANK_OPEN}">Offene Posten bis einschließlich dieser Saison</a></p>
+	<form id="overview" method="post" action="{U_ACTION}">
+	<fieldset>
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('overview', 'markleague', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('overview', 'markleague', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_LEAGUE}</th>
+		<th style="width: 25%">{L_LEAGUE_NAME}</th>
+		<th>{L_BET_POINTS}</th>
+		<th>{L_DEPOSITED}</th>
+		<th>{L_WINS}</th>
+		<th>{L_PAID}</th>
+		<th>{L_MARK}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .leagues -->
+		<!-- BEGIN leagues -->
+			<!-- IF leagues.S_ROW_COUNT is even --><tr class="bg1 row_light"><!-- ELSE --><tr class="bg2 row_dark"><!-- ENDIF -->
+				<td style="text-align: center;"><strong>{leagues.LEAGUE}</strong></td>
+				<td><a href="{leagues.U_DLOAD_BANK}">{leagues.LEAGUE_NAME}</a></td>
+				<td style="text-align: right;"><a href="{leagues.U_LIST_BET_POINTS}">{leagues.BET_POINTS}</a></td>
+				<td style="text-align: right;">
+					<!-- IF S_LIST_DEPOSITED --><a href="{leagues.U_LIST_DEPOSITED}"><!-- ENDIF -->
+					{leagues.DEPOSITED}
+					<!-- IF S_LIST_DEPOSITED --></a><!-- ENDIF --></td>
+				<td style="text-align: right;">{leagues.WINS}</td>
+				<td style="text-align: right;">
+					<!-- IF S_LIST_PAID --><a href="{leagues.U_LIST_PAID}"><!-- ENDIF -->
+					{leagues.PAID}
+					<!-- IF S_LIST_PAID --></a><!-- ENDIF --></td>
+				<td style="text-align: center;"><input type="checkbox" class="radio" name="markleague[]" value="{leagues.LEAGUE}" /></td>
+			</tr>
+		<!-- END leagues -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="3" class="row3">{L_NO_LEAGUES_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+	<!-- IF S_CASH_POINTS -->
+	{L_CASH_POINTS} <input name="cash" type="checkbox" class="radio" checked="checked" /> 
+	<!-- ENDIF -->
+		<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<select name="action"><option class="sep" value="">{L_SELECT_OPTION}</option>{S_LEAGUE_ACTION_OPTIONS}</select>
+			<input class="button2" type="submit" name="update" value="{L_SUBMIT}" />
+		</fieldset>
+
+	{S_FORM_TOKEN}
+	</fieldset>
+	</form><!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

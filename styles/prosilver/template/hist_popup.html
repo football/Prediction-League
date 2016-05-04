@@ -1,0 +1,288 @@
+<!-- INCLUDE simple_header.html -->
+<div class="panel">
+	<br />
+	<div class="navbar football_bg">
+		<div class="maintitle">{MAIN_TITLE}</div>
+	</div>
+		<br />
+<!-- IF S_DATA_HISTORY -->
+	<!-- IF S_DATA_HIST -->
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th >{L_SEASON}</th>
+					<th>{L_LEAGUE}</th>
+					<th colspan="5">{L_VS}</th>
+					<th colspan="3">{L_RESULT}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- BEGIN historie -->
+				<tr class="{historie.ROW_CLASS}">
+					<td class="td_season">{historie.SEASON}</td>
+					<td class="td_league">{historie.LEAGUE}</td>
+					<td class="td_logo">{historie.HLOGO}</td>
+					<td class="td_team">{historie.HNAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{historie.GLOGO}</td>
+					<td class="td_team">{historie.GNAME}</td>
+					<td class="td_goals_home">{historie.GOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest">{historie.GOALS_GUEST}</td>
+				</tr>
+				<!-- END historie -->
+			</tbody>
+		</table>
+	</div>
+	<div style="text-align:center">{STAT_HIST}</div>
+	<br />
+	<div style="text-align:center">
+		<!-- BEGIN chart_hist_total -->
+				{chart_hist_total.CHARTIMAGE}
+				<map name="map_total">
+				<!-- BEGIN map_total -->
+					<area shape="rect" coords="{chart_hist_total.map_total.COORDS}" title="{chart_hist_total.map_total.TITLE}">
+				<!-- END map_total -->
+				</map>				
+				<br />
+		<!-- END chart_hist_total -->
+	</div>
+	<!-- ELSE -->
+	<div style="text-align:center">{L_NO_HIST}</div>
+	<!-- ENDIF -->
+		<br />
+	<table style="width:100%;">
+		<tr>
+			<td style="width:50%;">
+				<div class="maintitle">{TEAM_HOME}</div>
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th>{L_TABLE}</th>
+								<th title="Vorhersagepunkte">{L_RANK_FORECAST}</th>
+								<th>{L_GAMES_SHORT}</th>
+								<th>{L_WIN_SHORT}</th>
+								<th>{L_DRAW_SHORT}</th>
+								<th>{L_LOST_SHORT}</th>
+								<th colspan="3">{L_GOALS}</th>
+								<th>{L_GOALS_DIFF_SHORT}</th>
+								<th>{L_POINTS_DOT}</th>
+							</tr>
+						</thead>
+						<tbody>
+					<!-- BEGIN table_hometeam -->
+							<tr class="{table_hometeam.ROW_CLASS}">
+								<td class="td_name">{table_hometeam.TABLE}</td>
+								<td class="td_fp">{table_hometeam.PLFP}</td>
+								<td class="td_matches">{table_hometeam.MATCHES}</td>
+								<td class="td_matches">{table_hometeam.WINS}</td>
+								<td class="td_matches">{table_hometeam.DRAW}</td>
+								<td class="td_matches">{table_hometeam.LOST}</td>
+								<td class="td_goals_home">{table_hometeam.GOALS_HOME}</td>
+								<td class="td_vs">:</td>
+								<td class="td_goals_guest">{table_hometeam.GOALS_GUEST}</td>
+								<td class="td_diff">{table_hometeam.GDIFF}</td>
+								<td class="td_pts">{table_hometeam.POINTS}</td>
+							</tr>
+					<!-- END table_hometeam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_HOME -->
+				<div style="text-align:center">{L_NO_MATCHES_TEAM}</div>
+			<!-- ENDIF -->
+				<br />
+			</td>
+			<td style="width:10px;">&nbsp;</td>
+			<td>
+				<div class="maintitle">{TEAM_GUEST}</div>
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th>{L_TABLE}</th>
+								<th title="Vorhersagepunkte">{L_RANK_FORECAST}</th>
+								<th>{L_GAMES_SHORT}</th>
+								<th>{L_WIN_SHORT}</th>
+								<th>{L_DRAW_SHORT}</th>
+								<th>{L_LOST_SHORT}</th>
+								<th colspan="3">{L_GOALS}</th>
+								<th>{L_GOALS_DIFF_SHORT}</th>
+								<th>{L_POINTS_DOT}</th>
+							</tr>
+						</thead>
+						<tbody>
+					<!-- BEGIN table_guestteam -->
+							<tr class="{table_guestteam.ROW_CLASS}">
+								<td class="td_name">{table_guestteam.TABLE}</td>
+								<td class="td_fp">{table_guestteam.PLFP}</td>
+								<td class="td_matches">{table_guestteam.MATCHES}</td>
+								<td class="td_matches">{table_guestteam.WINS}</td>
+								<td class="td_matches">{table_guestteam.DRAW}</td>
+								<td class="td_matches">{table_guestteam.LOST}</td>
+								<td class="td_goals_home">{table_guestteam.GOALS_HOME}</td>
+								<td class="td_vs">:</td>
+								<td class="td_goals_guest">{table_guestteam.GOALS_GUEST}</td>
+								<td class="td_diff">{table_guestteam.GDIFF}</td>
+								<td class="td_pts">{table_guestteam.POINTS}</td>
+							</tr>
+					<!-- END table_guestteam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_GUEST -->
+				<div style="text-align:center">{L_NO_MATCHES_TEAM}</div>
+			<!-- ENDIF -->
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">
+			<!-- BEGIN chart_home -->
+				{chart_home.CHARTIMAGE}
+				<map name="map_home">
+				<!-- BEGIN map_home -->
+					<area shape="rect" coords="{chart_home.map_home.COORDS}" title="{chart_home.map_home.TITLE}">
+				<!-- END map_home -->
+				</map>				
+				<br />
+			<!-- END chart_home -->
+			</td>
+			<td style="width:10px;">&nbsp;</td>
+			<td style="text-align:center">
+			<!-- BEGIN chart_guest -->
+				{chart_guest.CHARTIMAGE}
+				<map name="map_guest">
+				<!-- BEGIN map_guest -->
+					<area shape="rect" coords="{chart_guest.map_guest.COORDS}" title="{chart_guest.map_guest.TITLE}">
+				<!-- END map_guest -->
+				</map>				
+				<br />
+			<!-- END chart_guest -->
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th colspan="5">{L_LAST_GAMES}</th>
+							</tr>
+						</thead>
+						<tbody>
+					<!-- BEGIN last_hometeam -->
+							<tr class="{last_hometeam.ROW_CLASS}">
+								<td class="td_place {last_hometeam.MATCH_RESULT}">{last_hometeam.PLACE}</td>
+								<td class="td_team {last_hometeam.MATCH_RESULT}">{last_hometeam.AGAINST}</td>
+								<td class="td_goals_home {last_hometeam.MATCH_RESULT}">{last_hometeam.GOALS_HOME}</td>
+								<td class="td_vs {last_hometeam.MATCH_RESULT}">:</td>
+								<td class="td_goals_guest {last_hometeam.MATCH_RESULT}">{last_hometeam.GOALS_GUEST}</td>
+							</tr>
+					<!-- END last_hometeam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_HOME -->
+				<div style="text-align:center">{L_NO_MATCHES_TEAM}</div>
+			<!-- ENDIF -->
+			</td>
+			<td style="width:10px;">&nbsp;</td>
+			<td style="vertical-align: top;">
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th colspan="5">{L_LAST_GAMES}</th>
+							</tr>
+						</thead>
+						<tbody>
+						<!-- BEGIN last_guestteam -->
+							<tr class="{last_guestteam.ROW_CLASS}">
+								<td class="td_place {last_guestteam.MATCH_RESULT}">{last_guestteam.PLACE}</td>
+								<td class="td_team {last_guestteam.MATCH_RESULT}">{last_guestteam.AGAINST}</td>
+								<td class="td_goals_home {last_guestteam.MATCH_RESULT}">{last_guestteam.GOALS_HOME}</td>
+								<td class="td_vs {last_guestteam.MATCH_RESULT}">:</td>
+								<td class="td_goals_guest {last_guestteam.MATCH_RESULT}">{last_guestteam.GOALS_GUEST}</td>
+							</tr>
+						<!-- END last_guestteam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_GUEST -->
+				<div style="text-align:center">{L_NO_MATCHES_TEAM}</div>
+			<!-- ENDIF -->
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th colspan="4">{L_LAST_GAMES_HOME}</th>
+							</tr>
+						</thead>
+						<tbody>
+					<!-- BEGIN lasthome_hometeam -->
+							<tr class="{lasthome_hometeam.ROW_CLASS}">
+								<td class="td_team {lasthome_hometeam.MATCH_RESULT}">{lasthome_hometeam.AGAINST}</td>
+								<td class="td_goals_home {lasthome_hometeam.MATCH_RESULT}">{lasthome_hometeam.GOALS_HOME}</td>
+								<td class="td_vs {lasthome_hometeam.MATCH_RESULT}">:</td>
+								<td class="td_goals_guest {lasthome_hometeam.MATCH_RESULT}">{lasthome_hometeam.GOALS_GUEST}</td>
+							</tr>
+					<!-- END lasthome_hometeam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_LASTHOME -->
+				<div style="text-align:center">{L_NO_HOMEMATCHES_TEAM}</div>
+			<!-- ENDIF -->
+			</td>
+			<td style="width:10px;">&nbsp;</td>
+			<td style="vertical-align: top;">
+				<div class="forabg">
+					<table class="football">
+						<thead>
+							<tr>
+								<th colspan="4">{L_LAST_GAMES_AWAY}</th>
+							</tr>
+						</thead>
+						<tbody>
+						<!-- BEGIN lastaway_guestteam -->
+							<tr class="{lastaway_guestteam.ROW_CLASS}">
+								<td class="td_team {lastaway_guestteam.MATCH_RESULT}">{lastaway_guestteam.AGAINST}</td>
+								<td class="td_goals_home {lastaway_guestteam.MATCH_RESULT}">{lastaway_guestteam.GOALS_HOME}</td>
+								<td class="td_vs {lastaway_guestteam.MATCH_RESULT}">:</td>
+								<td class="td_goals_guest {lastaway_guestteam.MATCH_RESULT}">{lastaway_guestteam.GOALS_GUEST}</td>
+							</tr>
+						<!-- END lastaway_guestteam -->
+						</tbody>
+					</table>
+				</div>
+			<!-- IF not S_DATA_LASTAWAY -->
+				<div style="text-align:center">{L_NO_AWAYMATCHES_TEAM}</div>
+			<!-- ENDIF -->
+			</td>
+		</tr>
+	</table>
+
+	<div class="navbar football_bg">
+		<div style="text-align:center">
+			{FORECAST_QUOTE}
+			<br />
+			<div class="maintitle">{FORECAST}</div>
+		</div>
+	</div>
+<!-- ELSE -->
+	<br />
+	<div class="message">{S_ERROR_MESSAGE}</div>
+	<br />
+<!-- ENDIF -->
+	<div style="text-align:center">
+		<a href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a>
+	</div>
+</div>
+<!-- INCLUDE simple_footer.html -->

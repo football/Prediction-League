@@ -1,0 +1,164 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_TEAMS_MANAGE}</h1>
+	<p>{L_TEAM_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_TEAM_DETAILS}</legend>
+	<dl>
+		<dt><label for="team">{L_SEASON}:</label></dt>
+		<dd><strong>{SEASON_NAME}</strong><input name="s" type="hidden" id="season" value="{SEASON}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team">{L_LEAGUE}:</label></dt>
+		<dd><strong>{LEAGUE_NAME}</strong><input name="l" type="hidden" id="league" value="{LEAGUE}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team">{L_TEAM}:</label></dt>
+		<dd><!-- IF not S_ADD_TEAM --><strong>{TEAM}</strong><!-- ENDIF -->
+			<input name="t" type="<!-- IF S_ADD_TEAM -->text<!-- ELSE -->hidden<!-- ENDIF -->" id="team" value="{TEAM}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team_name">{L_TEAM_NAME}:</label></dt>
+		<dd><input name="team_name" type="text" id="team_name" size="30" maxlength="30" value="{TEAM_NAME}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team_short">{L_TEAM_SHORT}:</label><br /><span>{L_TEAM_SHORT_EXPLAIN}</span></dt>
+		<dd><input name="team_short" type="text" id="team_short" size="10" maxlength="10" value="{TEAM_SHORT}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team_symbol">{L_TEAM_SYMBOL}:</label><br /><span>{L_TEAM_SYMBOL_EXPLAIN}</span></dt>
+		<dd><span>
+			<select style="vertical-align:top;" name="team_symbol" id="team_symbol" 
+					onchange="document.getElementById('teamsymbol').src = '{PHPBB_ROOT_PATH}images/flags/' + this.value;">
+				{TEAM_SYMBOL_OPTIONS}
+			</select>&nbsp;&nbsp;&nbsp;<img src="{TEAM_IMAGE}" id="teamsymbol" alt="{TEAM_NAME}" title="{TEAM_NAME}" /></span></dd>
+	</dl>
+	<!-- IF S_KO_LEAGUE -->
+	<dl>
+		<dt><label for="team_group">{L_TEAM_GROUP}:</label><br /><span>{L_TEAM_GROUP_EXPLAIN}</span></dt>
+		<dd><input name="team_group" type="text" id="team_group" size="1" maxlength="1" value="{TEAM_GROUP}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="team_round">{L_TEAM_ROUND}:</label><br /><span>{L_TEAM_ROUND_EXPLAIN}</span></dt>
+		<dd><select name="team_round" id="team_round">{TEAM_MATCHDAY_OPTIONS}</select></dd>
+	</dl>
+	<input type="hidden" name="ko_league" value="1" />
+	<!-- ENDIF -->
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	<!-- IF S_ADD_TEAM -->
+		<input type="hidden" name="add" value="1" />
+	<!-- ENDIF -->
+		<input type="hidden" name="edit" value="1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_TEAMS_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_TEAMS_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<h1 style="display:inline;">{L_SELECT_LEAGUE}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="team_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="team_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form id="add_team" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<input type="hidden" name="l" value="{S_LEAGUE}" />
+			<input type="hidden" name="ko_league" value="{S_KO_LEAGUE}" />
+		<!-- IF S_TEAM_ADD -->
+			{L_ADD_TEAM}: <select name="t" id="old_team">{S_TEAM_OPTIONS}</select> <input class="button2" type="submit" name="submit" value="{L_SUBMIT}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<h1>{L_TEAM_DEF} {S_TEAMS}</h1>
+
+	<p>{L_TEAM_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_TEAM}</th>
+		<th></th>
+		<th style="width: 25%">{L_TEAM_NAME}</th>
+		<th></th>
+		<th>{L_TEAM_MATCHES}</th>
+		<th>{L_TEAM_AWAY}</th>
+		<!-- IF S_KO_LEAGUE -->
+		<th>{L_GROUP}</th>
+		<th>{L_MATCHDAY}</th>
+		<!-- ENDIF -->
+		<th>{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .teams -->
+		<!-- BEGIN teams -->
+			<tr class="{teams.ROW_CLASS}">
+				<td style="text-align: center;"><strong>{teams.TEAM}</strong></td>
+				<td style="text-align: center;"><img src="{teams.TEAM_IMAGE}" alt="{teams.TEAM_NAME}" title="{teams.TEAM_NAME}" width="20" height="20" /></td>
+				<td>{teams.TEAM_NAME}</td>
+				<td>{teams.TEAM_SHORT}</td>
+				<td>{teams.TEAM_MATCHES}</td>
+				<td>{teams.TEAM_HOME}</td>
+				<!-- IF S_KO_LEAGUE -->
+				<td style="text-align: center;">{teams.TEAM_GROUP}</td>
+				<td style="text-align: center;">{teams.TEAM_ROUND}</td>
+				<!-- ENDIF -->
+				<td style="text-align: center;"><a href="{teams.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align: center;"><!-- IF teams.U_DELETE --><a href="{teams.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END teams -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="2" class="row3">{L_NO_TEAMS_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+	<!-- IF S_MATCHES --> {S_MATCHES} {L_TEAM_MATCHES} <!-- ENDIF -->
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,149 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_EXTRA_MANAGE}</h1>
+	<p>{L_MATCHDAY_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_EXTRA_DETAILS}</legend>
+	<dl>
+		<dt><label for="season">{L_SEASON}:</label></dt>
+		<dd><strong>{SEASON_NAME}</strong><input name="s" type="hidden" id="season" value="{SEASON}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league">{L_LEAGUE}:</label></dt>
+		<dd><strong>{LEAGUE_NAME}</strong><input name="l" type="hidden" id="league" value="{LEAGUE}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="extra_no">{L_EXTRA_NO}:</label></dt>
+		<dd><strong>{EXTRA_NO}</strong><input name="e" type="hidden" id="extra_no" value="{EXTRA_NO}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="question_type">{L_EXTRA_QUESTION_TYPE}:</label><br /><span>{L_EXTRA_QUESTION_TYPE_EXPLAIN}</span></dt>
+		<dd><select id="question_type" name="question_type">{S_QUESTION_TYPE_OPTIONS}</select> </dd>
+	</dl>
+	<dl>
+		<dt><label for="question">{L_EXTRA_QUESTION}:</label><br /><span>{L_EXTRA_QUESTION_EXPLAIN}</span></dt>
+		<dd><input name="question" type="text" id="question" size="80" maxlength="255" value="{QUESTION}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday">{L_EXTRA_MATCHDAY}:</label><br /><span>{L_EXTRA_MATCHDAY_EXPLAIN}</span></dt>
+		<dd><select id="matchday" name="matchday">{S_MATCHDAY_OPTIONS}</select> </dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_eval">{L_EXTRA_MATCHDAY_EVAL}:</label><br /><span>{L_EXTRA_MATCHDAY_EVAL_EXPLAIN}</span></dt>
+		<dd><select id="matchday_eval" name="matchday_eval">{S_MATCHDAY_EVAL_OPTIONS}</select> </dd>
+	</dl>
+	<dl>
+		<dt><label for="extra_points">{L_EXTRA_POINTS}:</label><br /><span>{L_EXTRA_POINTS_EXPLAIN}</span></dt>
+		<dd><input name="extra_points" type="text" id="extra_points" size="2" maxlength="2" value="{EXTRA_POINTS}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="extra_status">{L_EXTRA_STATUS}:</label><br /><span>{L_EXTRA_STATUS_EXPLAIN}</span></dt>
+		<dd><select id="extra_status" name="extra_status">{S_EXTRA_STATUS_OPTIONS}</select></dd>
+	</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_EXTRA_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_EXTRA_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<h1 style="display:inline;">{L_SELECT_LEAGUE}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="matchday_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="matchday_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form id="add_extra" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<!-- IF S_EXTRA_ADD -->
+			<input class="button2" type="submit" name="submit" value="{L_EXTRA_ADD}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<h1>{L_EXTRA_DEF}</h1>
+
+	<p>{L_EXTRA_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_EXTRA_NO}</th>
+		<th>{L_QUESTION_TYPE}</th>
+		<th style="width: 40%">{L_EXTRA_QUESTION}</th>
+		<th>{L_EXTRA_MATCHDAY}</th>
+		<th>{L_EXTRA_MATCHDAY_EVAL}</th>
+		<th>{L_EXTRA_POINTS}</th>
+		<th>{L_STATUS}</th>
+		<th>{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .extras -->
+		<!-- BEGIN extras -->
+			<tr class="{extras.ROW_CLASS}">
+				<td style="text-align:center;"><strong>{extras.EXTRA_NO}</strong></td>
+				<td style="text-align:center;">{extras.QUESTION_TYPE}</td>
+				<td>{extras.QUESTION}</td>
+				<td style="text-align:right;">{extras.MATCHDAY}</td>
+				<td style="text-align:right;">{extras.MATCHDAY_EVAL}</td>
+				<td style="text-align:center;">{extras.EXTRA_POINTS}</td>
+				<td style="text-align:center;">{extras.EXTRA_STATUS}</td>
+				<td style="text-align: center;"><a href="{extras.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align: center;"><!-- IF extras.U_DELETE --><a href="{extras.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END extras -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="9" class="row3">{L_NO_EXTRA_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

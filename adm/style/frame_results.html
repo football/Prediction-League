@@ -1,0 +1,13 @@
+<!-- IF 0 -->
+Diese Datei existiert doppelt: Einmal im fooball\football\styles\prsilver\template und einmal im fooball\football\adm\style Ordner
+Mit Hilfe dieser Datei werden Fussballergebnisse zum Abgleich und schnelleren Erfassung von externen Seiten,
+wie z.B. den Weltfussball.de Torverteiler, eingebunden.
+Wenn ihr einen Weltfussball.de Account habt, könnt ihr dort in der Community einen Torverteiler erstellen und den Code hier 
+unter der entsprechenden Liganummer reinhängen (also 999999 mit der Liganummer bzw. wfb_tv_id ersetzen).
+Der Frame wird dann bei der Ergebnisseingabe in der Liga angezeigt, wenn der Spieltag editierbar ist.
+<!-- ENDIF -->
+<!-- IF S_EDIT_MODE -->
+	<!-- IF S_LEAGUE == 999999 -->
+		<div id="tor_v1" style="width:400px;text-align:right;font-family:Arial,Helvetica,Verdana,sans-serif;color:#000000;font-size:8pt;background-color:#cadceb;"><div id="iTorV1"></div>Der Torverteiler - pr&auml;sentiert von <a href="http://www.weltfussball.de/" target="_blank">weltfussball.de</a>&nbsp;<br />Alles &uuml;ber <a href="http://www.weltfussball.de/" target="_blank">Fu&szlig;ball</a> oder direkt zur <a href="http://www.weltfussball.de/wettbewerb/bundesliga/">Bundesliga</a>&nbsp;</div><script type="text/javascript">var wfb_tv_id="999999";</script><script id="wfb_link" type="text/javascript" src="http://www.weltfussball.de/js/get_tv.js"></script>
+	<!-- ENDIF -->
+<!-- ENDIF -->

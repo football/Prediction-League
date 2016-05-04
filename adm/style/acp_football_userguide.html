@@ -1,0 +1,44 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_IN_FOOTBALL_USERGUIDE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<h1>{L_ACP_FOOTBALL} - {L_ACP_FOOTBALL_USERGUIDE}</h1>
+	<p>{L_ACP_FOOTBALL_USERGUIDE_EXPLAIN}</p>
+
+	<fieldset id="userguidelinks">
+		<!-- BEGIN userguide_block -->
+			<div style="font-size: 0.85em; padding-bottom: 5px; margin-bottom: 0.7em; line-height: 1.40em;"><strong>{userguide_block.BLOCK_TITLE}</strong><br />
+				<!-- BEGIN userguide_row -->
+					<a href="#ug{userguide_block.S_ROW_COUNT}{userguide_block.userguide_row.S_ROW_COUNT}">{userguide_block.userguide_row.USERGUIDE_QUESTION}</a><br />
+				<!-- END userguide_row -->
+			</div>
+		<!-- END userguide_block -->
+	</fieldset>
+
+	<!-- BEGIN userguide_block -->
+	<fieldset>
+		<h2>{userguide_block.BLOCK_TITLE}</h2>
+		<!-- BEGIN userguide_row -->
+			<div style="font-size: 0.85em; padding-bottom: 5px; margin-bottom: 0.7em; line-height: 1.40em;">
+				<span id="ug{userguide_block.S_ROW_COUNT}{userguide_block.userguide_row.S_ROW_COUNT}">
+					<strong>{userguide_block.userguide_row.USERGUIDE_QUESTION}</strong></span><br />
+				{userguide_block.userguide_row.USERGUIDE_ANSWER}<br /><br />
+				<a href="#userguidelinks">{ICON_BACK_TO_TOP}&nbsp;{L_BACK_TO_TOP}</a>
+			</div>
+			<!-- IF not userguide_block.userguide_row.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
+		<!-- END userguide_row -->
+	</fieldset>
+	<!-- END userguide_block -->
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

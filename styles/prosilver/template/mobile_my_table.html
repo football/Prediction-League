@@ -1,0 +1,216 @@
+<!-- IF S_DATA_MY_TABLE -->
+	<div>
+		<h3 style="display:inline;">{L_USER_TABLE} : </h3>
+		<!-- IF S_VIEW <> 'print' -->
+			<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+			<div style="display:inline; margin:0; padding:0;">
+				<input type="hidden" name="side" value="{S_SIDE}" />
+				<input type="hidden" name="m" value="{S_MATCHDAY}" />
+				<input type="hidden" name="l" value="{S_LEAGUE}" />
+				<input type="hidden" name="s" value="{S_SEASON}" />
+				<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+				<!-- BEGIN form_user -->
+					<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+				<!-- END form_user -->
+				</select>
+			</div>
+			</form>
+		<!-- ELSE -->
+			<h3>{USERNAME}</h3>
+		<!-- ENDIF -->
+	</div>
+	<div class="football-inner-left">
+		<h3>{L_TABLE_TOTAL}</h3>
+		{L_POINTS_DIFF} = {S_PDIFF} {L_POINTS}
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_GAMES_SHORT}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th colspan="3">{L_GOALS}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN total -->
+					<!-- IF total.GROUP <> '' -->
+					<tr class="row_group">
+						<td colspan="12" style="text-align: center;">{total.GROUP}</td>
+					</tr>
+					<!-- ELSE -->
+					<tr class="{total.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{total.U_PLAN_TEAM}');return false;">
+						<td class="td_rank">{total.RANK}</td>
+						<td class="td_logo">{total.LOGO}</td>
+						<td class="td_team">{total.TEAM}</td>
+						<td class="td_hits">{total.GAMES}</td>
+						<td class="td_hits">{total.WIN}</td>
+						<td class="td_hits">{total.DRAW}</td>
+						<td class="td_hits">{total.LOST}</td>
+						<td class="td_goals_home">{total.GOALS}</td>
+						<td class="td_vs">:</td>
+						<td class="td_goals_guest">{total.GOALS_AGAINST}</td>
+						<td class="td_pts">{total.POINTS}</td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END total -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_TABLE_FORM}</h3>
+		{TEXT_FORM}
+	<!-- IF S_DATA_FORM -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_GAMES_SHORT}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th colspan="3">{L_GOALS}</th>
+						<th>{L_GOALS_DIFF_SHORT}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN form -->
+					<!-- IF form.GROUP <> '' -->
+					<tr class="row_group">
+						<td colspan="12" style="text-align: center;">{form.GROUP}</td>
+					</tr>
+					<!-- ELSE -->
+					<tr class="{form.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_REST}" onclick="popup('{form.U_PLAN_TEAM}');return false;">
+						<td class="td_rank">{form.RANK}</td>
+						<td class="td_logo">{form.LOGO}</td>
+						<td class="td_team">{form.TEAM}</td>
+						<td class="td_hits">{form.GAMES}</td>
+						<td class="td_hits">{form.WIN}</td>
+						<td class="td_hits">{form.DRAW}</td>
+						<td class="td_hits">{form.LOST}</td>
+						<td class="td_goals_home">{form.GOALS}</td>
+						<td class="td_vs">:</td>
+						<td class="td_goals_guest">{form.GOALS_AGAINST}</td>
+						<td class="td_hits">{form.GOALS_DIFF}</td>
+						<td class="td_pts">{form.POINTS}</td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END form -->
+				</tbody>
+			</table>
+		</div>
+	<!-- ELSE -->
+		<br />
+		<br />
+		<div class="message">{L_NO_TABLEFORM}</div>
+		<br />
+		<br />
+	<!-- ENDIF -->
+	</div>
+	<br style="clear:both" />
+	<br />
+	<div class="football-inner-left">
+		<h3>{L_TABLE_HOME}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_GAMES_SHORT}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th colspan="3">{L_GOALS}</th>
+						<th>{L_GOALS_DIFF_SHORT}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN home -->
+					<!-- IF home.GROUP <> '' -->
+					<tr class="row_group">
+						<td colspan="12" style="text-align: center;">{home.GROUP}</td>
+					</tr>
+					<!-- ELSE -->
+					<tr class="{home.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PLAYED_HOME}" onclick="popup('{home.U_PLAN_TEAM}');return false;">
+						<td class="td_rank">{home.RANK}</td>
+						<td class="td_logo">{home.LOGO}</td>
+						<td class="td_team">{home.TEAM}</td>
+						<td class="td_hits">{home.GAMES}</td>
+						<td class="td_hits">{home.WIN}</td>
+						<td class="td_hits">{home.DRAW}</td>
+						<td class="td_hits">{home.LOST}</td>
+						<td class="td_goals_home">{home.GOALS}</td>
+						<td class="td_vs">:</td>
+						<td class="td_goals_guest">{home.GOALS_AGAINST}</td>
+						<td class="td_hits">{home.GOALS_DIFF}</td>
+						<td class="td_pts">{home.POINTS}</td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END home -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_TABLE_AWAY}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_GAMES_SHORT}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th colspan="3">{L_GOALS}</th>
+						<th>{L_GOALS_DIFF_SHORT}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN away -->
+					<!-- IF away.GROUP <> '' -->
+					<tr class="row_group">
+						<td colspan="12" style="text-align: center;">{away.GROUP}</td>
+					</tr>
+					<!-- ELSE -->
+					<tr class="{away.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PLAYED_AWAY}" onclick="popup('{away.U_PLAN_TEAM}');return false;">
+						<td class="td_rank">{away.RANK}</td>
+						<td class="td_logo">{away.LOGO}</td>
+						<td class="td_team">{away.TEAM}</td>
+						<td class="td_hits">{away.GAMES}</td>
+						<td class="td_hits">{away.WIN}</td>
+						<td class="td_hits">{away.DRAW}</td>
+						<td class="td_hits">{away.LOST}</td>
+						<td class="td_goals_home">{away.GOALS}</td>
+						<td class="td_vs">:</td>
+						<td class="td_goals_guest">{away.GOALS_AGAINST}</td>
+						<td class="td_hits">{away.GOALS_DIFF}</td>
+						<td class="td_pts">{away.POINTS}</td>
+					</tr>
+					<!-- ENDIF -->
+				<!-- END away -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both" />
+	<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_TABLE}</div>
+	<br />
+	<br />
+<!-- ENDIF -->

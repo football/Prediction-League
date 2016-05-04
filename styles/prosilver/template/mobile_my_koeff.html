@@ -1,0 +1,101 @@
+<!-- IF S_MATCHES_ON_MATCHDAY -->
+	<!-- IF S_VIEW <> 'print' -->
+		<div>
+			<h3 style="display:inline;">{L_KOEFF_OF} : </h3>
+				<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+				<div style="display:inline; margin:0; padding:0;">
+					<input type="hidden" name="side" value="{S_SIDE}" />
+					<input type="hidden" name="m" value="{S_MATCHDAY}" />
+					<input type="hidden" name="l" value="{S_LEAGUE}" />
+					<input type="hidden" name="s" value="{S_SEASON}" />
+					<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+					<!-- BEGIN form_user -->
+						<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+					<!-- END form_user -->
+					</select>
+				</div>
+				</form>
+		</div>
+		<!-- IF PAGINATION or TOTAL_USERS -->
+			<div class="pagination">
+				{TOTAL_USERS}
+				<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+			</div>
+		<!-- ENDIF -->
+	<!-- ELSE -->
+		<h3>{L_KOEFF_OF} {USERNAME}:</h3>
+	<!-- ENDIF -->
+	<br />
+	<!-- BEGIN match_panel -->
+		<div class="forabg">
+			<div class="football-table-scroll">
+			<table class="football">
+				<thead>
+					<tr>
+						<th style="text-align: right;"><br /></th>
+					<!-- BEGIN match_entry -->
+						<th colspan="2">{match_panel.match_entry.HOME_NAME}<br />{match_panel.match_entry.GUEST_NAME}</th>
+					<!-- END match_entry -->
+					<!-- IF match_panel.S_TOTAL -->
+						<th style="text-align: center;"></th>
+					<!-- ENDIF -->
+					</tr>
+					<tr class="row_result">
+						<td style="text-align: left;"><b>{L_RESULT}</b></td>
+					<!-- BEGIN match_entry -->
+						<td class="td_result {match_panel.match_entry.COLOR_STYLE}">{match_panel.match_entry.RESULT}</td>
+						<td class="td_pts"></td>
+					<!-- END match_entry -->
+					<!-- IF match_panel.S_TOTAL -->
+						<td style="text-align: center;"><b>{L_TOTAL}</b></td>
+					<!-- ENDIF -->
+					</tr>
+				</thead>
+			<!-- BEGIN tendency_footer -->
+				<tfoot>
+					<tr> 
+						<td class="td_tendency" style="text-align: right;" title="{L_TEND_TEXT}">{L_TENDENCY}</td>
+					<!-- BEGIN tendency -->
+						<td class="td_tendency" style="text-align: center;" colspan="2">{match_panel.tendency_footer.tendency.TENDENCY}</td>
+					<!-- END tendency -->
+					<!-- IF match_panel.tendency_footer.S_TOTAL -->
+						<td class="td_pts_total" title="{L_POINTS_TOTAL}">{match_panel.tendency_footer.SUMTOTAL}</td>
+					<!-- ENDIF -->
+					</tr>
+				</tfoot>
+			<!-- END tendency_footer -->
+				<tbody>
+			<!-- BEGIN user_row -->
+				<tr class="{match_panel.user_row.ROW_CLASS}">
+					<td class="td_name">{match_panel.user_row.USER_NAME}</td>
+				<!-- BEGIN bet -->
+					<td class="td_result">{match_panel.user_row.bet.BET}</td>
+					<td class="{match_panel.bet.COLOR_STYLE}">{match_panel.user_row.bet.POINTS}</td>
+				<!-- END bet -->
+				<!-- BEGIN points -->
+					<td class="td_pts_total {match_panel.points.COLOR_STYLE}">{match_panel.user_row.points.POINTS_TOTAL}</td>
+				<!-- END points -->
+				</tr>
+			<!-- END user_row -->
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<!-- IF S_VIEW == 'print' -->
+			<br />
+		<!-- ENDIF -->
+	<!-- END match_panel -->
+	<!-- IF S_VIEW <> 'print' -->
+		<!-- IF PAGINATION or TOTAL_USERS -->
+			<div class="pagination">
+				{TOTAL_USERS}
+				<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+			</div>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_MATCHES_ON_MATCHDAY}</div>
+	<br />
+<!-- ENDIF -->

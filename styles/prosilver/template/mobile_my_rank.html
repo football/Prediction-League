@@ -1,0 +1,107 @@
+<!-- IF S_DATA_MY_RANK -->
+	<!-- IF S_VIEW <> 'print' -->
+		<div>
+			<h3 style="display:inline;">{L_RANKS_OF} : </h3>
+				<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+				<div style="display:inline; margin:0; padding:0;">
+					<input type="hidden" name="side" value="{S_SIDE}" />
+					<input type="hidden" name="m" value="{S_MATCHDAY}" />
+					<input type="hidden" name="l" value="{S_LEAGUE}" />
+					<input type="hidden" name="s" value="{S_SEASON}" />
+					<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+					<!-- BEGIN form_user -->
+						<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+					<!-- END form_user -->
+					</select>
+				</div>
+				</form>
+		</div>
+	<!-- ENDIF -->
+	<div class="football-inner-left">
+		<h3>{L_RANKS_OF} {USERNAME}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_SEASON}</th>
+						<th>{L_PARTICIPANTS_SHORT}</th>
+						<th>{L_POINTS_SHORT}</th>
+						<th style="white-space:nowrap">{L_RANK1}</th>
+						<th style="white-space:nowrap">{L_RANK2}</th>
+						<th style="white-space:nowrap">{L_RANK3}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN myrank -->
+					<tr class="{myrank.ROW_CLASS}">
+						<td class="td_hits">{myrank.SEASON}</td>
+						<td class="td_hits">{myrank.MATCHDAYS}</td>
+						<td class="td_hits">{myrank.POINTS}</td>
+						<td class="td_hits">{myrank.RANK1}</td>
+						<td class="td_hits">{myrank.RANK2}</td>
+						<td class="td_hits">{myrank.RANK3}</td>
+					</tr>
+				<!-- END myrank -->
+				</tbody>
+			</table>
+		</div>
+		<br />
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_PLACE}</th>
+						<th>{L_NUMBER}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN season_ranks -->
+					<tr class="{season_ranks.ROW_CLASS}">
+						<td class="td_result">{season_ranks.RANK}</td>
+						<td class="td_hits">{season_ranks.MATCHDAYS}</td>
+					</tr>
+				<!-- END season_ranks -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_RANKS_OF_ALL}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_NAME}</th>
+						<th>{L_PARTICIPANTS_SHORT}</th>
+						<th>{L_POINTS_SHORT}</th>
+						<th style="white-space:nowrap">&#216; {L_POINTS_SHORT}</th>
+						<th style="white-space:nowrap">{L_RANK1}</th>
+						<th style="white-space:nowrap">{L_RANK2}</th>
+						<th style="white-space:nowrap">{L_RANK3}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN allranks -->
+					<tr class="{allranks.ROW_CLASS}">
+						<td class="td_name">{allranks.NAME}</td>
+						<td class="td_hits">{allranks.MATCHDAYS}</td>
+						<td class="td_pts">{allranks.POINTS}</td>
+						<td class="td_pts">{allranks.AVERAGE}</td>
+						<td class="td_hits">{allranks.RANK1}</td>
+						<td class="td_hits">{allranks.RANK2}</td>
+						<td class="td_hits">{allranks.RANK3}</td>
+					</tr>
+				<!-- END allranks -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both" />
+	<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_BETS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->

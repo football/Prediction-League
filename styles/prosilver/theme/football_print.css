@@ -1,0 +1,95 @@
+/* -----------------------------------------------------------------------------------------
+ * @package phpBB Extension - Football Football
+ * @copyright (c) 2016 football (http://football.bplaced.net)
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ * ----------------------------------------------------------------------------------------- */
+body {
+	font: 11pt Verdana, Arial, Helvetica, sans-serif;
+	color:#000000;
+}
+
+a:link		{ color: #000000; text-decoration: none; }
+a:visited	{ color: #000000; text-decoration: none; }
+a:active	{ color: #000000; text-decoration: none; }
+
+h1, h2, h3, h1 a, h2 a, h3 a {
+	font-family: "Trebuchet MS",georgia,Verdana,Sans-serif;
+	color: #000000;
+	background: none;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+h1 { font-size: 20pt; }
+h2 { font-size: 16pt; margin-top: 1em; }
+h3 { font-size: 14pt; margin-top: 1em; }
+
+ hr {
+	height: 1px;
+	background-color: #999999;
+	border-width: 0;
+}
+
+
+ 
+img {border-width:0; display: block !important;}
+
+/* Table for rank in a box */
+table.rank 							{ font-size: 0.9em;}
+table.rank thead th 				{ font-weight: normal; text-transform: uppercase; padding: 0 2px 1px 2px; }
+table.rank td 						{ padding: 0 2px; }
+table.rank td.td_rank 				{ text-align: right; }
+table.rank td.td_pts 				{ text-align: right; }
+table.rank td.td_wins 				{ padding: 0 2px 0 4px; text-align: right; }
+
+/* Table for football data */
+/* Specific column styles */
+table.football 						{ font-size: 0.9em; white-space: nowrap; width: auto; border: 1px solid #000000; }
+table.football th 					{ text-align: center; }
+table.football thead th 			{ font-weight: bold; text-transform: uppercase; line-height: 1.3em; padding: 0 4px 2px 4px; }
+table.football thead th span 		{ padding-left: 7px; }
+table.football tbody td 			{ padding: 1px 2px; }
+table.football tbody th 			{ padding: 1px 2px; }
+table.football th.td_tendency 		{ padding: 4px 2px 0 2px; font-weight:bold; }
+table.football th.td_pts_total  	{ text-align: right; padding:4px 4px 0 2px; }
+table.football td.td_rank 			{ text-align: right; }
+table.football td.td_group 			{ text-align: center; }
+table.football td.td_hits 			{ text-align: center; }
+table.football td.td_wins 			{ text-align: right; padding: 0 2px 0 4px; }
+table.football td.td_match_no 		{ text-align: right; }
+table.football td.td_logo 			{ text-align: center; }
+table.football td.td_team 			{ text-align: left; padding: 0 1em 0 2px; }
+table.football td.td_team_home 		{ text-align: right; width: 155px; }
+table.football td.td_team_guest 	{ text-align: left; width: 155px; }
+table.football td.td_vs 			{ text-align: center; max-width: 1em; padding: 0; }
+table.football td.td_goals_home 	{ text-align: right; max-width: 3em; padding: 0;}
+table.football td.td_goals_guest 	{ text-align: left; max-width: 3em; padding:0; white-space: nowrap;}
+table.football td.td_pts 			{ text-align: right; padding: 0 2px 0 2px; }
+table.football td.td_button 		{ text-align: right; padding-right: 4px; }
+table.football td.td_result 		{ text-align: center; }
+table.football td.td_season 		{ text-align: center; }
+table.football td.td_league 		{ text-align: center; }
+table.football td.td_pts_total 		{ text-align: right; padding: 0 4px 0 2px; }
+table.football td.td_points	 		{ text-align: right; padding: 0 2em 0 2px; }
+table.football td.td_fp 			{ text-align: center; }
+table.football td.td_matches 		{ text-align: center; }
+table.football td.td_diff 			{ text-align: right; }
+table.football td.td_counter 		{ text-align: right; }
+
+table.rank td.color_finally,
+table.football .color_finally, .color_finally ,
+table.football .match_win, .match_win		{ font-weight: bold; color: #00AA00; }
+
+table.rank td.color_provisionally,
+table.football .color_provisionally, .color_provisionally ,
+table.football .match_lost, .match_lost 	{ font-weight: bold; color: #AA0000; }
+
+table.football .match_draw, .match_draw 	{ font-weight: bold; color: #6A6A6A; }
+
+table.rank td.color_not_rated,
+table.football .color_not_rated, 
+.color_not_rated						{ font-weight: bold; color: purple; }
+
+.row_result {
+	font-weight: bold;
+}

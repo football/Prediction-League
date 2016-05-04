@@ -1,0 +1,51 @@
+<!-- IF S_DATA_RANKS --> 
+	<!-- IF S_HEADER -->
+	<div style="text-align:center">
+		<h3>{S_HEADER}</h3>
+	</div>
+	<!-- ENDIF -->
+	<div class="left-box">
+		<span class="color_finally">{L_FINALLY}</span> - <span class="color_provisionally">{L_PROVISIONALLY}</span>
+	</div>
+	<br style="clear:both"/>
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr> 
+					<th>{L_PLACE}</th>
+					<!-- IF not S_HEADER -->
+					<th title="{L_TEND_RANK}">{L_TENDENCY}</th>
+					<!-- ENDIF -->
+					<th style="text-align:left">{L_NAME}</th>
+					<th title="{L_CNT_BET}">{L_BETS}</th>
+					<th style="text-align: right;">{L_POINTS}</th>
+					<!-- IF S_WIN -->
+					<th style="text-align: right;">{WIN_NAME}</th>
+					<!-- ENDIF -->
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN rankstotal -->
+				<tr class="{rankstotal.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PROFILE}"
+						onclick="window.location.href='./memberlist.php?mode=viewprofile&amp;u={rankstotal.USERID}';">
+					<td class="td_rank">{rankstotal.RANK}</td>
+					<!-- IF not S_HEADER -->
+					<td>{rankstotal.CHANGE_IMG} {rankstotal.CHANGE_DIFFER}</td>
+					<!-- ENDIF -->
+					<td class="td_name">{rankstotal.USERNAME}</td>
+					<td class="td_hits">{rankstotal.BETS}</td>
+					<td class="td_pts {rankstotal.COLOR_STYLE}">{rankstotal.POINTS}</td>
+					<!-- IF S_WIN -->
+					<td class="td_wins">{rankstotal.WIN}</td>
+					<!-- ENDIF -->
+				</tr>
+			<!-- END rankstotal -->
+			</tbody>
+		</table>
+	</div>
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_RESULTS}</div>
+	<br />
+<!-- ENDIF -->
+<!-- INCLUDE mobile_nav_delivery.html -->

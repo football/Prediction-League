@@ -1,0 +1,112 @@
+<!-- IF S_DATA_MY_POINTS -->
+	<!-- IF S_VIEW <> 'print' -->
+		<div>
+			<h3 style="display:inline;">{L_POINTS_OF} : </h3>
+				<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+				<div style="display:inline; margin:0; padding:0;">
+					<input type="hidden" name="side" value="{S_SIDE}" />
+					<input type="hidden" name="m" value="{S_MATCHDAY}" />
+					<input type="hidden" name="l" value="{S_LEAGUE}" />
+					<input type="hidden" name="s" value="{S_SEASON}" />
+					<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+					<!-- BEGIN form_user -->
+						<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+					<!-- END form_user -->
+					</select>
+				</div>
+				</form>
+		</div>
+	<!-- ENDIF -->
+	<div class="left-box" style="width:100%">
+		<h3>{L_POINTS_OF} {USERNAME}</h3>
+		<!-- IF .points -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th title="{L_CNT_BET}">{L_BETS}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th title="{L_CNT_HIT}">{L_DIRECTHITS_SHORT}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th title="{L_TOTAL}">{L_TOTAL_SHORT}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN points -->
+					<tr class="{points.ROW_CLASS}">
+						<td class="td_rank">{points.RANK}</td>
+						<td class="td_logo">{points.LOGO}</td>
+						<td class="td_team">{points.TEAM}</td>
+						<td class="td_hits">{points.COUNT}</td>
+						<td class="td_hits">{points.WIN}</td>
+						<td class="td_hits">{points.DRAW}</td>
+						<td class="td_hits">{points.LOST}</td>
+						<td class="td_hits">{points.DIRECTHITS}</td>
+						<td class="td_hits">{points.TENDENCIES}</td>
+						<td class="td_hits">{points.TOTAL}</td>
+						<td class="td_pts">{points.POINTS}</td>
+					</tr>
+				<!-- END points -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<div class="left-box" style="width:100%">
+		<h3>{L_POINTS_OF_ALL}</h3>
+		<!-- IF .allpoints -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_WIN_SHORT}</th>
+						<th>{L_DRAW_SHORT}</th>
+						<th>{L_LOST_SHORT}</th>
+						<th>{L_DIRECTHITS_SHORT}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th title="{L_TOTAL}">{L_TOTAL_SHORT}</th>
+						<th style="text-align: right;">{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN allpoints -->
+					<tr class="{allpoints.ROW_CLASS}">
+						<td class="td_rank">{allpoints.RANK}</td>
+						<td class="td_logo">{allpoints.LOGO}</td>
+						<td class="td_team">{allpoints.TEAM}</td>
+						<td class="td_hits">{allpoints.WIN}</td>
+						<td class="td_hits">{allpoints.DRAW}</td>
+						<td class="td_hits">{allpoints.LOST}</td>
+						<td class="td_hits">{allpoints.DIRECTHITS}</td>
+						<td class="td_hits">{allpoints.TENDENCIES}</td>
+						<td class="td_hits">{allpoints.TOTAL}</td>
+						<td class="td_pts">{allpoints.POINTS}</td>
+					</tr>
+				<!-- END allpoints -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<br style="clear:both" />
+	<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_BETS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->
+
+

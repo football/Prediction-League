@@ -1,0 +1,205 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_MATCHES_MANAGE}</h1>
+	<p>{L_MATCH_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_MATCH_DETAILS}</legend>
+	<dl>
+		<dt><label for="season">{L_SEASON}:</label></dt>
+		<dd><strong>{SEASON_NAME}</strong><input name="s" type="hidden" id="season" value="{SEASON}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league">{L_LEAGUE}:</label></dt>
+		<dd><strong>{LEAGUE_NAME}</strong><input name="l" type="hidden" id="league" value="{LEAGUE}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday">{L_MATCHDAY}:</label></dt>
+		<dd><strong>{MATCHDAY_NAME}</strong><input name="m" type="hidden" id="matchday" value="{MATCHDAY}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="match_number">{L_MATCH_NUMBER}:</label></dt>
+		<dd><strong>{MATCH_NUMBER}</strong><input name="g" type="hidden" id="match_number" value="{MATCH_NUMBER}" /></dd>
+	</dl>
+	<dl> 
+		<dt><label for="match_begin">{L_MATCH_BEGIN}:</label></dt>
+		<dd>{L_DAY}: <select id="match_begin" name="mday_day">{S_MATCHDAY_DAY_OPTIONS}</select> 
+			{L_MONTH}: <select name="mday_month">{S_MATCHDAY_MONTH_OPTIONS}</select> 
+			{L_YEAR}: <select name="mday_year">{S_MATCHDAY_YEAR_OPTIONS}</select>&nbsp;&nbsp;&nbsp;
+			{L_TIME}: <select name="mday_hour">{S_MATCHDAY_HOUR_OPTIONS}</select>:
+			<select name="mday_min">{S_MATCHDAY_MIN_OPTIONS}</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="match_status">{L_MATCH_STATUS}:</label><br /><span>{L_MATCH_STATUS_EXPLAIN}</span></dt>
+		<dd><!-- IF S_EDIT_STATUS -->
+			<select name="match_status" id="match_status">{STATUS_OPTIONS}</select>
+			<!-- ELSE -->
+			<strong>{MATCH_STATUS}</strong><input name="match_status" type="hidden" id="match_status" value="{MATCH_STATUS}" />
+			<!-- ENDIF -->
+		</dd>
+	</dl>
+	<dl> 
+		<dt><label for="match_odds">{L_MATCH_ODDS}:</label></dt>
+		<dd>{L_ODD_1}: <input name="odd_1" type="text" id="odd_1" size="10" maxlength="6" value="{ODD_1}" />&nbsp;&nbsp;
+			{L_ODD_x}:  <input name="odd_x" type="text" id="odd_x" size="10" maxlength="6" value="{ODD_x}" />&nbsp;&nbsp;
+			{L_ODD_2}:  <input name="odd_2" type="text" id="odd_2" size="10" maxlength="6" value="{ODD_2}" />
+		</dd>
+	</dl>
+	<dl> 
+		<dt><label for="rating">{L_MATCH_RATING}:</label></dt>
+		<dd><input name="rating" type="text" id="rating" size="10" maxlength="6" value="{RATING}" /></dd>
+	</dl>
+	<!-- IF S_KO_LEAGUE -->
+	<dl>
+		<dt><label for="match_group">{L_MATCH_GROUP}:</label></dt>
+		<dd><input name="group_match" id="group_match" type="checkbox" class="radio" 
+				onchange="if(this.checked){document.getElementById('match_ko').checked=false;}" <!-- IF S_GROUP_CHECKED --> checked="checked"<!-- ENDIF --> />
+			&nbsp;<input name="match_group" type="text" id="match_group" value="{MATCH_GROUP}" size="1" maxlength="1" readonly/></dd>
+	</dl>
+	<dl>
+		<dt><label for="match_ko">{L_MATCH_KO}:</label><br /><span>{L_MATCH_KO_EXPLAIN}</span></dt>
+		<dd><input name="match_ko" id="match_ko" type="checkbox" class="radio" 
+				onchange="if(this.checked){document.getElementById('group_match').checked=false;}" <!-- IF S_KO_CHECKED --> checked="checked"<!-- ENDIF --> /></dd>
+	</dl>
+	<!-- ENDIF -->
+	<dl>
+		<dt><label for="team_home">{L_MATCH_HOME}:</label></dt>
+		<dd><select name="team_home" id="team_home" onchange="document.getElementById('match_group').value = this.value.substring(0, 1);">{TEAM_HOME_OPTIONS}</select></dd>
+	</dl>
+	<!-- IF S_KO_LEAGUE -->
+	<dl>
+		<dt><label for="formula_home">{L_FORMULA_HOME}:</label><br /><span>{L_FORMULA_HOME_EXPLAIN}</span></dt>
+		<dd><input name="formula_home" type="text" id="formula_home" size="9" maxlength="9" value="{FORMULA_HOME}" /></dd>
+	</dl>
+	<!-- ENDIF -->
+	<dl>
+		<dt><label for="team_guest">{L_MATCH_GUEST}:</label></dt>
+		<dd><select name="team_guest" id="team_guest" onchange="document.getElementById('match_group').value = this.value.substring(0, 1);">{TEAM_GUEST_OPTIONS}</select></dd>
+	</dl>
+	<!-- IF S_KO_LEAGUE -->
+	<dl>
+		<dt><label for="formula_guest">{L_FORMULA_GUEST}:</label><br /><span>{L_FORMULA_GUEST_EXPLAIN}</span></dt>
+		<dd><input name="formula_guest" type="text" id="formula_guest" size="9" maxlength="9" value="{FORMULA_GUEST}" /></dd>
+	</dl>
+	<!-- ENDIF -->
+	<input type="hidden" name="ko_league" value="1" />
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_MATCHES_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_MATCHES_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<h1 style="display:inline;">{L_SELECT_MATCHDAY}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="match_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="match_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<select name="m" id="match_matchday" onchange="this.form.submit();">{S_MATCHDAY_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form id="add_match" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<input type="hidden" name="l" value="{S_LEAGUE}" />
+			<input type="hidden" name="m" value="{S_MATCHDAY}" />
+			<input type="hidden" name="ko_league" value="{KO_LEAGUE}" />
+		<!-- IF S_MATCH_ADD -->
+			<input class="button2" type="submit" name="submit" value="{L_GENERATE_MATCHES}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<h1>{L_MATCHES_DEF}</h1>
+
+	<p>{L_MATCHES_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_MATCH_NUMBER}</th>
+		<th>{L_MATCH_BEGIN}</th>
+		<th>{L_MATCH_STATUS}</th>
+		<!-- IF S_KO_LEAGUE -->
+		<th>{L_GROUP}</th>
+		<th>{L_KO}</th>
+		<!-- ENDIF -->
+		<th style="width: 20%">{L_MATCH_HOME}</th>
+		<th style="width: 20%">{L_MATCH_GUEST}</th>
+		<th>{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .match -->
+		<!-- BEGIN match -->
+			<tr class="{match.ROW_CLASS}">
+				<td style="text-align:center;"><strong>{match.MATCH_NUMBER}</strong></td>
+				<td>{match.MATCH_BEGIN}</td>
+				<td style="text-align:center;">{match.MATCH_STATUS}</td>
+				<!-- IF S_KO_LEAGUE -->
+				<td style="text-align:center;">{match.MATCH_GROUP}</td>
+				<td style="text-align:center;">{match.MATCH_KO}</td>
+				<!-- ENDIF -->
+				<td>{match.MATCH_HOME}</td>
+				<td>{match.MATCH_GUEST}</td>
+				<td style="text-align:center;"><a href="{match.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align:center;"><!-- IF match.U_DELETE --><a href="{match.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END match -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="4" class="row3">{L_NO_MATCHES_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

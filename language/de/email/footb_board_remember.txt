@@ -1,0 +1,10 @@
+
+Hallo {SITENAME},
+Folgende Tipper haben eine Erinnerungs-Mail erhalten:
+
+{REMEMBER_LIST}
+
+
+Hier geht es zur {SITENAME}: {U_BOARD}.
+
+{EMAIL_SIG}

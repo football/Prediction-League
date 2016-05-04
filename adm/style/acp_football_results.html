@@ -1,0 +1,223 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_RESULTS_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_RESULTS_MANAGE_EXPLAIN}</p>
+
+	<h1 style="display:inline;">{L_SELECT_MATCHDAY}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="match_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="match_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<select name="m" id="match_matchday" onchange="this.form.submit();">{S_MATCHDAY_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<!-- IF S_SUCCESS -->
+		<div class="successbox">
+			<h3>{L_ADVICE}</h3>
+			<p>{SUCCESS_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="list" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{S_LEGEND}</legend>
+		<p class="small" style="margin:0px">{S_TIME}</p>
+		<input type="hidden" name="s" value="{S_SEASON}" style="display:inline" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" style="display:inline" />
+		<input type="hidden" name="m" value="{S_MATCHDAY}" style="display:inline" />
+		<p class="small" style="text-align:right;margin-bottom:0px">
+			<a href="#" onclick="marklist('list', 'delete_', true); return false;">{L_MARK_ALL}</a> &bull; 
+			<a href="#" onclick="marklist('list', 'delete_', false); return false;">{L_UNMARK_ALL}</a>
+		</p>		
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th title="{L_SELECT_EXPLAIN}" style="text-align:center">{L_SELECT}</th>
+		<th>{L_MATCH_BEGIN}</th>
+		<th colspan="3" style="text-align:center">{L_VS}</th>
+		<th title="{L_RESULT_EXPLAIN}" colspan="3" style="text-align:center">{L_RESULT} ({RESULT_EXPLAIN})</th>
+	<!-- IF S_KO_MATCHDAY -->
+		<th title="{L_OVERTIME_EXPLAIN}" colspan="3" style="text-align:center">{LABEL_FINALRESULT}</th>
+	<!-- ENDIF -->
+		<th title="{L_MATCH_STATUS_TITLE}" style="text-align:center">{L_STATUS} </th>
+		<th title="{L_NO_VALUATION_EXPLAIN}" style="text-align:center">{L_NO_VALUATION}</th>
+		<th title="{L_DELETE_EXPLAIN}" style="text-align:center">{L_DELETE}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .match -->
+		<!-- BEGIN match -->
+			<tr class="{match.ROW_CLASS}">
+				<td style="text-align:center">
+				<!-- IF match.EDIT -->
+					<input name="select_{match.NUMBER}" id="select_{match.NUMBER}" type="checkbox" 
+						class="radio" <!-- IF match.SELECT_CHECKED --> checked="checked"<!-- ENDIF --> />
+				<!-- ELSE -->
+					&nbsp;
+				<!-- ENDIF -->
+				</td>
+				<td> {match.BEGIN}</td>
+				<td>{match.HOME_NAME}</td>
+				<td>:</td>
+				<td style="text-align:left">{match.GUEST_NAME}</td>
+				<td style="text-align:right">
+				<!-- IF match.EDIT -->
+					<input name="goals_home_{match.NUMBER}" style="margin:0; width:30px;" 
+						type="number" min="0" max="20" size="2" value="{match.GOALS_HOME}" 
+						onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+				<!-- ELSE -->	
+					{match.GOALS_HOME}	
+				<!-- ENDIF -->
+				</td>
+				<td style="text-align:center;width:3px;">:</td>
+				<td style="text-align:left">
+				<!-- IF match.EDIT -->
+					<input name="goals_guest_{match.NUMBER}" style="margin:0; width:30px;" 
+						type="number" min="0" max="20" size="2" value="{match.GOALS_GUEST}" 
+						onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+				<!-- ELSE -->
+					{match.GOALS_GUEST}
+				<!-- ENDIF -->
+				</td>
+
+			<!-- IF S_KO_MATCHDAY -->
+				<td style="text-align:right">
+				<!-- IF match.KO_MATCH -->
+					<!-- IF match.EDIT -->
+					<input name="overtime_home_{match.NUMBER}" style="margin:0; width:30px;" 
+						type="number" min="0" max="20" size="2" value="{match.OVERTIME_HOME}" 
+						onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+					<!-- ELSE -->
+						{match.OVERTIME_HOME}
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+				</td>
+				<td style="text-align:center; width:3px;">:</td>
+				<td style="text-align:left">
+				<!-- IF match.KO_MATCH -->
+					<!-- IF match.EDIT -->
+					<input name="overtime_guest_{match.NUMBER}" style="margin:0; width:30px;" 
+						type="number" min="0" max="20" size="2" value="{match.OVERTIME_GUEST}" 
+						onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+					<!-- ELSE -->
+						{match.OVERTIME_GUEST}
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+				</td>
+			<!-- ENDIF -->
+				<td style="text-align:center"><input type="hidden" name="status" value="{match.STATUS}" />{match.STATUS_COLOR}</td>
+				<td style="text-align:center">
+					<input name="no_valuation_{match.NUMBER}" type="checkbox" class="radio" 
+						<!-- IF match.NO_VALUATION_CHECKED --> checked="checked"<!-- ENDIF --> 
+						 onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+				</td>
+				<td style="text-align:center">
+					<input name="delete_{match.NUMBER}" type="checkbox" class="radio" 
+						onchange="document.getElementById('select_{match.NUMBER}').checked = true;" />
+				</td>
+			</tr>
+		<!-- END match -->
+	</tbody>
+	</table>
+	<p class="small">
+		<a href="#" onclick="marklist('list', 'select_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('list', 'select_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>
+	
+	<!-- IF S_EXTRA_RESULTS --> 
+	<br />
+	<table class="type_f">
+		<thead>
+			<tr>
+				<th style="text-align:center">{L_SELECT}</th>
+				<th style="text-align: left;">{L_QUESTION}</th>
+				<th>{L_POSSIBLE_POINTS}</th>
+				<th>{L_EVALUATION}</th>
+				<th>{L_RESULT}</th>
+				<th>{L_STATUS} </th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN extra_result -->
+			<tr class="{extra_result.ROW_CLASS}">
+				<td style="text-align:center">
+				<!-- IF extra_result.S_EDIT_EXTRA -->
+					<input name="select{extra_result.EXTRA_NO}" id="select{extra_result.EXTRA_NO}" type="checkbox" class="radio" />
+				<!-- ELSE -->
+					&nbsp;
+				<!-- ENDIF -->
+				</td>
+				<td>{extra_result.QUESTION}</td>
+				<td style="text-align: center;">{extra_result.EXTRA_POINTS}</td>
+				<td style="text-align: center;" title="{extra_result.EVALUATION_TITLE}">{extra_result.EVALUATION}</td>
+				<td style="text-align: center;">
+			<!-- IF extra_result.S_EDIT_EXTRA -->
+				<!-- IF extra_result.S_DISPLAY_TYPE == 1 -->
+					<!-- IF S_VIEW <> 'print' -->
+					<select {extra_result.S_MULTIPLE} name="extra{extra_result.EXTRA_NO}{extra_result.S_MULTIPLE_ARR}" 
+						onchange="document.getElementById('select{extra_result.EXTRA_NO}').checked = true;">
+						<!-- BEGIN extra_option -->
+						<option {extra_result.extra_option.S_SELECTED} value="{extra_result.extra_option.OPTION_VALUE}">{extra_result.extra_option.OPTION_NAME}</option>
+						<!-- END extra_option -->
+					</select>
+					<!-- ELSE -->
+					_{extra_result.RESULT}_
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+				<!-- IF extra_result.S_DISPLAY_TYPE == 2 -->
+					<!-- IF S_VIEW <> 'print' -->
+					<input style="display:inline; margin:0; padding:0;" type="text" name="extra{extra_result.EXTRA_NO}" size="15" maxlength="255" 
+						value="{extra_result.RESULT}" onchange="document.getElementById('select{extra_result.EXTRA_NO}').checked = true;"> 
+					<!-- ELSE -->
+					_{extra_result.RESULT}_
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+			<!-- ELSE -->
+					{extra_result.RESULT}
+			<!-- ENDIF -->
+				</td>
+				<td style="text-align:center"><input type="hidden" name="status" value="{extra_result.STATUS}" />{extra_result.STATUS_COLOR}</td>
+			</tr>
+		<!-- END extra_result -->
+		</tbody>
+	</table>
+	<!-- ENDIF -->
+	<!-- IF S_CASH_POINTS -->{L_CASH_POINTS} <input name="cash" type="checkbox" class="radio" <!-- IF S_CASH -->checked="checked"<!-- ENDIF --> /> <!-- ENDIF -->
+
+	</fieldset>
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="edit" value="{L_SAVE}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<!-- ELSE -->
+			<tr>
+				<td colspan="14" class="row3">{L_NO_MATCHES}</td>
+			</tr>
+	</tbody>
+	</table>
+	<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE frame_results.html -->
+<!-- INCLUDE overall_footer.html -->

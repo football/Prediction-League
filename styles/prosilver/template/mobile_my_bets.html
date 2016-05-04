@@ -1,0 +1,158 @@
+<!-- IF S_DATA_MY_BETS -->
+	<!-- IF S_VIEW <> 'print' -->
+		<div>
+			<h3 style="display:inline;">{L_BETS_OF} : </h3>
+				<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+				<div style="display:inline; margin:0; padding:0;">
+					<input type="hidden" name="side" value="{S_SIDE}" />
+					<input type="hidden" name="m" value="{S_MATCHDAY}" />
+					<input type="hidden" name="l" value="{S_LEAGUE}" />
+					<input type="hidden" name="s" value="{S_SEASON}" />
+					<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+					<!-- BEGIN form_user -->
+						<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+					<!-- END form_user -->
+					</select>
+				</div>
+				</form>
+		</div>
+	<!-- ENDIF -->
+	<div class="football-inner-left">
+		<h3>{L_BETS_OF} {USERNAME}</h3>
+		<!-- IF .bets -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_BET}</th>
+						<th>{L_NUMBER}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th title="{L_TOTAL}">{L_TOTAL_SHORT}</th>
+						<th title="{L_POINTS}">{L_POINTS_SHORT}</th>
+						<th style="white-space:nowrap">&#216; {L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN bets -->
+					<tr class="{bets.ROW_CLASS}">
+						<td class="td_result">{bets.GOALSHOME}:{bets.GOALSGUEST}</td>
+						<td class="td_hits">{bets.COUNT}</td>
+						<td class="td_hits">{bets.TENDENCIES}</td>
+						<td class="td_hits">{bets.DIRECTHITS}</td>
+						<td class="td_hits">{bets.TOTAL}</td>
+						<td class="td_pts">{bets.POINTS}</td>
+						<td class="td_pts">{bets.AVERAGE}</td>
+					</tr>
+				<!-- END bets -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_BETS_OF_ALL}</h3>
+		<!-- IF .allbets -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_BET}</th>
+						<th>{L_NUMBER}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th title="{L_TOTAL}">{L_TOTAL_SHORT}</th>
+						<th title="{L_POINTS}">{L_POINTS_SHORT}</th>
+						<th style="white-space:nowrap">&#216; {L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN allbets -->
+					<tr class="{allbets.ROW_CLASS}">
+						<td class="td_result">{allbets.GOALSHOME}:{allbets.GOALSGUEST}</td>
+						<td class="td_hits">{allbets.COUNT}</td>
+						<td class="td_hits">{allbets.TENDENCIES}</td>
+						<td class="td_hits">{allbets.DIRECTHITS}</td>
+						<td class="td_hits">{allbets.TOTAL}</td>
+						<td class="td_pts">{allbets.POINTS}</td>
+						<td class="td_pts">{allbets.AVERAGE}</td>
+					</tr>
+				<!-- END allbets -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<br style="clear:both" />
+	<br />
+	<div class="football-inner-left">
+		<!-- IF .bets_wdl -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>{L_HOME}</th>
+						<th>{L_DRAW}</th>
+						<th>{L_AWAY}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN bets_wdl -->
+					<tr class="{bets_wdl.ROW_CLASS}">
+						<td class="td_name">{bets_wdl.SCORE}</td>
+						<td class="td_hits">{bets_wdl.HOMEWIN}</td>
+						<td class="td_hits">{bets_wdl.DRAW}</td>
+						<td class="td_hits">{bets_wdl.GUESTWIN}</td>
+					</tr>
+				<!-- END bets_wdl -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<div class="football-inner-right">
+		<!-- IF .bets_wdl_all -->
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>{L_HOME}</th>
+						<th>{L_DRAW}</th>
+						<th>{L_AWAY}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN bets_wdl_all -->
+					<tr class="{bets_wdl_all.ROW_CLASS}">
+						<td class="td_name">{bets_wdl_all.SCORE}</td>
+						<td class="td_hits">{bets_wdl_all.HOMEWIN}</td>
+						<td class="td_hits">{bets_wdl_all.DRAW}</td>
+						<td class="td_hits">{bets_wdl_all.GUESTWIN}</td>
+					</tr>
+				<!-- END bets_wdl_all -->
+				</tbody>
+			</table>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;">{L_NO_DATA}</div>
+		<!-- ENDIF -->
+	</div>
+	<br style="clear:both"/>
+	<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_BETS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->
+
+

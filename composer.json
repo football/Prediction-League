@@ -1,0 +1,29 @@
+{
+	"name": "football/football",
+	"type": "phpbb-extension",
+	"description": "Football Prediction League for phpBB 3.1",
+	"homepage": "http://football.bplaced.net",
+	"version": "0.9.5",
+	"time": "2016-04-22",
+	"license": "GPL-2.0",
+	"authors": [{
+			"name": "J. Helmke",
+			"email": "phpBB3.football@gmx.de",
+			"homepage": "http://football.bplaced.net",
+			"role": "Lead Developer"
+		}],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "Football Prediction League",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*"
+		},
+		"version-check": {
+			"host": "football.bplaced.net",
+			"directory": "/updatecheck",
+			"filename": "football_predictionleague.json"
+		}
+	}
+}

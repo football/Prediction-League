@@ -1,0 +1,87 @@
+/* -----------------------------------------------------------------------------------------
+ * @package phpBB Extension - Football Football
+ * @copyright (c) 2016 football (http://football.bplaced.net)
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ * ----------------------------------------------------------------------------------------- */
+/* Table for football data */
+/* Specific column styles */
+table.type_f thead th 				{ font-weight:normal; text-transform:uppercase; line-height:1.3em; padding:0 4px 2px 4px; }
+table.type_f thead th span 			{ padding-left:7px; }
+table.type_f tfoot td {
+	padding: 3px 4px;
+	color: #FFFFFF;
+	background: #70AED3 url("../images/gradient2b.gif") bottom left repeat-x;
+	border-bottom: 1px solid #6DACD2;
+	border-top: 1px solid #327AA5;
+	text-align: left;
+	font-size: 0.75em;
+	text-transform: uppercase;
+}
+
+table.type_f tbody tr:hover, 
+table.type_f tbody tr.hover { 
+	background-color: #FFFFFF; color: #000000; 
+}
+table.type_f body td 				{ padding: 1px 2px; border-top: 1px solid #FAFAFA; }
+table.type_f tbody th 				{ padding:1px 2px; border-top: 1px solid #000000; background-color: #BFC1CF; }
+table.type_f tbody tr 				{ border: 1px solid #cfcfcf; }
+th.td_tendency 		{ text-align: center; padding: 4px 2px 0 2px; font-weight: bold; }
+th.td_pts_total  		{ text-align: right; padding: 4px 4px 0 2px; }
+td.td_rank 			{ text-align: right; }
+td.td_group 			{ text-align: center; }
+td.td_hits 			{ text-align: center; }
+td.td_wins 			{ text-align: right; padding: 0 2px 0 4px; }
+td.td_match_no 		{ text-align: right; }
+td.td_logo 			{ text-align: center; }
+td.td_team 			{ text-align: left; padding: 0 1em 0 2px; }
+td.td_team_home 		{ text-align: right; width: 155px; }
+td.td_team_guest 	{ text-align: left; width: 155px; }
+td.td_vs 			{ text-align: center; max-width: 1em; padding: 0; }
+td.td_goals_home 	{ text-align: right; max-width: 3em; padding: 0;}
+td.td_goals_guest 	{ text-align: left; max-width: 3em; padding: 0; white-space: nowrap;}
+td.td_pts 			{ text-align: right; padding: 0 2px 0 2px; }
+td.td_button 		{ text-align: right; padding-right: 4px; }
+td.td_result 		{ text-align: center; }
+td.td_season 		{ text-align: center; }
+td.td_league 		{ text-align: center; }
+td.td_pts_total 		{ text-align: right; padding: 0 4px 0 2px; }
+td.td_points	 		{ text-align: right; padding: 0 2em 0 2px; }
+td.td_fp 			{ text-align: center; }
+td.td_matches 		{ text-align: center; }
+td.td_diff 			{ text-align: right; }
+td.td_counter 		{ text-align: right; }
+td.td_name 			{ text-align: left; }
+
+table.rank td.color_finally, table.football .color_finally, .color_finally , table.football .match_win, .match_win { 
+	font-weight: bold; 
+	color: #00AA00; 
+}
+
+table.rank td.color_provisionally, table.football .color_provisionally, .color_provisionally , table.football .match_lost, .match_lost  { 
+	font-weight: bold; 
+	color: #AA0000; 
+}
+
+table.football .match_draw, .match_draw  { 
+	font-weight: bold; 
+	color: #6A6A6A; 
+}
+
+table.rank td.color_not_rated, table.football .color_not_rated, .color_not_rated { 
+	font-weight: bold; 
+	color: purple; 
+}
+
+/* Background colors where the tables iterate between two colors or mark user*/
+.row_light 		{ background-color: #e1ebf2; }
+.row_dark 		{ background-color: #cadceb; }
+.row_user 		{ background-color: #99CC99; }
+.row_group td	{ background-color: #12A3EB; color: #FFFFFF !important; }
+.row_result 		{ background-color: #BFC1CF; }
+.row_result  td 	{ padding: 1px 2px; }
+
+
+.message {
+	font-weight: bold;
+	color: #AA0000;
+}

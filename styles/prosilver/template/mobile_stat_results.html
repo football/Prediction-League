@@ -1,0 +1,85 @@
+<!-- IF S_DATA_STAT_RESULTS -->
+	<div class="football-inner-left">
+		<h3>{L_STAT_GAME_RESULTS}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RESULT}</th>
+						<th>{L_NUMBER}</th>
+						<th>{L_BETS}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th title="{L_TOTAL}">{L_TOTAL_SHORT}</th>
+						<th title="{L_POINTS}">{L_POINTS_SHORT}</th>
+						<th>&#216; {L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN result -->
+					<tr class="{result.ROW_CLASS}">
+						<td class="td_result">{result.GOALS_HOME}:{result.GOALS_GUEST}</td>
+						<td class="td_hits">{result.RESULTS}</td>
+						<td class="td_hits">{result.BETS}</td>
+						<td class="td_hits">{result.TENDENCIES}</td>
+						<td class="td_hits">{result.HITS}</td>
+						<td class="td_hits">{result.TOTAL}</td>
+						<td class="td_pts">{result.POINTS}</td>
+						<td class="td_pts">{result.AVERAGE}</td>
+					</tr>
+				<!-- END result -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_DIFF_COUNT}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_RANK_SHORT}</th>
+						<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+						<th>{L_GAMES_SHORT}</th>
+						<th>&lt;</th>
+						<th>-2</th>
+						<th>-1</th>
+						<th> 0</th>
+						<th>+1</th>
+						<th>+2</th>
+						<th>&gt;</th>
+						<th>{L_GOALS_DIFF_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN points -->
+					<tr class="{points.ROW_CLASS}">
+						<td class="td_rank">{points.RANK}</td>
+						<td class="td_logo">{points.LOGO}</td>
+						<td class="td_team">{points.TEAM}</td>
+						<td class="td_hits">{points.MATCHES}</td>
+						<td class="td_hits">{points.MINUS3}</td>
+						<td class="td_hits">{points.MINUS2}</td>
+						<td class="td_hits">{points.MINUS1}</td>
+						<td class="td_hits">{points.DRAW}</td>
+						<td class="td_hits">{points.PLUS1}</td>
+						<td class="td_hits">{points.PLUS2}</td>
+						<td class="td_hits">{points.PLUS3}</td>
+						<td class="td_diff">{points.GOALS_DIFF}</td>
+					</tr>
+				<!-- END points -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both"/>
+	<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_RESULTS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->
+
+

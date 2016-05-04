@@ -1,0 +1,220 @@
+<!-- IF S_DATA_BET --> 
+	<!-- IF S_EDIT_MODE -->
+	<form method="post" action="{S_FORM_ACTION_BET}" name="betform">
+	<!-- ELSE -->
+		<span class="color_finally">{L_FINALLY}</span> - <span class="color_provisionally">{L_PROVISIONALLY}</span> - <span class="color_not_rated">{L_NOT_RATED}</span><br />
+	<!-- ENDIF -->
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th>{L_DATE}</th>
+					<th style="text-align: right;">{L_NR}</th>
+				<!-- IF S_DATA_GROUP -->
+					<th>{L_GR}</th>
+				<!-- ENDIF -->
+					<th style="text-align: center;" colspan="5">{L_VS}</th>
+					<th style="text-align: center;" colspan="4">{L_BET_OF} ({BET_EXPLAIN})</th>
+				<!-- IF S_DISPLAY_RATING -->
+					<th style="text-align: center;">{L_RATING}</th>
+				<!-- ENDIF -->
+				<!-- IF S_DATA_BET_RESULTS -->
+					<th style="text-align: center;" colspan="3">{L_RESULT}</th>
+					<th>{L_POINTS}</th>
+				<!-- ENDIF -->
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN bet_view -->
+				<tr class="{bet_view.ROW_CLASS}">
+					<td>{bet_view.MATCH_TIME}</td>
+					<td class="td_match_no">{bet_view.MATCH_NUMBER}</td>
+				<!-- IF S_DATA_GROUP -->
+					<td class="td_group">{bet_view.GROUP}</td>
+				<!-- ENDIF -->
+					<td class="td_logo">{bet_view.LOGO_HOME}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAN}" onclick="popup('{bet_view.U_PLAN_HOME}', 625,625);return false;">
+						{bet_view.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{bet_view.LOGO_GUEST}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAN}" onclick="popup('{bet_view.U_PLAN_GUEST}', 625,625);return false;">
+						{bet_view.GUEST_NAME}</td>
+					<td class="td_goals_home">{bet_view.BET_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest" title="{bet_view.TREND} {bet_view.ODDS}">{bet_view.BET_GUEST}</td>
+					<td class="td_vs"></td>
+					<!-- IF S_DISPLAY_RATING -->
+					<td class="td_points">{bet_view.RATING}</td>
+					<!-- ENDIF -->
+					<td class="td_goals_home {bet_view.COLOR_STYLE}">{bet_view.GOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {bet_view.COLOR_STYLE}">{bet_view.GOALS_GUEST}</td>
+					<td class="td_points {bet_view.COLOR_STYLE}">{bet_view.POINTS}</td>
+					<td class="td_button">
+				<!-- IF S_VIEW <> 'print' and bet_view.DISPLAY_LINK -->
+						<a class="match_info" title="{L_MATCH_STATS}" href="{bet_view.U_MATCH_STATS}" onclick="javascript:popup(this.href, 818, 750, '_matchstats'); return false;"></a>
+				<!-- ELSE -->	
+						<img src="./../../ext/football/football/images/spacer.gif" alt="" width="28" height="28" />
+				<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END bet_view -->
+			<!-- BEGIN bet_edit -->
+				<tr class="{bet_edit.ROW_CLASS}">
+					<td class="td_datetime">{bet_edit.MATCH_TIME}</td>
+					<td class="td_match_no">{bet_edit.MATCH_NUMBER}</td>
+				<!-- IF S_DATA_GROUP -->
+					<td class="td_group">{bet_edit.GROUP}</td>
+				<!-- ENDIF -->
+					<td class="td_logo">{bet_edit.LOGO_HOME}&nbsp;</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAN}" onclick="popup('{bet_edit.U_PLAN_HOME}', 625,625);return false;">
+						{bet_edit.HOME_NAME}
+					</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{bet_edit.LOGO_GUEST}&nbsp;</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAN}" onclick="popup('{bet_edit.U_PLAN_GUEST}', 625,625);return false;">
+						{bet_edit.GUEST_NAME}
+					</td>
+					<td class="td_goals_home">
+				<!-- IF S_VIEW <> 'print' -->
+						<input type="number" style="width:30px" name="goalsh{bet_edit.MATCH_NUMBER}" min="0" max="20" size="2" value="{bet_edit.BET_HOME}">
+				<!-- ELSE -->
+						_{bet_edit.BET_HOME}_
+				<!-- ENDIF -->
+					</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest"  title="{bet_edit.TREND} {bet_edit.ODDS}">
+				<!-- IF S_VIEW <> 'print' -->
+						<input type="number" style="width:30px" name="goalsg{bet_edit.MATCH_NUMBER}" min="0" max="20" size="2" value="{bet_edit.BET_GUEST}"> 
+				<!-- ELSE -->
+						_{bet_edit.BET_GUEST}_
+				<!-- ENDIF -->
+					</td>
+					<td class="td_vs">{bet_edit.DELIVERTAG}</td>
+				<!-- IF S_DISPLAY_RATING -->
+					<td class="td_points">
+						<input style="display:inline; margin:0; padding:0;" type="number" style="width:30px" name="rating{bet_edit.MATCH_NUMBER}" min="0" max="10" size="2" value="{bet_edit.RATING}"> 
+					</td>
+				<!-- ENDIF -->
+				<!-- IF bet_edit.DATA_RESULTS -->
+					<td class="td_goals_home">&nbsp;</td>
+					<td class="td_vs">&nbsp;</td>
+					<td class="td_goals_guest">&nbsp;</td>
+					<td class="td_points">&nbsp;</td>
+				<!-- ENDIF -->
+					<td class="td_button">
+				<!-- IF S_VIEW <> 'print' and bet_edit.DISPLAY_LINK -->
+						<a class="match_info" title="{L_MATCH_STATS}" href="{bet_edit.U_MATCH_STATS}" onclick="javascript:popup(this.href, 818, 750, '_matchstats'); return false;"></a>
+				<!-- ELSE -->	
+						<img src="./../../ext/football/football/images/spacer.gif" alt="" width="28" height="28" />
+				<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END bet_edit -->
+			</tbody>
+		</table>
+	</div>
+
+	<!-- IF S_DISPLAY_DELIVERY2 or S_DISPLAY_DELIVERY3 -->
+	<div class="left-box"  style="margin-bottom:5px">
+		<!-- IF S_DISPLAY_DELIVERY2 -->
+		<strong style='color:green'>*&nbsp; {L_DELIVERY_UNTIL} {S_DELIVERY2} </strong><br />
+		<!-- ENDIF -->
+		<!-- IF S_DISPLAY_DELIVERY3 -->
+		<strong style='color:green'>**&nbsp; {L_DELIVERY_UNTIL} {S_DELIVERY3} </strong><br />
+		<!-- ENDIF -->
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_EXTRA_BET --> 
+	<br />
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th style="text-align: left;">{L_QUESTION}</th>
+					<th>{L_POSSIBLE_POINTS}</th>
+					<th>{L_EVALUATION}</th>
+					<th>{L_BET_OF}</th>
+				<!-- IF S_EXTRA_RESULTS -->
+					<th>{L_RESULT}</th>
+					<th>{L_POINTS}</th>
+				<!-- ENDIF -->
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN extra_view -->
+				<tr class="{extra_view.ROW_CLASS}">
+					<td>{extra_view.QUESTION}</td>
+					<td style="text-align: center;">{extra_view.EXTRA_POINTS}</td>
+					<td style="text-align: center;">{extra_view.EVALUATION}</td>
+					<td style="text-align: center;">{extra_view.BET}</td>
+					<td style="text-align: center;">{extra_view.RESULT}</td>
+					<td class="td_points {extra_view.COLOR_STYLE}">{extra_view.BET_POINTS}</td>
+				</tr>
+			<!-- END extra_view -->
+			<!-- BEGIN extra_edit -->
+				<tr class="{extra_edit.ROW_CLASS}" style="height:30px">
+					<td>{extra_edit.QUESTION}</td>
+					<td style="text-align: center;">{extra_edit.EXTRA_POINTS}</td>
+					<td style="text-align: center;" title="{extra_edit.EVALUATION_TITLE}">{extra_edit.EVALUATION}</td>
+					<td style="text-align: center;">
+				<!-- IF extra_edit.S_DISPLAY_TYPE == 1 -->
+					<!-- IF S_VIEW <> 'print' -->
+						<select name="extra{extra_edit.EXTRA_NO}">
+						<!-- BEGIN extra_option -->
+							<option {extra_edit.extra_option.S_SELECTED} value="{extra_edit.extra_option.OPTION_VALUE}">{extra_edit.extra_option.OPTION_NAME}</option>
+						<!-- END extra_option -->
+						</select>
+					<!-- ELSE -->
+						_{extra_edit.BET}_
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+				<!-- IF extra_edit.S_DISPLAY_TYPE == 2 -->
+					<!-- IF S_VIEW <> 'print' -->
+						<input style="display:inline; margin:0; padding:0;" type="text" name="extra{extra_edit.EXTRA_NO}" size="15" maxlength="255" value="{extra_edit.BET}"> 
+					<!-- ELSE -->
+						_{extra_edit.BET}_
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END extra_edit -->
+			</tbody>
+		</table>
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_EDIT_MODE -->
+		<!-- IF S_VIEW <> 'print' -->
+		<div class="right-box" style="margin-bottom:5px">
+			<div class="message">{S_DBMSG}&nbsp;&nbsp;&nbsp;<input class="button1" type="submit" value="{L_BET}"></div>
+		</div>
+		<!-- ENDIF -->
+	</form>
+	<!-- ELSE -->
+		<br /> 
+	<!-- ENDIF -->
+
+	<!-- INCLUDE nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<!-- IF S_USER_IS_MEMBER -->
+	<div class="message">{L_NO_MATCHES_ON_MATCHDAY}</div>
+	<!-- ELSE -->
+	<div class="message">{L_NO_MEMBER}</div>
+		<!-- IF S_JOIN_LEAGUE -->
+			<br />
+			<br />
+			<div>
+			<form method="post" action="{S_FORM_ACTION_JOIN}" name="joinform">
+				<strong>{JOIN_LEAGUE} </strong><br />
+				<br />
+				<input class="button1" type="submit" value="{L_JOIN}">
+			</form>
+			</div>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<br />
+<!-- ENDIF -->

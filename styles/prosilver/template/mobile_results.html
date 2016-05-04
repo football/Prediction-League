@@ -1,0 +1,141 @@
+<!-- IF S_DATA_RESULTS -->
+	<!-- IF S_EDIT_MODE --> 
+	<br />
+	<form method="post" name="resultform">
+		<input type=hidden name="action" value="result">
+		<input type=hidden name="side" value="results">
+		<input type="hidden" name="s" value="{S_SEASON}">
+		<input type="hidden" name="l" value="{S_LEAGUE}">
+		<input type="hidden" name="m" value="{S_MATCHDAY}">
+	<!-- ELSE -->
+		<span class="color_finally">{L_FINALLY}</span> - <span class="color_provisionally">{L_PROVISIONALLY}</span> - <span class="color_not_rated">{L_NOT_RATED}</span>
+	<!-- ENDIF -->
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th style="text-align: center;" colspan="5">{L_VS}</th>
+					<th style="text-align: center;" colspan="3">{L_RESULT} ({RESULT_EXPLAIN})</th>
+				<!-- IF S_DISPLAY_KO -->
+					<th style="text-align: center;" colspan="3">{LABEL_FINALRESULT}</th>
+				<!-- ENDIF -->
+				</tr>
+			</thead>
+			<tbody>
+		<!-- BEGIN result -->
+				<tr class="{result.ROW_CLASS}">
+					<td class="td_logo">{result.LOGO_HOME}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{result.U_PLAN_HOME}');return false;"> 
+						{result.HOME_SHORT}</td>
+					<td class="td_vs">:</td>
+					<td class="td_logo">{result.LOGO_GUEST}</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{result.U_PLAN_GUEST}');return false;">
+						{result.GUEST_SHORT}</td>
+			<!-- IF result.S_EDIT_MATCH -->
+					<td class="td_edit_right">
+						<input type="number" name="goalsh{result.MATCH_NUMBER}" min="0" max="20" size="2" value="{result.GOALS_HOME}">
+						<input type="hidden" name="oldgoalsh{result.MATCH_NUMBER}" value="{result.GOALS_HOME}">
+					</td>
+					<td class="td_vs">:</td>
+					<td class="td_edit_left">
+						<input type="number" name="goalsg{result.MATCH_NUMBER}" min="0" max="20" size="2" value="{result.GOALS_GUEST}"> 
+						<input type="hidden" name="oldgoalsg{result.MATCH_NUMBER}" value="{result.GOALS_GUEST}">
+					</td>
+				<!-- IF S_DISPLAY_KO -->
+					<td class="td_edit_right">
+						<!-- IF result.S_KO_MATCH -->
+						<input type="number" name="goals_ko_h{result.MATCH_NUMBER}" min="0" max="20" size="2" value="{result.KOGOALS_HOME}">
+						<input type="hidden" name="oldgoals_ko_h{result.MATCH_NUMBER}" value="{result.KOGOALS_HOME}">
+						<!-- ELSE -->
+						&nbsp;
+						<!-- ENDIF -->
+					</td>
+					<td class="td_vs">:</td>
+					<td class="td_edit_left">
+						<!-- IF result.S_KO_MATCH -->
+						<input type="number" name="goals_ko_g{result.MATCH_NUMBER}" min="0" max="20" size="2" value="{result.KOGOALS_GUEST}"> 
+						<input type="hidden" name="oldgoals_ko_g{result.MATCH_NUMBER}" value="{result.KOGOALS_GUEST}">
+						<!-- ELSE -->
+						&nbsp;
+						<!-- ENDIF -->
+					</td>
+				<!-- ENDIF -->
+			<!-- ELSE -->
+					<td class="td_goals_home {result.COLOR_STYLE}">{result.GOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {result.COLOR_STYLE}">{result.GOALS_GUEST}</td>
+				<!-- IF S_DISPLAY_KO -->
+					<td class="td_goals_home {result.COLOR_STYLE}">{result.KOGOALS_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest {result.COLOR_STYLE}">{result.KOGOALS_GUEST}</td>
+				<!-- ENDIF -->
+			<!-- ENDIF -->
+				</tr>
+		<!-- END result -->
+			</tbody>
+		</table>
+	</div>
+	<!-- IF S_EXTRA_RESULTS --> 
+	<br />
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th style="text-align: left;">{L_QUESTION}</th>
+					<th>{L_POSSIBLE_POINTS}</th>
+					<th>{L_EVALUATION}</th>
+					<th>{L_RESULT}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN extra_result -->
+				<tr class="{extra_result.ROW_CLASS}" style="height:30px">
+					<td>{extra_result.QUESTION}</td>
+					<td style="text-align: center;">{extra_result.EXTRA_POINTS}</td>
+					<td style="text-align: center;" title="{extra_result.EVALUATION_TITLE}">{extra_result.EVALUATION}</td>
+					<td style="text-align: center;">
+				<!-- IF extra_result.S_EDIT_EXTRA -->
+					<!-- IF extra_result.S_DISPLAY_TYPE == 1 -->
+						<!-- IF S_VIEW <> 'print' -->
+						<select name="extra{extra_result.EXTRA_NO}">
+							<!-- BEGIN extra_option -->
+							<option {extra_result.extra_option.S_SELECTED} value="{extra_result.extra_option.OPTION_VALUE}">{extra_result.extra_option.OPTION_NAME}</option>
+							<!-- END extra_option -->
+						</select>
+						<!-- ELSE -->
+						_{extra_result.RESULT}_
+						<!-- ENDIF -->
+					<!-- ENDIF -->
+					<!-- IF extra_result.S_DISPLAY_TYPE == 2 -->
+						<input style="display:inline; margin:0; padding:0;" type="text" name="extra{extra_result.EXTRA_NO}" size="15" maxlength="255" value="{extra_result.RESULT}"> 
+					<!-- ENDIF -->
+				<!-- ELSE -->
+						{extra_result.RESULT}
+				<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END extra_result -->
+			</tbody>
+		</table>
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_EDIT_MODE -->
+		<div class="right-box" style="margin-bottom:5px">
+			<div class="message">{S_DBMSG}&nbsp;&nbsp;&nbsp;<input class="button1" type="submit" value="{L_SAVE}"></div>
+		</div>
+		<br style="clear:both"/>
+	</form>
+	<!-- ELSE -->
+		<div class="right-box" style="margin-bottom:5px; height:1em">
+		<!-- IF not S_USER_IS_MEMBER -->
+			<div class="message">{L_NO_MEMBER}</div>
+		<!-- ENDIF -->
+		</div>
+		<br style="clear:both"/>
+	<!-- ENDIF -->
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<div class="message">{L_NO_PLAN}</div>
+	<br />
+<!-- ENDIF -->

@@ -1,0 +1,131 @@
+<!-- IF S_DATA_MY_CHART -->
+	<div>
+		<h3 style="display:inline;">{L_CHART_OF} : </h3>
+			<span style="font-weight:bold;color:#0000FF;">&mdash;</span>
+		<!-- IF S_VIEW <> 'print' -->
+			<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+			<div style="display:inline; margin:0; padding:0;">
+				<input type="hidden" name="side" value="{S_SIDE}" />
+				<select name="user1" onchange="this.form.submit();" title="{L_OPTION_USER}">
+				<!-- BEGIN form_user1 -->
+					<option {form_user1.S_SELECTEDID} value="{form_user1.S_USERID}">{form_user1.S_USERNAME}</option>
+				<!-- END form_user1 -->
+				</select>
+				<input type="hidden" name="m" value="{S_MATCHDAY}" />
+				<input type="hidden" name="l" value="{S_LEAGUE}" />
+				<input type="hidden" name="s" value="{S_SEASON}" />
+				<input type="hidden" name="user2" value="{S_USER2}" />
+				<input type="hidden" name="user3" value="{S_USER3}" />
+				<input type="hidden" name="user4" value="{S_USER4}" />
+			</div>
+			</form>
+		<!-- ELSE -->
+			{USERNAME1}
+		<!-- ENDIF -->
+			<span style="font-weight:bold;color:#00FF00;">&mdash;</span>
+		<!-- IF S_VIEW <> 'print' -->
+			<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+			<div style="display:inline; margin:0; padding:0;">
+				<input type="hidden" name="side" value="{S_SIDE}" />
+				<select name="user2" onchange="this.form.submit();" title="{L_OPTION_USER}">
+				<!-- BEGIN form_user2 -->
+					<option {form_user2.S_SELECTEDID} value="{form_user2.S_USERID}">{form_user2.S_USERNAME}</option>
+				<!-- END form_user2 -->
+				</select>
+				<input type="hidden" name="m" value="{S_MATCHDAY}" />
+				<input type="hidden" name="l" value="{S_LEAGUE}" />
+				<input type="hidden" name="s" value="{S_SEASON}" />
+				<input type="hidden" name="user1" value="{S_USER1}" />
+				<input type="hidden" name="user3" value="{S_USER3}" />
+				<input type="hidden" name="user4" value="{S_USER4}" />
+			</div>
+			</form>
+		<!-- ELSE -->
+			{USERNAME2}
+		<!-- ENDIF -->
+			<span style="font-weight:bold;color:#00FFFF;">&mdash;</span>
+		<!-- IF S_VIEW <> 'print' -->
+			<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+			<div style="display:inline; margin:0; padding:0;">
+				<input type="hidden" name="side" value="{S_SIDE}" />
+				<select name="user3" onchange="this.form.submit();" title="{L_OPTION_USER}">
+				<!-- BEGIN form_user3 -->
+					<option {form_user3.S_SELECTEDID} value="{form_user3.S_USERID}">{form_user3.S_USERNAME}</option>
+				<!-- END form_user3 -->
+				</select>
+				<input type="hidden" name="m" value="{S_MATCHDAY}" />
+				<input type="hidden" name="l" value="{S_LEAGUE}" />
+				<input type="hidden" name="s" value="{S_SEASON}" />
+				<input type="hidden" name="user1" value="{S_USER1}" />
+				<input type="hidden" name="user2" value="{S_USER2}" />
+				<input type="hidden" name="user4" value="{S_USER4}" />
+			</div>
+			</form>
+		<!-- ELSE -->
+			{USERNAME3}
+		<!-- ENDIF -->
+			<span style="font-weight:bold;color:#FF0000;">&mdash;</span>
+		<!-- IF S_VIEW <> 'print' -->
+			<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+			<div style="display:inline; margin:0; padding:0;">
+				<select name="user4" onchange="this.form.submit();" title="{L_OPTION_USER}">
+				<!-- BEGIN form_user4 -->
+					<option {form_user4.S_SELECTEDID} value="{form_user4.S_USERID}">{form_user4.S_USERNAME}</option>
+				<!-- END form_user4 -->
+				</select>
+				<input type="hidden" name="side" value="{S_SIDE}" />
+				<input type="hidden" name="m" value="{S_MATCHDAY}" />
+				<input type="hidden" name="l" value="{S_LEAGUE}" />
+				<input type="hidden" name="s" value="{S_SEASON}" />
+				<input type="hidden" name="user1" value="{S_USER1}" />
+				<input type="hidden" name="user2" value="{S_USER2}" />
+				<input type="hidden" name="user3" value="{S_USER3}" />
+			</div>
+			</form>
+		<!-- ELSE -->
+			{USERNAME4}
+		<!-- ENDIF -->
+	</div>
+	<!-- IF S_VIEW <> 'print' -->
+	<br />
+	{L_MYCHART_TEXT}
+	<!-- ENDIF -->
+	<br />
+	<br />
+	<div>
+		<!-- BEGIN chart_rank -->
+			<h3>{L_TOTAL_RANKS_OF_ALL}</h3>
+			<div class="football-table-scroll">
+			{chart_rank.CHARTIMAGE}
+			</div>
+		<!-- END chart_rank -->
+	</div>
+	<br />
+	<br />
+	<div>
+		<!-- BEGIN chart_matchtdays -->
+			<h3>{L_DAY_RANKS_OF_ALL}</h3>
+			<div class="football-table-scroll">
+			{chart_matchtdays.CHARTIMAGE}
+			</div>
+		<!-- END chart_matchtdays -->
+	</div>
+	<br />
+	<br />
+	<div>
+		<!-- BEGIN chart_points -->
+			<h3>{L_DAY_POINTS_OF_ALL}</h3>
+			<div class="football-table-scroll">
+			{chart_points.CHARTIMAGE}
+			</div>
+		<!-- END chart_points -->
+	</div>
+	<br style="clear:both" />
+	<br />
+		<!-- INCLUDE nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_BETS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->

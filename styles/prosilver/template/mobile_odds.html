@@ -1,0 +1,35 @@
+<!-- IF S_DATA_ODDS -->
+	<div class="forabg">
+		<table class="football">
+			<thead>
+				<tr>
+					<th style="text-align: center;" colspan="3">{L_VS}</th>
+					<th>%</th>					
+					<th style="text-align: center;" colspan="3">Quoten</th>
+				</tr>
+			</thead>
+			<tbody>
+		<!-- BEGIN odds -->
+				<tr class="{odds.ROW_CLASS}">
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{odds.U_PLAN_HOME}');return false;"> 
+						{odds.HOME_NAME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}"  onclick="popup('{odds.U_PLAN_GUEST}');return false;">
+						{odds.GUEST_NAME}</td>
+					<td style="text-align: center;">{odds.TREND}</td>
+					<td class="td_group {odds.COLOR_HOME}">{odds.ODD_1}</td>
+					<td style="text-align: center;">{odds.ODD_X}</td>
+					<td class="td_group {odds.COLOR_AWAY}">{odds.ODD_2}</td>
+				</tr>
+		<!-- END odds -->
+			</tbody>
+		</table>
+	</div>
+		<br />
+	<!-- INCLUDE mobile_nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_PLAN}</div>
+	<br />
+	<br />
+<!-- ENDIF -->

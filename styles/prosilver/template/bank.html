@@ -1,0 +1,65 @@
+<!-- IF S_MEMBER -->
+	<!-- IF (S_VIEW <> 'print') and S_MULTI_VIEW -->
+		<div>
+			<h3 style="display:inline;">{L_BANK_OF} : </h3>
+				<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
+				<div style="display:inline; margin:0; padding:0;">
+					<input type="hidden" name="side" value="{S_SIDE}" />
+					<input type="hidden" name="m" value="{S_MATCHDAY}" />
+					<input type="hidden" name="l" value="{S_LEAGUE}" />
+					<input type="hidden" name="s" value="{S_SEASON}" />
+					<select name="u" onchange="this.form.submit();" title="{L_OPTION_USER}">
+					<!-- BEGIN form_user -->
+						<option {form_user.S_SELECTEDID} value="{form_user.S_USER}">{form_user.S_USERNAME}</option>
+					<!-- END form_user -->
+					</select>
+				</div>
+				</form>
+		</div>
+	<!-- ELSE -->
+		<h3>{L_BANK_OF} {USERNAME}:</h3>
+	<!-- ENDIF -->
+	<br />
+		<div class="forabg">
+			<table class="football">
+				<thead>
+				<tr>
+					<th>{L_SEASON}</th>
+					<th>{L_LEAGUE}</th>
+					<th>{L_MATCHDAY}</th>
+					<th>{L_BOOK_TYPE}</th>
+					<th>{POINTS}</th>
+					<th>{L_LOGS_COMMENT}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN football -->
+				<!-- IF football.S_ROW_COUNT is even --><tr class="bg1"><!-- ELSE --><tr class="bg2"><!-- ENDIF -->
+					<td>{football.SEASON_NAME}</td>
+					<td>{football.LEAGUE_NAME}</td>
+					<td>{football.MATCHDAY_NAME}</td>
+					<td>{football.POINTS_TYPE}</td>
+					<td style="text-align: right; {football.POINTS_STYLE}"><!-- IF football.S_CASH --><b><!-- ENDIF -->{football.POINTS_SIGN}{football.POINTS}<!-- IF football.S_CASH --></b><!-- ENDIF --></td>
+					<td>{football.COMMENT}</td>
+				</tr>
+				<!-- BEGINELSE -->
+				<tr>
+					<td class="bg1" colspan="<!-- IF S_CLEAR_ALLOWED -->7<!-- ELSE -->6<!-- ENDIF -->" style="text-align: center;"><span class="gen">{L_FOOTBALL_NO_BOOKS}</span></td>
+				</tr>
+				<!-- END football -->
+				</tbody>
+			</table>
+		</div>
+		<!-- IF S_VIEW == 'print' -->
+			<br />
+		<!-- ENDIF -->
+	<!-- IF S_VIEW <> 'print' -->
+			<div class="pagination">
+				{L_FOOTBALL_BOOK_TOTAL}: {L_TOTAL_ENTRIES}
+			</div>
+	<!-- ENDIF -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_MEMBER}</div>
+	<br />
+<!-- ENDIF -->

@@ -1,0 +1,285 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_MATCHDAYS_MANAGE}</h1>
+	<p>{L_MATCHDAY_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_MATCHDAY_DETAILS}</legend>
+	<dl>
+		<dt><label for="season">{L_SEASON}:</label></dt>
+		<dd><strong>{SEASON_NAME}</strong><input name="s" type="hidden" id="season" value="{SEASON}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league">{L_LEAGUE}:</label></dt>
+		<dd><strong>{LEAGUE_NAME}</strong><input name="l" type="hidden" id="league" value="{LEAGUE}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday">{L_MATCHDAY}:</label></dt>
+		<dd><strong>{MATCHDAY}</strong><input name="m" type="hidden" id="matchday" value="{MATCHDAY}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_name">{L_MATCHDAY_NAME}:</label></dt>
+		<dd><input name="matchday_name" type="text" id="matchday_name" size="30" maxlength="30" value="{MATCHDAY_NAME}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_status">{L_MATCHDAY_STATUS}:</label><br /><span>{L_MATCHDAY_STATUS_EXPLAIN}</span></dt>
+		<dd><strong>{MATCHDAY_STATUS}</strong><input name="matchday_status" type="hidden" id="matchday_status" value="{MATCHDAY_STATUS}" /></dd>
+	</dl>
+	<!-- IF S_EDIT_DELIVERY -->
+	<dl> 
+		<dt><label for="delivery1">{L_MATCHDAY_DELIVERY}:</label><br /><span>{L_MATCHDAY_DELIVERY_EXPLAIN}</span></dt>
+		<dd>{L_DAY}: <select id="delivery1" name="dday1_day">{S_DELIVERY1_DAY_OPTIONS}</select> 
+			{L_MONTH}: <select name="dday1_month">{S_DELIVERY1_MONTH_OPTIONS}</select> 
+			{L_YEAR}: <select name="dday1_year">{S_DELIVERY1_YEAR_OPTIONS}</select>&nbsp;&nbsp;&nbsp;
+			{L_TIME}: <select name="dday1_hour">{S_DELIVERY1_HOUR_OPTIONS}</select>:
+			<select name="dday1_min">{S_DELIVERY1_MIN_OPTIONS}</select>
+		</dd>
+	</dl>
+	<dl> 
+		<dt><label for="delivery2">{L_MATCHDAY_DELIVERY2}:</label><br /><span>{L_MATCHDAY_DELIVERY2_EXPLAIN}</span></dt>
+		<dd>{L_DAY}: <select id="delivery2" name="dday2_day">{S_DELIVERY2_DAY_OPTIONS}</select> 
+			{L_MONTH}: <select name="dday2_month">{S_DELIVERY2_MONTH_OPTIONS}</select> 
+			{L_YEAR}: <select name="dday2_year">{S_DELIVERY2_YEAR_OPTIONS}</select>&nbsp;&nbsp;&nbsp;
+			{L_TIME}: <select name="dday2_hour">{S_DELIVERY2_HOUR_OPTIONS}</select>:
+			<select name="dday2_min">{S_DELIVERY2_MIN_OPTIONS}</select>
+		</dd>
+	</dl>
+	<dl> 
+		<dt><label for="delivery3">{L_MATCHDAY_DELIVERY3}:</label><br /><span>{L_MATCHDAY_DELIVERY3_EXPLAIN}</span></dt>
+		<dd>{L_DAY}: <select id="delivery3" name="dday3_day">{S_DELIVERY3_DAY_OPTIONS}</select> 
+			{L_MONTH}: <select name="dday3_month">{S_DELIVERY3_MONTH_OPTIONS}</select> 
+			{L_YEAR}: <select name="dday3_year">{S_DELIVERY3_YEAR_OPTIONS}</select>&nbsp;&nbsp;&nbsp;
+			{L_TIME}: <select name="dday3_hour">{S_DELIVERY3_HOUR_OPTIONS}</select>:
+			<select name="dday3_min">{S_DELIVERY3_MIN_OPTIONS}</select>
+		</dd>
+	</dl>
+	<!-- ELSE -->
+	<dl>
+		<dt><label for="matchday_delivery1">{L_MATCHDAY_DELIVERY}:</label><br /><span>{L_MATCHDAY_DELIVERY_EXPLAIN}</span></dt>
+		<dd>
+			{MATCHDAY_DEL1}
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_delivery2">{L_MATCHDAY_DELIVERY2}:</label><br /><span>{L_MATCHDAY_DELIVERY2_EXPLAIN}</span></dt>
+		<dd>
+			{MATCHDAY_DEL2}
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="matchday_delivery3">{L_MATCHDAY_DELIVERY3}:</label><br /><span>{L_MATCHDAY_DELIVERY3_EXPLAIN}</span></dt>
+		<dd>
+			{MATCHDAY_DEL3}
+		</dd>
+	</dl>
+	<!-- ENDIF -->
+	<!-- IF S_KO_LEAGUE -->
+	<dl>
+		<dt><label for="matchday_matches">{L_MATCHDAY_MATCHES}:</label><br /><span>{L_MATCHDAY_MATCHES_EXPLAIN}</span></dt>
+		<dd>
+		<!-- IF S_EDIT_MATCHES -->
+			<input name="matchday_matches" type="text" id="matchday_matches" size="2" maxlength="2" value="{MATCHDAY_MATCHES}" />
+		<!-- ELSE -->
+			{MATCHDAY_MATCHES}
+		<!-- ENDIF -->
+		</dd>
+	</dl>
+	<input type="hidden" name="ko_league" value="1" />
+	<!-- ENDIF -->
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSEIF S_CHANGE_DELIVERY -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_CHANGE_DELIVERY}</h1>
+	<p>{L_CHANGE_DELIVERY_EXPLAIN}</p>
+
+	<form id="change_delivery" method="post" action="{U_ACTION}">
+
+	<!-- IF S_SHOW_DELIVERY_SELECT -->
+	<fieldset>
+		<legend>{L_DELIVERY_SET_TIME}</legend>
+	<dl>
+		<dt><label> {L_BACKWARD_DELIVERY}:</label><br /><span>{L_BACKWARD_DELIVERY_EXPLAIN}</span></dt>
+		<dd>{L_DAYS}: <select id="backward_days" name="backward_days">{S_BACKWARD_DAYS_OPTIONS}</select> &nbsp;
+			{L_HOURS}: <select name="backward_hours">{S_BACKWARD_HOURS_OPTIONS}</select> &nbsp;
+			{L_MINUTES}: <select name="backward_minutes">{S_BACKWARD_MINUTES_OPTIONS}</select>
+		</dd>
+	</dl>
+	</fieldset>
+	<!-- ENDIF -->
+	<!-- IF S_SHOW_DELIVERY -->
+	<h1>{L_UPDATE_DELIVERY}</h1>
+
+	<p>{L_UPDATE_DELIVERY_EXPLAIN}</p>
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('change_delivery', 'delivery_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('change_delivery', 'delivery_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_MATCHDAY}</th>
+		<th>{L_DELIVERY_NUMBER}</th>
+		<th>{L_DELIVERY}</th>
+		<th>{L_NEW_DELIVERY}</th>
+		<th>{L_SELECT}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN delivery -->
+		<tr class="{delivery.ROW_CLASS}">
+			<td style="text-align: center;"><strong>{delivery.MATCHDAY}</strong></td>
+			<td>{delivery.NUMBER}</td>
+			<td><b>{delivery.DELIVERY_DATE_DAY}</b>
+				<!-- IF delivery.DELIVERY_ERROR --><span style="color: #FF0000;"><!-- ENDIF --> 
+				{delivery.DELIVERY_DATE}
+				<!-- IF delivery.DELIVERY_ERROR --></span><!-- ENDIF --> 
+			</td>
+			<td><b>{delivery.NEW_DELIVERY_DAY}</b> {delivery.NEW_DELIVERY}
+				<input type="hidden" name="new_delivery_{delivery.MATCHDAY}_{delivery.NUMBER}" value="{delivery.NEW_DELIVERY}" />
+			</td>
+			<td>
+				<input name="delivery_{delivery.MATCHDAY}_{delivery.NUMBER}" id="delivery_{delivery.MATCHDAY}_{delivery.NUMBER}" 
+						type="checkbox" class="radio" <!-- IF delivery.SELECT_CHECKED --> checked="checked"<!-- ENDIF --> />
+			</td>
+		</tr>
+	<!-- END delivery -->
+	</tbody>
+	</table>
+	<p class="small" style="text-align:right;margin-bottom:0px">
+		<a href="#" onclick="marklist('update_delivery', 'delivery_', true); return false;">{L_MARK_ALL}</a> &bull; 
+		<a href="#" onclick="marklist('update_delivery', 'delivery_', false); return false;">{L_UNMARK_ALL}</a>
+	</p>		
+
+	<!-- ENDIF -->
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<!-- IF S_SHOW_DELIVERY -->
+			<input class="button1" type="submit" id="update_delivery" name="update_delivery" value="{L_SUBMIT}" />&nbsp;
+		<!-- ELSE -->
+			<input class="button1" type="submit" id="show_delivery" name="show_delivery" value="{L_SHOW_DELIVERY}" />&nbsp;
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_MATCHDAYS_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_MATCHDAYS_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<h1 style="display:inline;">{L_SELECT_LEAGUE}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="matchday_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="matchday_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form style="display:inline;" id="add_matchday" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<input type="hidden" name="l" value="{S_LEAGUE}" />
+			<input type="hidden" name="m" value="{S_MATCHDAY}" />
+			<input type="hidden" name="ko_league" value="{KO_LEAGUE}" />
+		<!-- IF S_MATCHDAYS_REMOVE -->
+			<input class="button2" type="submit" name="submit" value="{L_REMOVE_MATCHDAYS}" />
+			<input type="hidden" name="remove" value="1" />
+		<!-- ENDIF -->
+		<!-- IF S_MATCHDAY_ADD -->
+
+			<input class="button2" type="submit" name="submit" value="{L_GENERATE_MATCHDAY}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	
+	<form style="display:inline;" id="change_delivery" method="post" action="{U_ACTION}">
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+			<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<!-- IF not S_MATCHDAY_ADD and not S_MATCHDAYS_REMOVE -->
+
+			<input class="button2" type="submit" name="change_delivery" value="{L_CHANGE_DELIVERY}" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	
+	<h1>{L_MATCHDAY_DEF}</h1>
+
+	<p>{L_MATCHDAY_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_MATCHDAY}</th>
+		<th style="width: 25%">{L_MATCHDAY_NAME}</th>
+		<th>{L_MATCHDAY_STATUS}</th>
+		<th>{L_MATCHDAY_DELIVERY}</th>
+		<th>{L_MATCHDAY_DELIVERY} 2</th>
+		<th>{L_MATCHDAY_DELIVERY} 3</th>
+		<th>{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .matchdays -->
+		<!-- BEGIN matchdays -->
+			<tr class="{matchdays.ROW_CLASS}">
+				<td style="text-align: center;"><strong>{matchdays.MATCHDAY}</strong></td>
+				<td>{matchdays.MATCHDAY_NAME}</td>
+				<td style="text-align: center;">{matchdays.MATCHDAY_STATUS}</td>
+				<td>{matchdays.MATCHDAY_DELIVERY}</td>
+				<td>{matchdays.MATCHDAY_DELIVERY_2}</td>
+				<td>{matchdays.MATCHDAY_DELIVERY_3}</td>
+				<td style="text-align: center;"><a href="{matchdays.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align: center;"><!-- IF matchdays.U_DELETE --><a href="{matchdays.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END matchdays -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="4" class="row3">{L_NO_MATCHDAYS_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

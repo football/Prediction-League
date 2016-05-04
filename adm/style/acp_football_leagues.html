@@ -1,0 +1,321 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+<!-- IF S_EDIT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_FOOTBALL_LEAGUES_MANAGE}</h1>
+	<p>{L_LEAGUE_EDIT_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="settings" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_LEAGUE_DETAILS}</legend>
+	<dl>
+		<dt><label for="season">{L_SEASON}:</label></dt>
+		<dd><strong>{SEASON}</strong><input name="l" type="hidden" id="season" value="{SEASON}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league">{L_LEAGUE}:</label></dt>
+		<dd>
+		<!-- IF not S_ADD_LEAGUE -->
+			<strong>{LEAGUE}</strong>
+		<!-- ENDIF -->
+			<input name="l" type="<!-- IF S_ADD_LEAGUE -->text<!-- ELSE -->hidden<!-- ENDIF -->" id="league" value="{LEAGUE}" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="league_name">{L_LEAGUE_NAME}:</label></dt>
+		<dd><input name="league_name" type="text" id="league_name" size="20" maxlength="20" value="{LEAGUE_NAME}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_short">{L_LEAGUE_SHORT}:</label><br /><span>{L_LEAGUE_SHORT_EXPLAIN}</span></dt>
+		<dd><input name="league_short" type="text" id="league_short" size="3" maxlength="3" value="{LEAGUE_SHORT}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_type">{L_LEAGUE_TYPE}:</label><br /><span>{L_LEAGUE_TYPE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="league_type" type="radio" class="radio" id="league_type" value="{LEAGUE_TYPE_CHAMP}"{LEAGUE_CHAMP} /> {L_LEAGUE_CHAMP}</label>
+			<label><input name="league_type" type="radio" class="radio" value="{LEAGUE_TYPE_KO}"{LEAGUE_KO} /> {L_LEAGUE_KO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="bet_ko_type">{L_BET_TYPE_KO}:</label><br /><span>{L_BET_TYPE_KO_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="bet_ko_type" type="radio" class="radio" id="bet_ko_type" value="{BET_TYPE_KO_90}"{BET_KO_90} /> {L_MIN90}</label>
+			<label><input name="bet_ko_type" type="radio" class="radio" value="{BET_TYPE_KO_EXTRATIME}"{BET_KO_EXTRATIME} /> {L_EXTRATIME}</label>
+			<label><input name="bet_ko_type" type="radio" class="radio" value="{BET_TYPE_KO_PENALTY}"{BET_KO_PENALTY} /> {L_PENALTY}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="league_matchdays">{L_LEAGUE_MATCHDAYS}:</label><br /><span>{L_LEAGUE_MATCHDAYS_EXPLAIN}</span></dt>
+		<dd><input name="league_matchdays" type="text" id="league_matchdays" size="2" maxlength="2" value="{LEAGUE_MATCHDAYS}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_matches">{L_LEAGUE_MATCHES}:</label><br /><span>{L_LEAGUE_MATCHES_EXPLAIN}</span></dt>
+		<dd>
+			<!-- IF S_EDIT_MATCHES -->
+			<input name="league_matches" type="text" id="league_matches" size="2" maxlength="2" value="{LEAGUE_MATCHES}" />
+			<!-- ELSE -->
+			{LEAGUE_MATCHES}
+			<!-- ENDIF -->
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="league_rules_post_id">{L_LEAGUE_RULES_POST_ID}:</label><br /><span>{L_LEAGUE_RULES_POST_ID_EXPLAIN}</span></dt>
+		<dd><input name="league_rules_post_id" type="text" id="league_rules_post_id" size="8" maxlength="8" value="{LEAGUE_RULES_POST_ID}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_join_by_user">{L_LEAGUE_JOIN_BY_USER}:</label><br /><span>{L_LEAGUE_JOIN_BY_USER_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="league_join_by_user" type="radio" class="radio" id="league_join_by_user" value="1"{JOIN_BY_USER_YES} /> {L_YES}</label>
+			<label><input name="league_join_by_user" type="radio" class="radio" value="0"{JOIN_BY_USER_NO} 
+						onchange="document.getElementById('no_league_join_in_season').checked=true;"/> {L_NO}</label>
+
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="league_join_in_season">{L_LEAGUE_JOIN_IN_SEASON}:</label><br /><span>{L_LEAGUE_JOIN_IN_SEASON_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="league_join_in_season" type="radio" class="radio" id="league_join_in_season" value="1"{JOIN_IN_SEASON_YES} 
+						onchange="document.getElementById('league_join_by_user').checked=true;"/> {L_YES}</label>
+			<label><input name="league_join_in_season" type="radio" class="radio" id="no_league_join_in_season" value="0"{JOIN_IN_SEASON_NO} /> {L_NO}</label>
+
+		</dd>
+	</dl>
+	<!-- IF ! S_EDIT_MATCHES -->
+	<dl>
+		<dt><label for="league_bet_in_time">{L_LEAGUE_BET_IN_TIME}:</label><br /><span>{L_LEAGUE_BET_IN_TIME_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="league_bet_in_time" type="radio" class="radio" id="league_bet_in_time" value="1"{BET_IN_TIME_YES} /> {L_YES}</label>
+			<label><input name="league_bet_in_time" type="radio" class="radio" id="no_league_bet_in_time" value="0"{BET_IN_TIME_NO} /> {L_NO}</label>
+
+		</dd>
+	</dl>
+	<!-- ENDIF -->	
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_LEAGUE_POINTS}</legend>
+	<dl>
+		<dt><label for="league_points_mode">{L_LEAGUE_POINTS_MODE}:</label><br /><span>{L_LEAGUE_POINTS_MODE_EXPLAIN}</span></dt>
+		<dd><span><select style="vertical-align:top;" name="league_points_mode" id="league_points_mode">{LEAGUE_POINTS_MODE_OPTIONS}</select></span></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_points_hit">{L_LEAGUE_POINTS_HIT}:</label><br /><span>{L_LEAGUE_POINTS_HIT_EXPLAIN}</span></dt>
+		<dd><input name="league_points_hit" type="text" id="league_points_hit" size="2" maxlength="2" value="{LEAGUE_POINTS_HIT}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_points_tendency">{L_LEAGUE_POINTS_TENDENCY}:</label><br /><span>{L_LEAGUE_POINTS_TENDENCY_EXPLAIN}</span></dt>
+		<dd><input name="league_points_tendency" type="text" id="league_points_tendency" size="2" maxlength="2" value="{LEAGUE_POINTS_TENDENCY}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_points_diff">{L_LEAGUE_POINTS_DIFF}:</label><br /><span>{L_LEAGUE_POINTS_DIFF_EXPLAIN}</span></dt>
+		<dd><input name="league_points_diff" type="text" id="league_points_diff" size="2" maxlength="2" value="{LEAGUE_POINTS_DIFF}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_points_last">{L_LEAGUE_POINTS_LAST}:</label><br /><span>{L_LEAGUE_POINTS_LAST_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="league_points_last" type="radio" class="radio" id="league_points_last" value="1"{POINTS_LAST_YES} /> {L_YES}</label>
+			<label><input name="league_points_last" type="radio" class="radio" value="0"{POINTS_LAST_NO} /> {L_NO}</label>
+
+		</dd>
+	</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_LEAGUE_WINS}</legend>
+	<dl>
+		<dt><label for="bet_points">{L_BET_POINTS}:</label><br /><span>{L_BET_POINTS_EXPLAIN}</span></dt>
+		<dd><input name="bet_points" type="text" id="bet_points" size="10" maxlength="10" value="{BET_POINTS}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_win_hits">{L_LEAGUE_WIN_HITS}:</label><br /><span>{L_LEAGUE_WIN_HITS_EXPLAIN}</span></dt>
+		<dd><input name="league_win_hits" type="text" id="league_win_hits" size="10" maxlength="10" value="{LEAGUE_WIN_HITS}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_win_hits_away">{L_LEAGUE_WIN_HITS_AWAY}:</label><br /><span>{L_LEAGUE_WIN_HITS_AWAY_EXPLAIN}</span></dt>
+		<dd><input name="league_win_hits_away" type="text" id="league_win_hits_away" size="10" maxlength="10" value="{LEAGUE_WIN_HITS_AWAY}" /></dd>
+	</dl>
+	<dl>
+		<dt><br /><span>{L_LEAGUE_WIN_EXPLAIN}</span></dt>
+		<dd></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_win_matchdays">{L_LEAGUE_WIN_MATCHDAYS}:</label><br /><span>{L_LEAGUE_WIN_MATCHDAYS_EXPLAIN}</span></dt>
+		<dd><input name="league_win_matchdays" type="text" id="league_win_matchdays" value="{LEAGUE_WIN_MATCHDAYS}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="league_win_season">{L_LEAGUE_WIN_SEASON}:</label><br /><span>{L_LEAGUE_WIN_SEASON_EXPLAIN}</span></dt>
+		<dd><input name="league_win_season" type="text" id="league_win_season" value="{LEAGUE_WIN_SEASON}" /></dd>
+	</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	<!-- IF S_ADD_LEAGUE -->
+		<input type="hidden" name="add" value="1" />
+	<!-- ENDIF -->
+		<input type="hidden" name="edit" value="1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+<!-- ELSEIF S_LIST -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_LEAGUE_MEMBERS} :: {LEAGUE_NAME}</h1>
+	<p>{L_MEMBER_EXPLAIN}</p>
+
+	<form id="list" method="post" action="{U_ACTION}">
+
+	<fieldset class="quick">
+		<a href="{U_DEFAULT_ALL}">&raquo; {L_MEMBER_ALL}</a>
+	</fieldset>
+
+	<!-- IF .pagination -->
+	<div class="pagination top-pagination">
+		<!-- INCLUDE pagination.html -->
+	</div>
+	<!-- ENDIF -->	
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_USERNAME}</th>
+		<th>{L_JOINED}</th>
+		<th>{L_MARK}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN member -->
+			<!-- IF member.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td><a href="{member.U_USER_EDIT}">{member.USERNAME}</a></td>
+			<td style="text-align: center;">{member.JOINED}</td>
+			<td style="text-align: center;"><input type="checkbox" class="radio" name="mark[]" value="{member.USER_ID}" /></td>
+		</tr>
+	<!-- BEGINELSE -->
+		<tr>
+			<td class="row1" colspan="3" style="text-align: center;">{L_LEAGUE_NO_MEMBER}</td>
+		</tr>
+	<!-- END member -->
+	</tbody>
+	</table>
+	<!-- IF .pagination or TOTAL_MEMBERS -->
+	<div class="pagination">
+		{TOTAL_MEMBERS}
+		<!-- IF .pagination -->
+			<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+			&bull; {PAGE_NUMBER}
+		<!-- ENDIF -->
+	</div>
+	<!-- ENDIF -->	
+
+	<fieldset class="quick">
+		<select name="action"><option class="sep" value="">{L_SELECT_OPTION}</option>{S_ACTION_OPTIONS}</select>
+		<input class="button2" type="submit" name="update" value="{L_SUBMIT}" />
+		<p class="small"><a href="#" onclick="marklist('list', 'mark', true); return false;">{L_MARK_ALL}</a> &bull; 
+						<a href="#" onclick="marklist('list', 'mark', false); return false;">{L_UNMARK_ALL}</a></p>		
+	</fieldset>
+
+	<h1>{L_ADD_USERS}</h1>
+
+	<p>{L_ADD_USERS_EXPLAIN}</p>
+
+	<fieldset>
+		<legend>{L_ADD_USERS}</legend>
+	<dl>
+		<dt><label for="group">{L_ADD_GROUP}:</label></dt>
+		<dd><select id="group" name="g">{S_GROUP_OPTIONS}</select></dd>
+	</dl>
+	<dl>
+		<dt><label for="usernames">{L_USERNAME}:</label><br /><span>{L_USERNAMES_EXPLAIN}</span></dt>
+		<dd><textarea id="usernames" name="usernames" cols="40" rows="5"></textarea></dd>
+		<dd>[ <a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</dd>
+	</dl>
+
+	<p class="quick">
+		<input class="button2" type="submit" name="addmembers" value="{L_SUBMIT}" />
+	</p>
+	{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_LEAGUES_MANAGE}</h1>
+	<p>{L_ACP_FOOTBALL_LEAGUES_MANAGE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<h1 style="display:inline;">{L_SELECT_SEASON}:</h1>
+		<select name="s" id="league_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<form id="acp_leagues" method="post" action="{U_ACTION}">
+	
+	<fieldset class="quick">
+			<input type="hidden" name="s" value="{S_SEASON}" />
+		<!-- IF S_LEAGUE_ADD -->
+			{L_CREATE_LEAGUE}: <input type="text" name="l" value="" /> <input class="button2" type="submit" name="submit" value="{L_SUBMIT}" />
+			<input type="hidden" name="add" value="1" />
+		<!-- ENDIF -->
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	<h1>{L_LEAGUE_DEF}</h1>
+
+	<p>{L_LEAGUE_DEF_EXPLAIN}</p>
+	<table class="type_f">
+	<thead>
+	<tr>
+		<th>{L_SEASON}</th>
+		<th>{L_LEAGUE}</th>
+		<th style="width: 25%">{L_LEAGUE_NAME}</th>
+		<th></th>
+		<th>{L_MEMBER}</th>
+		<th colspan="2">{L_OPTIONS}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- IF .leagues -->
+		<!-- BEGIN leagues -->
+			<tr class="{leagues.ROW_CLASS}">
+				<td style="text-align: center;"><strong>{leagues.SEASON}</strong></td>
+				<td style="text-align: center;"><strong>{leagues.LEAGUE}</strong></td>
+				<td>{leagues.LEAGUE_NAME}</td>
+				<td>{leagues.LEAGUE_SHORT}</td>
+				<td style="text-align: center;">{leagues.MEMBERS}</td>
+				<td style="text-align: center;"><a href="{leagues.U_EDIT}">{L_SETTINGS}</a></td>
+				<td style="text-align: center;"><!-- IF leagues.S_MEMBER --><a href="{leagues.U_LIST}">{L_MEMBER}</a><!-- ELSE -->{L_MEMBER}<!-- ENDIF --></td>
+				<td style="text-align: center;"><!-- IF leagues.U_DELETE --><a href="{leagues.U_DELETE}">{L_DELETE}</a><!-- ELSE -->{L_DELETE}<!-- ENDIF --></td>
+			</tr>
+		<!-- END leagues -->
+	<!-- ELSE -->
+			<tr>
+				<td colspan="3" class="row3">{L_NO_LEAGUES_CREATED}</td>
+			</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+<!-- ENDIF -->
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,42 @@
+#footballside {
+	width: 200px;
+	position: fixed;
+	z-index: 1001;
+	left: -185px;
+	top: 100px;
+	min-height: 200px;
+	background-color: #fff;
+}
+* html #footballside {
+	position: absolute;
+	height: 200px;
+}
+#footballside .forabg {
+	margin-bottom: 0;
+}
+#footballside:hover, #footballside.iehover {
+	left: -5px;
+}
+#footballside ul {
+	list-style: none;
+	margin-right: 15px;
+}
+#footballside li {
+	padding: 3px;
+}
+* html #footballside li.header, * html #footballside li.header dl, * html #footballside li.header dl dt {
+	height: 18px;
+}
+#footballside li.header {
+	padding: 0 5px;
+}
+#dirty {
+	margin: 0;
+	padding: 10px 0;
+	position: relative;
+	float: right;
+	right: 0;
+	text-align: center;
+	font-weight: bold;
+	color: #FFF;
+}

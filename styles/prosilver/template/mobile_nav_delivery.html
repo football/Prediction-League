@@ -1,0 +1,22 @@
+<!-- IF S_VIEW <> 'print' -->
+	<div class="navbar football_bg">
+		<div class="left-box" style="margin-left:5px; width:45%">
+			<!-- IF S_PREV_DEADLINE <> '' -->
+			<a class="{S_PREV_CLASS}" href="{S_PREV_LINK}" title="{L_SHOW_PREV}">&lt; {S_PREV_DEADLINE}</a> 
+			<!-- ELSE -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- ENDIF -->
+		</div>
+		<div class="right-box" style="margin-right:5px; width:45%">
+			<!-- IF S_NEXT_DEADLINE <> '' -->
+			<a class="{S_NEXT_CLASS}" href="{S_NEXT_LINK}" title="{L_SHOW_NEXT}">{S_NEXT_DEADLINE} &gt;</a>
+			<!-- ELSE -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- ENDIF -->
+		</div>
+		<div style="text-align:center" style="width:8%">
+			<a href="{S_CURR_LINK}" title="{L_SHOW_CURRENT}"><strong>{S_CURR_MATCHDAY}</strong></a>
+		</div>
+	</div>
+	<br style="clear:both"/>
+<!-- ENDIF -->

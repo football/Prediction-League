@@ -1,0 +1,151 @@
+<!-- INCLUDECSS css/football_acp.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+	<!-- IF U_FOOTBALL --><a href="{U_FOOTBALL}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_PREDICTION_LEAGUE}</a><!-- ENDIF -->
+	<h1>{L_ACP_FOOTBALL_ALL_BETS_VIEW}</h1>
+	<p>{L_ACP_FOOTBALL_ALL_BETS_VIEW_EXPLAIN}</p>
+
+	<h1 style="display:inline;">{L_SELECT_MATCHDAY}:</h1>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<select name="s" id="match_season" onchange="this.form.submit();">{S_SEASON_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<select name="l" id="match_league" onchange="this.form.submit();">{S_LEAGUE_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+	<form style="display:inline;" method="post" action="{U_ACTION}">
+	<div style="display:inline; margin:0; padding:0;">
+		<input type="hidden" name="s" value="{S_SEASON}" />
+		<input type="hidden" name="l" value="{S_LEAGUE}" />
+		<select name="m" id="match_matchday" onchange="this.form.submit();">{S_MATCHDAY_OPTIONS}</select>
+		{S_FORM_TOKEN}
+	</div>
+	</form>
+
+	<fieldset>
+		<legend>{S_LEGEND}</legend>
+	<!-- IF .pagination -->
+	<div class="pagination top-pagination">
+		<!-- INCLUDE pagination.html -->
+	</div>
+	<!-- ENDIF -->	
+
+	<!-- IF .match_panel -->
+		<!-- BEGIN match_panel -->
+		<table class="type_f">
+			<thead>
+				<tr>
+					<th style="text-align: right;"><br/></th>
+				<!-- BEGIN match -->
+					<th colspan="2">{match_panel.match.HOME_NAME}-<br />{match_panel.match.GUEST_NAME}</th>
+				<!-- END match -->
+				<!-- IF match_panel.S_TOTAL -->
+					<th style="text-align: center;"></th>
+				<!-- ENDIF -->
+				</tr>
+				<tr class="row_result">
+					<td  title="{L_RESULT_EXPLAIN}" style="text-align: right;"><b>{L_RESULT}</b></td>
+				<!-- BEGIN match -->
+					<td class="td_result {match_panel.match.COLOR_STYLE}">{match_panel.match.RESULT}</td>
+					<td class="td_pts"></td>
+				<!-- END match -->
+				<!-- IF match_panel.S_TOTAL -->
+					<td title="{L_TOTAL_EXPLAIN}" style="text-align: center;"><b>{L_TOTAL}</b></td>
+				<!-- ENDIF -->
+				</tr>
+			</thead>
+			<!-- BEGIN tendency_footer -->
+				<tfoot>
+					<tr> 
+						<td class="td_tendency" style="text-align: right;" title="{L_TEND_TEXT}">{L_TENDENCY}</td>
+					<!-- BEGIN tendency -->
+						<td class="td_tendency" colspan="2">
+							<dfn style="display: none;">{match_panel.tendency_footer.tendency.MATCH_ENTRY}</dfn>
+							{match_panel.tendency_footer.tendency.TENDENCY}
+						</td>
+					<!-- END tendency -->
+					<!-- IF match_panel.tendency_footer.S_TOTAL -->
+						<td class="td_pts_total"  title="{L_POINTS_TOTAL}">
+							<dfn style="display: none;">{L_POINTS_TOTAL}</dfn>
+							{match_panel.tendency_footer.SUMTOTAL}
+						</td>
+					<!-- ENDIF -->
+					</tr>
+				</tfoot>
+			<!-- END tendency_footer -->
+			<tbody>
+			<!-- BEGIN user_row -->
+				<tr class="{match_panel.user_row.ROW_CLASS}">
+					<td class="td_name">{match_panel.user_row.USER_NAME}</td>
+				<!-- BEGIN bet -->
+					<td class="td_result">{match_panel.user_row.bet.BET}</td>
+					<td class="{match_panel.bet.COLOR_STYLE}">{match_panel.user_row.bet.POINTS}</td>
+				<!-- END bet -->
+				<!-- BEGIN points -->
+					<td class="td_pts_total {match_panel.points.COLOR_STYLE}">{match_panel.user_row.points.POINTS_TOTAL}</td>
+				<!-- END points -->
+				</tr>
+			<!-- END user_row -->
+			</tbody>
+		</table>
+		<!-- END match_panel -->
+		
+		<!-- BEGIN extra_panel -->
+		<br />
+		<table class="type_f">
+			<thead>
+				<tr>
+					<th style="text-align:left;">{L_EXTRA_BET}</th>
+					<th style="width:70%; text-align:left;">{extra_panel.QUESTION}</th>
+					<th>{L_EVALUATION}</th>
+					<th>{L_POINTS}</th>
+				</tr>
+				<tr class="row_result">
+					<td><b>{L_RESULT}</b></td>
+					<td style="text-align:left;" class="{extra_panel.COLOR_STYLE}">{extra_panel.RESULT}</td>
+					<td style="text-align:center;">{extra_panel.EVALUATION}</td>
+					<td style="text-align:center;" title="{extra_panel.EVALUATION_TITLE}">{extra_panel.POINTS}</td>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN user_row -->
+				<tr class="{extra_panel.user_row.ROW_CLASS}">
+					<td class="td_name">{extra_panel.user_row.USER_NAME}</td>
+					<td style="text-align:left;">{extra_panel.user_row.BET}</td>
+					<td>&nbsp;</td>
+					<td style="text-align:center;" class="{extra_panel.bet.COLOR_STYLE}">{extra_panel.user_row.POINTS}</td>
+				</tr>
+			<!-- END user_row -->
+			</tbody>
+		</table>
+		<!-- IF S_VIEW == 'print' -->
+		<br />
+		<!-- ENDIF -->
+		<!-- END extra_panel -->
+		<!-- IF .pagination or TOTAL_USERS -->
+		<div class="pagination">
+			{TOTAL_USERS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				&bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->	
+		
+	<!-- ELSE -->
+		<br />
+		<div class="message">{L_NO_MATCHES_ON_MATCHDAY}</div>
+		<br />
+	<!-- ENDIF -->
+	</fieldset>
+<br />
+<div style="text-align: center;">phpBB Extension - Football Prediction League - Version {S_VERSION_NO} &copy; 2016 <a href="http://football.bplaced.net">football</a></div>
+<!-- INCLUDE overall_footer.html -->

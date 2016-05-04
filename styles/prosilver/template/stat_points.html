@@ -1,0 +1,137 @@
+<!-- IF S_DATA_STAT_POINTS -->
+	<br style="clear:both" />
+	<div class="football-inner-left">
+		<h3>{L_TOP20_POINTS}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_NAME}</th>
+						<th>{L_MATCHDAY_SHORT}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th>{L_TOTAL}</th>
+						<th>{L_POINTS_SHORT}</th>
+						<!-- IF S_WIN -->
+						<th>{L_WIN}</th>
+						<!-- ENDIF -->
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN top20 -->
+					<tr class="{top20.ROW_CLASS}">
+						<td class="td_name">{top20.NAME}</td>
+						<td class="td_matches">{top20.MATCHDAY}</td>
+						<td class="td_hits">{top20.TENDENCIES}</td>
+						<td class="td_hits">{top20.DIRECTHITS}</td>
+						<td class="td_hits">{top20.TOTAL}</td>
+						<td class="td_pts">{top20.POINTS}</td>
+						<!-- IF S_WIN -->
+						<td class="td_wins">{top20.WIN}</td>
+						<!-- ENDIF -->
+					</tr>
+				<!-- END top20 -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_FLOP20_POINTS}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_NAME}</th>
+						<th>{L_MATCHDAY_SHORT}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th>{L_TOTAL}</th>
+						<th>{L_POINTS_SHORT}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN flop20 -->
+					<tr class="{flop20.ROW_CLASS}">
+						<td class="td_name">{flop20.NAME}</td>
+						<td class="td_matches">{flop20.MATCHDAY}</td>
+						<td class="td_hits">{flop20.TENDENCIES}</td>
+						<td class="td_hits">{flop20.DIRECTHITS}</td>
+						<td class="td_hits">{flop20.TOTAL}</td>
+						<td class="td_pts">{flop20.POINTS}</td>
+					</tr>
+				<!-- END flop20 -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both" />
+	<br />
+	<div class="football-inner-left">
+		<h3>{L_TOP20_POINTS_ALL}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_NAME}</th>
+						<th>{L_SEASON}</th>
+						<th>{L_MATCHDAY_SHORT}</th>
+						<th title="{L_CNT_TEND}">{L_TENDENCY_SHORT}</th>
+						<th>{L_HITS_SHORT}</th>
+						<th>{L_TOTAL}</th>
+						<th>{L_POINTS_SHORT}</th>
+						<!-- IF S_WIN -->
+						<th>{L_WIN}</th>
+						<!-- ENDIF -->
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN alltop20 -->
+					<tr class="{alltop20.ROW_CLASS}">
+						<td class="td_name">{alltop20.NAME}</td>
+						<td class="td_season">{alltop20.SEASON}</td>
+						<td class="td_matches">{alltop20.MATCHDAY}</td>
+						<td class="td_hits">{alltop20.TENDENCIES}</td>
+						<td class="td_hits">{alltop20.DIRECTHITS}</td>
+						<td class="td_hits">{alltop20.TOTAL}</td>
+						<td class="td_pts">{alltop20.POINTS}</td>
+						<!-- IF S_WIN -->
+						<td class="td_wins">{alltop20.WIN}</td>
+						<!-- ENDIF -->
+					</tr>
+				<!-- END alltop20 -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="football-inner-right">
+		<h3>{L_FLOP20_POINTS_ALL}</h3>
+		<div class="forabg">
+			<table class="football">
+				<thead>
+					<tr>
+						<th>{L_NAME}</th>
+						<th>{L_ZERO_POINTS}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN allflop20 -->
+					<tr class="{allflop20.ROW_CLASS}">
+						<td class="td_name">{allflop20.NAME}</td>
+						<td class="td_hits">{allflop20.COUNTZERO}</td>
+					</tr>
+				<!-- END allflop20 -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br style="clear:both" />
+	<br />
+	<!-- INCLUDE nav_delivery.html -->
+<!-- ELSE -->
+	<br />
+	<div class="message">{L_NO_BETS}</div>
+	<br />
+	<br />
+<!-- ENDIF -->
+
+
