@@ -512,9 +512,9 @@ class update_module
 				$league_info = league_info($season, $league);
 				if ($league_info['bet_in_time'])
 				{
-					$sql = 'REPLACE INTO ' . FOOTB_MATCHDAYS . ' (season, league, matchday, delivery_date, matchday_name, matches)
-							SELECT m.season, m.league, m.matchday, min(m.match_datetime) AS delivery_date, md.matchday_name, md.matches 
-							FROM ' . FOOTB_MATCHES . ' AS m
+					$sql = 'REPLACE INTO ' . FOOTB_MATCHDAYS . " (season, league, matchday, delivery_date, delivery_date_2, delivery_date_3, matchday_name, matches)
+							SELECT m.season, m.league, m.matchday, min(m.match_datetime) AS delivery_date, '' AS delivery_date_2, '' AS delivery_date_3, md.matchday_name, md.matches 
+							FROM " . FOOTB_MATCHES . ' AS m
 							JOIN ' . FOOTB_LEAGUES . ' AS l ON (l.season = m.season AND l.league = m.league)
 							JOIN ' . FOOTB_MATCHDAYS . " AS md ON (md.season = m.season AND md.league = m.league AND md.matchday = m.matchday)
 							WHERE m.season = $season 
@@ -667,7 +667,7 @@ class update_module
 					
 				// check status of matchdays
 				$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
-				$sql = "UPDATE phpbb_footb_matchdays AS target 
+				$sql = $sql = 'UPDATE ' . FOOTB_MATCHDAYS . " AS target 
 						INNER JOIN  
 						( 
 						SELECT md.season

@@ -902,7 +902,14 @@ class main
 		if (!$user->data['football_mobile'])
 		{
 		// Start matchday list
-			include($this->football_root_path . 'block/rank_matchday.' . $this->php_ext);
+			if ($side == 'bet')
+			{
+				include($this->football_root_path . 'block/side_table.' . $this->php_ext);
+			}
+			else
+			{
+				include($this->football_root_path . 'block/rank_matchday.' . $this->php_ext);
+			}
 		// End matchday list
 
 		//*****************************************************************************

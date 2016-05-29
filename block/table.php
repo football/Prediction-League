@@ -12,6 +12,7 @@ if (!defined('IN_PHPBB') OR !defined('IN_FOOTBALL'))
 	exit;
 }
 
+
 $data_table = false;
 $data_form = false;
 
@@ -58,76 +59,101 @@ $sql = "SELECT
 	WHERE t.season = $season 
 		AND t.league = $league 
 		AND m.matchday <= $matchday 
-		AND m.status IN (2, 3,5,6)
+		AND m.status IN (2,3,5,6)
 	GROUP BY t.team_id
 	ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC, t.team_name ASC";
 	
 $result = $db->sql_query($sql);
+
+$table_ary = array();
+$points_ary = array();
+$ranks_ary = array();
+$rank = 0;
+while( $row = $db->sql_fetchrow($result))
+{
+	$rank++;
+	$table_ary[$row['team_id']] = $row;
+	$points_ary[$row['group_id']][$row['points']][]=$row['team_id']; 
+	$ranks_ary[] = $row['team_id'];
+}
+
 $last_group = '';
+$rank = 0;
 $current_rank = 0;
 $last_goals = 0;
 $last_goals_againts = 0;
 $last_points = 0;
-while($row = $db->sql_fetchrow($result))
+foreach($points_ary as $group_id => $points)
 {
-	if ($last_group != $row['group_id'])
+	$data_table = true;
+	if ($last_group != $group_id)
 	{
-		$last_group = $row['group_id'];
+		$last_group =$group_id;
 		$rank = 0;
 		$last_goals = 0;
 		$last_goals_againts = 0;
 		$last_points = 0;
 		$template->assign_block_vars('total', array(
-			'GROUP' => sprintf($user->lang['GROUP']) . ' ' . $row['group_id'],
+			'GROUP' => sprintf($user->lang['GROUP']) . ' ' .$group_id,
 			)
 		);
 	}
-	if ($league_type != 2 OR $row['group_id'] != '')
+	
+	foreach($points as $point => $teams)
 	{
-		$data_table = true;
-		$rank++;
-		if ($last_points <> $row['points'] OR $last_goals <> $row['goals'] OR $last_goals_againts <> $row['goals_against'])
+		if(count($teams) > 1 AND  $group_id != '')
 		{
-			$current_rank = $rank . '.';
+			// Compare teams with equal points and sort
+			$teams = get_order_team_compare($teams, $season, $league, $group_id, $ranks_ary, $matchday);
 		}
-		else
+		foreach($teams as $key => $team)
 		{
-			$current_rank = '';
-		}
-		$last_points = $row['points'];
-		$last_goals = $row['goals'];
-		$last_goals_againts = $row['goals_against'];
-		$row_class = (!($rank % 2)) ? 'bg1 row_light' : 'bg2 row_dark';
-		if ($row['team_symbol'] <> '')
-		{
-			$logo = "<img src=\"" . $ext_path . 'images/flags/' . $row['team_symbol'] . "\" alt=\"" . $row['team_symbol'] . "\" width=\"28\" height=\"28\"/>" ;
-		}
-		else
-		{
-			$logo = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"28\" height=\"28\"/>" ;
-		}
-		  
-		$template->assign_block_vars('total', array(
-			'RANK' 			=> $current_rank,
-			'ROW_CLASS' 	=> $row_class,
-			'LOGO' 			=> $logo,
-			'TEAM_ID' 		=> $row['team_id'],
-			'TEAM' 			=> $row['team_name'],
-			'TEAM_SHORT' 	=> $row['team_name_short'],
-			'U_PLAN_TEAM'	=> $this->helper->route('football_football_popup', array('popside' => 'viewplan_popup', 's' => $season, 'l' => $row['league'],
-																				'tid' => $row['team_id'], 'mode' => 'played')),
-			'GAMES' 		=> $row['matches'],
-			'WIN' 			=> $row['win'],
-			'DRAW' 			=> $row['draw'],
-			'LOST' 			=> $row['lost'],
-			'GOALS' 		=> $row['goals'],
-			'GOALS_AGAINST' => $row['goals_against'],
-			'GOALS_DIFF' 	=> $row['goals_diff'],
-			'POINTS' 		=> $row['points'],
-			)
-		);
-	}
+			$row = $table_ary[$team];
+			$rank++;
+			if ($last_points <> $row['points'] OR $last_goals <> $row['goals'] OR $last_goals_againts <> $row['goals_against'])
+			{
+				$current_rank = $rank . '.';
+			}
+			else
+			{
+				$current_rank = '';
+			}
+			$last_points = $row['points'];
+			$last_goals = $row['goals'];
+			$last_goals_againts = $row['goals_against'];
+			$row_class = (!($rank % 2)) ? 'bg1 row_light' : 'bg2 row_dark';
+			if ($row['team_symbol'] <> '')
+			{
+				$logo = "<img src=\"" . $ext_path . 'images/flags/' . $row['team_symbol'] . "\" alt=\"" . $row['team_symbol'] . "\" width=\"28\" height=\"28\"/>" ;
+			}
+			else
+			{
+				$logo = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"28\" height=\"28\"/>" ;
+			}
+			  
+			$template->assign_block_vars('total', array(
+				'RANK' 			=> $current_rank,
+				'ROW_CLASS' 	=> $row_class,
+				'LOGO' 			=> $logo,
+				'TEAM_ID' 		=> $row['team_id'],
+				'TEAM' 			=> $row['team_name'],
+				'TEAM_SHORT' 	=> $row['team_name_short'],
+				'U_PLAN_TEAM'	=> $this->helper->route('football_football_popup', array('popside' => 'viewplan_popup', 's' => $season, 'l' => $row['league'],
+																					'tid' => $row['team_id'], 'mode' => 'played')),
+				'GAMES' 		=> $row['matches'],
+				'WIN' 			=> $row['win'],
+				'DRAW' 			=> $row['draw'],
+				'LOST' 			=> $row['lost'],
+				'GOALS' 		=> $row['goals'],
+				'GOALS_AGAINST' => $row['goals_against'],
+				'GOALS_DIFF' 	=> $row['goals_diff'],
+				'POINTS' 		=> $row['points'],
+				)
+			);
+		}		
+	}     
 }
+
 $db->sql_freeresult($result);
 $rank = 0;
 // Get form-table-information

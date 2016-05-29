@@ -1,0 +1,36 @@
+<div class="panel">
+	<h3><span class="small-icon icon-rank"></span>&nbsp;{L_TABLE_TOTAL}</h3>
+	<!-- IF S_DATA_SIDE_TABLE -->
+		<table class="forabg rank">
+			<thead>
+				<tr>
+					<th>{L_RANK_SHORT}</th>
+					<th  colspan="2" style="text-align: center;">{L_TEAM}</th>
+					<th>{L_GAMES_SHORT}</th>
+					<th style="text-align: right;">{L_POINTS_SHORT}</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- BEGIN side_total -->
+				<!-- IF side_total.GROUP <> '' -->
+				<tr class="row_group">
+					<td colspan="12" style="text-align: center;">{side_total.GROUP}</td>
+				</tr>
+				<!-- ELSE -->
+				<tr class="{side_total.ROW_CLASS}"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{side_total.U_PLAN_TEAM}');return false;">
+					<td class="td_rank">{side_total.RANK}</td>
+					<td class="td_logo">{side_total.LOGO}</td>
+					<td class="td_team">{side_total.TEAM_SHORT}</td>
+					<td class="td_hits">{side_total.GAMES}</td>
+					<td class="td_pts">{side_total.POINTS}</td>
+				</tr>
+				<!-- ENDIF -->
+			<!-- END side_total -->
+		</tbody>
+		</table>
+	<!-- ELSE -->
+	<div class="message">{L_NO_TABLE}</div>
+	<br />
+	<!-- ENDIF -->
+</div>
+

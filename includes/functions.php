@@ -1642,6 +1642,78 @@ function color_points($text, $status)
 }
 
 /**
+* get table order on teams with equal points.
+*/
+function get_order_team_compare($team_ary, $season, $league, $group, $ranks, $matchday = 999, $first = true)
+{
+	global $db;
+	$sql = "
+		SELECT
+		t.*,
+		SUM(IF(m.team_id_home = t.team_id, 
+				IF(goals_home + 0 > goals_guest, 3, IF(goals_home = goals_guest, 1, 0)), 
+				IF(goals_home + 0 < goals_guest, 3, IF(goals_home = goals_guest, 1, 0))
+			)
+		) - IF(t.team_id = 20 AND t.season = 2011 AND $matchday > 7, 2, 0) AS points,
+		SUM(IF(m.team_id_home = t.team_id, goals_home - goals_guest, goals_guest - goals_home)) AS goals_diff,
+		SUM(IF(m.team_id_home = t.team_id, goals_home, goals_guest)) AS goals
+		FROM " . FOOTB_TEAMS . ' AS t
+		LEFT JOIN ' . FOOTB_MATCHES . " AS m ON (m.season = t.season AND m.league = t.league AND 
+												(m.team_id_home = t.team_id OR m.team_id_guest = t.team_id) AND m.group_id = t.group_id)
+		WHERE t.season = $season 
+		AND t.league = $league 
+		AND m.matchday <= $matchday 
+		AND m.status IN (2,3,5,6)
+		AND m.group_id = '$group'
+		AND (m.team_id_home='" . implode("' OR m.team_id_home='", $team_ary) . "') 
+		AND (m.team_id_guest='" . implode("' OR m.team_id_guest='", $team_ary) . "')
+		GROUP BY t.team_id
+		ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC";
+
+		$result = $db->sql_query($sql);
+
+	$tmp = array();
+	$rank_ary = array();
+	$rank = 0;
+	$last_points = 0;
+	$last_goals_diff = 0;
+	$last_goals = 0;
+
+	while( $row = $db->sql_fetchrow($result))
+	{
+		if ($last_points <> $row['points'] OR $last_goals_diff <> $row['goals_diff'] OR $last_goals <> $row['goals'])
+		{
+			$rank++;
+		}
+		$rank_ary[$rank][]=$row['team_id']; 
+		$last_points = $row['points'];
+		$last_goals_diff = $row['goals_diff'];
+		$last_goals = $row['goals'];
+	}
+	foreach($rank_ary as $rank => $teams)
+	{
+		if(count($teams) > 1)
+		{
+			if ($first)
+			{
+				// Compare teams with equal ranks
+				$teams = get_order_team_compare($teams, $season, $league, $group, $ranks, $matchday, false);
+			}
+			else
+			{
+				// Second compare is still equal, so look on total rank
+				$teams = array_intersect($ranks, $teams);
+			}
+		}
+		foreach($teams as $key => $team)
+		{
+			$tmp[] = $team;
+		}
+	}
+    return $tmp;
+}  
+
+/**
 * determine team items from formula.
 */
 function get_team($season, $league, $matchnumber, $field, $formula)
@@ -1653,6 +1725,147 @@ function get_team($season, $league, $matchnumber, $field, $formula)
 
 	switch($first_letter)
 	{
+		case '3':
+			// 3. Place Euro 2106
+			$groups = substr($para_ary[0], 0, 5);
+			$sql = '
+				SELECT
+				SUM(1) AS matches,
+				SUM(IF(m.status = 3, 1, 0)) AS played
+				FROM ' . FOOTB_MATCHES . " AS m
+				WHERE m.season = $season AND m.league = $league AND m.group_id <> '' 
+				GROUP BY m.group_id
+			";
+			$result = $db->sql_query($sql);
+
+			if ( $row = $db->sql_fetchrow($result))
+			{
+				if ($row['matches'] == $row['played'])
+				{
+					$rank = 0;
+					// Get table-information
+					$sql = "SELECT
+							t.*,
+							SUM(1) AS matches,
+							SUM(IF((m.team_id_home = t.team_id), IF(goals_home + 0 > goals_guest, 1, 0), IF(goals_home + 0 < goals_guest, 1, 0))) AS win,
+							SUM(IF(goals_home = goals_guest, 1, 0)) AS draw,
+							SUM(IF((m.team_id_home = t.team_id), IF(goals_home + 0 < goals_guest, 1, 0), IF(goals_home + 0 > goals_guest, 1, 0))) AS lost,
+							SUM(IF(m.team_id_home = t.team_id, 
+									IF(goals_home + 0 > goals_guest, 3, IF(goals_home = goals_guest, 1, 0)), 
+									IF(goals_home + 0 < goals_guest, 3, IF(goals_home = goals_guest, 1, 0))
+								)
+							) AS points,
+							SUM(IF(m.team_id_home = t.team_id, goals_home - goals_guest , goals_guest - goals_home)) AS goals_diff,
+							SUM(IF(m.team_id_home = t.team_id, goals_home , goals_guest)) AS goals,
+							SUM(IF(m.team_id_home = t.team_id, goals_guest , goals_home)) AS goals_against
+						FROM " . FOOTB_TEAMS . ' AS t
+						LEFT JOIN ' . FOOTB_MATCHES . " AS m ON (m.season = t.season AND m.league = t.league 
+																AND (m.team_id_home = t.team_id OR m.team_id_guest = t.team_id) AND m.group_id = t.group_id)
+						WHERE t.season = $season 
+							AND t.league = $league 
+							AND m.status IN (2,3,5,6)
+						GROUP BY t.team_id
+						ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC, t.team_name ASC";
+						
+					$result = $db->sql_query($sql);
+
+					$table_ary = array();
+					$points_ary = array();
+					$ranks_ary = array();
+					$third_team = array();
+					$third_group = array();
+					$points3 = array();
+					$diff3 = array();
+					$goals3 = array();
+					$rank = 0;
+					while( $row = $db->sql_fetchrow($result))
+					{
+						$rank++;
+						$table_ary[$row['team_id']] = $row;
+						$points_ary[$row['group_id']][$row['points']][]=$row['team_id']; 
+						$ranks_ary[] = $row['team_id'];
+					}
+
+					foreach($points_ary as $group_id => $points)
+					{
+						$rank = 0;
+
+						//sort on points descending
+						krsort($points);
+
+						foreach($points as $point => $teams)
+						{
+							if(count($teams) > 1)
+							{
+								// Compare teams with equal points
+								$teams = get_order_team_compare($teams, $season, $league, $group_id, $ranks_ary);
+							}
+							foreach($teams as $key => $team)
+							{
+								$row = $table_ary[$team];
+								$rank++;
+								if ($rank == 3)
+								{
+									$points3[$team] = $row['points'];
+									$diff3[$team] = $row['goals_diff'];
+									$goals3[$team] = $row['goals'];
+									$third_team[$team]= $team;
+									$third_group[$team]= $row['group_id'];
+								}
+							}		
+						}     
+					}
+					// Sort 3. Place on points, diff, goals
+					array_multisort($points3, SORT_DESC, $diff3, SORT_DESC, $goals3, SORT_DESC, $third_team, $third_group);
+					$qualified_groups = array();
+					for($i = 0; $i < 4; $i++)
+					{
+						$qualified_groups[$i] = $third_group[$i];
+						$team_of[$third_group[$i]] = $third_team[$i];
+					}
+					asort($qualified_groups);
+					$qualified_groups_string = '';
+					foreach($qualified_groups as $key => $letter)
+					{
+						$qualified_groups_string .= $letter;
+					}
+					$modus = array('ABCD' => 'CDAB', 'ABCE' => 'CABE', 'ABCF' => 'CABF', 'ABDE' => 'DABE', 'ABDF' => 'DABF', 
+									'ABEF' => 'EABF', 'ACDE' => 'CDAE', 'ACDF' => 'CDAF', 'ACEF' => 'CAFE', 'ADEF' => 'DAFE', 
+									'BCDE' => 'CDBE', 'BCDF' => 'CDBF', 'BCEF' => 'ECBF', 'BDEF' => 'EDBF', 'CDEF' => 'CDFE');
+					$form_para = array('CDE', 'ACD', 'ABF', 'BEF');
+					$mode = $modus[$qualified_groups_string];
+					for($i = 0; $i < 4; $i++)
+					{
+						$team = $team_of[substr($mode, $i, 1)];
+						
+						$sqlup = 'UPDATE ' . FOOTB_MATCHES . " SET team_id_guest = $team WHERE season = $season AND league = $league AND formula_guest = '3 $form_para[$i]'";
+						$resultup = $db->sql_query($sqlup);
+						$sqlup = 'UPDATE ' . FOOTB_TEAMS . ' SET matchday = (SELECT max(matchday) FROM ' . FOOTB_MATCHES . " 
+																			 WHERE season = $season AND league = $league AND (team_id_home= $team OR team_id_guest = $team))
+								  WHERE season = $season AND league = $league AND team_id = $team";
+						$resultup = $db->sql_query($sqlup);
+						if ($form_para[$i] == $groups)
+						{
+							$team_id = $team;
+							$row = $table_ary[$team];
+							$team_symbol = $row['team_symbol'];
+							$team_name = $row['team_name'];
+							$team_name_short = $row['team_name_short'];
+						}
+					}
+					return $team_symbol . '#' . $team_id . '#' . $team_name . '#' . $team_name_short;
+					
+				}
+				else
+				{
+					return '#0#' . '3. ' . sprintf($user->lang['GROUP']) . ' ' . $groups . '#' . '3. ' . sprintf($user->lang['GROUP']) . ' ' . $groups;
+				}
+			}
+			else
+			{
+				return '#0#' . '3. ' . sprintf($user->lang['GROUP']) . ' ' . $groups . '#' . '3. ' . sprintf($user->lang['GROUP']) . ' ' . $groups;
+			}
+			break;
 		case 'D':
 			// Drawing
 			return '#0#' . sprintf($user->lang['DRAWING']) . '#' . sprintf($user->lang['DRAWING']);
@@ -1675,31 +1888,16 @@ function get_team($season, $league, $matchnumber, $field, $formula)
 			{
 				if ($row['matches'] == $row['played'])
 				{
+					$rank = 0;
 					$sql = '
 						SELECT
 						t.*,
-						SUM(1) AS matches,
-						SUM(IF((m.team_id_home = t.team_id), IF(goals_home + 0 > goals_guest, 1, 0), IF(goals_home + 0 < goals_guest, 1, 0))) AS win,
-						SUM(IF(goals_home = goals_guest, 1, 0)) AS draw,
-						SUM(IF((m.team_id_home = t.team_id), IF(goals_home + 0 < goals_guest, 1, 0), IF(goals_home + 0 > goals_guest, 1, 0))) AS lose,
 						SUM(IF(m.team_id_home = t.team_id, 
-								IF(goals_home + 0 > goals_guest, 
-									3, 
-									IF(goals_home = goals_guest, 
-										1, 
-										0
-									)
-								), 
-								IF(goals_home + 0 < goals_guest, 
-									3, 
-									IF(goals_home = goals_guest, 
-										1, 
-										0
-									)
-								)
+								IF(goals_home + 0 > goals_guest, 3, IF(goals_home = goals_guest, 1, 0)), 
+								IF(goals_home + 0 < goals_guest, 3, IF(goals_home = goals_guest, 1, 0))
 							)
 						) AS points,
-						SUM(IF(m.team_id_home = t.team_id, goals_home - goals_guest, goals_guest - goals_home)) AS goal_diff,
+						SUM(IF(m.team_id_home = t.team_id, goals_home - goals_guest, goals_guest - goals_home)) AS goals_diff,
 						SUM(IF(m.team_id_home = t.team_id, goals_home, goals_guest)) AS goals,
 						SUM(IF(m.team_id_home = t.team_id, goals_guest, goals_home)) AS goals_get
 						FROM ' . FOOTB_TEAMS . ' AS t
@@ -1707,48 +1905,44 @@ function get_team($season, $league, $matchnumber, $field, $formula)
 																(m.team_id_home = t.team_id OR m.team_id_guest = t.team_id) AND m.group_id = t.group_id)
 						WHERE t.season = $season AND t.league = $league AND m.group_id = '$group'
 						GROUP BY t.team_id
-						ORDER BY points DESC, goal_diff DESC, goals DESC
+						ORDER BY points DESC, goals_diff DESC, goals DESC
 					";
 					$result = $db->sql_query($sql);
-					$rowset = $db->sql_fetchrowset($result);
-					$db->sql_freeresult($result);
-					
-					if (1 == $place)
+					$table_ary = array();
+					$points_ary = array();
+					$ranks_ary = array();
+					while( $row = $db->sql_fetchrow($result))
 					{
-						if ($rowset[0]['points'] == $rowset[1]['points'] AND $rowset[0]['goal_diff'] == $rowset[1]['goal_diff'] AND $rowset[0]['goals'] == $rowset[1]['goals'])
-						{
-							return '#0#' . $place . '. ' . sprintf($user->lang['GROUP']) . ' ' . $place . '#' . $place . '. ' . sprintf($user->lang['GROUP']) . ' ' . $group;
-						}
-						else
-						{
-							$new_id = $rowset[0]['team_id'];
-							$sqlup = 'UPDATE ' . FOOTB_MATCHES . " SET $field = $new_id WHERE season = $season AND league = $league AND match_no = $matchnumber";
-							$resultup = $db->sql_query($sqlup);
-							$sqlup = 'UPDATE ' . FOOTB_TEAMS . ' SET matchday = (SELECT max(matchday) FROM ' . FOOTB_MATCHES . " 
-																				 WHERE season = $season AND league = $league AND (team_id_home= $new_id OR team_id_guest = $new_id))
-									  WHERE season = $season AND league = $league AND team_id = $new_id";
-							$resultup = $db->sql_query($sqlup);
-							return $rowset[0]['team_symbol'] . '#' . $new_id . '#' . $rowset[0]['team_name'] . '#' . $rowset[0]['team_name_short'];
-						}
+						$table_ary[$row['team_id']] = $row;
+						$points_ary[$row['points']][]=$row['team_id'];
+						$ranks_ary[] = $row['team_id'];
 					}
-					else
+					$db->sql_freeresult($result);
+
+					//sort on points descending
+					krsort($points_ary);
+
+					foreach($points_ary as $point => $teams)
 					{
-						// second 
-						if (($rowset[0]['points'] == $rowset[1]['points'] AND $rowset[0]['goal_diff'] == $rowset[1]['goal_diff'] AND $rowset[0]['goals'] == $rowset[1]['goals'] ) OR
-						    ($rowset[2]['points'] == $rowset[1]['points'] AND $rowset[2]['goal_diff'] == $rowset[1]['goal_diff'] AND $rowset[2]['goals'] == $rowset[1]['goals'] ))
+						if(count($teams) > 1)
 						{
-							return '#0#' . $place . '. ' . sprintf($user->lang['GROUP']) . ' ' . $group . '#' . $place . '. ' . sprintf($user->lang['GROUP']) . ' ' . $group;
+							// Compare teams with equal points
+							$teams = get_order_team_compare($teams, $season, $league, $group, $ranks_ary);
 						}
-						else
+						foreach($teams as $key => $team)
 						{
-							$new_id = $rowset[1]['team_id'];
-							$sqlup = 'UPDATE ' . FOOTB_MATCHES . " SET $field = $new_id WHERE season = $season AND league = $league AND match_no = $matchnumber";
-							$resultup = $db->sql_query($sqlup);
-							$sqlup = 'UPDATE ' . FOOTB_TEAMS . ' SET matchday = (SELECT max(matchday) FROM ' . FOOTB_MATCHES . " 
-																				 WHERE season = $season AND league = $league AND (team_id_home= $new_id OR team_id_guest = $new_id))
-									  WHERE season = $season AND league = $league AND team_id = $new_id";
-							$resultup = $db->sql_query($sqlup);
-							return $rowset[1]['team_symbol'] . '#' . $new_id . '#' . $rowset[1]['team_name'] . '#' . $rowset[1]['team_name_short'];
+							$row = $table_ary[$team];
+							$rank++;
+							if ($rank == $place)
+							{
+								$sqlup = 'UPDATE ' . FOOTB_MATCHES . " SET $field = $team WHERE season = $season AND league = $league AND match_no = $matchnumber";
+								$resultup = $db->sql_query($sqlup);
+								$sqlup = 'UPDATE ' . FOOTB_TEAMS . ' SET matchday = (SELECT max(matchday) FROM ' . FOOTB_MATCHES . " 
+																					 WHERE season = $season AND league = $league AND (team_id_home= $team OR team_id_guest = $team))
+										  WHERE season = $season AND league = $league AND team_id = $team";
+								$resultup = $db->sql_query($sqlup);
+								return $row['team_symbol'] . '#' . $team . '#' . $row['team_name'] . '#' . $row['team_name_short'];
+							}
 						}
 					}
 				}
@@ -2112,37 +2306,53 @@ function ko_group_next_round($season, $league, $matchday_from, $matchday_to, $ma
 			ORDER BY group_id ASC,points DESC, goal_diff DESC, goals DESC
 		";
 		$result = $db->sql_query($sql);
+		
+		$table_ary = array();
+		$points_ary = array();
+		$ranks_ary = array();
+		while( $row = $db->sql_fetchrow($result))
+		{
+			$table_ary[$row['team_id']] = $row;
+			$points_ary[$row['group_id']][$row['points']][]=$row['team_id']; 
+			$ranks_ary[] = $row['team_id'];
+		}
 
 		$message = sprintf($user->lang['KO_NEXT_CHECK']) . ': <br /><br />';
 		$message .= sprintf($user->lang['KO_NEXT']) . ': <br /><br />';
 		$messag_moved = '<br /><br />' .  sprintf($user->lang['KO_MOVED']) . ': <br />';
 		$group_id = 'XX';
-		while ($row = $db->sql_fetchrow($result))
+		foreach($points_ary as $group_id => $points)
 		{
-			if ($group_id != $row['group_id'])
+			$place = 1;
+			foreach($points as $point => $teams)
 			{
-				$place = 1;
-				$group_id = $row['group_id'];
-			}
+				if(count($teams) > 1)
+				{
+					// Compare teams with equal points
+					$teams = get_order_team_compare($teams, $season, $league, $group_id, $ranks_ary);
+				}
+				foreach($teams as $key => $team_id)
+				{
+					$row = $table_ary[$team_id];
 
-			if ($place <= $rank)
-			{
-				$team_id = $row['team_id'];
-				$sqlup = 'UPDATE ' . FOOTB_TEAMS . " SET matchday = $matchday_new WHERE season = $season AND league = $league AND team_id = $team_id";
-				$resultup = $db->sql_query($sqlup);
-				$message .= $row['team_name'] . '<br />';
+					if ($place <= $rank)
+					{
+						$sqlup = 'UPDATE ' . FOOTB_TEAMS . " SET matchday = $matchday_new WHERE season = $season AND league = $league AND team_id = $team_id";
+						$resultup = $db->sql_query($sqlup);
+						$message .= $row['team_name'] . '<br />';
+					}
+					if ($move_rank > 0 AND $move_league > 0 AND $place == $move_rank)
+					{
+						$team_name = $row['team_name'];
+						$short_name = $row['team_name_short'];
+						$team_sign = $row['team_symbol'];
+						$sqlinsert = 'INSERT INTO ' . FOOTB_TEAMS . " VALUES($season, $move_league, $team_id, '$team_name', '$short_name', '$team_sign', '', $move_matchday)";
+						$resultinsert = $db->sql_query($sqlinsert);
+						$messag_moved .= $row['team_name'] . '<br />';
+					}
+					$place++;
+				}
 			}
-			if ($move_rank > 0 AND $move_league > 0 AND $place == $move_rank)
-			{
-				$team_id = $row['team_id'];
-				$team_name = $row['team_name'];
-				$short_name = $row['team_name_short'];
-				$team_sign = $row['team_symbol'];
-				$sqlinsert = 'INSERT INTO ' . FOOTB_TEAMS . " VALUES($season, $move_league, $team_id, '$team_name', '$short_name', '$team_sign', '', $move_matchday)";
-				$resultinsert = $db->sql_query($sqlinsert);
-				$messag_moved .= $row['team_name'] . '<br />';
-			}
-			$place++;
 		}
 	}
 	$db->sql_freeresult($result);

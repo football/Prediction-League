@@ -19,9 +19,9 @@
 				<li class="tab <!-- IF S_DISPLAY_BET -->activetab<!-- ENDIF --> small-icon icon-bet"><a href="{U_BET}"><span>{L_BET}</span></a></li>
 				<li class="tab <!-- IF S_DISPLAY_ALL_BETS -->activetab<!-- ENDIF --> small-icon icon-allbets"><a href="{U_ALL_BETS}"><span>{L_ALL_BETS}</span></a></li>
 				<li class="tab <!-- IF S_DISPLAY_RESULTS -->activetab<!-- ENDIF --> small-icon icon-results"><a href="{U_RESULTS}"><span>{L_RESULTS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_TABLE -->activetab<!-- ENDIF --> small-icon icon-list"><a href="{U_TABLE}"><span>{L_TABLE}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_RANKS_TOTAL -->activetab<!-- ENDIF --> small-icon icon-rank"><a href="{U_RANKS_TOTAL}"><span>{L_RANK_TOTAL}</span></a></li>
 				<li class="tab <!-- IF S_DISPLAY_RANKS_MATCHDAY -->activetab<!-- ENDIF --> small-icon icon-rank"><a href="{U_RANKS_MATCHDAY}"><span>{L_RANK_MATCHDAY}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_RANKS_TOTAL -->activetab<!-- ENDIF --> small-icon icon-rank"><a href="{U_RANKS_TOTAL}"><span>{L_RANK_TOTAL}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_TABLE -->activetab<!-- ENDIF --> small-icon icon-list"><a href="{U_TABLE}"><span>{L_TABLE}</span></a></li>
 				<li class="tab <!-- IF S_DISPLAY_BANK -->activetab<!-- ENDIF --> small-icon icon-points"><a href="{U_FOOTBALL_BANK}"><span>{L_FOOTBALL_BANK}</span></a></li>
 				<li class="tab small-icon icon-rules"><a href="{U_RULES}" target="popup" onclick="popup('{U_RULES}', 625,625);return false;"><span>{L_RULES}</span></a></li>
 				<li class="tab <!-- IF S_DISPLAY_ODDS -->activetab<!-- ENDIF --> small-icon icon-odds"><a href="{U_ODDS}"><span>{L_ODDS}</span></a></li>
@@ -196,6 +196,9 @@
 
 	<!-- IF S_DISPLAY_RANK_MATCHDAY -->
 		<!-- INCLUDE rank_matchday.html -->
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_SIDE_TABLE -->
+		<!-- INCLUDE side_table.html -->
 	<!-- ENDIF -->
 	<!-- IF S_DISPLAY_DELIVERY -->
 		<!-- INCLUDE delivery.html -->

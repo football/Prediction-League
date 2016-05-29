@@ -180,7 +180,8 @@ if ($data_rules)
 		'JOIN_MODE'			=> ($league_info['join_by_user']) ? (($league_info['join_in_season']) ? sprintf($user->lang['JOIN_IN_SEASON']) : sprintf($user->lang['JOIN_BY_USER'])) : sprintf($user->lang['JOIN_BY_ADMIN']),
 		'POINTS_HIT'		=> sprintf($user->lang['POINTS_HIT'], $league_info['points_result']) . '<br/>',
 		'POINTS_TENDENCY'	=> $points_tendency . '<br/>',
-		'POINTS_DIFF'		=> ($league_info['points_mode'] == 4) ? sprintf($user->lang['POINTS_DIFFERENCE'], $league_info['points_diff']) . '<br/>' : '',
+		'POINTS_DIFF'		=> ($league_info['points_mode'] == 4) ? sprintf($user->lang['POINTS_DIFFERENCE'], $league_info['points_diff']) . '<br/>' : 
+								(($league_info['points_mode'] == 5) ? sprintf($user->lang['POINTS_DIFFERENCE_DRAW'], $league_info['points_diff']) . '<br/>' : ''),
 		'POINTS_LAST'		=> ($league_info['points_last']) ? sprintf($user->lang['POINTS_NO_BET']) . '<br/>' : '',
 		'LINK_RULES'	 	=> sprintf($user->lang['LINK_RULES'], $link_rules),
 		'SEASONNAME'	 	=> $season_info['season_name'],

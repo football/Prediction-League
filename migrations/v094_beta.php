@@ -274,7 +274,6 @@ class v094_beta extends \phpbb\db\migration\migration
 			array('config.remove', array('football_menu_forumid4')),
 			array('config.remove', array('football_menu_forumid5')),
 			array('config.remove', array('football_menu_forumid6')),
-			array('config.remove', array('football_side')),
 			array('config.add', array('football_bank', '0', '0')),
 			array('config.add', array('football_code', '0000', '0')),
 			array('config.add', array('football_disable', '0', '0')),
