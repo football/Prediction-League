@@ -120,7 +120,7 @@ $lang = array_merge($lang, array(
 	'FOOTBALL_REMEMBER_ENABLE_EXPLAIN'	=> 'Hier kannst Du angeben, ob 1 Tag vor Tippabgabe eine Erinnerungsmail versendet werden soll.',
 
 	'FOOTBALL_REMEMBER_NEXT_RUN'		=> 'Nächster Cronjoblauf für die Tipp-Erinnerungsmail',
-	'FOOTBALL_REMEMBER_NEXT_RUN_EXPLAIN'=> 'Hier kannst Du einstellen, wann der Cronjob für die Tipp-Erinnerungsmail frühestens wieder aufgerufen wird. Nach Ausführung wird der Cronjob für den Folgetag zur geichen Uhrzeit neu eingeplant.',
+	'FOOTBALL_REMEMBER_NEXT_RUN_EXPLAIN'=> 'Hier kannst Du einstellen, wann der Cronjob für die Tipp-Erinnerungsmail frühestens wieder aufgerufen wird. Nach Ausführung wird der Cronjob für den Folgetag zur gleichen Uhrzeit neu eingeplant.',
 
 	'FOUNDER_DELETE'					=> 'Nur Gründungsmitglieder dürfen löschen',
 	'FOUNDER_DELETE_EXPLAIN'			=> 'Löschung von Spielplandaten wie Saisons, Ligen, Teams, Spieltage und Spielpläne nur auf Gründungsmitglieder beschränken. ',

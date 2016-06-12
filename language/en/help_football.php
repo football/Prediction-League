@@ -96,7 +96,7 @@ footb_rem_s = switch for sending the reminder email to the second E-mail address
 		0 => 'How do I activate the reminder e-mail function? ',
 		1 => 'In the admin area in the Prediction League functionality the mail reminder cron job and the next run must be activated. <br />
 The cron job is run on the first access after this date and sends an e-mail reminder for the missing tip duties that lie in the period 24-48 hours after cron date .
-If not sufficient accesses the page, the cron job should automatically run on script "cron.php?cron_type=football_remember". <br />
+If not sufficient accesses the page, the cron job should automatically run on script "YOUR_URL/cron.php?cron_type=football.football.cron.task.football_remember". <br />
 The ship of the email takes place only once . After calling up the cron job, the next scheduled is automatically planned for the following day .
 With the appended parameters " & mode = test & days = n " can be tested the shipment for the offset to n days predictions . Only mails to board email address will be shipped .
 		In ACP a user defined prediction leagues code is to define.<br />

@@ -934,14 +934,20 @@ function set_bet_in_time_delivery($season, $league)
 function curr_season()
 {
 	global $db, $lang, $user;
-	$curr_user = $user->data['user_id'];
+	$user_spec = '';
+	if ($user->data['user_type']==0 OR $user->data['user_type']==3)
+	{
+		$curr_user = $user->data['user_id'];
+		$user_spec = 'AND b.user_id = ' . $curr_user;
+	}
+	
 	$sql = 'SELECT DISTINCT s.season 
 			FROM  ' . FOOTB_SEASONS . '  AS s
 			INNER JOIN ' . FOOTB_LEAGUES . ' AS l ON (l.season = s.season)
 			INNER JOIN ' . FOOTB_MATCHDAYS . ' AS m ON (m.season = s.season AND m.league = l.league)
-			INNER JOIN ' . FOOTB_BETS . " AS b ON (b.season = m.season AND b.league = m.league AND b.user_id = $curr_user) 
+			INNER JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league ' . $user_spec . ') 
 			WHERE m.status IN (0,1,2)
-			ORDER BY s.season ASC";
+			ORDER BY s.season ASC';
 	$result = $db->sql_query($sql);
 
 	if ($row = $db->sql_fetchrow($result))
@@ -1017,10 +1023,15 @@ function first_league($season, $complete = true)
 function current_league($season)
 {
 	global $db, $lang, $user;
-	$curr_user = $user->data['user_id'];
+	$user_spec = '';
+	if ($user->data['user_type']==0 OR $user->data['user_type']==3)
+	{
+		$curr_user = $user->data['user_id'];
+		$user_spec = 'AND b.user_id = ' . $curr_user;
+	}
 	$sql = 'SELECT m.league 
 			FROM ' . FOOTB_MATCHES . ' AS m  
-			INNER JOIN ' . FOOTB_BETS . " AS b ON (b.season = m.season AND b.league = m.league AND b.user_id = $curr_user)
+			INNER JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league ' . $user_spec . ")
 			WHERE m.season = $season 
 			AND m.status in (0,1,2)
 			ORDER BY m.match_datetime ASC";
@@ -1710,7 +1721,7 @@ function get_order_team_compare($team_ary, $season, $league, $group, $ranks, $ma
 			$tmp[] = $team;
 		}
 	}
-    return $tmp;
+    return (sizeof($tmp) == 0) ? $team_ary: $tmp;
 }  
 
 /**

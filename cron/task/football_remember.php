@@ -87,9 +87,8 @@ class football_remember extends \phpbb\cron\task\base
 
 		$season = curr_season();
 		//Matchdays to close in 24 hours and 24 hours later
-		$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
 		// shift days to test
-		$local_board_time = $local_board_time + ($days * 86400);
+		$local_board_time = time() + ($days * 86400);
 
 		if ($mode <> 'test')
 		{
@@ -137,12 +136,17 @@ class football_remember extends \phpbb\cron\task\base
 					u.user_id AS userid,
 					u.user_lang 
 					FROM ' . FOOTB_MATCHES . ' AS m
+					LEFT JOIN ' . FOOTB_LEAGUES . ' AS l ON (l.season = m.season AND l.league = m.league)
 					LEFT JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = m.match_no)
 					LEFT JOIN ' . PROFILE_FIELDS_DATA_TABLE. ' AS p ON p.user_id = b.user_id
 					LEFT JOIN ' . USERS_TABLE. " AS u ON u.user_id = b.user_id
 					WHERE m.season = $season AND m.league = $league AND m.matchday = $matchday 
 						AND ((b.goals_home = '') OR (b.goals_guest = '')) 
 						AND m.status = 0 AND p.pf_footb_rem_f = 1
+						AND (l.bet_in_time = 0 OR 
+								(l.bet_in_time = 1 
+									AND (DATE_SUB(m.match_datetime, INTERVAL '1 23:59' DAY_MINUTE) < FROM_UNIXTIME('$local_board_time'))
+									AND (DATE_SUB(m.match_datetime, INTERVAL '1 00:00' DAY_MINUTE) > FROM_UNIXTIME('$local_board_time'))))
 					GROUP BY b.user_id
 					UNION
 					SELECT
@@ -151,12 +155,17 @@ class football_remember extends \phpbb\cron\task\base
 					u.user_id AS userid,
 					u.user_lang
 					FROM " . FOOTB_MATCHES . ' AS m
+					LEFT JOIN ' . FOOTB_LEAGUES . ' AS l ON (l.season = m.season AND l.league = m.league)
 					LEFT JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = m.match_no)
 					LEFT JOIN ' . PROFILE_FIELDS_DATA_TABLE. ' AS p ON p.user_id = b.user_id
 					LEFT JOIN ' . USERS_TABLE. " AS u ON u.user_id = b.user_id
 					WHERE m.season = $season AND m.league = $league AND m.matchday = $matchday 
 						AND ((b.goals_home = '') OR (b.goals_guest = '')) 
 						AND m.status = 0 AND p.pf_footb_rem_s = 1
+						AND (l.bet_in_time = 0 OR 
+								(l.bet_in_time = 1 
+									AND (DATE_SUB(m.match_datetime, INTERVAL '1 23:59' DAY_MINUTE) < FROM_UNIXTIME('$local_board_time'))
+									AND (DATE_SUB(m.match_datetime, INTERVAL '1 00:00' DAY_MINUTE) > FROM_UNIXTIME('$local_board_time'))))
 					GROUP BY b.user_id
 					";
 			$result = $this->db->sql_query($sql);

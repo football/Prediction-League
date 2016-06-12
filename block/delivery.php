@@ -45,7 +45,7 @@ $sql = "(SELECT
 			SUM(IF(eb.extra_no > 0, IF(eb.bet = '', 0, 1), 0)) AS extra_bets_count,
 			SUM(IF(e.extra_no > 0, 1, 0)) AS extra_count
 		FROM " . FOOTB_MATCHDAYS . " AS m
-		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league)
+		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league AND l.bet_in_time = 0)
 		JOIN " . FOOTB_MATCHES . " AS ma ON (ma.season = m.season AND ma.league = m.league AND ma.matchday = m.matchday AND ma.status = 0)
 		JOIN " . FOOTB_BETS . " AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = ma.match_no AND b.user_id = $user_id)
 		LEFT JOIN " . FOOTB_EXTRA . " AS e ON (e.season = m.season AND e.league = m.league AND e.matchday = m.matchday  AND e.extra_status = 0)
@@ -83,7 +83,7 @@ $sql = "(SELECT
 			0 AS extra_bets_count,
 			0 AS extra_count
 		FROM " . FOOTB_MATCHDAYS . " AS m
-		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league)
+		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league AND l.bet_in_time = 0)
 		JOIN " . FOOTB_MATCHES . " AS ma ON (ma.season = m.season AND ma.league = m.league AND ma.matchday = m.matchday AND ma.status = -1)
 		JOIN " . FOOTB_BETS . " AS b ON (b.season = ma.season AND b.league = ma.league AND b.match_no = ma.match_no AND b.user_id = $user_id)
 		WHERE m.delivery_date_2 > FROM_UNIXTIME('$local_board_time') 
@@ -119,12 +119,48 @@ $sql = "(SELECT
 			0 AS extra_bets_count,
 			0 AS extra_count
 		FROM " . FOOTB_MATCHDAYS . " AS m
-		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league)
+		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league AND l.bet_in_time = 0)
 		JOIN " . FOOTB_MATCHES . " AS ma ON (ma.season = m.season AND ma.league = m.league AND ma.matchday = m.matchday AND ma.status = -2)
 		JOIN " . FOOTB_BETS . " AS b ON (b.season = ma.season AND b.league = ma.league AND b.match_no = ma.match_no AND b.user_id = $user_id)
 		WHERE m.delivery_date_3 > FROM_UNIXTIME('$local_board_time')
 			AND m.status <= 0
 		GROUP BY m.delivery_date, m.league, b.user_id
+	) 
+	UNION
+	(SELECT 
+			m.season, 
+			m.league, 
+			m.matchday,
+			l.league_name_short, 
+			CASE m.matchday_name 
+				WHEN '' 
+					THEN CONCAT(m.matchday, '." . sprintf($user->lang['MATCHDAY']) . "') 
+					ELSE m.matchday_name 
+			END AS matchday_name, 
+			CONCAT(
+				CASE DATE_FORMAT(ma.match_datetime,'%w')
+					WHEN 0 THEN '" . $lang_dates['Sun'] . "'
+					WHEN 1 THEN '" . $lang_dates['Mon'] . "'
+					WHEN 2 THEN '" . $lang_dates['Tue'] . "'
+					WHEN 3 THEN '" . $lang_dates['Wed'] . "'
+					WHEN 4 THEN '" . $lang_dates['Thu'] . "'
+					WHEN 5 THEN '" . $lang_dates['Fri'] . "'
+					WHEN 6 THEN '" . $lang_dates['Sat'] . "'
+					ELSE 'Error' END,
+				DATE_FORMAT(ma.match_datetime,' %d.%m.%y %H:%i')
+			) as delivery_time,
+			ma.match_datetime AS delivery, 
+			SUM(IF(((b.goals_home = '') OR (b.goals_guest = '')), 0, 1)) AS bets_count,
+			COUNT(*) AS matches_count,
+			0 AS extra_bets_count,
+			0 AS extra_count
+		FROM " . FOOTB_MATCHDAYS . " AS m
+		JOIN " . FOOTB_LEAGUES . " AS l ON(l.season = m.season AND l.league = m.league AND l.bet_in_time = 1)
+		JOIN " . FOOTB_MATCHES . " AS ma ON (ma.season = m.season AND ma.league = m.league AND ma.matchday = m.matchday AND ma.status = 0)
+		JOIN " . FOOTB_BETS . " AS b ON (b.season = ma.season AND b.league = ma.league AND b.match_no = ma.match_no AND b.user_id = $user_id)
+		WHERE ma.match_datetime > FROM_UNIXTIME('$local_board_time')
+			AND m.status <= 0
+		GROUP BY ma.match_datetime, m.league, b.user_id
 	) 
 	ORDER BY delivery, league";
 	

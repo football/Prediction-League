@@ -93,7 +93,8 @@ footb_rem_s = Schalter für Versand der Erinnerungsmail an die 2. E-Mail-Adresse
 		0 => 'Wie aktiviere ich die Erinnerungs-Mail Funktion?',
 		1 => 'Im Adminbereich muss unter den Tipprunden-Funktionalitäten der Cronjob für die Tipp-Erinnerungsmail aktiviert und der Termin der nächsten Ausführung gesetzt werden.<br />
 Der Cron-Job wird beim ersten Zugriff nach diesem Termin ausgeführt und sendet eine Erinnerungs-Mail für die fehlenden Tippabgaben, die im Zeitraum 24-48 Stunden nach dem Cron-Termin liegen. 
-Falls nicht ausreichend Zugriffe auf die Seite erfolgen, sollte der Cronjob automatisch z.B. von www.cronjob.de durch das Script "cron.php?cron_type=football_remember" gestartet werden.<br />
+Falls nicht ausreichend Zugriffe auf die Seite erfolgen, sollte der Cronjob automatisch z.B. von www.cronjob.de durch das Script 
+"DEINE_URL/cron.php?cron_type=football.football.cron.task.football_remember" gestartet werden.<br />
 Das versenden der Email erfolgt nur einmalig. Nach Aufruf des Cronjobs wird der nächste automatisch für den Folgetag eingeplant.
 Mit den angehängten parametern "&mode=test&days=n" kann der Versand für die um n Tage versetzte Tippabgabe getestet werden. Dabei werden nur Mails an Board-Email-Adresse versendet.'
 	),

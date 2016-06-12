@@ -24,6 +24,7 @@ $sql = 'SELECT s.session_user_id
 	FROM ' . USERS_TABLE . ' AS u
 	LEFT JOIN ' . SESSIONS_TABLE . ' AS s ON (u.user_id = s.session_user_id)
 	WHERE u.user_lastvisit > 0
+	AND u.user_type IN (0,3)
 	GROUP BY u.user_id 
 	ORDER BY lastvisit DESC';
 

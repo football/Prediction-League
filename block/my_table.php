@@ -137,7 +137,6 @@ $sql = 'SELECT
 		AND b.goals_home <> '' 
 		AND b.goals_guest <> '' 
 		AND m.matchday <= $matchday 
-		AND m.status IN (2, 3,5,6)
 	GROUP BY t.team_id
 	ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC";
 	
@@ -234,7 +233,6 @@ $sql = 'SELECT
 		AND b.goals_home <> '' 
 		AND b.goals_guest <> '' 
 		AND m.matchday >= $form_from 
-		AND m.status IN (2, 3,5,6)
 	GROUP BY t.team_id
 	ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC";
 	
@@ -302,7 +300,6 @@ $sql = 'SELECT
 		AND b.goals_home <> '' 
 		AND b.goals_guest <> '' 
 		AND m.matchday <= $matchday 
-		AND m.status IN (2, 3,5,6)
 	GROUP BY t.team_id
 	ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC";
 	
@@ -368,7 +365,6 @@ $sql = 'SELECT
 		AND b.goals_home <> '' 
 		AND b.goals_guest <> '' 
 		AND m.matchday <= $matchday 
-		AND m.status IN (2, 3,5,6)
 	GROUP BY t.team_id
 	ORDER BY t.group_id ASC, points DESC, goals_diff DESC, goals DESC";
 	
