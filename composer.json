@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Football Prediction League for phpBB 3.1",
 	"homepage": "http://football.bplaced.net",
-	"version": "0.9.6",
-	"time": "2016-05-29",
+	"version": "0.9.7",
+	"time": "2016-06-12",
 	"license": "GPL-2.0",
 	"authors": [{
 			"name": "J. Helmke",
