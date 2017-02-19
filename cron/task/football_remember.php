@@ -73,8 +73,9 @@ class football_remember extends \phpbb\cron\task\base
 		include($ext_path . 'includes/constants.' . $this->php_ext);
 
 		// Load extension language file
+		$this->user->setup();
 		$this->user->add_lang_ext('football/football', 'info_acp_football');
-		
+
 		// mode=test ?
 		$mode = $request->variable('mode', '');
 		$days = $request->variable('days', 0);
@@ -104,13 +105,14 @@ class football_remember extends \phpbb\cron\task\base
 		}
 
 		$sql = 'SELECT
-				 m.*,
-				 l.*
-				 FROM ' . FOOTB_MATCHDAYS . ' AS m
-				 LEFT JOIN ' . FOOTB_LEAGUES . " AS l ON (l.season = m.season AND l.league = m.league)
-				 WHERE m.season >= $season AND m.status = 0 
+				m.*,
+				l.*
+				FROM ' . FOOTB_MATCHDAYS . ' AS m
+				LEFT JOIN ' . FOOTB_LEAGUES . " AS l ON (l.season = m.season AND l.league = m.league)
+				WHERE m.season >= $season AND m.status = 0 
 					AND (DATE_SUB(m.delivery_date, INTERVAL '1 23:59' DAY_MINUTE) < FROM_UNIXTIME('$local_board_time'))
-					AND (DATE_SUB(m.delivery_date, INTERVAL '1 00:00' DAY_MINUTE) > FROM_UNIXTIME('$local_board_time'))";
+					AND (DATE_SUB(m.delivery_date, INTERVAL '1 00:00' DAY_MINUTE) > FROM_UNIXTIME('$local_board_time'))
+				GROUP BY m.season, m.league, m.matchday";
 		$result = $this->db->sql_query($sql);
 		$toclose = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);

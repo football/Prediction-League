@@ -51,11 +51,9 @@ class football_module
 	{
 		global $db, $auth, $phpbb_container, $phpbb_admin_path, $league_info, $phpbb_log;
 		global $template, $user, $config, $phpbb_extension_manager, $request, $phpbb_root_path, $phpEx;
-		$provider			= new \phpbb\controller\ provider();
-		$symphony_request	= new \phpbb\ symfony_request($request);
-		$filesystem			= new \phpbb\ filesystem();
-		$helper				= new \phpbb\controller\ helper($template, $user, $config, $provider, $phpbb_extension_manager, $symphony_request, $request, $filesystem, $phpbb_root_path, $phpEx);
-
+		
+		$helper = $phpbb_container->get('controller.helper');
+		
 		$user->add_lang('acp/board');
 
 		$action	= $this->request->variable('action', '');

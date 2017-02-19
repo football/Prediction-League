@@ -58,22 +58,12 @@ class v094_beta_update extends \phpbb\db\migration\migration
 	{
 		return array(
 			'drop_columns'        => array(
-				$this->table_prefix . 'groups'        => array(
-					'group_teampage',
-				),
 				$this->table_prefix . 'sessions' 			=> array(
+					'football_season',
+					'football_league',
+					'football_matchday',
 					'football_mobile',
 					'football_mobile_device',
-				),
-				$this->table_prefix . 'footb_bets'		=> array(
-					'bet_time',
-				),
-				$this->table_prefix . 'footb_matches'	=> array(
-					'trend',
-					'odd_1',
-					'odd_x',
-					'odd_2',
-					'rating',
 				),
 			)
 		);

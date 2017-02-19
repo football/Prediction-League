@@ -185,6 +185,7 @@ $lang = array_merge($lang, array(
 	'LOG_FOOTBALL_FEATURES'				=> '<strong>Tipprunden-Funktionalitäten geändert</strong>',
 	'LOG_FOOTBALL_MENU'					=> '<strong>Tipprunden-Menu geändert</strong>',
 	'LOG_FOOTBALL_SETTINGS'				=> '<strong>Tipprunde-Einstellungen geändert</strong>',
+	'LOG_PL_BACKUP'						=> '<strong>Tipprunden Backup</strong>',
 
 	'LOG_FOOTBALL_MSG_TEST'				=> 'Aufruf am %s.',
 	'LOG_FOOTBALL_MSG_TEST_TRAVEL'		=> 'Aufruf mit Zeitreise zum %s.',

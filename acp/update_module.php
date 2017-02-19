@@ -36,11 +36,9 @@ class update_module
 	{
 		global $db, $auth, $phpbb_container, $phpbb_admin_path, $league_info, $functions_points;
 		global $template, $user, $config, $phpbb_extension_manager, $request, $phpbb_root_path, $phpEx;
-		$provider			= new \phpbb\controller\ provider();
-		$symphony_request	= new \phpbb\ symfony_request($request);
-		$filesystem			= new \phpbb\ filesystem();
-		$helper				= new \phpbb\controller\ helper($template, $user, $config, $provider, $phpbb_extension_manager, $symphony_request, $request, $filesystem, $phpbb_root_path, $phpEx);
-
+		
+		$helper = $phpbb_container->get('controller.helper');
+		
 		$user->add_lang_ext('football/football', 'info_acp_update');
 
 		$this->db = $db;
@@ -90,11 +88,9 @@ class update_module
 	{
 		global $db, $auth, $phpbb_container, $phpbb_admin_path, $league_info, $functions_points, $phpbb_log;
 		global $template, $user, $config, $phpbb_extension_manager, $request, $phpbb_root_path, $phpEx, $cache;
-		$provider			= new \phpbb\controller\ provider();
-		$symphony_request	= new \phpbb\ symfony_request($request);
-		$filesystem			= new \phpbb\ filesystem();
-		$helper				= new \phpbb\controller\ helper($template, $user, $config, $provider, $phpbb_extension_manager, $symphony_request, $request, $filesystem, $phpbb_root_path, $phpEx);
-
+		
+		$helper = $phpbb_container->get('controller.helper');
+		
 		$this->ext_football_path = $phpbb_root_path . 'ext/football/football/';
 		if(!function_exists('season_info'))
 		{

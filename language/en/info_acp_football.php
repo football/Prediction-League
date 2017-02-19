@@ -146,6 +146,7 @@ $lang = array_merge($lang, array(
 	'LOG_FOOTBALL_MSG_TEST_TRAVEL'			=> 'Call with time travel to %s.',
 	'LOG_FOOTBALL_REMEMBER_CRON'			=> 'Cronjob Football remember running %s',
 	'LOG_FOOTBALL_REMEMBER_CRON_TEST'		=> 'Cronjob Football remember test call %s',
+	'LOG_PL_BACKUP'							=> '<strong>Prediction League backup</strong>',
 	'FOOTBALL_REMEMBER_SUBJECT'				=> 'Please bet %1$s %2$d. matchday',
 	'FOOTBALL_REMEMBER_SUBJECT_BOARD'		=> 'Sent reminder mails %1$s %2$d',
 	'FOOTBALL_REMEMBER_ERROR_EMAIL'			=> '%1$s reminder email to: %2$d failed',

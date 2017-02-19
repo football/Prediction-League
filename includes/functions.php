@@ -1029,12 +1029,13 @@ function current_league($season)
 		$curr_user = $user->data['user_id'];
 		$user_spec = 'AND b.user_id = ' . $curr_user;
 	}
-	$sql = 'SELECT m.league 
+	$sql = 'SELECT DISTINCT m.league 
 			FROM ' . FOOTB_MATCHES . ' AS m  
 			INNER JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league ' . $user_spec . ")
 			WHERE m.season = $season 
 			AND m.status in (0,1,2)
-			ORDER BY m.match_datetime ASC";
+			ORDER BY m.match_datetime ASC
+			LIMIT 1";
 	$result = $db->sql_query($sql);
 
 	if ($row = $db->sql_fetchrow($result))
