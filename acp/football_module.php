@@ -77,7 +77,7 @@ class football_module
 				));
 
 				// Pull the array data from the lang pack
-				foreach ($user->help as $help_ary)
+				foreach ($user->lang['FOOTBALL_HELP_FAQ'] as $help_ary)
 				{
 					if ($help_ary[0] == '--')
 					{

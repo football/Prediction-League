@@ -37,7 +37,7 @@ if ( empty($lang) || !is_array($lang) )
 // ’ » „ “ — …
 //
 
-$help = array(
+$lang = array_merge($lang, array('FOOTBALL_HELP_FAQ' => array(
 	array(
 		0 => '--',
 		1 => 'Erste Schritte'
@@ -527,5 +527,5 @@ mit gleichem Status aktualisieren" zu wählen.'
 Datenquelle erfolgen. Benötigt man innerhalb dieser Zeit trotzdem aktualisierte Daten, so muss man den Cache löschen um einen erneuten Download von der
 Datenquelle zu erzwingen.' 
 	),
-);
+)));
 ?>

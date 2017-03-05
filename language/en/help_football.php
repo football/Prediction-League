@@ -40,7 +40,7 @@ if ( empty($lang) || !is_array($lang) )
 // ’ » „ “ — …
 //
 
-$help = array(
+$lang = array_merge($lang, array('FOOTBALL_HELP_FAQ' => array(
 	array(
 		0 => '--',
 		1 => 'First steps'
@@ -499,5 +499,5 @@ Preliminary results from the update are not used. If these should be taken, this
 		1 => 'The seasons- and the leagues-data are stored for 5 minutes in the cache, so that the data are downloaded from Source only once. If you need 
 updated data within that time anyway, you have to delete the cache to force a new download from the Source.' 
 	),
-);
+)));
 ?>
