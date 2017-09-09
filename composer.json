@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "Football Prediction League",
 	"homepage": "http://football.bplaced.net",
-	"version": "0.9.9b1",
+	"version": "0.9.9",
 	"time": "2017-09-09",
 	"license": "GPL-2.0",
 	"authors": [{
@@ -18,7 +18,7 @@
 	"extra": {
 		"display-name": "Football Prediction League",
 		"soft-require": {
-			"phpbb/phpbb": "3.1.*"
+			"phpbb/phpbb": ">3.1.*"
 		},
 		"version-check": {
 			"host": "football.bplaced.net",
