@@ -308,8 +308,8 @@ class main
 					$user_id = $user->data['user_id'];
 					$sql = 'SELECT * FROM ' . FOOTB_MATCHES . " WHERE season = $season AND league = $league AND matchday = $matchday AND status <= 0";
 					$resultopen = $db->sql_query($sql);
-					
 					$rows = $db->sql_fetchrowset($resultopen);
+					$db->sql_freeresult($resultopen);
 				
 					$count_matches = 0;
 					$count_updates = 0;
@@ -419,7 +419,6 @@ class main
 					{
 						$dbmsg = sprintf($user->lang['NO_BETS_SAVED']);
 					}
-					$db->sql_freeresult($resultopen);
 					
 					// extra bets
 					$sql = 'SELECT * FROM ' . FOOTB_EXTRA . " WHERE season = $season AND league = $league  AND matchday = $matchday AND extra_status <= 0";
@@ -479,6 +478,7 @@ class main
 							}
 						}
 					}
+					$db->sql_freeresult($resultextra);
 					if ($count_extra_updates)
 					{
 						$dbmsg = $dbmsg . ' ' . sprintf($user->lang['EXTRA_BET' . (($count_extra_updates == 1) ? '' : 'S') . '_SAVED'], $count_extra_updates);
@@ -725,6 +725,7 @@ class main
 						}
 					}
 				}
+				$db->sql_freeresult($resultextra);
 				if ($count_extra_updates)
 				{
 					$dbmsg = $dbmsg . ' ' . sprintf($user->lang['EXTRA_RESULT' . (($count_extra_updates == 1) ? '' : 'S') . '_SAVED'], $count_extra_updates);
@@ -823,7 +824,7 @@ class main
 			$league_type = $row['league_type'];
 			$db->sql_freeresult($result);
 			$lang_dates = $user->lang['datetime'];
-			$local_board_time = time() + (($config['board_timezone'] - $config['football_host_timezone']) * 3600); 
+			$local_board_time = time() + ($config['football_time_shift'] * 3600); 
 			$sql = "SELECT *,
 					CONCAT(
 						CASE DATE_FORMAT(delivery_date,'%w')
@@ -1000,7 +1001,14 @@ class main
 		else
 		{
 			$mobile = '';
-			include($this->football_root_path . 'block/last_users.' . $this->php_ext);
+			if ($config['football_display_last_users'] > 0)
+			{
+				include($this->football_root_path . 'block/last_users.' . $this->php_ext);
+			}
+			if ($config['football_display_last_results'] > 0)
+			{
+				include($this->football_root_path . 'block/last_results.' . $this->php_ext);				
+			}
 		}
 		// Send data to the template file
 		if ($view == 'print') 

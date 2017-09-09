@@ -198,12 +198,6 @@ $template->assign_vars(array(
 	'S_SIDENAME' 				=> $sidename,
 	'RESULT_EXPLAIN' 			=> $result_explain,
 	'LABEL_FINALRESULT' 		=> $label_finalresult,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['BET']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'table', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['TABLE']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_BET']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_TABLE']),
 	'S_DATA_ODDS' 				=> $data_odds,
 	)
 );

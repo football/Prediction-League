@@ -219,7 +219,6 @@ class all_bets_module
 			$split_after = $count_matches; 
 			$splits = 1;
 		}
-		$db->sql_freeresult($result);
 
 		// Make sure $start is set to the last page if it exceeds the amount
 		if ($start < 0 || $start >= $total_users)
@@ -311,7 +310,7 @@ class all_bets_module
 							$total = 0;
 						}	
 						$bet_index++;
-						$total += $user_bet['points'];
+						$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 						if ($user_bet['status'] < 3)
 						{
 							$colorstyle_total = ' color_provisionally';
@@ -419,7 +418,7 @@ class all_bets_module
 					$total = 0;
 				}	
 				$bet_index++;
-				$total += $user_bet['points'];
+				$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 				if ($user_bet['status'] < 3)
 				{
 					$colorstyle_total = ' color_provisionally';
@@ -573,7 +572,9 @@ class all_bets_module
 					)
 				);
 			}
+			$db->sql_freeresult($result_bet);
 		}
+		$db->sql_freeresult($result);
 		
 		$legend = delivery($season, $league, $matchday);
 

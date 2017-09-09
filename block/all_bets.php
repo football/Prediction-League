@@ -78,7 +78,6 @@ else
 		$splits = 1;
 	}
 }
-$db->sql_freeresult($result);
 
 // Make sure $start is set to the last page if it exceeds the amount
 if ($start < 0 || $start >= $total_users)
@@ -183,7 +182,7 @@ foreach ($matches AS $match)
 					$total = 0;
 				}	
 				$bet_index++;
-				$total += $user_bet['points'];
+				$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 				if ($user_bet['status'] < 3)
 				{
 					$colorstyle_total = ' color_provisionally';
@@ -306,7 +305,7 @@ if ($count_matches > 0)
 			$total = 0;
 		}	
 		$bet_index++;
-		$total += $user_bet['points'];
+		$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 		if ($user_bet['status'] < 3)
 		{
 			$colorstyle_total = ' color_provisionally';
@@ -479,19 +478,14 @@ while ($row = $db->sql_fetchrow($result))
 			)
 		);
 	}
+	$db->sql_freeresult($result_bet);
 }
-
+$db->sql_freeresult($result);
 
 $sidename = sprintf($user->lang['ALL_BETS']);
 $template->assign_vars(array(
 	'S_DISPLAY_ALL_BETS' 		=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['BET']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['RESULTS']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_BET']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_RESULTS']),
 	'S_MATCHES_ON_MATCHDAY' 	=> $matches_on_matchday,
 	'S_SPALTEN' 				=> ($count_matches * 2) + 2,
 	'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),

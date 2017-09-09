@@ -89,6 +89,7 @@ else
 				trigger_error('NO_LEAGUE');
 			}
 			$user_rows = $db->sql_fetchrowset($result);
+			$db->sql_freeresult($result);
 			$export_file = $league_short . '_' . $season . '_bank.csv';
 			$newline = "\r\n";
 			header('Pragma: no-cache');

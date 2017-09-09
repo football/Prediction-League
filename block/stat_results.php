@@ -131,12 +131,6 @@ $sidename = sprintf($user->lang['STAT_RESULTS']);
 $template->assign_vars(array(
 	'S_DISPLAY_STAT_RESULTS' 	=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'stat_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['STAT_POINTS']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['BET']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_STAT_POINTS']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_BET']),
 	'S_DATA_STAT_RESULTS' 		=> $data,
 	'SEASON' 					=> $season,
 	'LEAGUE' 					=> $league,

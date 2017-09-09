@@ -151,8 +151,6 @@ class extra_module
 			$existing_extra = sizeof($extra_row);
 			$db->sql_freeresult($result);
 		}
-
-		$db->sql_freeresult($result);
 		
 		// Which page?
 		switch ($action)
@@ -265,7 +263,7 @@ class extra_module
 							$matchday_eval_options 	.= '<option value="' . $row['matchday'] . '"' . $selected_eval . '>' . $day_name . '</option>';
 						}
 					}
-					
+					$db->sql_freeresult($result);
 					$question_type_options = '';
 					for($i = 1; $i<= 5; $i++)
 					{

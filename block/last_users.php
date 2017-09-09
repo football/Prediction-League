@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 }
 
 $display_last_users = false;
-// Last 5 users
+// Last users
 $sql = 'SELECT s.session_user_id
 		, u.username
 		, u.user_colour
@@ -28,7 +28,7 @@ $sql = 'SELECT s.session_user_id
 	GROUP BY u.user_id 
 	ORDER BY lastvisit DESC';
 
-$result = $db->sql_query_limit($sql, 5);
+$result = $db->sql_query_limit($sql, $config['football_display_last_users']);
 $first = true;
 while ($row = $db->sql_fetchrow($result))
 {
@@ -58,7 +58,7 @@ $db->sql_freeresult($result);
 
 // Assign specific vars
 $template->assign_vars(array(
-	'LAST_USERS'			=> sprintf($user->lang['LAST_VISITORS'], 5),
+	'LAST_USERS'			=> sprintf($user->lang['LAST_VISITORS'], $config['football_display_last_users']),
 	'S_DISPLAY_LAST_USERS'	=> $display_last_users,
 	'S_LAST_USERS'			=> true,
 ));

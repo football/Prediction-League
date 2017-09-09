@@ -387,6 +387,7 @@ while ($row = $db->sql_fetchrow($result))
 		);
 	}
 }
+$db->sql_freeresult($result);
 
 $sidename = sprintf($user->lang['RESULTS']);
 switch ($league_info['bet_ko_type'])
@@ -415,12 +416,6 @@ $template->assign_vars(array(
 	'S_SIDENAME' 				=> $sidename,
 	'RESULT_EXPLAIN' 			=> $result_explain,
 	'LABEL_FINALRESULT' 		=> $label_finalresult,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['ALL_BETS']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'table', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['TABLE']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_ALL_BETS']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_TABLE']),
 	'S_FORM_ACTION_RESULT' 		=> $this->helper->route('football_main_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'result')),
 	'S_DATA_RESULTS' 			=> $data_results,
 	'S_USER_IS_MEMBER' 			=> $user_is_member,

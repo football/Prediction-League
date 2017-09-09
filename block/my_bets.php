@@ -314,14 +314,6 @@ $sidename = sprintf($user->lang['MY_BETS']);
 $template->assign_vars(array(
 	'S_DISPLAY_MY_BETS' 		=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> ($config['football_bank']) ? $this->helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)) :
-																$this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> ($config['football_bank']) ? '&lt; ' . sprintf($user->lang['FOOTBALL_BANK']) : 
-																'&lt; ' . sprintf($user->lang['RANK_TOTAL']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'my_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['MY_POINTS']) . ' &gt;',
-	'LEFT_TITLE' 				=> ($config['football_bank']) ? sprintf($user->lang['TITLE_FOOTBALL_BANK']) : sprintf($user->lang['TITLE_RANK_TOTAL']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_MY_POINTS']),
 	'S_DATA_MY_BETS' 			=> $data,
 	'SEASON' 					=> $season,
 	'LEAGUE' 					=> $league,

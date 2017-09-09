@@ -397,6 +397,7 @@ class update_module
 					{
 						$error[] = sprintf($user->lang['MISMATCH_MATCHDAYS'], $row['matchdays']);
 					}
+					$db->sql_freeresult($result);
 					
 					$sql = 'SELECT COUNT(match_no) as matches
 							FROM ' . FOOTB_MATCHES . " 
@@ -414,6 +415,7 @@ class update_module
 					{
 						$error[] = sprintf($user->lang['MISMATCH_MATCHES'], $row['matches']);
 					}
+					$db->sql_freeresult($result);
 					
 					if (!sizeof($error))
 					{
@@ -547,6 +549,7 @@ class update_module
 						$count_updates++;
 						$effected_matchdays = ($effected_matchdays == '') ? $row['matchday'] : $effected_matchdays . ', ' . $row['matchday'];
 					}
+					$db->sql_freeresult($result);
 					if ($effected_matchdays <> '')
 					{
 						$sql = 'REPLACE INTO ' . FOOTB_MATCHDAYS . ' (season, league, matchday, status, delivery_date, delivery_date_2, delivery_date_3, matchday_name, matches)
@@ -591,6 +594,7 @@ class update_module
 						$count_updates++;
 						$effected_matchdays = ($effected_matchdays == '') ? $row['matchday'] : $effected_matchdays . ', ' . $row['matchday'];
 					}
+					$db->sql_freeresult($result);
 					if ($effected_matchdays <> '')
 					{
 						$sql = 'REPLACE INTO ' . FOOTB_MATCHDAYS . ' (season, league, matchday, status, delivery_date, delivery_date_2, delivery_date_3, matchday_name, matches)
@@ -635,6 +639,7 @@ class update_module
 						$count_updates++;
 						$effected_matchdays = ($effected_matchdays == '') ? $row['matchday'] : $effected_matchdays . ', ' . $row['matchday'];
 					}
+					$db->sql_freeresult($result);
 					if ($effected_matchdays <> '')
 					{
 						$sql = 'REPLACE INTO ' . FOOTB_MATCHDAYS . ' (season, league, matchday, status, delivery_date, delivery_date_2, delivery_date_3, matchday_name, matches)
@@ -662,7 +667,7 @@ class update_module
 				}
 					
 				// check status of matchdays
-				$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
+				$local_board_time = time() + ($this->config['football_time_shift'] * 3600); 
 				$sql = $sql = 'UPDATE ' . FOOTB_MATCHDAYS . " AS target 
 						INNER JOIN  
 						( 
@@ -1382,6 +1387,7 @@ class update_module
 				}
 			}
 		}
+		$db->sql_freeresult($result);
 		return $count_updates;
 	}
 

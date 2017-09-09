@@ -468,6 +468,8 @@ while ($row = $db->sql_fetchrow($result))
 		);
 	}
 }
+$db->sql_freeresult($result);
+
 $league_info = league_info($season, $league);
 $bet_explain = '';
 switch ($league_info['bet_ko_type'])
@@ -505,12 +507,6 @@ $template->assign_vars(array(
 	'S_DISPLAY_BET' 			=> true,
 	'S_SIDENAME' 				=> $sidename,
 	'BET_EXPLAIN' 				=> $bet_explain,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'stat_results', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['STAT_RESULTS']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['ALL_BETS']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_STAT_RESULTS']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_ALL_BETS']),
 	'JOIN_LEAGUE'	 			=> ($link_rules == '') ? '' : sprintf($user->lang['JOIN_LEAGUE'], $link_rules),
 	'S_FORM_ACTION_BET' 		=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'bet')),
 	'S_FORM_ACTION_JOIN' 		=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'join')),

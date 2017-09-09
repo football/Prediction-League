@@ -159,7 +159,6 @@ while($row = $db->sql_fetchrow($result))
 		if ($rankof[$row['user_id']] == '')
 		{
 			$change_sign 	= '';
-			$change_img 	= '';
 			$change_differ 	= '&nbsp;';
 		}
 		else
@@ -167,7 +166,6 @@ while($row = $db->sql_fetchrow($result))
 			if ($rankof[$row['user_id']] == $prevrankof[$row['user_id']])
 			{
 				$change_sign 	= '=';
-				$change_img 	= "<img src=\"" . $ext_path . "images/no_change.gif\" alt=\"" . $user->lang['NO_CHANGES'] . "\"/>";
 				$change_differ 	= '&nbsp;';
 			}
 			else
@@ -175,14 +173,12 @@ while($row = $db->sql_fetchrow($result))
 				if ($rankof[$row['user_id']] > $prevrankof[$row['user_id']])
 				{
 					$change_sign 	= '+';
-					$change_img 	= "<img src=\"" . $ext_path . "images/arrow_down.gif\" alt=\"" . $user->lang['WORSENED'] . "\"/>";
 					$differ 		= $rankof[$row['user_id']] - $prevrankof[$row['user_id']];
 					$change_differ 	= ' (' . $differ . ')';
 				}
 				else
 				{
 					$change_sign 	= '-';
-					$change_img 	= "<img src=\"" . $ext_path . "images/arrow_up.gif\" alt=\""	. $user->lang['IMPROVED'] . "\"/>";
 					$differ 		= $prevrankof[$row['user_id']] - $rankof[$row['user_id']];
 					$change_differ 	= ' (' . $differ . ')';
 				}
@@ -192,7 +188,6 @@ while($row = $db->sql_fetchrow($result))
 	else
 	{
 			$change_sign 	= '';
-			$change_img 	= '';
 			$change_differ 	= '&nbsp;';
 	}
 
@@ -228,8 +223,10 @@ while($row = $db->sql_fetchrow($result))
 	$template->assign_block_vars('rankstotal', array(
 		'ROW_CLASS' 	=> $row_class,
 		'RANK' 			=> $rankof[$row['user_id']],
+		'NO_CHANGES'	=> ($change_sign == '=') ? true : false,
+		'WORSENED'		=> ($change_sign == '-') ? true : false,
+		'IMPROVED'		=> ($change_sign == '+') ? true : false,
 		'CHANGE_SIGN' 	=> $change_sign,
-		'CHANGE_IMG' 	=> $change_img,
 		'CHANGE_DIFFER'	=> $change_differ,
 		'USERID' 		=> $row['user_id'],
 		'USERNAME' 		=> $row['username'],
@@ -254,12 +251,6 @@ $template->assign_vars(array(
 	'S_DISPLAY_HITS02'			=> $config['football_win_hits02'],
 	'S_SIDENAME' 				=> $sidename,
 	'S_WIN' 					=> ($league_info['win_matchday'] == '0') ? false : true,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'table', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['TABLE']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['RANK_TOTAL']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_TABLE']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_TOTAL']),
 	'S_DATA_RANKS' 				=> $data_ranks,
 	'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
 	'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),

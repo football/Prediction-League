@@ -184,6 +184,7 @@ class bank_module
 									AND points_type IN (" . POINTS_MATCHDAY . ',' . POINTS_SEASON . ',' . POINTS_MOST_HITS . ',' . POINTS_MOST_HITS_AWAY . ')';
 							$result = $db->sql_query($sql);
 							$count_updates += $db->sql_affectedrows();
+							$db->sql_freeresult($result);
 						}
 						else
 						{
@@ -199,6 +200,7 @@ class bank_module
 									HAVING win > 0";
 							$result = $db->sql_query($sql);
 							$points_ary = $db->sql_fetchrowset($result);
+							$db->sql_freeresult($result);
 							if (!$default_matchday)
 							{
 								$matchday = (curr_matchday($season, $league) > 0) ? curr_matchday($season, $league) : 1;
@@ -351,6 +353,7 @@ class bank_module
 								AND points_type = $type";
 						$result = $db->sql_query($sql);
 						$count_updates += $db->sql_affectedrows();
+						$db->sql_freeresult($result);
 					}
 					$back_link =  $this->u_action . '&amp;action=list&amp;s=' . $season . '&amp;l=' . $league . '&amp;t=' . $type . '&amp;start=' . $start;
 					trigger_error(sprintf($user->lang['LEAGUE_' . $points_var . ($count_updates == 1 ? '' : 'S')], $count_updates) . adm_back_link($back_link));

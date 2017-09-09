@@ -121,7 +121,7 @@ if( !$result_bets = $db->sql_query($sql_bets) )
 }
 $rows_bets = $db->sql_fetchrowset($result_bets);
 $count_bets = sizeof($rows_bets);
-$db->sql_freeresult($result_results);
+$db->sql_freeresult($result_bets);
 $column = array();
 $lastcolumn = 0;
 $last_match_num = 0;

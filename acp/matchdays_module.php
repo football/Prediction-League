@@ -323,6 +323,7 @@ class matchdays_module
 					ORDER BY matchday ASC, number ASC";
 				$result = $db->sql_query($sql);
 				$rows_matchdays = $db->sql_fetchrowset($result);
+				$db->sql_freeresult($result);
 				$row_number = 0;
 				foreach ($rows_matchdays as $row_matchday)
 				{
@@ -710,7 +711,7 @@ class matchdays_module
 						if ($data['dday1_day'] <> '--' and $data['dday1_month'] <> '--' and $data['dday1_year'] <> '--')
 						{
 							$delivery_timestamp = mktime($data['dday1_hour'], $data['dday1_min'], 0, $data['dday1_month'], $data['dday1_day'], $data['dday1_year']);
-							$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
+							$local_board_time = time() + ($this->config['football_time_shift'] * 3600); 
 							if ($delivery_timestamp > $local_board_time AND $matchday_row['status'] == 0)
 							{
 								// check if delivery is before all open matches 
@@ -764,6 +765,7 @@ class matchdays_module
 									// reopen matchday
 									$matchday_row['status'] = 0;
 								}
+								$db->sql_freeresult($result);
 							}
 						}
 						else

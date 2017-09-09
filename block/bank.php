@@ -221,12 +221,6 @@ $template->assign_vars(array(
 	'S_SIDENAME' 				=> $sidename,
 	'S_MULTI_VIEW' 				=> $multi_view,
 	'L_TOTAL_ENTRIES'			=> ($count == 1) ? $count . ' ' .sprintf($user->lang['FOOTBALL_RECORD']) : $count . ' ' .sprintf($user->lang['FOOTBALL_RECORDS']),
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['RANK_TOTAL']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['MY_BETS']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_TOTAL']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_MY_BETS']),
 	'USERNAME' 					=> $username,
 	'POINTS'					=> $config['football_win_name'],	
 	)

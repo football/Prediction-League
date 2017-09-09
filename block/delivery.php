@@ -15,7 +15,7 @@ $data_delivery = false;
 $user_id = $user->data['user_id'];
 $lang_dates = $user->lang['datetime'];
 $index = 0;
-$local_board_time = time() + (($config['board_timezone'] - $config['football_host_timezone']) * 3600); 
+$local_board_time = time() + ($config['football_time_shift'] * 3600); 
 $sql = "SELECT 
 			m.season, 
 			m.league, 

@@ -192,7 +192,7 @@ class results_module
 		{
 			trigger_error(sprintf($user->lang['NO_MATCHDAY'], $league_info['league_name'], $season) . adm_back_link($this->u_action . "&amp;s=$season&amp;l=$league"), E_USER_WARNING);
 		}
-		$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
+		$local_board_time = time() + ($this->config['football_time_shift'] * 3600); 
 	
 		// Which page?
 		switch ($action)
@@ -382,6 +382,7 @@ class results_module
 						}
 					}
 				}
+				$db->sql_freeresult($resultextra);
 				if ($count_extra_updates)
 				{
 					$success[] =  sprintf($user->lang['EXTRA_RESULT' . (($count_extra_updates == 1) ? '' : 'S') . '_SAVED'], $count_extra_updates);
@@ -768,6 +769,7 @@ class results_module
 				);
 			}
 		}
+		$db->sql_freeresult($result);
 		
 		switch ($league_info['bet_ko_type'])
 		{

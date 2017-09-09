@@ -126,13 +126,14 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 			{
 				$matchday_status = 2;
 			}
+			$db->sql_freeresult($result);
 		}
 		
 		if ($matchday_status == 0 OR $matchday_status == 1)
 		{
 			// No matches played, so we can delete the ranking
 			$sql = 'DELETE FROM ' . FOOTB_RANKS . " WHERE season = $season AND league = $league AND matchday = $matchday";
-			$result = $db->sql_query($sql);
+			$db->sql_query($sql);
 		}
 		else
 		{
@@ -280,7 +281,7 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 								,0
 								,0
 								)";
-				$result = $db->sql_query($sql);
+				$db->sql_query($sql);
 			}
 			if ( sizeof($ranking_ary) == 0 )
 			{
@@ -288,7 +289,7 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 						WHERE season = $season 
 							AND league = $league 
 							AND matchday = $matchday";
-				$result = $db->sql_query($sql);
+				$db->sql_query($sql);
 			}
 			else
 			{
@@ -389,7 +390,7 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 							points_total = $points_total, 
 							win_total = $win_total 
 							WHERE season = $season AND league = $league AND matchday = $matchday AND user_id = $curr_userid";
-					$result = $db->sql_query($sql);
+					$db->sql_query($sql);
 				}
 			}
 		}
@@ -427,9 +428,9 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 		$result = $db->sql_query($sql);
 		if ( $next_matchday = (int) $db->sql_fetchfield('matchday'))
 		{
-			$db->sql_freeresult($result);
 			save_ranking_matchday($season, $league, $next_matchday, $cash);			
 		}
+		$db->sql_freeresult($result);
 	}
 }
 
@@ -480,7 +481,7 @@ function rollback_points($points_type, $season, $league, $matchday, $cash)
 	
 	}
 	$sql = 'DELETE FROM ' . FOOTB_POINTS . " WHERE season = $season AND league = $league AND matchday = $matchday AND points_type = $points_type";
-	$result = $db->sql_query($sql);
+	$db->sql_query($sql);
 }
 
 function set_footb_points($points_type, $season, $league, $matchday, $wins, $cash) 
@@ -897,7 +898,7 @@ function set_bet_in_time_delivery($season, $league)
 			'goals_overtime_home'	=> '',
 			'goals_overtime_guest'	=> '',
 		);
-		$local_board_time = time() + (($config['board_timezone'] - $config['football_host_timezone']) * 3600); 
+		$local_board_time = time() + ($config['football_time_shift'] * 3600); 
 		$sql = 'UPDATE ' . FOOTB_MATCHES . '
 			SET ' . $db->sql_build_array('UPDATE', $sql_ary) . "
 			WHERE season = $season AND league = $league AND matchday =" . $row['matchday'] . " AND match_datetime > FROM_UNIXTIME('$local_board_time')";
@@ -1166,7 +1167,7 @@ function close_open_matchdays()
 {
 	global $db, $lang, $config;
 
-	$local_board_time = time() + (($config['board_timezone'] - $config['football_host_timezone']) * 3600); 
+	$local_board_time = time() + ($config['football_time_shift'] * 3600); 
 	$sql = 'SELECT * FROM ' . FOOTB_MATCHDAYS . " WHERE status = 0 AND delivery_date < FROM_UNIXTIME('$local_board_time')";
 	$result = $db->sql_query($sql);
 	$toclose = $db->sql_fetchrowset($result);

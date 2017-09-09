@@ -112,11 +112,11 @@ else
 				$row_class = (!($rank % 2)) ? 'bg1 row_light' : 'bg2 row_dark';
 				if ($row['team_symbol'] <> '')
 				{
-					$logo = "<img src=\"" . $ext_path . 'images/flags/' . $row['team_symbol'] . "\" alt=\"" . $row['team_symbol'] . "\" width=\"28\" height=\"28\"/>" ;
+					$logo = "<img src=\"" . $ext_path . 'images/flags/' . $row['team_symbol'] . "\" alt=\"" . $row['team_symbol'] . "\" width=\"20\" height=\"20\"/>" ;
 				}
 				else
 				{
-					$logo = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"28\" height=\"28\"/>" ;
+					$logo = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"20\" height=\"20\"/>" ;
 				}
 				  
 				$template->assign_block_vars('side_total', array(

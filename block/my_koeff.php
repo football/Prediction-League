@@ -98,7 +98,6 @@ else
 	$split_after = $count_matches; 
 	$splits = 1;
 }
-$db->sql_freeresult($result);
 
 // Make sure $start is set to the last page if it exceeds the amount
 if ($start < 0 || $start >= $total_users)
@@ -192,7 +191,7 @@ foreach ($matches AS $match)
 					$total = 0;
 				}	
 				$bet_index++;
-				$total += $user_bet['points'];
+				$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 				if ($user_bet['status'] < 1 && !$config['football_view_bets'])
 				{
 					// hide bets
@@ -310,7 +309,7 @@ if ($count_matches > 0)
 			$total = 0;
 		}	
 		$bet_index++;
-		$total += $user_bet['points'];
+		$total += ($user_bet['points'] == '') ? 0 : $user_bet['points'];
 		if ($user_bet['status'] < 1)
 		{
 			if ($user_bet['bet_home'] == '')
@@ -376,12 +375,6 @@ $sidename = sprintf($user->lang['MY_KOEFF']);
 $template->assign_vars(array(
 	'S_DISPLAY_MY_KOEFF' 		=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'my_chart', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['MY_CHART']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'stat_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['STAT_POINTS']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_MY_CHART']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_STAT_POINTS']),
 	'S_MATCHES_ON_MATCHDAY' 	=> $matches_on_matchday,
 	'S_SPALTEN' 				=> ($count_matches * 2) + 2,
 	'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),

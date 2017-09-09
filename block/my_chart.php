@@ -36,6 +36,7 @@ $sql = 'SELECT
 	
 $result = $db->sql_query($sql);
 $current_ranks = $db->sql_fetchrowset($result);
+$db->sql_freeresult($result);
 $total_users = sizeof($current_ranks);
 if ($total_users > 3 AND $total_users <= 50)
 {
@@ -317,12 +318,6 @@ $sidename = sprintf($user->lang['MY_CHART']);
 $template->assign_vars(array(
 	'S_DISPLAY_MY_CHART' 		=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'my_rank', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['MY_RANK']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'my_koeff', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['MY_KOEFF']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_MY_RANKS']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_MY_KOEFF']),
 	'S_DATA_MY_CHART' 			=> $data,
 	'SEASON' 					=> $season,
 	'LEAGUE' 					=> $league,

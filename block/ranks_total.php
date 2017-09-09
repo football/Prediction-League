@@ -157,7 +157,6 @@ switch ($mode)
 			}
 			$index++;
 		}
-		$db->sql_freeresult($result);
 
 		$sidename = sprintf($user->lang['RANK_TOTAL']);
 		$league_info = league_info($season, $league);
@@ -166,13 +165,6 @@ switch ($mode)
 			'S_DISPLAY_HITS02'			=> $config['football_win_hits02'],
 			'S_DATA_RANKS' 				=> $data_ranks,
 			'S_SIDENAME' 				=> $sidename,
-			'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['RANK_MATCHDAY']),
-			'U_RIGHT' 					=> ($config['football_bank']) ? $this->helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)) : 
-																		$this->helper->route('football_main_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'RIGHT_LINK' 				=> ($config['football_bank']) ? sprintf($user->lang['FOOTBALL_BANK']) . ' &gt;' : sprintf($user->lang['MY_BETS']) . ' &gt;',
-			'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_MATCHDAY']),
-			'RIGHT_TITLE' 				=> ($config['football_bank']) ? sprintf($user->lang['TITLE_FOOTBALL_BANK']) : sprintf($user->lang['TITLE_MY_BETS']),
 			'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
 			'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),
 			'S_WIN' 					=> false,
@@ -328,7 +320,6 @@ switch ($mode)
 			}
 			$index++;
 		}
-		$db->sql_freeresult($result);
 
 		$sidename = sprintf($user->lang['RANK_TOTAL']);
 		$league_info = league_info($season, $league);
@@ -337,13 +328,6 @@ switch ($mode)
 			'S_DISPLAY_HITS02'			=> $config['football_win_hits02'],
 			'S_DATA_RANKS' 				=> $data_ranks,
 			'S_SIDENAME' 				=> $sidename,
-			'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['RANK_MATCHDAY']),
-			'U_RIGHT' 					=> ($config['football_bank']) ? $this->helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)) : 
-																		$this->helper->route('football_main_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'RIGHT_LINK' 				=> ($config['football_bank']) ? sprintf($user->lang['FOOTBALL_BANK']) . ' &gt;' : sprintf($user->lang['MY_BETS']) . ' &gt;',
-			'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_MATCHDAY']),
-			'RIGHT_TITLE' 				=> ($config['football_bank']) ? sprintf($user->lang['TITLE_FOOTBALL_BANK']) : sprintf($user->lang['TITLE_MY_BETS']),
 			'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
 			'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),
 			'S_WIN' 					=> ($league_info['win_matchday'] == '0' and $league_info['win_season'] == '0') ? false : ($this->auth->acl_gets('a_')) ? true : false,
@@ -492,7 +476,6 @@ switch ($mode)
 					if ($rank == $prev_rank_of[$curr_rank['user_id']])
 					{
 						$change_sign 	= '=';
-						$change_img 	= "<img src=\"" . $ext_path . "images/no_change.gif\" alt=\"" . $user->lang['NO_CHANGES'] . "\"/>";
 						$change_differ 	= '';
 					}
 					else
@@ -500,14 +483,12 @@ switch ($mode)
 						if ($rank > $prev_rank_of[$curr_rank['user_id']])
 						{
 							$change_sign 	= '+';
-							$change_img 	= "<img src=\"" . $ext_path . "images/arrow_down.gif\" alt=\"" . $user->lang['WORSENED'] . "\"/>";
 							$differ 		= $rank - $prev_rank_of[$curr_rank['user_id']];
 							$change_differ 	= ' (' . $differ . ')';
 						}
 						else
 						{
 							$change_sign 	= '-';
-							$change_img 	= "<img src=\"" . $ext_path . "images/arrow_up.gif\" alt=\""	. $user->lang['IMPROVED'] . "\"/>";
 							$differ 		= $prev_rank_of[$curr_rank['user_id']] - $rank;
 							$change_differ 	= ' (' . $differ . ')';
 						}
@@ -516,7 +497,6 @@ switch ($mode)
 				else
 				{
 					$change_sign 	= '';
-					$change_img 	= '';
 					$change_differ 	= '';
 				}
 
@@ -539,8 +519,10 @@ switch ($mode)
 				$template->assign_block_vars('rankstotal', array(
 					'ROW_CLASS' 	=> $row_class,
 					'RANK' 			=> $rank,
+					'NO_CHANGES'	=> ($change_sign == '=') ? true : false,
+					'WORSENED'		=> ($change_sign == '-') ? true : false,
+					'IMPROVED'		=> ($change_sign == '+') ? true : false,
 					'CHANGE_SIGN' 	=> $change_sign,
-					'CHANGE_IMG' 	=> $change_img,
 					'CHANGE_DIFFER'	=> $change_differ,
 					'USERID' 		=> $curr_rank['user_id'],
 					'USERNAME' 		=> $curr_rank['username'],
@@ -558,7 +540,6 @@ switch ($mode)
 			}
 			$index++;
 		}
-		$db->sql_freeresult($result);
 
 		$sidename = sprintf($user->lang['RANK_TOTAL']);
 		$league_info = league_info($season, $league);
@@ -567,13 +548,6 @@ switch ($mode)
 			'S_DISPLAY_HITS02'			=> $config['football_win_hits02'],
 			'S_DATA_RANKS' 				=> $data_ranks,
 			'S_SIDENAME' 				=> $sidename,
-			'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['RANK_MATCHDAY']),
-			'U_RIGHT' 					=> ($config['football_bank']) ? $this->helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)) :
-																		$this->helper->route('football_main_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'RIGHT_LINK' 				=> ($config['football_bank']) ? sprintf($user->lang['FOOTBALL_BANK']) . ' &gt;' : sprintf($user->lang['MY_BETS']) . ' &gt;',
-			'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_MATCHDAY']),
-			'RIGHT_TITLE' 				=> ($config['football_bank']) ? sprintf($user->lang['TITLE_FOOTBALL_BANK']) : sprintf($user->lang['TITLE_MY_BETS']),
 			'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
 			'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),
 			'S_WIN' 					=> ($league_info['win_matchday'] == '0' and $league_info['win_season'] == '0') ? false : true,

@@ -10,16 +10,15 @@
 <!-- IF S_FOOTBALL_HEADER_ENABLED -->
 <style>
 @media screen and (min-width: 700px){
-	.site_logo {
+	.imageset.site_logo {
 		background-image: url({S_FOOTBALL_EXT_PATH}images/site_logo.gif);
 		padding-left: 0px;
 		padding-top: 0px;
-		height: 52px;
-		width: 52px;
+		height: 75px;
+		width: 75px;
 	}
 	.headerbar 	{
-		background: url({S_FOOTBALL_EXT_PATH}styles/prosilver/theme/images/header{S_FOOTBALL_HEADER_LEAGUE}.gif) 300px 5px no-repeat,
-		url({S_FOOTBALL_EXT_PATH}styles/prosilver/theme/images/header.jpg) 0px 0px;
+		background: url({S_FOOTBALL_EXT_PATH}styles/prosilver/theme/images/header{S_FOOTBALL_HEADER_LEAGUE}.jpg) 0px 0px no-repeat;
 		background-color: #12A3EB;
 		margin-bottom: 4px;
 		width: auto;
@@ -27,3 +26,11 @@
 }
 </style>
 <!-- ENDIF -->
+<style>
+@media screen and (max-width: 700px){
+	li.tab i.icon {
+		display: none;
+	}
+
+}
+</style>

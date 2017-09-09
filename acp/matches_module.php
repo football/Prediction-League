@@ -413,7 +413,7 @@ class matches_module
 						if ($data['mday_day'] <> '--' and $data['mday_month'] <> '--' and $data['mday_year'] <> '--')
 						{
 							$match_timestamp = mktime($data['mday_hour'], $data['mday_min'], 0, $data['mday_month'], $data['mday_day'], $data['mday_year']);
-							$local_board_time = time() + (($this->config['board_timezone'] - $this->config['football_host_timezone']) * 3600); 
+							$local_board_time = time() + ($this->config['football_time_shift'] * 3600); 
 							if ($match_timestamp > $local_board_time AND $match_row['status'] < 3 AND $league_info['bet_in_time'] == 1)
 							{
 								// Bet in time and match moved to future
@@ -627,7 +627,7 @@ class matches_module
 					$selected_home = ($home_id && $row['team_id'] == $home_id) ? ' selected="selected"' : '';
 					$team_home_options .= '<option value="' . $row['group_id'] . ';' . $row['team_id'] .'"' . $selected_home . '>' . $row['team_name'] . '</option>';
 				}
-
+				$db->sql_freeresult($result);
 				$u_back = $this->u_action . "&amp;s=$season&amp;l=$league&amp;m=$matchday";
 
 				$template->assign_vars(array(

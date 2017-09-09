@@ -153,7 +153,6 @@ class leagues_module
 					$result = $db->sql_query($sql);
 					if (!($row = $db->sql_fetchrow($result)))
 					{
-						$db->sql_freeresult($result);
 						trigger_error($user->lang['NO_MEMBERS_SELECTED'] . adm_back_link($this->u_action . "&amp;action=list&amp;s=$season&amp;l=$league"), E_USER_WARNING);
 					}
 

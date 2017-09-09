@@ -347,6 +347,7 @@ while ($row = $db->sql_fetchrow($result))
 		)
 	);
 }
+$db->sql_freeresult($result);
 
 $sidename = sprintf($user->lang['BET']);
 if ($data_bet)

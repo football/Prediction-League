@@ -16,44 +16,40 @@
 		<div id="football-center" style="margin: 0 {FOOTBALL_RIGHT_COLUMN}px 0 {FOOTBALL_LEFT_COLUMN}px; padding: 0 4px;">
 		<div id="tabs" class="tabs" style="margin-top: 0px;  margin-left: 5px;">
 			<ul>
-				<li class="tab <!-- IF S_DISPLAY_BET -->activetab<!-- ENDIF --> small-icon icon-bet"><a href="{U_BET}"><span>{L_BET}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_ALL_BETS -->activetab<!-- ENDIF --> small-icon icon-allbets"><a href="{U_ALL_BETS}"><span>{L_ALL_BETS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_RESULTS -->activetab<!-- ENDIF --> small-icon icon-results"><a href="{U_RESULTS}"><span>{L_RESULTS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_RANKS_MATCHDAY -->activetab<!-- ENDIF --> small-icon icon-rank"><a href="{U_RANKS_MATCHDAY}"><span>{L_RANK_MATCHDAY}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_RANKS_TOTAL -->activetab<!-- ENDIF --> small-icon icon-rank"><a href="{U_RANKS_TOTAL}"><span>{L_RANK_TOTAL}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_TABLE -->activetab<!-- ENDIF --> small-icon icon-list"><a href="{U_TABLE}"><span>{L_TABLE}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_BANK -->activetab<!-- ENDIF --> small-icon icon-points"><a href="{U_FOOTBALL_BANK}"><span>{L_FOOTBALL_BANK}</span></a></li>
-				<li class="tab small-icon icon-rules"><a href="{U_RULES}" target="popup" onclick="popup('{U_RULES}', 625,625);return false;"><span>{L_RULES}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_ODDS -->activetab<!-- ENDIF --> small-icon icon-odds"><a href="{U_ODDS}"><span>{L_ODDS}</span></a></li>
-				<li class="tab  small-icon icon-print"><a href="{U_PRINT_FOOTBALL}" accesskey="d" target="_blank"><span>{L_PRINT_FOOTBALL}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_BET -->activetab<!-- ENDIF -->"><a href="{U_BET}"><span><i class="icon fa-futbol-o fa-fw"></i>{L_BET}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_ALL_BETS -->activetab<!-- ENDIF -->"><a href="{U_ALL_BETS}"><span><i class="icon fa-group fa-fw"></i>{L_ALL_BETS}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_RESULTS -->activetab<!-- ENDIF -->"><a href="{U_RESULTS}"><span><i class="icon fa-check-square-o fa-fw"></i>{L_RESULTS}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_RANKS_MATCHDAY -->activetab<!-- ENDIF -->"><a href="{U_RANKS_MATCHDAY}"><span><i class="icon fa-trophy fa-fw"></i>{L_RANK_MATCHDAY}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_RANKS_TOTAL -->activetab<!-- ENDIF -->"><a href="{U_RANKS_TOTAL}"><span><i class="icon fa-trophy fa-fw"></i>{L_RANK_TOTAL}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_TABLE -->activetab<!-- ENDIF -->"><a href="{U_TABLE}"><span><i class="icon fa-list-ol fa-fw"></i>{L_TABLE}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_BANK -->activetab<!-- ENDIF -->"><a href="{U_FOOTBALL_BANK}"><span><i class="icon fa-bank fa-fw"></i>{L_FOOTBALL_BANK}</span></a></li>
+				<li class="tab"><a href="{U_RULES}" target="popup" onclick="popup('{U_RULES}', 625,625);return false;"><span><i class="icon fa-paragraph fa-fw"></i>{L_RULES}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_ODDS -->activetab<!-- ENDIF -->"><a href="{U_ODDS}"><span><i class="icon fa-line-chart fa-fw"></i>{L_ODDS}</span></a></li>
+				<li class="tab"><a href="{U_PRINT_FOOTBALL}" accesskey="d" target="_blank"><span><i class="icon fa-print fa-fw"></i>{L_PRINT_FOOTBALL}</span></a></li>
 				<!-- IF S_MENU_LINK1-->
-				<li class="tab small-icon icon-xml"><a href="{U_MENU_LINK1}" target="_blank"><span>{MENU_DESC_LINK1}</span></a></li>
+				<li class="tab"><a href="{U_MENU_LINK1}" target="_blank"><span><i class="icon fa-external-link fa-fw"></i>{MENU_DESC_LINK1}</span></a></li>
 				<!-- ENDIF -->
 				<!-- IF S_MENU_LINK2-->
-				<li class="tab small-icon icon-xml"><a href="{U_MENU_LINK2}" target="_blank"><span>{MENU_DESC_LINK2}</span></a></li>
+				<li class="tab"><a href="{U_MENU_LINK2}" target="_blank"><span><i class="icon fa-external-link fa-fw"></i>{MENU_DESC_LINK2}</span></a></li>
 				<!-- ENDIF -->
 				<!-- IF S_MENU_LINK3-->
-				<li class="tab small-icon icon-xml"><a href="{U_MENU_LINK3}" target="_blank"><span>{MENU_DESC_LINK3}</span></a></li>
+				<li class="tab"><a href="{U_MENU_LINK3}" target="_blank"><span><i class="icon fa-external-link fa-fw"></i>{MENU_DESC_LINK3}</span></a></li>
 				<!-- ENDIF -->
-				<li class="tab <!-- IF S_DISPLAY_MY_BETS -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_BETS}"><span>{L_MY_BETS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_MY_POINTS -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_POINTS}"><span>{L_MY_POINTS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_MY_TABLE -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_TABLE}"><span>{L_MY_TABLE}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_MY_RANK -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_RANK}"><span>{L_MY_RANK}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_MY_CHART -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_CHART}"><span>{L_MY_CHART}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_MY_KOEFF -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_MY_KOEFF}"><span>{L_MY_KOEFF}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_STAT_POINTS -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_STAT_POINTS}"><span>{L_STAT_POINTS}</span></a></li>
-				<li class="tab <!-- IF S_DISPLAY_STAT_RESULTS -->activetab<!-- ENDIF --> small-icon icon-statistics"><a href="{U_STAT_RESULTS}"><span>{L_STAT_RESULTS}</span></a></li>
-				<li class="tab small-icon icon-download"><a href="{U_EXPORT}"><span>{L_EXPORT}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_BETS -->activetab<!-- ENDIF -->"><a href="{U_MY_BETS}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_BETS}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_POINTS -->activetab<!-- ENDIF -->"><a href="{U_MY_POINTS}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_POINTS}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_TABLE -->activetab<!-- ENDIF -->"><a href="{U_MY_TABLE}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_TABLE}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_RANK -->activetab<!-- ENDIF -->"><a href="{U_MY_RANK}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_RANK}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_CHART -->activetab<!-- ENDIF -->"><a href="{U_MY_CHART}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_CHART}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_MY_KOEFF -->activetab<!-- ENDIF -->"><a href="{U_MY_KOEFF}"><span><i class="icon fa-area-chart fa-fw"></i>{L_MY_KOEFF}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_STAT_POINTS -->activetab<!-- ENDIF -->"><a href="{U_STAT_POINTS}"><span><i class="icon fa-area-chart fa-fw"></i>{L_STAT_POINTS}</span></a></li>
+				<li class="tab <!-- IF S_DISPLAY_STAT_RESULTS -->activetab<!-- ENDIF -->"><a href="{U_STAT_RESULTS}"><span><i class="icon fa-area-chart fa-fw"></i>{L_STAT_RESULTS}</span></a></li>
+				<li class="tab"><a href="{U_EXPORT}"><span><i class="icon fa-file-excel-o fa-fw"></i>{L_EXPORT}</span></a></li>
 			</ul>
 		</div>
 
 		<div class="panel">
-			<!-- IF S_FOOTBALL_TABS --> 
-			<div class="left-box football-h3" style="margin-left:5px; width:35%"><a title="{LEFT_TITLE}" href="{U_LEFT}">{LEFT_LINK}</a></div>
-				<div class="right-box football-h3" style="margin-right:5px; width:35%"><a title="{RIGHT_TITLE}" href="{U_RIGHT}">{RIGHT_LINK}</a></div>
-				<div style="display:inline; text-align:center;"><div ><H3>{S_SIDENAME} <a href="{U_PRINT_FOOTBALL}" title="{L_PRINT_FOOTBALL}" accesskey="p" class="football_print" style="vertical-align: top;"></a></H3></div></div>
-			<!-- ENDIF -->
-			<div class="navbar football_bg">
+			<div class="navbar football_nav">
+				<div>
 				<!-- IF .form_season -->
 					<form style="display:inline; margin:0; padding:0;" action="{S_FORMSELF}" method="post">
 					<div style="float:left;">
@@ -84,7 +80,7 @@
 				<!-- IF .form_matchday and not S_MATCHDAY_HIDE -->
 					<div style="float:left;">
 						<!-- IF S_PREV_LINK -->
-						<a class="prev_matchday" title="{L_SHOW_PREV}" href="{S_PREV_LINK}"></a>
+						<a title="{L_SHOW_PREV}" href="{S_PREV_LINK}"><i class="icon fa-minus-square fa-fw" style="line-height: 2em; text-align: right;"></i></a>
 						<!-- ELSE -->
 							&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- ENDIF -->
@@ -104,7 +100,7 @@
 					</form>
 					<div style="float:left;">
 						<!-- IF S_NEXT_LINK -->
-						<a class="next_matchday" title="{L_SHOW_NEXT}" href="{S_NEXT_LINK}"></a>
+						<a title="{L_SHOW_NEXT}" href="{S_NEXT_LINK}"><i class="icon fa-plus-square fa-fw" style="line-height: 2em;"></i></a>
 						<!-- ELSE -->
 							&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- ENDIF -->
@@ -114,6 +110,7 @@
 						{S_DELIVERY}
 					</div>
 				<!-- ENDIF -->
+				</div>
 			</div>
 
 			<!-- IF S_DISPLAY_UNDER_CONSTRUCTION -->
@@ -213,6 +210,9 @@
 		<!-- IF S_DISPLAY_RANK_TOTAL -->
 			<!-- INCLUDE rank_total.html -->
 		<!-- ENDIF -->
+	<!-- IF S_DISPLAY_LAST_RESULTS -->
+		<!-- INCLUDE last_results.html -->
+	<!-- ENDIF -->
 	</div>
 <!-- [-] right block area -->
 	<br class="football-clear" />

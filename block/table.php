@@ -429,12 +429,6 @@ $sidename = sprintf($user->lang['TABLE']);
 $template->assign_vars(array(
 	'S_DISPLAY_TABLE' 			=> true,
 	'S_SIDENAME' 				=> $sidename,
-	'U_LEFT' 					=> $this->helper->route('football_main_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'LEFT_LINK' 				=> '&lt; ' . sprintf($user->lang['RESULTS']),
-	'U_RIGHT' 					=> $this->helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
-	'RIGHT_LINK' 				=> sprintf($user->lang['RANK_MATCHDAY']) . ' &gt;',
-	'LEFT_TITLE' 				=> sprintf($user->lang['TITLE_RESULTS']),
-	'RIGHT_TITLE' 				=> sprintf($user->lang['TITLE_RANK_MATCHDAY']),
 	'S_DATA_TABLE' 				=> $data_table,
 	'S_DATA_FORM' 				=> $data_form,
 	'SEASON' 					=> $season,

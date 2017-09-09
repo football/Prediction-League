@@ -107,7 +107,7 @@ class football_module
 						'football_header_enable'	=> array('lang' => 'FOOTBALL_HEADER_ENABLE','validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),
 						'football_guest_view'		=> array('lang' => 'GUEST_VIEW',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),
 						'football_user_view'		=> array('lang' => 'USER_VIEW',			'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),
-						'football_host_timezone'	=> array('lang' => 'HOST_TIMEZONE',		'validate' => 'string',	'type' => 'select', 'function' => 'phpbb_timezone_select', 'params' => array($template, $user, '{CONFIG_VALUE}', true), 'explain' => true),
+						'football_time_shift'		=> array('lang' => 'TIME_SHIFT',		'validate' => 'int',	'type' => 'select', 'method' => 'time_shift_select', 'params' => array('{CONFIG_VALUE}', false), 'explain' => true),
 						'football_info_display'		=> array('lang' => 'FOOTBALL_INFO',		'validate' => 'bool',	'type' => 'custom', 'method' => 'football_info', 'explain' => true),
 						'football_info'				=> false,
 						'football_win_name'			=> array('lang' => 'WIN_NAME',			'validate' => 'string',	'type' => 'text:6:6', 'explain' => true),
@@ -120,6 +120,8 @@ class football_module
 						'legend2'				=> 'GENERAL_SETTINGS',
 						'football_left_column_width'	=> array('lang' => 'LEFT_COLUMN',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
 						'football_right_column_width'	=> array('lang' => 'RIGHT_COLUMN',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
+						'football_display_last_users'	=> array('lang' => 'DISPLAY_LAST_USERS', 'validate' => 'int','type' => 'text:3:3', 'explain' => true),
+						'football_display_last_results'	=> array('lang' => 'DISPLAY_LAST_RESULTS', 'validate' => 'int','type' => 'text:3:3', 'explain' => true),
 						'football_display_ranks'		=> array('lang' => 'DISPLAY_RANKS',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
 						'football_users_per_page'		=> array('lang' => 'USERS_PAGE',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
 
@@ -362,7 +364,7 @@ class football_module
 	}
 
 	/**
-	* Adjust Cronjob EMail remember next un
+	* Adjust Cronjob EMail remember next run
 	*/
 	function next_run($value, $key = '')
 	{
@@ -419,6 +421,18 @@ class football_module
 			$year_options . ' ' . $user->lang['HOURS'] . ': ' . $hour_options . ' ' . $user->lang['MINUTES'] . ': ' . $minute_options;
 
 	}
+
+	function time_shift_select($default = 0)
+	{
+		$time_shift_options = "";
+		for ($i = -23; $i < 24; $i++)
+		{
+			$selected = ($i == $default) ? ' selected="selected"' : '';
+			$time_shift_options .= '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+		}
+		return $time_shift_options;
+	}
+
 }
 
 ?>

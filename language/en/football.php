@@ -185,6 +185,7 @@ $lang = array_merge($lang, array(
 	'LAST_GAMES'						=> 'The last matches',
 	'LAST_GAMES_AWAY'					=> 'The last away matches',
 	'LAST_GAMES_HOME'					=> 'The last home matches',
+	'LAST_RESULTS'						=> 'Last results',
 	'LAST_VISITORS'						=> 'Last %s visitors',
 	'LEAGUE'							=> 'League',
 	'LINK_PREDICTION_LEAGUE'			=> 'To the WebtTip',

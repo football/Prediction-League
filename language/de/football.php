@@ -193,6 +193,7 @@ $lang = array_merge($lang, array(
 	'LAST_GAMES'					=> 'Die letzten Spiele',
 	'LAST_GAMES_AWAY'				=> 'Die letzten Auswärtsspiele',
 	'LAST_GAMES_HOME'				=> 'Die letzten Heimspiele',
+	'LAST_RESULTS'					=> 'Die letzten Ergebnisse',
 	'LAST_VISITORS'					=> 'Die letzten %s Besuche',
 	'LEAGUE'						=> 'Liga',
 	'LINK_PREDICTION_LEAGUE'		=> 'Zur Tipprunde',

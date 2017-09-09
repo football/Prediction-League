@@ -91,6 +91,10 @@ else
 			$data_last_home = false;
 			$data_last_away = false;
 			$form_from = $matchday-5;
+			$percent_home = 0;
+			$percent_draw = 0;
+			$percent_guest = 0;
+			$stat_hist = '';
 			$value_h = 0;
 			$value_g = 0;
 			$value_hg = 0;
@@ -115,7 +119,6 @@ else
 				{
 					$logo[$home_id] = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"28\" height=\"28\"/>" ;
 				}
-				$db->sql_freeresult($result);
 			}
 			else
 			{
@@ -142,7 +145,6 @@ else
 				{
 					$logo[$guest_id] = "<img src=\"" . $ext_path . "images/flags/blank.gif\" alt=\"\" width=\"28\" height=\"28\"/>" ;
 				}
-				$db->sql_freeresult($result);
 			}
 			else
 			{
@@ -245,7 +247,6 @@ else
 						)
 					);
 				}
-				$db->sql_freeresult($result);
 
 				// Statistic and forecast-points for historie 
 				$sql = "SELECT
@@ -322,10 +323,6 @@ else
 					}
 				}
 				
-				$stat_hist = '';
-				$percent_home = 0;
-				$percent_draw = 0;
-				$percent_guest = 0;
 				if (sizeof($row))
 				{
 					if ($history_count <= 2)
@@ -1003,7 +1000,6 @@ else
 					);
 				}
 			}
-			$db->sql_freeresult($result);
 
 			//last matches home hometeam
 			$sql = '(SELECT
@@ -1074,7 +1070,6 @@ else
 					);
 				}
 			}
-			$db->sql_freeresult($result);
 			
 			//last game guestteam
 			$sql = "(SELECT
@@ -1158,7 +1153,6 @@ else
 					);
 				}
 			}
-			$db->sql_freeresult($result);
 
 			//last matches away guestteam
 			$sql = '(SELECT
@@ -1226,7 +1220,6 @@ else
 					);
 				}
 			}
-			$db->sql_freeresult($result);
 			
 			if ($history_count == 0 and !($data_home and $data_guest))
 			{
@@ -1266,7 +1259,7 @@ else
 			$sql = 'UPDATE ' . FOOTB_MATCHES . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . "
 				WHERE season = $season AND league = $league AND match_no = $matchnumber";
 			$result = $db->sql_query($sql);
-
+			$db->sql_freeresult($result);
 			
 			
 			$forecast_value = 0;

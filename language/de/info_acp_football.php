@@ -48,6 +48,10 @@ $lang = array_merge($lang, array(
 
 	'DISABLE_FOOTBALL'					=> 'Tipprunde deaktivieren',
 	'DISABLE_FOOTBALL_EXPLAIN'			=> 'Hiermit sperrst du die Tipprunde für alle Benutzer. Wenn du möchtest, kannst du eine kurze Nachricht (bis zu 255 Zeichen) angeben. ',
+	'DISPLAY_LAST_USERS'				=> 'Anzahl anzuzeigender letzter Besucher des Forums',
+	'DISPLAY_LAST_USERS_EXPLAIN'		=> 'Limitiert die Anzeige der letzten Besucher im selbigen Tipprunden-Block. Mit 0 wird die Anzeige des Blocks unterdrückt. ',
+	'DISPLAY_LAST_RESULTS'				=> 'Anzahl maximal anzuzeigender letzter Spielergebnisse',
+	'DISPLAY_LAST_RESULTS_EXPLAIN'		=> 'Limitiert die Anzeige der letzten Spielergebnisse im selbigen Tipprunden-Block. Finden mehr Spiele am letzten Tag statt, werden alle Ergebnisse dieses Tages angezeigt. Mit 0 wird die Anzeige des Blocks unterdrückt. ',
 	'DISPLAY_RANKS'						=> 'Anzahl angezeigter Tipper in den Übersichts-Ranglisten',
 	'DISPLAY_RANKS_EXPLAIN'				=> 'Limitiert die Anzeige der Spieltags- und Gesamtrangliste in der Hauptansicht. Die eigene Platzierung wird ggf. unten angehängt. ',
 
@@ -75,8 +79,8 @@ $lang = array_merge($lang, array(
 	'USER_VIEW'							=> 'Tipprunde nur für Teilnehmer sichtbar',
 	'USER_VIEW_EXPLAIN'					=> 'Soll die Tipprunde nur für Tipprunden-Teilnehmer sichtbar sein?',
 
-	'HOST_TIMEZONE'						=> 'Host Zeitzone',
-	'HOST_TIMEZONE_EXPLAIN'				=> 'Differenz zur Board Zeitzone wenn dein Host in einer anderen Zeitzone steht, damit die Tippabgabe korrekt funktioniert. ',
+	'TIME_SHIFT'						=> 'Zeitverschiebung',
+	'TIME_SHIFT_EXPLAIN'				=> 'Differenz in Stunden zur Board Zeitzone wenn dein Host in einer anderen Zeitzone steht, damit die Tippabgabe korrekt funktioniert. ',
 
 	'LEFT_COLUMN'						=> 'Spaltenbreite Links in Pixeln',
 	'LEFT_COLUMN_EXPLAIN'				=> 'Optimale Breite 180 Pixel. Dieser Wert sollte nicht unterschritten werden. ',

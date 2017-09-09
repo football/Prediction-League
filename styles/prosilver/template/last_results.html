@@ -1,0 +1,13 @@
+<!-- IF S_DATA_LAST_RESULTS -->
+<div class="panel">	<h3><i class="icon fa-check-square-o fa-fw"></i>{L_LAST_RESULTS}</h3>
+	<!-- BEGIN last_results -->
+		<div style="text-align:center;" class="{last_results.COLOR_STYLE}" title="{last_results.LEAGUE_NAME}: {last_results.MATCH_TIME}"
+			onclick="location.href='{last_results.U_RESULTS_LINK}'">
+			{last_results.LOGO_HOME} {last_results.GOALS_HOME}:{last_results.GOALS_GUEST} {last_results.LOGO_GUEST}
+		</div> 
+		<!-- IF last_results.KOGOALS_HOME != '- ' -->
+		<div style="text-align:center;">({last_results.KOGOALS_HOME}:{last_results.KOGOALS_GUEST})</div> 
+		<!-- ENDIF -->
+		<div style="text-align:center;">{last_results.HOME_SHORT} - {last_results.GUEST_SHORT}</div><hr />
+	<!-- END last_results --></div>
+<!-- ENDIF -->		

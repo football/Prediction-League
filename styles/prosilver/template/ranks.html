@@ -49,7 +49,12 @@
 						onclick="window.location.href='{rankstotal.U_PROFILE}';">
 					<td class="td_rank">{rankstotal.RANK}</td>
 					<!-- IF not S_HEADER -->
-					<td><!-- IF S_VIEW == 'print' -->{rankstotal.CHANGE_SIGN}<!-- ELSE -->{rankstotal.CHANGE_IMG}<!-- ENDIF -->{rankstotal.CHANGE_DIFFER}</td>
+					<td><!-- IF S_VIEW == 'print' -->{rankstotal.CHANGE_SIGN}
+						<!-- ELSE -->	<!-- IF rankstotal.WORSENED -->	<i class="icon fa-arrow-down fa-fw icon-red" aria-hidden="true"></i><!-- ENDIF -->
+										<!-- IF rankstotal.NO_CHANGES --><i class="icon fa-circle fa-fw icon-gray" aria-hidden="true"></i><!-- ENDIF -->
+										<!-- IF rankstotal.IMPROVED --><i class="icon fa-arrow-up fa-fw icon-green" aria-hidden="true"></i><!-- ENDIF -->
+						<!-- ENDIF -->{rankstotal.CHANGE_DIFFER}
+					</td>
 					<!-- ENDIF -->
 					<td class="td_name">{rankstotal.USERNAME}</td>
 					<!-- IF S_LINK_RANKING <> '' and S_LINK_ALL_TIME <> '' -->

@@ -49,6 +49,7 @@ else
 			trigger_error('NO_SEASON');
 		}
 		$user_rows = $db->sql_fetchrowset($result);
+		$db->sql_freeresult($result);
 		$export_file = $season. '_bank.csv';
 		$newline = "\r\n";
 		header('Pragma: no-cache');

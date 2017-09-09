@@ -325,6 +325,7 @@ class bets_module
 							}
 						}
 					}
+					$db->sql_freeresult($resultopen);
 					if ($count_updates > 0)
 					{
 						if ($same AND ($count_matches > 6) AND $this->config['football_same_allowed'] == 0)
@@ -358,7 +359,6 @@ class bets_module
 					{
 						$success[] = sprintf($user->lang['NO_BETS_SAVED']);
 					}
-					$db->sql_freeresult($resultopen);
 
 					// extra bets
 					$sql = 'SELECT * FROM ' . FOOTB_EXTRA . " WHERE season = $season AND league = $league  AND matchday = $matchday";
@@ -418,6 +418,7 @@ class bets_module
 							}
 						}
 					}
+					$db->sql_freeresult($resultextra);
 					if ($count_extra_updates)
 					{
 						$success[] = sprintf($user->lang['EXTRA_BET' . (($count_extra_updates == 1) ? '' : 'S') . '_SAVED'], $count_extra_updates);
@@ -582,7 +583,8 @@ class bets_module
 				)
 			);
 		}
-		
+		$db->sql_freeresult($resultopen);
+
 		// Calculate extra bets of matchday
 		// Start select team
 		$sql = 'SELECT 
