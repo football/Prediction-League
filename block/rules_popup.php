@@ -173,6 +173,7 @@ if ($data_rules)
 		'S_SIDENAME' 		=> $sidename,
 		'S_DATA_RULES'		=> $data_rules,
 		'S_BET_IN_TIME'		=> $league_info['bet_in_time'],
+		'S_BET_POINTS'		=> true,
 		'S_RULES_POST_ID'	=> $league_info['rules_post_id'],
 		'S_ERROR_MESSAGE'	=> $error_message,
 		'S_FOOTBALL_COPY' 	=> sprintf($user->lang['FOOTBALL_COPY'], $config['football_version'], $phpbb_root_path . 'football/'),
@@ -186,6 +187,7 @@ if ($data_rules)
 		'LINK_RULES'	 	=> sprintf($user->lang['LINK_RULES'], $link_rules),
 		'SEASONNAME'	 	=> $season_info['season_name'],
 		'LEAGUENAME'	 	=> $league_name,
+		'BET_POINTS'	 	=> $league_info['bet_points'],
 		)
 	);
 
@@ -198,6 +200,7 @@ else
 		'S_SIDENAME' 		=> $sidename,
 		'S_DATA_RULES'		=> $data_rules,
 		'S_BET_IN_TIME'		=> false,
+		'S_BET_POINTS'		=> false,
 		'S_RULES_POST_ID'	=> 0,
 		'S_ERROR_MESSAGE'	=> $error_message,
 		'S_FOOTBALL_COPY' 	=> sprintf($user->lang['FOOTBALL_COPY'], $config['football_version'], $phpbb_root_path . 'football/'),
@@ -223,5 +226,3 @@ $template->set_filenames(array(
 //	$template->display('popup');
 
 page_footer();
-
-?>

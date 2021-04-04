@@ -415,7 +415,7 @@ class extra_module
 
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
 			'S_SEASON'			=> $season,
 			'S_LEAGUE'			=> $league,
 			'S_SEASON_OPTIONS'	=> $season_options,
@@ -456,4 +456,3 @@ class extra_module
 		}
 	}
 }
-?>

@@ -12,102 +12,102 @@ services:
     football.football.controller:
         class: football\football\controller\main
         arguments:
-            - @auth
-            - @config
-            - @ext.manager
-            - @notification_manager
-            - @log
-            - @path_helper
-            - @dbal.conn           
-            - @controller.helper
-            - @template
-            - @user
-            - @pagination
-            - %core.root_path% 
-            - %core.php_ext%	
+            - '@auth'
+            - '@config'
+            - '@ext.manager'
+            - '@notification_manager'
+            - '@log'
+            - '@path_helper'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@pagination'
+            - '%core.root_path%'
+            - '%core.php_ext%'
             
     football.football.controller_popup:
         class: football\football\controller\popup
         arguments:
-            - @auth
-            - @config
-            - @ext.manager
-            - @path_helper
-            - @dbal.conn           
-            - @controller.helper
-            - @template
-            - @user
-            - @pagination
-            - %core.root_path% 
-            - %core.php_ext%	
+            - '@auth'
+            - '@config'
+            - '@ext.manager'
+            - '@path_helper'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@pagination'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     football.football.controller_download:
         class: football\football\controller\download
         arguments:
-            - @auth
-            - @config
-            - @ext.manager
-            - @path_helper
-            - @dbal.conn           
-            - @controller.helper
-            - @template
-            - @user
-            - %core.root_path% 
-            - %core.php_ext%	
+            - '@auth'
+            - '@config'
+            - '@ext.manager'
+            - '@path_helper'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     football.football.version.check:
         class: football\football\includes\version_check
         scope: prototype
         arguments:
-            - %football.version_data%
-            - @config
-            - @version_helper
-            - @template
-            - @user
+            - '%football.version_data%'
+            - '@config'
+            - '@version_helper'
+            - '@template'
+            - '@user'
 
     football.football.controller_xml:
         class: football\football\controller\xmlplan
         arguments:
-            - @config
-            - @ext.manager
-            - @path_helper
-            - @dbal.conn
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@ext.manager'
+            - '@path_helper'
+            - '@dbal.conn'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     football.football.core.functions.points:
         class: football\football\core\functions_points
         arguments:
-            - @user
-            - @dbal.conn
+            - '@user'
+            - '@dbal.conn'
 
     football.football.listener:
         class: football\football\event\main_listener
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - @template
-            - @path_helper
-            - @ext.manager
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@path_helper'
+            - '@ext.manager'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }            
 
     football.football.cron.task.football_remember:
         class: football\football\cron\task\football_remember
         arguments:
-            - %core.root_path%
-            - %core.php_ext%
-            - @ext.manager
-            - @path_helper
-            - @dbal.conn
-            - @config
-            - @log
-            - @user
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@ext.manager'
+            - '@path_helper'
+            - '@dbal.conn'
+            - '@config'
+            - '@log'
+            - '@user'
         calls:
             - [set_name, [football.football.cron.task.football_remember]]
         tags:

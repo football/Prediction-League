@@ -39,7 +39,7 @@ switch ($mode)
 				WHERE b.league = $league 
 					AND ((b.season < $season) OR (b.season = $season AND m.matchday <= $matchday))
 					AND m.status IN (2,3) 
-				GROUP BY user_id";
+				GROUP BY b.user_id";
 
 		$result = $db->sql_query($sql);
 		$rows = $db->sql_fetchrowset($result);
@@ -61,7 +61,7 @@ switch ($mode)
 				WHERE r.league = $league 
 					AND ((r.season < $season AND r.matchday = l.matchdays) OR (r.season = $season AND r.matchday = $matchday))
 					AND r.status IN (2,3) 
-				GROUP BY user_id
+				GROUP BY r.user_id
 				ORDER BY r.user_id ASC";
 				
 		$result = $db->sql_query($sql);
@@ -89,7 +89,7 @@ switch ($mode)
 				WHERE r.league = $league 
 					AND ((r.season < $season) OR (r.season = $season AND r.matchday <= $matchday))
 					AND r.status IN (2,3) 
-				GROUP BY user_id
+				GROUP BY r.user_id
 				ORDER BY points_total DESC, LOWER(u.username) ASC";
 				
 		$result = $db->sql_query($sql);
@@ -114,7 +114,7 @@ switch ($mode)
 		$index_end = $index_start + $config['football_users_per_page'] - 1;
 
 		// handle pagination.
-		$base_url = $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime'));
+		$base_url = $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime'));
 		$pagination = $phpbb_container->get('pagination');
 		$pagination->generate_template_pagination($base_url, 'pagination', 'start', $total_users, $this->config['football_users_per_page'], $start);
 
@@ -171,9 +171,9 @@ switch ($mode)
 			'WIN_NAME' 					=> $config['football_win_name'],
 			'S_SHOW_OTHER_LINKS'		=> true,
 			'S_HEADER'					=> sprintf($user->lang['RANKING_ALL_TIME']),
-			'S_LINK_RANKING'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'S_LINK_RANKING'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'S_LINK_ALL_TIME'			=> '',
-			'S_LINK_COMPARE'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare')),
+			'S_LINK_COMPARE'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare')),
 			)
 		);
 	break;
@@ -227,8 +227,8 @@ switch ($mode)
 					AND r.league = $league 
 					AND r.matchday = $matchday
 					AND r.status IN (2,3) 
-				GROUP BY season, user_id
-				ORDER BY r.user_id ASC, season ASC";
+				GROUP BY r.season, r.user_id
+				ORDER BY r.user_id ASC, r.season ASC";
 				
 		$result = $db->sql_query($sql);
 
@@ -275,7 +275,7 @@ switch ($mode)
 		$index_end = $index_start + $config['football_users_per_page'] - 1;
 
 		// handle pagination.
-		$base_url = $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare'));
+		$base_url = $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare'));
 		$pagination = $phpbb_container->get('pagination');
 		$pagination->generate_template_pagination($base_url, 'pagination', 'start', $total_users, $this->config['football_users_per_page'], $start);
 
@@ -334,8 +334,8 @@ switch ($mode)
 			'WIN_NAME' 					=> $config['football_win_name'],
 			'S_SHOW_OTHER_LINKS'		=> true,
 			'S_HEADER'					=> sprintf($user->lang['RANKING_COMPARE']),
-			'S_LINK_RANKING'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
-			'S_LINK_ALL_TIME'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime')),
+			'S_LINK_RANKING'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'S_LINK_ALL_TIME'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime')),
 			'S_LINK_COMPARE'			=> '',
 			)
 		);
@@ -369,7 +369,7 @@ switch ($mode)
 					AND b.league = $league 
 					AND m.status IN (2,3) 
 					AND m.matchday <= $matchday
-				GROUP BY user_id";
+				GROUP BY b.user_id";
 
 		$result = $db->sql_query($sql);
 		$rows = $db->sql_fetchrowset($result);
@@ -423,7 +423,7 @@ switch ($mode)
 					AND r.league = $league 
 					AND r.matchday = $matchday 
 					AND r.status IN (2,3)
-				GROUP BY user_id
+				GROUP BY r.user_id
 				ORDER BY r.points_total DESC, LOWER(u.username) ASC";
 				
 		$result = $db->sql_query($sql);
@@ -447,7 +447,7 @@ switch ($mode)
 		$index_end = $index_start + $config['football_users_per_page'] - 1;
 
 		// handle pagination.
-		$base_url = $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday));
+		$base_url = $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday));
 		$pagination = $phpbb_container->get('pagination');
 		if ($user->data['football_mobile'])
 		{
@@ -520,8 +520,8 @@ switch ($mode)
 					'ROW_CLASS' 	=> $row_class,
 					'RANK' 			=> $rank,
 					'NO_CHANGES'	=> ($change_sign == '=') ? true : false,
-					'WORSENED'		=> ($change_sign == '-') ? true : false,
-					'IMPROVED'		=> ($change_sign == '+') ? true : false,
+					'WORSENED'		=> ($change_sign == '+') ? true : false,
+					'IMPROVED'		=> ($change_sign == '-') ? true : false,
 					'CHANGE_SIGN' 	=> $change_sign,
 					'CHANGE_DIFFER'	=> $change_differ,
 					'USERID' 		=> $curr_rank['user_id'],
@@ -554,11 +554,9 @@ switch ($mode)
 			'WIN_NAME' 					=> $config['football_win_name'],
 			'S_SHOW_OTHER_LINKS'		=> true,
 			'S_LINK_RANKING'			=> '',
-			'S_LINK_ALL_TIME'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime')),
-			'S_LINK_COMPARE'			=> $this->helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare')),
+			'S_LINK_ALL_TIME'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'alltime')),
+			'S_LINK_COMPARE'			=> $this->helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday, 'mode' => 'compare')),
 			)
 		);
 	break;
 }
-
-?>

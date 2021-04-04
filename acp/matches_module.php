@@ -124,12 +124,12 @@ class matches_module
 				$league_options .= '<option value="' . $row['league'] . '"' . $selected . '>' . $row['league_name'] . '</option>';
 				if ($selected <> '')
 				{
-					$league_info 	    = $row;
-					$league_matchdays 	= $row['matchdays'];
-					$matches_matchday 	= $row['matches_on_matchday'];
-					$league_name 		= $row['league_name'];
-					$league_type 		= $row['league_type'];
-					$ko_league 			= ($row['league_type'] == LEAGUE_KO) ? true : false;
+					$league_info		= $row;
+					$league_matchdays	= $row['matchdays'];
+					$matches_matchday	= $row['matches_on_matchday'];
+					$league_name		= $row['league_name'];
+					$league_type		= $row['league_type'];
+					$ko_league			= ($row['league_type'] == LEAGUE_KO) ? true : false;
 				}
 			}
 			$db->sql_freeresult($result);
@@ -387,17 +387,17 @@ class matches_module
 							trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action . "&amp;s=$season&amp;l=$league&amp;m=$matchday"), E_USER_WARNING);
 						}
 						
-						$match_row['status'] 		= utf8_normalize_nfc($this->request->variable('match_status', '', true));
-						$match_row['odd_1'] 		= round($this->request->variable('odd_1', $match_row['odd_1']),2);
-						$match_row['odd_x'] 		= round($this->request->variable('odd_x', $match_row['odd_x']),2);
-						$match_row['odd_2'] 		= round($this->request->variable('odd_2', $match_row['odd_2']),2);
-						$match_row['rating'] 		= round($this->request->variable('rating', $match_row['rating']),2);
-						$match_row['team_id_home'] 	= utf8_normalize_nfc($this->request->variable('team_home', '', true));
+						$match_row['status']		= utf8_normalize_nfc($this->request->variable('match_status', '', true));
+						$match_row['odd_1']			= round($this->request->variable('odd_1', $match_row['odd_1']),2);
+						$match_row['odd_x']			= round($this->request->variable('odd_x', $match_row['odd_x']),2);
+						$match_row['odd_2']			= round($this->request->variable('odd_2', $match_row['odd_2']),2);
+						$match_row['rating']		= round($this->request->variable('rating', $match_row['rating']),2);
+						$match_row['team_id_home']	= utf8_normalize_nfc($this->request->variable('team_home', '', true));
 						$match_row['team_id_guest'] = utf8_normalize_nfc($this->request->variable('team_guest', '', true));
-						$match_row['formula_home'] 	= utf8_normalize_nfc($this->request->variable('formula_home', '', true));
+						$match_row['formula_home']	= utf8_normalize_nfc($this->request->variable('formula_home', '', true));
 						$match_row['formula_guest'] = utf8_normalize_nfc($this->request->variable('formula_guest', '', true));
-						$match_row['ko_match'] 		= $this->request->variable('match_ko', false);
-						$match_row['group_id'] 		= ($this->request->variable('group_match', false)) ? utf8_normalize_nfc($this->request->variable('match_group', '', true)) : '';
+						$match_row['ko_match']		= $this->request->variable('match_ko', false);
+						$match_row['group_id']		= ($this->request->variable('group_match', false)) ? utf8_normalize_nfc($this->request->variable('match_group', '', true)) : '';
 						
 						if ($match_row['team_id_home'] <> '')
 						{
@@ -717,7 +717,7 @@ class matches_module
 
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'U_FOOTBALL'		=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'S_SEASON'			=> $season,
 			'S_LEAGUE'			=> $league,
 			'S_KO_LEAGUE'		=> $ko_league,
@@ -761,5 +761,3 @@ class matches_module
 		}
 	}
 }
-
-?>

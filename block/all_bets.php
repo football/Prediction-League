@@ -94,7 +94,7 @@ $sql_limit = $config['football_users_per_page'] * $count_matches;
 
 // If we've got a hightlight set pass it on to pagination.
 // handle pagination.
-$base_url = $this->helper->route('football_main_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday));
+$base_url = $this->helper->route('football_football_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday));
 $pagination = $phpbb_container->get('pagination');
 if ($user->data['football_mobile'])
 {
@@ -492,4 +492,3 @@ $template->assign_vars(array(
 	'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),
 	)
 );
-?>

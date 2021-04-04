@@ -81,6 +81,7 @@ $lang = array_merge($lang, array(
 	'INSERT_TEAMS'							=> 'Insert new teams',
 	'LEAGUE_SHORTCUT'						=> 'League shortcut',
 	'LOAD'									=> 'load',
+	'LOG_FOOTB_UPDATE'						=> '<strong>Football Prediction League fixure list update</strong><br />» %s',
 	'MAP_TEAMS'								=> 'Map teams',
 	'MATCH_OF_GROUP'						=> 'Match on group',
 	'MATCHES'								=> 'Matches',

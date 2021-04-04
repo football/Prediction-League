@@ -1,4 +1,4 @@
-football_main_controller:
+football_football_controller:
     path: /football/{side}
     defaults: { _controller: football.football.controller:handle }
 

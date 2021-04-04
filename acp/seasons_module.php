@@ -335,6 +335,7 @@ class seasons_module
 					'SEASON_SHORT'		=> $season_row['season_name_short'],
 					'U_BACK'			=> $u_back,
 					'U_ACTION'			=> "{$this->u_action}&amp;action=$action&amp;s=$season",
+					'S_VERSION_NO'		=> $this->config['football_version'],
 					)
 				);
 				return;
@@ -343,7 +344,7 @@ class seasons_module
 
 		$template->assign_vars(array(
 			'U_ACTION'		=> $this->u_action,
-			'U_FOOTBALL' 				=> $helper->route('football_main_controller',array('side' => 'bet')),
+			'U_FOOTBALL' 				=> $helper->route('football_football_controller',array('side' => 'bet')),
 			'S_SEASON_ADD'	=> true,
 			) 
 		);
@@ -356,8 +357,8 @@ class seasons_module
 				COUNT(l.league) AS leagues
 			FROM ' . FOOTB_SEASONS . ' s
 			LEFT JOIN ' . FOOTB_LEAGUES . ' l on l.season = s.season
-			GROUP BY season
-			ORDER BY season DESC';
+			GROUP BY s.season
+			ORDER BY s.season DESC';
 		$result = $db->sql_query($sql);
 		$rows_seasons = $db->sql_fetchrowset($result);
 		$db->sql_freeresult($result);
@@ -390,5 +391,3 @@ class seasons_module
 		}
 	}
 }
-
-?>

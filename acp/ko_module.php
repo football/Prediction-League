@@ -230,7 +230,7 @@ class ko_module
 
 		$template->assign_vars(array(
 			'U_ACTION'				=> $this->u_action,
-			'U_FOOTBALL' 			=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
+			'U_FOOTBALL' 			=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
 			'S_ERROR'				=> (sizeof($error)) ? true : false,
 			'ERROR_MSG'				=> (sizeof($error)) ? implode('<br />', $error) : '',
 			'S_SUCCESS'				=> (sizeof($success)) ? true : false,
@@ -252,4 +252,3 @@ class ko_module
 		);
 	}
 }
-?>

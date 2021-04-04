@@ -39,7 +39,7 @@ class popup
 	/* @var \phpbb\user */
 	protected $user;
 	
-	/** @var \phpbb\pagination */
+	/* @var \phpbb\pagination */
 	protected $pagination;
 	
 	/* @var phpBB root path */

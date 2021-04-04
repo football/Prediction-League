@@ -129,7 +129,7 @@ class main_listener implements EventSubscriberInterface
 				}
 				else
 				{
-					$event['location_url'] = $this->controller_helper->route('football_main_controller', array_merge(array('side' => $url_parts['base']), $url_parts['params']));
+					$event['location_url'] = $this->controller_helper->route('football_football_controller', array_merge(array('side' => $url_parts['base']), $url_parts['params']));
 				}
 				$db->sql_freeresult($result);
 			}
@@ -137,7 +137,7 @@ class main_listener implements EventSubscriberInterface
 			{
 				$event['location'] = $this->user->lang('VIEWING_FOOTBALL' . (empty($url_parts['base']) ? '' : '_' . strtoupper ($url_parts['base'])));
 			}
-			$event['location_url'] = $this->controller_helper->route('football_main_controller', array_merge(array('side' => $url_parts['base']), $url_parts['params']));
+			$event['location_url'] = $this->controller_helper->route('football_football_controller', array_merge(array('side' => $url_parts['base']), $url_parts['params']));
 		}
 	}
 
@@ -217,19 +217,19 @@ class main_listener implements EventSubscriberInterface
 				'S_FOOTBALL_HEADER_LEAGUE'	 => $league,
 				'S_FOOTBALL_EXT_PATH' => $ext_path,
 				'S_FOOTBALL_HEADER_ENABLED'	 => $this->config['football_header_enable'] ? $in_football_ext : false,
-				'U_FOOTBALL'		=> $this->controller_helper->route('football_main_controller', array('side' => 'bet')),
-				'U_BET'				=> $this->controller_helper->route('football_main_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_ALL_BETS'		=> $this->controller_helper->route('football_main_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_RESULTS'			=> $this->controller_helper->route('football_main_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_TABLE'			=> $this->controller_helper->route('football_main_controller', array('side' => 'table', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_RANKS_TOTAL'		=> $this->controller_helper->route('football_main_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_RANKS_MATCHDAY'	=> $this->controller_helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_DELIVERY_LIST'	=> $this->controller_helper->route('football_main_controller', array('side' => 'delivery', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_LAST_VISITORS'	=> $this->controller_helper->route('football_main_controller', array('side' => 'last_users', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_FOOTBALL_BANK'	=> $this->controller_helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_FOOTBALL'		=> $this->controller_helper->route('football_football_controller', array('side' => 'bet')),
+				'U_BET'				=> $this->controller_helper->route('football_football_controller', array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_ALL_BETS'		=> $this->controller_helper->route('football_football_controller', array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_RESULTS'			=> $this->controller_helper->route('football_football_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_TABLE'			=> $this->controller_helper->route('football_football_controller', array('side' => 'table', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_RANKS_TOTAL'		=> $this->controller_helper->route('football_football_controller', array('side' => 'ranks_total', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_RANKS_MATCHDAY'	=> $this->controller_helper->route('football_football_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_DELIVERY_LIST'	=> $this->controller_helper->route('football_football_controller', array('side' => 'delivery', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_LAST_VISITORS'	=> $this->controller_helper->route('football_football_controller', array('side' => 'last_users', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_FOOTBALL_BANK'	=> $this->controller_helper->route('football_football_controller', array('side' => 'bank', 's' => $season, 'l' => $league, 'm' => $matchday)),
 				'U_RULES'			=> $this->controller_helper->route('football_football_popup', array('popside' => 'rules_popup', 's' => $season, 'l' => $league)),
 				'U_EXPORT'			=> $this->controller_helper->route('football_football_download', array('downside' => 'dload_export', 's' => $season, 'l' => $league)),
-				'U_ODDS'			=> $this->controller_helper->route('football_main_controller', array('side' => 'odds', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_ODDS'			=> $this->controller_helper->route('football_football_controller', array('side' => 'odds', 's' => $season, 'l' => $league, 'm' => $matchday)),
 				'S_MENU_LINK1'		=> (strlen($this->config['football_menu_link1']) > 4) ? true : false,
 				'U_MENU_LINK1'		=> $this->config['football_menu_link1'],
 				'MENU_DESC_LINK1'	=> $this->config['football_menu_desc1'],
@@ -239,14 +239,14 @@ class main_listener implements EventSubscriberInterface
 				'S_MENU_LINK3'		=> (strlen($this->config['football_menu_link3']) > 4) ? true : false,
 				'U_MENU_LINK3'		=> (strpos($this->config['football_menu_link3'], 'xml/league.php') === false) ? $this->config['football_menu_link3'] : $this->config['football_menu_link3'] . "&season=$season&league=$league",
 				'MENU_DESC_LINK3'	=> $this->config['football_menu_desc3'],
-				'U_MY_BETS'			=> $this->controller_helper->route('football_main_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_MY_POINTS'		=> $this->controller_helper->route('football_main_controller', array('side' => 'my_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_MY_TABLE'		=> $this->controller_helper->route('football_main_controller', array('side' => 'my_table', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_MY_RANK'			=> $this->controller_helper->route('football_main_controller', array('side' => 'my_rank', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_MY_CHART'		=> $this->controller_helper->route('football_main_controller', array('side' => 'my_chart', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_MY_KOEFF'		=> $this->controller_helper->route('football_main_controller', array('side' => 'my_koeff', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_STAT_RESULTS'	=> $this->controller_helper->route('football_main_controller', array('side' => 'stat_results', 's' => $season, 'l' => $league, 'm' => $matchday)),
-				'U_STAT_POINTS'		=> $this->controller_helper->route('football_main_controller', array('side' => 'stat_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_BETS'			=> $this->controller_helper->route('football_football_controller', array('side' => 'my_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_POINTS'		=> $this->controller_helper->route('football_football_controller', array('side' => 'my_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_TABLE'		=> $this->controller_helper->route('football_football_controller', array('side' => 'my_table', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_RANK'			=> $this->controller_helper->route('football_football_controller', array('side' => 'my_rank', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_CHART'		=> $this->controller_helper->route('football_football_controller', array('side' => 'my_chart', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_MY_KOEFF'		=> $this->controller_helper->route('football_football_controller', array('side' => 'my_koeff', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_STAT_RESULTS'	=> $this->controller_helper->route('football_football_controller', array('side' => 'stat_results', 's' => $season, 'l' => $league, 'm' => $matchday)),
+				'U_STAT_POINTS'		=> $this->controller_helper->route('football_football_controller', array('side' => 'stat_points', 's' => $season, 'l' => $league, 'm' => $matchday)),
 		));
 	}
 

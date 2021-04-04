@@ -555,7 +555,7 @@ class bank_module
 					'POINTS'			=> $this->config['points_name'],
 					'TARGET'			=> $target,
 					'ACTUAL'			=> $actual,
-					'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bank', 's' => $season, 'l' => $league)),
+					'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bank', 's' => $season, 'l' => $league)),
 					'U_ACTION'			=> $this->u_action . "&amp;s=$season&amp;l=$league",
 					'U_BACK'			=> $this->u_action. "&amp;s=$season&amp;l=$league",
 					)
@@ -593,7 +593,7 @@ class bank_module
 				{
 					$template->assign_block_vars('member', array(
 						'U_USER_EDIT'	=> append_sid("{$phpbb_admin_path}index.$phpEx", "i=users&amp;action=edit&amp;u={$row['user_id']}"),
-						'U_USER_BANK' 	=> $helper->route('football_main_controller',array('side' => 'bank', 's' => $season, 'l' => $league, 'u' => $row['user_id'])),
+						'U_USER_BANK' 	=> $helper->route('football_football_controller',array('side' => 'bank', 's' => $season, 'l' => $league, 'u' => $row['user_id'])),
 						'USERNAME'		=> $row['username'],
 						'POINTS'		=> $functions_points->number_format_points($row['user_points']),
 						'TARGET'		=> $functions_points->number_format_points($row['target']),
@@ -619,7 +619,7 @@ class bank_module
 		
 		$template->assign_vars(array(
 			'U_ACTION'					=> $this->u_action,
-			'U_FOOTBALL' 				=> $helper->route('football_main_controller',array('side' => 'bank', 's' => $season)),
+			'U_FOOTBALL' 				=> $helper->route('football_football_controller',array('side' => 'bank', 's' => $season)),
 			'U_DLOAD_BANK_OPEN' 		=> $helper->route('football_football_download',array('downside' => 'dload_bank_open', 's' => $season)),
 			'S_SEASON'					=> $season,
 			'S_LIST_DEPOSITED'			=> ($this->config['football_ult_points'] == UP_POINTS) ? false : true,
@@ -645,7 +645,7 @@ class bank_module
 			LEFT JOIN ' . FOOTB_POINTS . " AS p ON (p.season = $season AND p.league = l.league)
 			WHERE l.season = $season
 			GROUP BY l.league
-			ORDER BY league ASC";
+			ORDER BY l.league ASC";
 		$result = $db->sql_query($sql);
 		$rows_leagues = $db->sql_fetchrowset($result);
 		$db->sql_freeresult($result);
@@ -670,5 +670,3 @@ class bank_module
 		}
 	}
 }
-
-?>

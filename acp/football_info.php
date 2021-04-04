@@ -20,7 +20,7 @@ class football_info
 			'modes'		=> array(
 				'settings'	=> array('title' => 'ACP_FOOTBALL_SETTINGS', 'auth' => 'acl_a_football_config', 'cat' => array('ACP_FOOTBALL_CONFIGURATION')),
 				'features'	=> array('title' => 'ACP_FOOTBALL_FEATURES', 'auth' => 'acl_a_football_config', 'cat' => array('ACP_FOOTBALL_CONFIGURATION')),
-				'menu'		=> array('title' => 'ACP_FOOTBALL_MENU',     'auth' => 'acl_a_football_config', 'cat' => array('ACP_FOOTBALL_CONFIGURATION')),
+				'menu'		=> array('title' => 'ACP_FOOTBALL_MENU',	 'auth' => 'acl_a_football_config', 'cat' => array('ACP_FOOTBALL_CONFIGURATION')),
 				'userguide'	=> array('title' => 'ACP_FOOTBALL_USERGUIDE','auth' => 'acl_a_football_plan',   'cat' => array('ACP_FOOTBALL_CONFIGURATION')),
 			),
 		);

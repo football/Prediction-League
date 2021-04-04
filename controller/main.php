@@ -45,7 +45,7 @@ class main
 	/* @var \phpbb\user */
 	protected $user;
 	
-	/** @var \phpbb\pagination */
+	/* @var \phpbb\pagination */
 	protected $pagination;
 	
 	/* @var phpBB root path */
@@ -750,18 +750,18 @@ class main
 				INNER JOIN ' . FOOTB_LEAGUES . ' AS l ON (l.season = s.season)
 				INNER JOIN ' . FOOTB_MATCHDAYS . ' AS sp ON (sp.season = s.season AND sp.league = l.league)
 				WHERE 1
-				ORDER BY season DESC';
+				ORDER BY s.season DESC';
 		$result = $db->sql_query($sql);
 		while( $row = $db->sql_fetchrow($result))
 		{
 			$selected = ($season && $row['season'] == $season) ? ' selected="selected"' : '';
 			if ($selected)
 			{
-				$season_name = htmlspecialchars($row['season_name_short']);
+				$season_name = utf8_htmlspecialchars($row['season_name_short']);
 			}
 			$template->assign_block_vars('form_season', array(
-				'S_SEASON' 		=> htmlspecialchars($row['season']),
-				'S_SEASONNAME' 	=> htmlspecialchars($row['season_name_short']),
+				'S_SEASON' 		=> utf8_htmlspecialchars($row['season']),
+				'S_SEASONNAME' 	=> utf8_htmlspecialchars($row['season_name_short']),
 				'S_SELECTED' 	=> $selected));
 		}
 		$db->sql_freeresult($result);
@@ -945,9 +945,9 @@ class main
 		$print_start = ($start) ? "start=$start&amp;" : '';
 		
 		$template->assign_vars(array(
-			'U_PRINT_FOOTBALL'	=> $this->helper->route('football_main_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday, 'view' => 'print')),
-			'U_MOBILE_SWITCH'	=> $this->helper->route('football_main_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'switch')),
-			'U_SIDE_LINK'		=> $this->helper->route('football_main_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'U_PRINT_FOOTBALL'	=> $this->helper->route('football_football_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday, 'view' => 'print')),
+			'U_MOBILE_SWITCH'	=> $this->helper->route('football_football_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'switch')),
+			'U_SIDE_LINK'		=> $this->helper->route('football_football_controller', array('side' => $side, 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'L_TOP_RANKSP' 		=> sprintf($user->lang['RANKING']) . ' ' . $matchday . '. ' . sprintf($user->lang['MATCHDAY']),
 			'L_TOP_RANKGESAMT' 	=> sprintf($user->lang['TOTAL_RANKING']) . ' ' . $matchday . '. ' . sprintf($user->lang['MATCHDAY']),
 			'PHPBB_ROOT_PATH'	=> $this->phpbb_root_path,
@@ -966,13 +966,13 @@ class main
 			'S_SEASON_NAME' 	=> $season_name,
 			'S_LEAGUE_NAME' 	=> $league_name,
 			'S_MATCHDAY_NAME' 	=> $matchday_name,
-			'S_FORMSELF' 		=> $this->helper->route('football_main_controller', array('side' => $side)),
+			'S_FORMSELF' 		=> $this->helper->route('football_football_controller', array('side' => $side)),
 			'S_DELIVERY' 		=> delivery($season, $league, $matchday),
 			// For nav_delivery
 			'S_PREV_LINK' 		=> $prev_link,
 			'S_PREV_CLASS' 		=> $prev_class,
 			'S_PREV_DEADLINE' 	=> $prev_deadline,
-			'S_CURR_LINK' 		=> $this->helper->route('football_main_controller', array('side' => $side, 's' => $season, 'l' => $league)),
+			'S_CURR_LINK' 		=> $this->helper->route('football_football_controller', array('side' => $side, 's' => $season, 'l' => $league)),
 			'S_CURR_MATCHDAY' 	=> $curr_matchday,
 			'S_NEXT_LINK' 		=> $next_link,
 			'S_NEXT_CLASS' 		=> $next_class,

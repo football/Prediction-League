@@ -216,7 +216,7 @@ class matchdays_module
 				$show_delivery_select = false;
 				$show_delivery = true;
 				$lang_dates = $user->lang['datetime'];
-				$sql = "(SELECT md.matchday,
+				$sql = "(SELECT md.matchday AS matchday,
 							1 AS number,
 							md.delivery_date,
 							CASE DATE_FORMAT(md.delivery_date,'%w')
@@ -251,7 +251,7 @@ class matchdays_module
 					AND md.league = agg.league 
 					AND md.matchday = agg.matchday)
 					UNION
-					(SELECT md2.matchday,
+					(SELECT md2.matchday AS matchday,
 							2 AS number,
 							md2.delivery_date_2 AS delivery_date,
 							CASE DATE_FORMAT(md2.delivery_date_2,'%w')
@@ -286,7 +286,7 @@ class matchdays_module
 					AND md2.league = agg2.league 
 					AND md2.matchday = agg2.matchday)
 					UNION
-					(SELECT md3.matchday,
+					(SELECT md3.matchday AS matchday,
 							3 AS number,
 							md3.delivery_date_3 AS delivery_date,
 							CASE DATE_FORMAT(md3.delivery_date_3,'%w')
@@ -1090,7 +1090,7 @@ class matchdays_module
 
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
 			'S_SEASON'			=> $season,
 			'S_LEAGUE'			=> $league,
 			'S_SEASON_OPTIONS'	=> $season_options,
@@ -1131,4 +1131,3 @@ class matchdays_module
 		}
 	}
 }
-?>

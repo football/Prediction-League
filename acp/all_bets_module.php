@@ -62,7 +62,7 @@ class all_bets_module
 		$season		= $this->request->variable('s', 0);
 		$league		= $this->request->variable('l', 0);
 		$matchday	= $this->request->variable('m', 0);
-		$start 		= $this->request->variable('start', 0);
+		$start		= $this->request->variable('start', 0);
 
 		// Grab current season
 		if (!$season)
@@ -118,11 +118,11 @@ class all_bets_module
 				$league_options .= '<option value="' . $row['league'] . '"' . $selected . '>' . $row['league_name'] . '</option>';
 				if ($selected <> '')
 				{
-					$league_matchdays 	= $row['matchdays'];
-					$matches_matchday 	= $row['matches_on_matchday'];
-					$league_name 		= $row['league_name'];
-					$league_type 		= $row['league_type'];
-					$ko_league 			= ($row['league_type'] == LEAGUE_KO) ? true : false;
+					$league_matchdays	= $row['matchdays'];
+					$matches_matchday	= $row['matches_on_matchday'];
+					$league_name		= $row['league_name'];
+					$league_type		= $row['league_type'];
+					$ko_league			= ($row['league_type'] == LEAGUE_KO) ? true : false;
 				}
 			}
 			$db->sql_freeresult($result);
@@ -320,9 +320,9 @@ class all_bets_module
 						
 						$colorstyle_bet = color_style($user_bet['status']);
 						$template->assign_block_vars('match_panel.user_row.bet', array(
-							'BET' 			=> $bet_home. ':'. $bet_guest,
-							'COLOR_STYLE' 	=> $colorstyle_bet,
-							'POINTS' 		=> ($user_bet['points'] == '') ? '&nbsp;' : $user_bet['points'],
+							'BET'			=> $bet_home. ':'. $bet_guest,
+							'COLOR_STYLE'	=> $colorstyle_bet,
+							'POINTS'		=> ($user_bet['points'] == '') ? '&nbsp;' : $user_bet['points'],
 							)
 						);
 
@@ -364,9 +364,9 @@ class all_bets_module
 			}
 			if (0 == $match['hid'])
 			{
-				$home_info 		= get_team($season, $league, $match['match_no'], 'team_id_home', $match['formula_home']);
-				$home_in_array 	= explode("#",$home_info);
-				$homename 		= $home_in_array[3];
+				$home_info		= get_team($season, $league, $match['match_no'], 'team_id_home', $match['formula_home']);
+				$home_in_array	= explode("#",$home_info);
+				$homename		= $home_in_array[3];
 			}
 			else
 			{
@@ -374,9 +374,9 @@ class all_bets_module
 			}
 			if (0 == $match['gid'])
 			{
-				$guest_info 	= get_team($season, $league, $match['match_no'], 'team_id_guest', $match['formula_guest']);
-				$guest_in_array = explode("#",$guest_info);
-				$guestname 		= $guest_in_array[3];
+				$guest_info		= get_team($season, $league, $match['match_no'], 'team_id_guest', $match['formula_guest']);
+				$guest_in_array	= explode("#",$guest_info);
+				$guestname		= $guest_in_array[3];
 			}
 			else
 			{
@@ -384,10 +384,10 @@ class all_bets_module
 			}
 			$colorstyle_match = color_style($match['status']);
 			$template->assign_block_vars('match_panel.match', array(
-				'HOME_NAME' 	=> $homename,
-				'GUEST_NAME' 	=> $guestname,
-				'RESULT' 		=> $match['goals_home']. ':'.$match['goals_guest'],
-				'COLOR_STYLE' 	=> $colorstyle_match,
+				'HOME_NAME'		=> $homename,
+				'GUEST_NAME'	=> $guestname,
+				'RESULT'		=> $match['goals_home']. ':'.$match['goals_guest'],
+				'COLOR_STYLE'	=> $colorstyle_match,
 				)
 			);
 			
@@ -428,9 +428,9 @@ class all_bets_module
 				
 				$colorstyle_bet = color_style($user_bet['status']);
 				$template->assign_block_vars('match_panel.user_row.bet', array(
-					'BET' 			=> $bet_home. ':'. $bet_guest,
-					'COLOR_STYLE' 	=> $colorstyle_bet,
-					'POINTS' 		=> ($user_bet['points'] == '') ? '&nbsp;' : $user_bet['points'],
+					'BET'			=> $bet_home. ':'. $bet_guest,
+					'COLOR_STYLE'	=> $colorstyle_bet,
+					'POINTS'		=> ($user_bet['points'] == '') ? '&nbsp;' : $user_bet['points'],
 					)
 				);
 
@@ -439,8 +439,8 @@ class all_bets_module
 					 $sum_total[$user_bet['username']] += $total;
 					 $matchday_sum_total += $total;
 					 $template->assign_block_vars('match_panel.user_row.points', array(
-						'COLOR_STYLE'    => $colorstyle_total,
-						'POINTS_TOTAL'    => $sum_total[$user_bet['username']],
+						'COLOR_STYLE'	=> $colorstyle_total,
+						'POINTS_TOTAL'	=> $sum_total[$user_bet['username']],
 						)
 					 );
 					 $bet_index = 0;
@@ -448,9 +448,9 @@ class all_bets_module
 			}
 
 			$template->assign_block_vars('match_panel.tendency_footer', array(
-				'S_TOTAL' 		=> true,
-				'COLOR_STYLE' 	=> $colorstyle_total, //currently ignored
-				'SUMTOTAL' 	=> $matchday_sum_total,
+				'S_TOTAL'		=> true,
+				'COLOR_STYLE'	=> $colorstyle_total, //currently ignored
+				'SUMTOTAL'		=> $matchday_sum_total,
 				)
 			);
 			foreach ($matches_tendency AS $match_tendency)
@@ -521,12 +521,12 @@ class all_bets_module
 			$extra_colorstyle = color_style($row['extra_status']);
 
 			$template->assign_block_vars('extra_panel', array(
-				'QUESTION' 			=> $row['question'],
-				'RESULT' 			=> ($display_type == 1) ? $row['result_team'] : $row['result'],
-				'POINTS' 			=> $row['extra_points'],
-				'EVALUATION' 		=> ($row['matchday'] == $row['matchday_eval']) ? sprintf($user->lang['MATCHDAY']) : sprintf($user->lang['TOTAL']),
-				'EVALUATION_TITLE' 	=> $eval_title,
-				'COLOR_STYLE' 		=> $extra_colorstyle,
+				'QUESTION'			=> $row['question'],
+				'RESULT'			=> ($display_type == 1) ? $row['result_team'] : $row['result'],
+				'POINTS'			=> $row['extra_points'],
+				'EVALUATION'		=> ($row['matchday'] == $row['matchday_eval']) ? sprintf($user->lang['MATCHDAY']) : sprintf($user->lang['TOTAL']),
+				'EVALUATION_TITLE'	=> $eval_title,
+				'COLOR_STYLE'		=> $extra_colorstyle,
 				)
 			);
 
@@ -564,11 +564,11 @@ class all_bets_module
 
 				
 				$template->assign_block_vars('extra_panel.user_row', array(
-					'ROW_CLASS' 	=> $row_class,
-					'USER_NAME' 	=> $user_row['username'],
-					'BET' 			=> ($display_type == 1) ? $bet_team : $bet,
-					'BET_POINTS' 	=> $user_row['bet_points'],
-					'COLOR_STYLE' 	=> $extra_colorstyle,
+					'ROW_CLASS'		=> $row_class,
+					'USER_NAME'		=> $user_row['username'],
+					'BET'			=> ($display_type == 1) ? $bet_team : $bet,
+					'BET_POINTS'	=> $user_row['bet_points'],
+					'COLOR_STYLE'	=> $extra_colorstyle,
 					)
 				);
 			}
@@ -579,21 +579,20 @@ class all_bets_module
 		$legend = delivery($season, $league, $matchday);
 
 		$template->assign_vars(array(
-			'U_FOOTBALL' 				=> $helper->route('football_main_controller',array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'U_FOOTBALL'				=> $helper->route('football_football_controller',array('side' => 'all_bets', 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'S_SEASON'					=> $season,
 			'S_LEAGUE'					=> $league,
 			'S_MATCHDAY'				=> $matchday,
 			'S_SEASON_OPTIONS'			=> $season_options,
 			'S_LEAGUE_OPTIONS'			=> $league_options,
 			'S_MATCHDAY_OPTIONS'		=> $matchday_options,
-			'S_DISPLAY_ALL_BETS' 		=> true,
-			'S_MATCHES_ON_MATCHDAY' 	=> $matches_on_matchday,
-			'S_SPALTEN' 				=> ($count_matches * 2)+2,
+			'S_DISPLAY_ALL_BETS'		=> true,
+			'S_MATCHES_ON_MATCHDAY'		=> $matches_on_matchday,
+			'S_SPALTEN'					=> ($count_matches * 2)+2,
 			'S_VERSION_NO'				=> $this->config['football_version'],
 			'TOTAL_USERS'				=> ($total_users == 1) ? $user->lang['VIEW_BET_USER'] : sprintf($user->lang['VIEW_BET_USERS'], $total_users),
-			'PAGE_NUMBER' 				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
+			'PAGE_NUMBER'				=> $pagination->on_page($total_users, $this->config['football_users_per_page'], $start),
 			)
 		);
 	}
 }
-?>

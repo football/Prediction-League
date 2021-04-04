@@ -151,7 +151,7 @@ foreach($points_ary as $group_id => $points)
 				)
 			);
 		}		
-	}     
+	}
 }
 
 $db->sql_freeresult($result);

@@ -43,8 +43,8 @@ $sql = "SELECT
 		LEFT JOIN " . FOOTB_EXTRA . " AS e ON (e.season = m.season AND e.league = m.league AND e.matchday = m.matchday  AND e.extra_status = 0)
 		LEFT JOIN " . FOOTB_EXTRA_BETS . " AS eb ON (eb.season = m.season AND eb.league = m.league AND eb.extra_no = e.extra_no AND eb.user_id = $user_id)
 		WHERE m.status <= 0 
-		GROUP BY delivery, m.league
-		ORDER BY delivery, m.league";
+		GROUP BY m.season, m.league, m.matchday, l.league_name_short, matchday_name, delivery
+		ORDER BY delivery, m.season, m.league";
 	
 $result = $db->sql_query($sql);
 while($row = $db->sql_fetchrow($result) AND $index < 11)
@@ -55,7 +55,7 @@ while($row = $db->sql_fetchrow($result) AND $index < 11)
 		
 	$template->assign_block_vars('delivery', array(
 		'ROW_CLASS' 	=> $row_class,
-		'U_BET_LINK'	=> $this->helper->route('football_main_controller', array('side' => 'bet', 's' =>  $row['season'], 'l' => $row['league'], 'm' => $row['matchday'])),
+		'U_BET_LINK'	=> $this->helper->route('football_football_controller', array('side' => 'bet', 's' =>  $row['season'], 'l' => $row['league'], 'm' => $row['matchday'])),
 		'LEAGUE_SHORT' 	=> $row['league_name_short'],
 		'MATCHDAY_NAME' => $row['matchday_name'],
 		'COLOR'			=> ($row['bets_count'] == $row['matches_count'] && $row['extra_bets_count'] == $row['extra_count']) ? 'green' : 'red',

@@ -17,7 +17,7 @@ $action='';
 
 if (!$season OR !$league)
 {
-	redirect($this->helper->route('football_main_controller', array('side' => 'bet')));
+	redirect($this->helper->route('football_football_controller', array('side' => 'bet')));
 }
 else
 {
@@ -45,8 +45,6 @@ else
 	}
 	else
 	{
-		redirect($this->helper->route('football_main_controller', array('side' => 'bet')));
+		redirect($this->helper->route('football_football_controller', array('side' => 'bet')));
 	}
 }
-
-?>

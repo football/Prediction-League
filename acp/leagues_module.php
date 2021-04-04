@@ -672,7 +672,7 @@ class leagues_module
 
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season)),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season)),
 			'S_SEASON'			=> $season,
 			'S_SEASON_OPTIONS'	=> $season_options,
 			'S_LEAGUE_ADD'		=> true,
@@ -690,8 +690,8 @@ class leagues_module
 			FROM ' . FOOTB_LEAGUES . ' AS l
 			LEFT JOIN ' . FOOTB_BETS . " AS b ON (b.season = l.season AND b.league = l.league)
 			WHERE l.season = $season
-			GROUP BY league
-			ORDER BY league ASC";
+			GROUP BY l.league
+			ORDER BY l.league ASC";
 		$result = $db->sql_query($sql);
 		$rows_leagues = $db->sql_fetchrowset($result);
 		$db->sql_freeresult($result);
@@ -730,4 +730,3 @@ class leagues_module
 		}
 	}
 }
-?>

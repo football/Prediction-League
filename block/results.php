@@ -416,7 +416,7 @@ $template->assign_vars(array(
 	'S_SIDENAME' 				=> $sidename,
 	'RESULT_EXPLAIN' 			=> $result_explain,
 	'LABEL_FINALRESULT' 		=> $label_finalresult,
-	'S_FORM_ACTION_RESULT' 		=> $this->helper->route('football_main_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'result')),
+	'S_FORM_ACTION_RESULT' 		=> $this->helper->route('football_football_controller', array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday, 'action' => 'result')),
 	'S_DATA_RESULTS' 			=> $data_results,
 	'S_USER_IS_MEMBER' 			=> $user_is_member,
 	'S_DISPLAY_GROUP'			=> $display_group,

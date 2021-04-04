@@ -13,12 +13,12 @@
 */
 if (!defined('IN_PHPBB'))
 {
-    exit;
+	exit;
 }
 
 if (empty($lang) || !is_array($lang))
 {
-    $lang = array();
+	$lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -346,6 +346,8 @@ $lang = array_merge($lang, array(
 
 	'SAMESAVED'						=> 'Deine %d OMA-Tipps wurden erfolgreich gespeichert. Ein Tipp wurde automatisch modifiziert. ',
 	'SAVE'							=> 'Speichern',
+	'SAVE_PREDICTION'				=> 'Tipps speichern',
+	'SAVE_RESULTS'					=> 'Ergebnisse speichern',
 	'SCORED'						=> 'Gepunktet',
 	'SEASON'						=> 'Saison',
 	'SEC_LEG_ERROR'					=> 'Rückspiel existiert nicht',
@@ -505,5 +507,3 @@ $lang = array_merge($lang, array(
 	*/
 	'FOOTBALL_COPY'					=> '<a href="http://football.bplaced.net/" title="Zur Demoseite">phpBB Extension - Football Prediction League</a> Version %1s'
 ));
-
-?>

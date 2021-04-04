@@ -145,6 +145,6 @@ function xml_table($season, $league, $table)
 			$xml_table .= "	</" . strtolower($table) . ">" . "\n";
 		}
 	}
+	$db->sql_freeresult($result);
 	return $xml_table;
 }
-?>

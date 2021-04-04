@@ -2,27 +2,27 @@
 <!-- Football Extension by football XSD file v0.9.4 copyright 2016 football.
 	$Id: seasons-data-0.9.4.xsd 1 2016-01-01 11:11:11Z football $ -->
 <xs:schema id="seasons-data" targetNamespace="http://football.bplaced.net/ext/football/football/xml/seasons-data-0.9.4.xsd" xmlns="http://football.bplaced.net/ext/football/football/xml/seasons-data-0.9.4.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:xdt="http://www.w3.org/2005/xpath-datatypes">
-  <xs:element name="seasons-data">
-    <xs:element name="code" type="xsd:string" />
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" name="season">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="season_id" type="xsd:int" />
-              <xs:element name="season_name_short" type="xsd:string" />
-              <xs:element maxOccurs="unbounded" name="league">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="league_id" type="xsd:int" />
-                    <xs:element name="league_name" type="xsd:string" />
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+	<xs:element name="seasons-data">
+		<xs:element name="code" type="xsd:string" />
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" name="season">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="season_id" type="xsd:int" />
+							<xs:element name="season_name_short" type="xsd:string" />
+							<xs:element maxOccurs="unbounded" name="league">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="league_id" type="xsd:int" />
+										<xs:element name="league_name" type="xsd:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

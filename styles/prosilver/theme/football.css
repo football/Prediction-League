@@ -4,8 +4,8 @@
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  * ----------------------------------------------------------------------------------------- */
 .fa-paragraph:before {
-    font-weight: bold;
-    content: '§';
+	font-weight: bold;
+	content: '§';
 }
 
 ul.dropdown-contents i.icon {
@@ -14,8 +14,8 @@ ul.dropdown-contents i.icon {
 }
 
 .football-table-scroll { 
-    overflow-x:auto;
-    overflow-y:visible;
+	overflow-x:auto;
+	overflow-y:visible;
 	width: 100%;
 }
  

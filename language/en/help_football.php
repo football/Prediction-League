@@ -500,4 +500,3 @@ Preliminary results from the update are not used. If these should be taken, this
 updated data within that time anyway, you have to delete the cache to force a new download from the Source.' 
 	),
 )));
-?>

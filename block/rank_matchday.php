@@ -29,7 +29,7 @@ if ($league <> 0)
 			AND r.league = $league 
 			AND r.matchday = $matchday 
 			AND r.status IN (2,3)
-		ORDER BY rank ASC, LOWER(u.username) ASC";
+		ORDER BY r.rank ASC, LOWER(u.username) ASC";
 		
 	$result = $db->sql_query($sql);
 	while($row = $db->sql_fetchrow($result))
@@ -69,4 +69,3 @@ if ($league <> 0)
 		'WIN_NAME' 					=> $config['football_win_name'],
 	));
 }
-?>

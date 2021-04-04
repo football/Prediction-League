@@ -53,7 +53,7 @@ $sql = "SELECT
 		AND b.league = $league 
 		AND m.status IN (2,3) 
 		AND m.matchday = $matchday
-	GROUP BY user_id";
+	GROUP BY b.user_id";
 
 $result = $db->sql_query($sql);
 $usersstats = $db->sql_fetchrowset($result);
@@ -126,7 +126,7 @@ else
 $sql_limit = $config['football_users_per_page'];
 
 // handle pagination.
-$base_url = $this->helper->route('football_main_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday));
+$base_url = $this->helper->route('football_football_controller', array('side' => 'ranks_matchday', 's' => $season, 'l' => $league, 'm' => $matchday));
 $pagination = $phpbb_container->get('pagination');
 $pagination->generate_template_pagination($base_url, 'pagination', 'start', $total_users, $this->config['football_users_per_page'], $start);
 																$data_ranks = false;
@@ -224,8 +224,8 @@ while($row = $db->sql_fetchrow($result))
 		'ROW_CLASS' 	=> $row_class,
 		'RANK' 			=> $rankof[$row['user_id']],
 		'NO_CHANGES'	=> ($change_sign == '=') ? true : false,
-		'WORSENED'		=> ($change_sign == '-') ? true : false,
-		'IMPROVED'		=> ($change_sign == '+') ? true : false,
+		'WORSENED'		=> ($change_sign == '+') ? true : false,
+		'IMPROVED'		=> ($change_sign == '-') ? true : false,
 		'CHANGE_SIGN' 	=> $change_sign,
 		'CHANGE_DIFFER'	=> $change_differ,
 		'USERID' 		=> $row['user_id'],
@@ -257,5 +257,3 @@ $template->assign_vars(array(
 	'WIN_NAME' 					=> $config['football_win_name'],
 	)
 );
-
-?>

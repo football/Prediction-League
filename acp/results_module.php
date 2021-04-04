@@ -793,7 +793,7 @@ class results_module
 		
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'results', 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'S_LEGEND'			=> $legend,
 			'S_SUCCESS'			=> (sizeof($success)) ? true : false,
 			'SUCCESS_MSG'		=> (sizeof($success)) ? implode('<br />', $success) : '',
@@ -815,5 +815,3 @@ class results_module
 		);
 	}
 }
-
-?>

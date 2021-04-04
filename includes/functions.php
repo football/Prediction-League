@@ -170,8 +170,8 @@ function save_ranking_matchday($season, $league, $matchday, $cash = false)
 				INNER JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = m.match_no)
 				INNER JOIN ' . USERS_TABLE . "  AS u ON (b.user_id = u.user_id)
 				WHERE  m.season = $season AND m.league = $league AND m.matchday = $matchday AND m.status IN (2,3)
-				GROUP BY b.user_id
-				ORDER BY points DESC, nobet ASC, username ASC
+				GROUP BY u.user_id
+				ORDER BY points DESC, nobet ASC, u.username ASC
 				";
 
 			$result = $db->sql_query($sql);
@@ -586,13 +586,13 @@ function set_footb_points($points_type, $season, $league, $matchday, $wins, $cas
 
 function _sort_points($value_a, $value_b) 
 {
-    if ($value_a['points'] > $value_b['points']) 
+	if ($value_a['points'] > $value_b['points']) 
 	{
-        return -1;
-    } 
+		return -1;
+	} 
 	else 
 	{
-        if ($value_a['points'] == $value_b['points']) 
+		if ($value_a['points'] == $value_b['points']) 
 		{
 			if (isset($value_a['nobet']))
 			{
@@ -616,12 +616,12 @@ function _sort_points($value_a, $value_b)
 			{
 				return 0;
 			}
-        } 
+		} 
 		else 
 		{
-            return 1;
-        }
-    }
+			return 1;
+		}
+	}
 }
 
 
@@ -838,7 +838,8 @@ function next_delivery($season, $league)
 					WHEN 6 THEN '" . $lang_dates['Sat'] . "'
 					ELSE 'Error' END,
 				DATE_FORMAT(delivery_date,' %d.%m.%Y %H:%i')
-			) AS deliverytime
+			) AS deliverytime,
+			matchday
 			FROM " . FOOTB_MATCHDAYS . " 
 			WHERE season = $season AND league = $league AND status = 0
 			ORDER BY matchday ASC
@@ -999,7 +1000,7 @@ function first_league($season, $complete = true)
 	{
 		$join_matchday = 'INNER JOIN ' . FOOTB_MATCHDAYS . ' AS m ON (m.season = l.season AND m.league = l.league) ';
 	}
-	$sql = 'SELECT * 
+	$sql = 'SELECT l.* 
 			FROM ' . FOOTB_LEAGUES . ' AS l ' .
 			$join_matchday . "
 			WHERE l.season = $season 
@@ -1030,12 +1031,12 @@ function current_league($season)
 		$curr_user = $user->data['user_id'];
 		$user_spec = 'AND b.user_id = ' . $curr_user;
 	}
-	$sql = 'SELECT DISTINCT m.league 
+	$sql = 'SELECT DISTINCT m.league, m.match_datetime
 			FROM ' . FOOTB_MATCHES . ' AS m  
 			INNER JOIN ' . FOOTB_BETS . ' AS b ON (b.season = m.season AND b.league = m.league ' . $user_spec . ")
 			WHERE m.season = $season 
 			AND m.status in (0,1,2)
-			ORDER BY m.match_datetime ASC
+			ORDER BY m.match_datetime ASC, m.league ASC
 			LIMIT 1";
 	$result = $db->sql_query($sql);
 
@@ -1826,7 +1827,7 @@ function get_team($season, $league, $matchnumber, $field, $formula)
 									$third_group[$team]= $row['group_id'];
 								}
 							}		
-						}     
+						}
 					}
 					// Sort 3. Place on points, diff, goals
 					array_multisort($points3, SORT_DESC, $diff3, SORT_DESC, $goals3, SORT_DESC, $third_team, $third_group);
@@ -2096,7 +2097,8 @@ function get_team($season, $league, $matchnumber, $field, $formula)
 					m.goals_overtime_home,
 					m.goals_overtime_guest,
 					m.goals_home,
-					m.goals_guest
+					m.goals_guest,
+					m.match_no
 					FROM  ' . FOOTB_MATCHES . ' AS m
 					LEFT JOIN ' . FOOTB_TEAMS . ' AS t1 ON (t1.season = m.season AND t1.league = m.league AND t1.team_id = m.team_id_home)
 					LEFT JOIN ' . FOOTB_TEAMS . " AS t2 ON (t2.season = m.season AND t2.league = m.league AND t2.team_id = m.team_id_guest)
@@ -2316,7 +2318,7 @@ function ko_group_next_round($season, $league, $matchday_from, $matchday_to, $ma
 			LEFT JOIN ' . FOOTB_MATCHES . " AS m ON (m.season = t.season AND m.league = t.league AND (m.team_id_home = t.team_id OR m.team_id_guest = t.team_id) AND m.group_id = t.group_id)
 			WHERE t.season = $season AND t.league = $league AND m.matchday >= $matchday_from AND m.matchday <= $matchday_to AND m.status IN (3,6)
 			GROUP BY t.team_id
-			ORDER BY group_id ASC,points DESC, goal_diff DESC, goals DESC
+			ORDER BY t.group_id ASC, points DESC, goal_diff DESC, goals DESC
 		";
 		$result = $db->sql_query($sql);
 		
@@ -2530,4 +2532,3 @@ function select_points($creator = 'm', $sum = false)
 	}
 	return $select_part;
 }
-?>

@@ -65,12 +65,12 @@ class football_module
 		switch ($mode)
 		{
 			case 'userguide':
-            	$this->page_title = 'ACP_FOOTBALL_USERGUIDE';
+				$this->page_title = 'ACP_FOOTBALL_USERGUIDE';
 				$this->tpl_name = 'acp_football_userguide';
 
 				$template->assign_vars(array(
 					'S_IN_FOOTBALL_USERGUIDE'	=> true,
-					'U_FOOTBALL' 				=> $helper->route('football_main_controller',array('side' => 'bet')),
+					'U_FOOTBALL' 				=> $helper->route('football_football_controller',array('side' => 'bet')),
 					'L_BACK_TO_TOP'				=> $user->lang['BACK_TO_TOP'],
 					'ICON_BACK_TO_TOP'			=> '<img src="' . $phpbb_admin_path . 'images/icon_up.gif" style="vertical-align: middle;" alt="' . $user->lang['BACK_TO_TOP'] . '" title="' . $user->lang['BACK_TO_TOP'] . '" />',
 					'S_VERSION_NO'				=> $this->config['football_version'],
@@ -242,7 +242,7 @@ class football_module
 		$this->page_title = $display_vars['title'];
 
 		$template->assign_vars(array(
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet')),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bet')),
 			'L_TITLE'			=> $user->lang[$display_vars['title']],
 			'L_TITLE_EXPLAIN'	=> $user->lang[$display_vars['title'] . '_EXPLAIN'],
 			'S_ERROR'			=> (sizeof($error)) ? true : false,
@@ -434,5 +434,3 @@ class football_module
 	}
 
 }
-
-?>

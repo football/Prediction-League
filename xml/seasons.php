@@ -96,6 +96,6 @@ function xml_seasons()
 		}
 		$xml_seasons .= '</seasons-data>' . "\n";
 	}
+	$db->sql_freeresult($result);
 	return $xml_seasons;
 }
-?>

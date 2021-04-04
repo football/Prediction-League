@@ -113,7 +113,7 @@ $sql_start = $start * $count_matches;
 $sql_limit = $config['football_users_per_page'] * $count_matches;
 
 // handle pagination.
-$base_url = $this->helper->route('football_main_controller', array('side' => 'my_koeff', 's' => $season, 'l' => $league, 'm' => $matchday, 'u' => "$user_sel"));
+$base_url = $this->helper->route('football_football_controller', array('side' => 'my_koeff', 's' => $season, 'l' => $league, 'm' => $matchday, 'u' => "$user_sel"));
 $pagination = $phpbb_container->get('pagination');
 $pagination->generate_template_pagination($base_url, 'pagination', 'start', $total_users, $this->config['football_users_per_page'], $start);
 

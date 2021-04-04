@@ -78,7 +78,7 @@ $sql_bets = "SELECT
 				FROM " . FOOTB_MATCHES . ' AS m
 				LEFT JOIN ' . FOOTB_BETS . " AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = m.match_no)
 				WHERE m.season = $season AND m.league = $league
-				ORDER BY matchday ASC, match_no ASC, user_id ASC";
+				ORDER BY m.matchday ASC, m.match_no ASC, b.user_id ASC";
 
 if(!$result_users = $db->sql_query($sql_users))
 {
@@ -268,4 +268,3 @@ else
 	echo utf8_decode($export);
 	exit;
 }
-?>

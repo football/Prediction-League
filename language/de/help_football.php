@@ -528,4 +528,3 @@ Datenquelle erfolgen. Benötigt man innerhalb dieser Zeit trotzdem aktualisierte
 Datenquelle zu erzwingen.' 
 	),
 )));
-?>

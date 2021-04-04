@@ -8,6 +8,9 @@
 					<th>{L_GR}</th>
 				<!-- ENDIF -->
 					<th style="text-align: center;" colspan="5">{L_VS}</th>
+				<!-- IF S_USER_IS_MEMBER -->
+					<th style="text-align: center;" colspan="3">{L_BET_OF}</th>
+				<!-- ENDIF -->
 					<th style="text-align: center;" colspan="3">{L_RESULT} ({RESULT_EXPLAIN})</th>
 				<!-- IF S_DISPLAY_KO -->
 					<th style="text-align: center;" colspan="3">{LABEL_FINALRESULT}</th>
@@ -31,6 +34,11 @@
 					<td class="td_logo">{odds.LOGO_GUEST}</td>
 					<td class="td_team"  style="cursor:pointer;" title="{L_SHOW_PLAYED}" onclick="popup('{odds.U_PLAN_GUEST}', 625,625);return false;">
 						{odds.GUEST_NAME}</td>
+				<!-- IF S_USER_IS_MEMBER -->
+					<td class="td_goals_home">{odds.BET_HOME}</td>
+					<td class="td_vs">:</td>
+					<td class="td_goals_guest">{odds.BET_GUEST}</td>
+				<!-- ENDIF -->
 					<td class="td_goals_home {odds.COLOR_STYLE}">{odds.GOALS_HOME}</td>
 					<td class="td_vs">:</td>
 					<td class="td_goals_guest {odds.COLOR_STYLE}">{odds.GOALS_GUEST}</td>

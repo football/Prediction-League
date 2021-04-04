@@ -20,7 +20,7 @@ $action='';
 
 if (!$season OR !$league)
 {
-	redirect($this->helper->route('football_main_controller', array('side' => 'bank', 's' => $season, 'l' => $league)));
+	redirect($this->helper->route('football_football_controller', array('side' => 'bank', 's' => $season, 'l' => $league)));
 }
 else
 {

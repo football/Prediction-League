@@ -177,7 +177,7 @@ class teams_module
 			$folder = $this->ext_football_path . 'images/flags/';
 			$directory  = opendir($folder);
 			$files = array(); 
-			while($file = readdir($directory))    
+			while($file = readdir($directory))
 			{
 				if( !(bool) preg_match('/.+\.(?:jpe?g|gif|png)$/i', $file) ) 
 				{
@@ -309,7 +309,7 @@ class teams_module
 				$folder = $this->ext_football_path . 'images/flags/';
 				$directory  = opendir($folder);
 				$files = array(); 
-				while($file = readdir($directory))    
+				while($file = readdir($directory))
 				{
 					if( !(bool) preg_match('/.+\.(?:jpe?g|gif|png)$/i', $file) ) 
 					{
@@ -589,7 +589,7 @@ class teams_module
 
 		$template->assign_vars(array(
 			'U_ACTION'			=> $this->u_action,
-			'U_FOOTBALL' 		=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
+			'U_FOOTBALL' 		=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
 			'S_SEASON'			=> $season,
 			'S_LEAGUE'			=> $league,
 			'S_KO_LEAGUE'		=> $ko_league,
@@ -597,6 +597,7 @@ class teams_module
 			'S_LEAGUE_OPTIONS'	=> $league_options,
 			'S_TEAM_OPTIONS'	=> $team_options,
 			'S_TEAM_ADD'		=> true,
+			'S_VERSION_NO'		=> $this->config['football_version'],
 			) 
 		);
 		
@@ -609,7 +610,7 @@ class teams_module
 			WHERE t.season = $season 
 				AND t.league = $league
 			GROUP BY t.team_id
-			ORDER BY team_id ASC";
+			ORDER BY t.team_id ASC";
 		$result = $db->sql_query($sql);
 		$rows_teams = $db->sql_fetchrowset($result);
 		$db->sql_freeresult($result);
@@ -654,4 +655,3 @@ class teams_module
 		);
 	}
 }
-?>

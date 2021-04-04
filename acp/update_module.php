@@ -131,7 +131,7 @@ class update_module
 		$insert_season	= $this->request->variable('insert_season', false);
 		$insert_league	= $this->request->variable('insert_league', false);
 		$list			= $this->request->variable('list', false);
-		$this->xml_ary	= unserialize(urldecode($this->request->variable('xml_ary', '')));
+		$this->xml_ary	= json_decode(urldecode($this->request->variable('xml_ary', '')),true);
 		$display_team_mapping = false;
 		// Clear some vars
 		$error = array();
@@ -730,7 +730,7 @@ class update_module
 		$template->assign_vars(array(
 			'U_ACTION'				=> $this->u_action,
 			'U_CHOOSE_ACTION'		=> $this->u_action . "&amp;action=choose",			
-			'U_FOOTBALL' 			=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
+			'U_FOOTBALL' 			=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league)),
 			'S_ERROR'				=> (sizeof($error)) ? true : false,
 			'ERROR_MSG'				=> (sizeof($error)) ? implode('<br />', $error) : '',
 			'S_SUCCESS'				=> (sizeof($success)) ? true : false,
@@ -750,7 +750,7 @@ class update_module
 			'DO_MATCHES'			=> ($insert_league) ? sprintf($user->lang['INSERT_MATCHES']) : sprintf($user->lang['UPDATE_MATCHES']),
 			'XML_SEASON_URL'		=> $xml_season_url,
 			'XML_LEAGUE_URL'		=> $xml_league_url,
-			'XML_ARY'				=> (sizeof($this->xml_ary)) ? urlencode(serialize($this->xml_ary)) : '',
+			'XML_ARY'				=> (is_array($this->xml_ary) && sizeof($this->xml_ary)) ? urlencode(json_encode($this->xml_ary)) : '',
 			'S_XSEASON_OPTIONS'		=> $xseason_options,
 			'S_XLEAGUE_OPTIONS'		=> $xleague_options,
 			'S_XSEASON'				=> $xseason,
@@ -851,7 +851,7 @@ class update_module
 			{
 				$this->xml_ary['footb_teams'][$key]['team_id'] = $team_id_map_ary[$xml_team['team_id']];
 			}
-			usort($this->xml_ary['footb_teams'], 'sort_teams');
+			usort($this->xml_ary['footb_teams'], array($this, 'sort_teams'));
 
 			foreach ($this->xml_ary['footb_matches'] AS $key => $xml_team)
 			{
@@ -1144,7 +1144,7 @@ class update_module
 		{
 			if (sizeof($table_row))
 			{
-				$tpl .= '<input type="hidden" name="row_' . $id . '" value="' . urlencode(serialize($diff)) . '" />';
+				$tpl .= '<input type="hidden" name="row_' . $id . '" value="' . urlencode(json_encode($diff)) . '" />';
 				// match status update and database
 				if (substr($id, 0, 13) == 'FOOTB_MATCHES')
 				{
@@ -1160,7 +1160,7 @@ class update_module
 			else
 			{
 				// Insert team
-				$tpl .= '<input type="hidden" name="' . $id . '[]" value="' . urlencode(serialize($diff)) . '" />';
+				$tpl .= '<input type="hidden" name="' . $id . '[]" value="' . urlencode(json_encode($diff)) . '" />';
 			}
 		}
 
@@ -1171,7 +1171,7 @@ class update_module
 			{
 				if (sizeof($table_row))
 				{
-					$color_open = '<span title= "' . sprintf($user->lang['CURRENT_VALUE']) . ': ' . htmlspecialchars($table_row[$key], ENT_COMPAT, 'UTF-8') . '" style="color: red;">* ';
+					$color_open = '<span title= "' . sprintf($user->lang['CURRENT_VALUE']) . ': ' . utf8_htmlspecialchars($table_row[$key]) . '" style="color: red;">* ';
 					$color_close = '</span>';
 				}
 				else
@@ -1188,8 +1188,8 @@ class update_module
 			if (sizeof($order))
 			{
 				$value = (substr($key, 0, 7) == 'team_id') ? $value . ' ' . $this->team_ary[$value] : $value;
-				$tpl_ary[$order[$key]] = ($order[$key] % 2) ? $color_open . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . $color_close . '&nbsp;</td>' :
-										'<td>' . $color_open . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . $color_close . '<br />';			
+				$tpl_ary[$order[$key]] = ($order[$key] % 2) ? $color_open . utf8_htmlspecialchars($value) . $color_close . '&nbsp;</td>' :
+				'<td>' . $color_open . utf8_htmlspecialchars($value) . $color_close . '<br />';			
 			}
 			else
 			{
@@ -1198,14 +1198,14 @@ class update_module
 					// Write table fields
 					if (sizeof($table_row))
 					{
-						$tpl .= '<td title= "' . htmlspecialchars($table_row[$key], ENT_COMPAT, 'UTF-8') . '">' .
-									$color_open . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . $color_close . 
+						$tpl .= '<td title= "' . utf8_htmlspecialchars($table_row[$key]) . '">' .
+							$color_open . utf8_htmlspecialchars($value) . $color_close . 
 								'</td>';		
 					}
 					else
 					{
 						$tpl .= '<td title= "' . sprintf($user->lang['NEW_TEAM']) . '">' .
-									$color_open . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . $color_close . 
+							$color_open . utf8_htmlspecialchars($value) . $color_close . 
 								'</td>';		
 					}
 				}
@@ -1245,15 +1245,15 @@ class update_module
 			if (sizeof($order))
 			{
 				$value = (substr($key, 0, 7) == 'team_id') ? $value . ' ' . $this->team_ary[$value] : $value;
-				$tpl_ary[$order[$key]] = ($order[$key] % 2) ? htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '&nbsp;</td>' :
-										'<td>' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '<br />';			
+				$tpl_ary[$order[$key]] = ($order[$key] % 2) ? utf8_htmlspecialchars($value) . '&nbsp;</td>' :
+				'<td>' . utf8_htmlspecialchars($value) . '<br />';			
 			}
 			else
 			{
 				if ($key <> 'season' and $key <> 'league')
 				{
 					// Write XML-table fields
-					$tpl .= '<td>' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '</td>';
+					$tpl .= '<td>' . utf8_htmlspecialchars($value) . '</td>';
 				}
 			}
 		}
@@ -1322,7 +1322,7 @@ class update_module
 			if ($this->request->variable($table . '_' . $row['index_field'], false))
 			{
 				
-				$diff_ary = unserialize(urldecode($this->request->variable('row_' . $table . '_' . $row['index_field'], '')));
+				$diff_ary = json_decode(urldecode($this->request->variable('row_' . $table . '_' . $row['index_field'], '')),true);
 				$sql_ary = array_intersect_ukey($diff_ary, $selected_fields, 'self::key_compare_func');
 				if ($table == 'FOOTB_MATCHES')
 				{
@@ -1407,7 +1407,7 @@ class update_module
 		}
 		foreach ($insert_ary AS $insert)
 		{
-			$sql_ary = unserialize(urldecode($insert));
+			$sql_ary = json_decode(urldecode($insert),true);
 			$sql = 'INSERT INTO ' . $table_name . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 			$db->sql_query($sql);
 			if ($db->sql_affectedrows())
@@ -1461,4 +1461,3 @@ class update_module
 		return $selected_fields;
 	}
 }
-?>

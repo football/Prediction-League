@@ -583,7 +583,7 @@ class bets_module
 				)
 			);
 		}
-		$db->sql_freeresult($resultopen);
+		$db->sql_freeresult($result);
 
 		// Calculate extra bets of matchday
 		// Start select team
@@ -730,7 +730,7 @@ class bets_module
 		$legend = delivery($season, $league, $matchday);
 
 		$template->assign_vars(array(
-			'U_FOOTBALL' 			=> $helper->route('football_main_controller',array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
+			'U_FOOTBALL' 			=> $helper->route('football_football_controller',array('side' => 'bet', 's' => $season, 'l' => $league, 'm' => $matchday)),
 			'S_LEGEND'				=> $legend,
 			'S_SUCCESS'				=> (sizeof($success)) ? true : false,
 			'SUCCESS_MSG'			=> (sizeof($success)) ? implode('<br />', $success) : '',
@@ -750,4 +750,3 @@ class bets_module
 		);
 	}
 }
-?>

@@ -42,7 +42,7 @@ class football_remember extends \phpbb\cron\task\base
 	* @param string									$php_ext
 	* @param \phpbb\extension\manager				$phpbb_extension_manager
 	* @param \phpbb\path_helper						$phpbb_path_helper
-	* @param \phpbb\db\driver\driver_interfacer		$db
+	* @param \phpbb\db\driver\driver_interface		$db
 	* @param \phpbb\config\config					$config
 	* @param \phpbb\log\log_interface 				$log
 	* @param \phpbb\user							$user

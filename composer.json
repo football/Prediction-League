@@ -1,29 +1,30 @@
 {
-	"name": "football/football",
-	"type": "phpbb-extension",
-	"description": "Football Prediction League",
-	"homepage": "http://football.bplaced.net",
-	"version": "0.9.9",
-	"time": "2017-09-09",
-	"license": "GPL-2.0",
-	"authors": [{
-			"name": "J. Helmke",
-			"email": "phpBB3.football@gmx.de",
-			"homepage": "http://football.bplaced.net",
-			"role": "Lead Developer"
-		}],
-	"require": {
-		"php": ">=5.3.3"
+	"name" : "football/football",
+	"type" : "phpbb-extension",
+	"description" : "Football Prediction League",
+	"homepage" : "http://football.bplaced.net",
+	"version" : "0.9.9",
+	"time" : "2021-04-04",
+	"license" : "GPL-2.0",
+	"authors" : [{
+			"name" : "J. Helmke",
+			"email" : "phpBB3.football@gmx.de",
+			"homepage" : "http://football.bplaced.net",
+			"role" : "Lead Developer"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.3"
 	},
-	"extra": {
-		"display-name": "Football Prediction League",
-		"soft-require": {
-			"phpbb/phpbb": ">3.1.*"
+	"extra" : {
+		"display-name" : "Football Prediction League",
+		"soft-require" : {
+			"phpbb/phpbb" : ">=3.2.8,<3.4"
 		},
-		"version-check": {
-			"host": "football.bplaced.net",
-			"directory": "/updatecheck",
-			"filename": "football_predictionleague.json"
+		"version-check" : {
+			"host" : "football.bplaced.net",
+			"directory" : "/updatecheck",
+			"filename" : "football_predictionleague.json"
 		}
 	}
 }

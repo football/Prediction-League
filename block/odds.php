@@ -13,6 +13,8 @@ if (!defined('IN_PHPBB') OR !defined('IN_FOOTBALL'))
 }
 
 $data_odds 	= false;
+$userid =  $user->data['user_id'];
+$user_is_member = user_is_member($userid, $season, $league);
 $matchnumber = 0;
 $lang_dates 	= $user->lang['datetime'];
 
@@ -37,6 +39,8 @@ $sql = "SELECT
 		t2.team_name_short AS guest_name,
 		t1.team_id AS home_id,
 		t2.team_id AS guest_id,
+		b.goals_home AS bet_home,
+		b.goals_guest AS bet_guest,
 		m.goals_home,
 		m.goals_guest,
 		m.goals_overtime_home AS kogoals_home,
@@ -48,13 +52,15 @@ $sql = "SELECT
 		m.odd_1,
 		m.odd_x,
 		m.odd_2,
-		m.trend	FROM " . FOOTB_MATCHES . ' AS m
-	LEFT JOIN ' . FOOTB_TEAMS . ' AS t1 ON (t1.season = m.season AND t1.league = m.league AND t1.team_id = m.team_id_home)
-	LEFT JOIN ' . FOOTB_TEAMS . " AS t2 ON (t2.season = m.season AND t2.league = m.league AND t2.team_id = m.team_id_guest)
-	WHERE  m.season = $season 
-		AND m.league = $league
-		AND m.matchday = $matchday
-	ORDER BY m.match_datetime ASC, m.match_no ASC";
+		m.trend	
+		FROM " . FOOTB_MATCHES . ' AS m
+		LEFT JOIN ' . FOOTB_BETS . " AS b ON (b.season = m.season AND b.league = m.league AND b.match_no = m.match_no AND b.user_id = $userid)
+		LEFT JOIN " . FOOTB_TEAMS . ' AS t1 ON (t1.season = m.season AND t1.league = m.league AND t1.team_id = m.team_id_home)
+		LEFT JOIN ' . FOOTB_TEAMS . " AS t2 ON (t2.season = m.season AND t2.league = m.league AND t2.team_id = m.team_id_guest)
+		WHERE  m.season = $season 
+			AND m.league = $league
+			AND m.matchday = $matchday
+		ORDER BY m.match_datetime ASC, m.match_no ASC";
 	
 $result = $db->sql_query($sql);
 $rows = $db->sql_fetchrowset($result);
@@ -137,6 +143,8 @@ foreach ($rows as $row)
 	$goals_guest	= ($row['goals_guest'] == '') ? '&nbsp;' : $row['goals_guest'];
 	$kogoals_home	= ($row['kogoals_home'] == '') ? '&nbsp;' : $row['kogoals_home'];
 	$kogoals_guest	= ($row['kogoals_guest'] == '') ? '&nbsp;' : $row['kogoals_guest'];
+	$bet_home		= ($row['bet_home'] == '') ? '&nbsp;' : $row['bet_home'];
+	$bet_guest 		= ($row['bet_guest'] == '') ? '&nbsp;' : $row['bet_guest'];
 
 	$template->assign_block_vars('odds', array(
 		'ROW_CLASS' 	=> $row_class,
@@ -154,12 +162,15 @@ foreach ($rows as $row)
 																			'tid' => $homeid, 'mode' => 'all')),
 		'U_PLAN_GUEST'	=> $this->helper->route('football_football_popup', array('popside' => 'viewplan_popup', 's' => $season, 'l' => $league,
 																			'tid' => $guestid, 'mode' => 'all')),
+		'BET_HOME' 		=> $bet_home,
+		'BET_GUEST' 	=> $bet_guest,
 		'GOALS_HOME' 	=> $goals_home,
 		'GOALS_GUEST'	=> $goals_guest,
 		'COLOR_STYLE' 	=> '',
 		'KOGOALS_HOME' 	=> $kogoals_home,
 		'KOGOALS_GUEST'	=> $kogoals_guest,
 		'S_KO_MATCH' 	=> $ko_match,
+		'S_USER_IS_MEMBER' => $user_is_member,
 		'TREND' 		=> $row['trend'],
 		'U_MATCH_STATS'	=> $this->helper->route('football_football_popup', array('popside' => 'hist_popup', 's' => $season, 'l' => $league,
 																			'hid' => $homeid, 'gid' => $guestid, 'm' => $matchday, 

@@ -114,7 +114,7 @@ while($row = $db->sql_fetchrow($result))
 	
 	$template->assign_block_vars('last_results', array(
 		'ROW_CLASS' 	=> $row_class,
-		'U_RESULTS_LINK'=> $this->helper->route('football_main_controller', array('side' => 'results', 's' =>  $row['season'], 'l' => $row['league'], 'm' => $row['matchday'])),
+		'U_RESULTS_LINK'=> $this->helper->route('football_football_controller', array('side' => 'results', 's' =>  $row['season'], 'l' => $row['league'], 'm' => $row['matchday'])),
 		'MATCH_DATE' 	=> $row['match_date'],
 		'MATCH_TIME' 	=> $row['match_time'],
 		'LEAGUE_NAME' 	=> $row['league_name'],

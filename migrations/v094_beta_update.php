@@ -16,7 +16,7 @@ class v094_beta_update extends \phpbb\db\migration\migration
 	{
 		return !$this->db_tools->sql_column_exists($this->table_prefix . 'sessions', 'session_matchday');
 	}
-      
+
 	static public function depends_on()
 	{
 		return array('\phpbb\db\migration\data\v310\extensions');
@@ -26,14 +26,14 @@ class v094_beta_update extends \phpbb\db\migration\migration
 	{
 		return array(
  			'drop_columns' => array(
-				$this->table_prefix . 'sessions' 			=> array(
+				$this->table_prefix . 'sessions' 		=> array(
 					'session_season',
 					'session_league',
 					'session_matchday',
 				)
 			),
 			'add_columns' => array(
-				$this->table_prefix . 'sessions' 			=> array(
+				$this->table_prefix . 'sessions' 		=> array(
 					'football_season' 			=> array('USINT', 0),
 					'football_league' 			=> array('TINT:2', 0),
 					'football_matchday' 		=> array('TINT:2', 0),
@@ -57,7 +57,7 @@ class v094_beta_update extends \phpbb\db\migration\migration
 	public function revert_schema()
 	{
 		return array(
-			'drop_columns'        => array(
+			'drop_columns'		=> array(
 				$this->table_prefix . 'sessions' 			=> array(
 					'football_season',
 					'football_league',
@@ -113,46 +113,46 @@ class v094_beta_update extends \phpbb\db\migration\migration
 			
 			// Add the manage mode from football_results to the ACP_FOOTBALL_OPERATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_OPERATION', array(
-					'module_basename'   => '\football\football\acp\results_module',
-					'module_langname'   => 'ACP_FOOTBALL_RESULTS_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_results',
+					'module_basename'	=> '\football\football\acp\results_module',
+					'module_langname'	=> 'ACP_FOOTBALL_RESULTS_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_results',
 				),
 			)),
 
 			// Add the manage mode from football_all_bets to the ACP_FOOTBALL_OPERATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_OPERATION', array(
-					'module_basename'   => '\football\football\acp\all_bets_module',
-					'module_langname'   => 'ACP_FOOTBALL_ALL_BETS_VIEW',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_editbets',
+					'module_basename'	=> '\football\football\acp\all_bets_module',
+					'module_langname'	=> 'ACP_FOOTBALL_ALL_BETS_VIEW',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_editbets',
 				),
 			)),
 
 			// Add the manage mode from football_bets to the ACP_FOOTBALL_OPERATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_OPERATION', array(
-					'module_basename'   => '\football\football\acp\bets_module',
-					'module_langname'   => 'ACP_FOOTBALL_BETS_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_editbets',
+					'module_basename'	=> '\football\football\acp\bets_module',
+					'module_langname'	=> 'ACP_FOOTBALL_BETS_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_editbets',
 				),
 			)),
 
 			// Add the manage mode from football_ko to the ACP_FOOTBALL_OPERATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_OPERATION', array(
-					'module_basename'   => '\football\football\acp\ko_module',
-					'module_langname'   => 'ACP_FOOTBALL_KO_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\ko_module',
+					'module_langname'	=> 'ACP_FOOTBALL_KO_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
 			// Add the manage mode from football_bank to the ACP_FOOTBALL_OPERATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_OPERATION', array(
-					'module_basename'   => '\football\football\acp\bank_module',
-					'module_langname'   => 'ACP_FOOTBALL_BANK_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_points',
+					'module_basename'	=> '\football\football\acp\bank_module',
+					'module_langname'	=> 'ACP_FOOTBALL_BANK_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_points',
 				),
 			)),
 			
@@ -162,64 +162,64 @@ class v094_beta_update extends \phpbb\db\migration\migration
 
 			// Add the manage mode from football_seasons to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\seasons_module',
-					'module_langname'   => 'ACP_FOOTBALL_SEASONS_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\seasons_module',
+					'module_langname'	=> 'ACP_FOOTBALL_SEASONS_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
 			// Add the manage mode from football_leagues to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\leagues_module',
-					'module_langname'   => 'ACP_FOOTBALL_LEAGUES_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\leagues_module',
+					'module_langname'	=> 'ACP_FOOTBALL_LEAGUES_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
 			// Add the manage mode from football_matchdays to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\matchdays_module',
-					'module_langname'   => 'ACP_FOOTBALL_MATCHDAYS_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\matchdays_module',
+					'module_langname'	=> 'ACP_FOOTBALL_MATCHDAYS_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
 			// Add the manage mode from football_teams to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\teams_module',
-					'module_langname'   => 'ACP_FOOTBALL_TEAMS_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\teams_module',
+					'module_langname'	=> 'ACP_FOOTBALL_TEAMS_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
 			// Add the manage mode from football_matches to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\matches_module',
-					'module_langname'   => 'ACP_FOOTBALL_MATCHES_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\matches_module',
+					'module_langname'	=> 'ACP_FOOTBALL_MATCHES_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 
 			// Add the manage mode from football_extra to the ACP_FOOTBALL_MANAGE category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\extra_module',
-					'module_langname'   => 'ACP_FOOTBALL_EXTRA_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\extra_module',
+					'module_langname'	=> 'ACP_FOOTBALL_EXTRA_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 
 			// Add the manage mode from football_update to the ACP_FOOTBALL_MANAGE category using the "manual" method.
 			array('module.add', array('acp', 'ACP_FOOTBALL_MANAGE', array(
-					'module_basename'   => '\football\football\acp\update_module',
-					'module_langname'   => 'ACP_FOOTBALL_UPDATE_MANAGE',
-					'module_mode'       => 'manage',
-					'module_auth'       => 'acl_a_football_plan',
+					'module_basename'	=> '\football\football\acp\update_module',
+					'module_langname'	=> 'ACP_FOOTBALL_UPDATE_MANAGE',
+					'module_mode'		=> 'manage',
+					'module_auth'		=> 'acl_a_football_plan',
 				),
 			)),
 			
@@ -228,37 +228,37 @@ class v094_beta_update extends \phpbb\db\migration\migration
 
 			// Add the settings mode from football to the ACP_FOOTBALL_CONFIGURATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_CONFIGURATION', array(
-					'module_basename'   => 'football\football\acp\football_module',
-					'module_langname'   => 'ACP_FOOTBALL_SETTINGS',
-					'module_mode'       => 'settings',
-					'module_auth'       => 'acl_a_football_config',
+					'module_basename'	=> 'football\football\acp\football_module',
+					'module_langname'	=> 'ACP_FOOTBALL_SETTINGS',
+					'module_mode'		=> 'settings',
+					'module_auth'		=> 'acl_a_football_config',
 				),
 			)),
 			
 			// Add the features mode from football to the ACP_FOOTBALL_CONFIGURATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_CONFIGURATION', array(
-					'module_basename'   => 'football\football\acp\football_module',
-					'module_langname'   => 'ACP_FOOTBALL_FEATURES',
-					'module_mode'       => 'features',
-					'module_auth'       => 'acl_a_football_config',
+					'module_basename'	=> 'football\football\acp\football_module',
+					'module_langname'	=> 'ACP_FOOTBALL_FEATURES',
+					'module_mode'		=> 'features',
+					'module_auth'		=> 'acl_a_football_config',
 				),
 			)),
 			
 			// Add the menu mode from football to the ACP_FOOTBALL_CONFIGURATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_CONFIGURATION', array(
-					'module_basename'   => 'football\football\acp\football_module',
-					'module_langname'   => 'ACP_FOOTBALL_MENU',
-					'module_mode'       => 'menu',
-					'module_auth'       => 'acl_a_football_config',
+					'module_basename'	=> 'football\football\acp\football_module',
+					'module_langname'	=> 'ACP_FOOTBALL_MENU',
+					'module_mode'		=> 'menu',
+					'module_auth'		=> 'acl_a_football_config',
 				),
 			)),
 			
 			// Add the userguide mode from football to the ACP_FOOTBALL_CONFIGURATION category.
 			array('module.add', array('acp', 'ACP_FOOTBALL_CONFIGURATION', array(
-					'module_basename'   => 'football\football\acp\football_module',
-					'module_langname'   => 'ACP_FOOTBALL_USERGUIDE',
-					'module_mode'       => 'userguide',
-					'module_auth'       => 'acl_a_football_plan'
+					'module_basename'	=> 'football\football\acp\football_module',
+					'module_langname'	=> 'ACP_FOOTBALL_USERGUIDE',
+					'module_mode'		=> 'userguide',
+					'module_auth'		=> 'acl_a_football_plan'
 				),
 			)),
 		);
