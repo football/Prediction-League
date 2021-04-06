@@ -333,4 +333,3 @@ class football_remember extends \phpbb\cron\task\base
 		}
 	}
 }
-?>

@@ -128,7 +128,6 @@ class popup
 		{
 			$message = (!empty($config['football_disable_msg'])) ? $config['football_disable_msg'] : 'FOOTBALL_DISABLED';
 			trigger_error($message);
-			exit;
 		}
 
 		// Can this user view Prediction Leagues pages?

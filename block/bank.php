@@ -7,6 +7,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 // Check Prediction League authorisation 
 if ( !$this->auth->acl_get('u_use_football') )
 {
@@ -225,5 +230,3 @@ $template->assign_vars(array(
 	'POINTS'					=> $config['football_win_name'],	
 	)
 );
-
-?>

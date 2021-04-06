@@ -105,7 +105,6 @@ class xmlplan
 		{
 			$message = (!empty($config['football_disable_msg'])) ? $config['football_disable_msg'] : 'FOOTBALL_DISABLED';
 			trigger_error($message);
-			exit;
 		}
 
 

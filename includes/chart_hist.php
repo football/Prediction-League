@@ -9,6 +9,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $values1 = ( isset($_GET['v1']) ) ? $_GET['v1'] : 0;
 $graphvalues1 = explode(",",$values1);
 $matchdays = sizeof($graphvalues1);
@@ -63,4 +68,3 @@ for ($i = 0; $i < $count_values; $i++)
 // Output graph and clear image from memory
 imagepng($image);
 imagedestroy($image);
-?>

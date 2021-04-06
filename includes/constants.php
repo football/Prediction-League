@@ -42,4 +42,3 @@ define('UP_WINS', 1);
 define('UP_POINTS', 2);
 define('LEAGUE_CHAMP', 1);
 define('LEAGUE_KO', 2);
-?>

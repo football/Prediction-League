@@ -7,6 +7,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $this->user->add_lang_ext('football/football', 'info_acp_bank');
 
 // Check Prediction League authorisation 
@@ -96,4 +101,3 @@ else
 		exit_handler();
 	}
 }
-?>

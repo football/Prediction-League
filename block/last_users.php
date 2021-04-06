@@ -62,5 +62,3 @@ $template->assign_vars(array(
 	'S_DISPLAY_LAST_USERS'	=> $display_last_users,
 	'S_LAST_USERS'			=> true,
 ));
-
-?>

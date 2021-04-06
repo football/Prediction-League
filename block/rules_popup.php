@@ -7,6 +7,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 // Can this user view Prediction Leagues pages?
 if (!$config['football_guest_view'])
 {

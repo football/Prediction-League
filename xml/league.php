@@ -11,66 +11,63 @@
 * Automatically write the league as XML-file
 */
 
-if (!defined('IN_PHPBB'))
-{
-	// Stuff required to work with phpBB3
-	define('IN_PHPBB', true);
-	$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
-	$phpEx = substr(strrchr(__FILE__, '.'), 1);
-	include($phpbb_root_path . 'common.' . $phpEx);
+// Stuff required to work with phpBB3
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include($phpbb_root_path . 'common.' . $phpEx);
  
-	// Start session management
-	$user->session_begin();
-	$auth->acl($user->data);
-	$user->setup();
-	$user->add_lang_ext('football/football', 'info_acp_update');
-	include('../includes/constants.' . $phpEx);	
+// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup();
+$user->add_lang_ext('football/football', 'info_acp_update');
+include('../includes/constants.' . $phpEx);	
 
-	if ($config['board_disable'])
-	{
-		$message = (!empty($config['board_disable_msg'])) ? $config['board_disable_msg'] : 'BOARD_DISABLE';
-		trigger_error($message);
-	}
-	
-	$season = $request->variable('season', 0);
-	$league = $request->variable('league', 0);
-	if (!$season or !$league)
-	{
-		exit;
-	}
-	
-	$download = $request->variable('d', false);
-	$xml_string = xml_data($season, $league);
-	
-	if ( $xml_string == '')
-	{
-		trigger_error('Fehler! Die XML-Datei konnte nicht erzeugt werden.');
-	}
+if ($config['board_disable'])
+{
+	$message = (!empty($config['board_disable_msg'])) ? $config['board_disable_msg'] : 'BOARD_DISABLE';
+	trigger_error($message);
+}
 
-	if ($download)
-	{
-		// Download XML-File
-		$filename = 'league_' . $season . '_' . $league . '.xml';
-		$fp = fopen('php://output', 'w');
-		
-		header('Pragma: no-cache');
-		header("Content-Type: application/xml name=\"" . basename($filename) . "\"");
-		header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Cache-Control: private', false);
-		header('Pragma: public');
-		
-		fwrite($fp, $xml_string);
-		fclose($fp);
-		exit_handler();
-	}
-	else
-	{
-		// XML header
-		header ("content-type: text/xml");
-		echo $xml_string;
-	}
+$season = $request->variable('season', 0);
+$league = $request->variable('league', 0);
+if (!$season or !$league)
+{
+	trigger_error('Keine gültige Saison oder Liga gewählt.');
+}
+
+$download = $request->variable('d', false);
+$xml_string = xml_data($season, $league);
+
+if ( $xml_string == '')
+{
+	trigger_error('Fehler! Die XML-Datei konnte nicht erzeugt werden.');
+}
+
+if ($download)
+{
+	// Download XML-File
+	$filename = 'league_' . $season . '_' . $league . '.xml';
+	$fp = fopen('php://output', 'w');
+	
+	header('Pragma: no-cache');
+	header("Content-Type: application/xml name=\"" . basename($filename) . "\"");
+	header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
+	header('Expires: 0');
+	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+	header('Cache-Control: private', false);
+	header('Pragma: public');
+	
+	fwrite($fp, $xml_string);
+	fclose($fp);
+	exit_handler();
+}
+else
+{
+	// XML header
+	header ("content-type: text/xml");
+	echo $xml_string;
 }
 
 function xml_data($season, $league)

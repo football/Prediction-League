@@ -7,6 +7,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $vert = 9;
 $start = 22;
 $end = 28;
@@ -1342,4 +1347,3 @@ $template->set_filenames(array(
 );
 
 page_footer();
-?>

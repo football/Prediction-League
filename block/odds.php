@@ -7,7 +7,7 @@
 *
 */
 
-if (!defined('IN_PHPBB') OR !defined('IN_FOOTBALL'))
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -212,5 +212,3 @@ $template->assign_vars(array(
 	'S_DATA_ODDS' 				=> $data_odds,
 	)
 );
-
-?>

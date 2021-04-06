@@ -5,7 +5,7 @@
 	"homepage" : "http://football.bplaced.net",
 	"version" : "0.9.9",
 	"time" : "2021-04-04",
-	"license" : "GPL-2.0",
+	"license" : "GPL-2.0-only",
 	"authors" : [{
 			"name" : "J. Helmke",
 			"email" : "phpBB3.football@gmx.de",

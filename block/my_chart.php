@@ -7,7 +7,7 @@
 *
 */
 
-if (!defined('IN_PHPBB') OR !defined('IN_FOOTBALL'))
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -331,4 +331,3 @@ $template->assign_vars(array(
 	'USERNAME4' 				=> $username4,
 	)
 );
-?>

@@ -11,46 +11,43 @@
 * Automatically write the seasons and leagues as XML-file
 */
 
-if (!defined('IN_PHPBB'))
-{
-	// Stuff required to work with phpBB3
-	define('IN_PHPBB', true);
-	$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
-	$phpEx = substr(strrchr(__FILE__, '.'), 1);
-	include($phpbb_root_path . 'common.' . $phpEx);
+// Stuff required to work with phpBB3
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../../../../';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include($phpbb_root_path . 'common.' . $phpEx);
  
-	// Start session management
-	$user->session_begin();
-	$auth->acl($user->data);
-	$user->setup();
-	$user->add_lang_ext('football/football', 'info_acp_update');
-	include('../includes/constants.' . $phpEx);	
+// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup();
+$user->add_lang_ext('football/football', 'info_acp_update');
+include('../includes/constants.' . $phpEx);	
 
-	if ($config['board_disable'])
-	{
-		$message = (!empty($config['board_disable_msg'])) ? $config['board_disable_msg'] : 'BOARD_DISABLE';
-		trigger_error($message);
-	}
-	
-	//Check Access Code
-	global $code;
-	$code = $request->variable('code', '');
-	if (strcmp($code, trim($config['football_update_code'])) <> 0)
-	{
-		trigger_error('ERROR_XML_CODE');
-	}
-	
-	$string = xml_seasons();
-
-	if ( $string == '')
-	{
-		trigger_error('ERROR_XML_CREATE');
-	}
-
-	header ("content-type: text/xml");
-	echo $string;
+if ($config['board_disable'])
+{
+	$message = (!empty($config['board_disable_msg'])) ? $config['board_disable_msg'] : 'BOARD_DISABLE';
+	trigger_error($message);
 }
-	
+
+//Check Access Code
+global $code;
+$code = $request->variable('code', '');
+if (strcmp($code, trim($config['football_update_code'])) <> 0)
+{
+	trigger_error('ERROR_XML_CODE');
+}
+
+$string = xml_seasons();
+
+if ( $string == '')
+{
+	trigger_error('ERROR_XML_CREATE');
+}
+
+header ("content-type: text/xml");
+echo $string;
+
 function xml_seasons()
 {
 	global $db, $phpbb_root_path, $phpEx, $table_prefix, $code, $ext_path;

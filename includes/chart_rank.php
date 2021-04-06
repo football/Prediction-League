@@ -8,6 +8,11 @@
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 
 $numb_users = ( isset($_GET['t']) ) ? intval($_GET['t']) : 0;
 $matchdays 	= ( isset($_GET['m']) ) ? intval($_GET['m']) : 0;
@@ -94,4 +99,3 @@ for ($i = 1; $i < $count_values; $i++)
 // Output graph and clear image from memory
 imagepng($image);
 imagedestroy($image);
-?>
