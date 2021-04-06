@@ -56,7 +56,7 @@ class leagues_module
 		$form_key = 'acp_football_leagues';
 		add_form_key($form_key);
 
-		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+		include_once($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 		// Check and set some common vars
 		$action		= (isset($_POST['add'])) ? 'add' : ((isset($_POST['addmembers'])) ? 'addmembers' : $this->request->variable('action', ''));

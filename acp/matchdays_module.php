@@ -56,7 +56,7 @@ class matchdays_module
 		$form_key = 'acp_football_matchdays';
 		add_form_key($form_key);
 
-		include($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
+		include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 
 		// Check and set some common vars
 		$action			= (isset($_POST['add'])) ? 'add' : '';

@@ -56,7 +56,7 @@ class seasons_module
 		$form_key = 'acp_football_seasons';
 		add_form_key($form_key);
 
-		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+		include_once($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 		// Check and set some common vars
 		$action		= (isset($_POST['add'])) ? 'add' : $this->request->variable('action', '');

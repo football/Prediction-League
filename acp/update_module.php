@@ -107,7 +107,7 @@ class update_module
 		$form_key = 'acp_football_update';
 		add_form_key($form_key);
 
-		include($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
+		include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 
 		// Check and set some common vars
 		$action			= (isset($_POST['load_xml_season'])) ? 'load_xml_season' : '';

@@ -56,7 +56,7 @@ class ko_module
 		$form_key = 'acp_football_ko';
 		add_form_key($form_key);
 
-		include($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
+		include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 
 		// Check and set some common vars
 		$action				= (isset($_POST['update'])) ? 'update' : $this->request->variable('action', '');

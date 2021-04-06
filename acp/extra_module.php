@@ -56,7 +56,7 @@ class extra_module
 		$form_key = 'acp_football_extra';
 		add_form_key($form_key);
 
-		include($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
+		include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 
 		// Check and set some common vars
 		$action			= (isset($_POST['add'])) ? 'add' : ((isset($_POST['remove'])) ? 'remove' : $this->request->variable('action', ''));
