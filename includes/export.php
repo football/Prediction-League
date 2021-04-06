@@ -22,25 +22,8 @@ if( !$result = $db->sql_query($sql) )
 }
 $league_short = $db->sql_fetchfield('league_name_short');
 $db->sql_freeresult($result);
-$export_file = $league_short . '_'. $season. '_Tipps.csv';
-$path_attachment = './../../files/' . $export_file;
 $newline = "\r\n";
-
-if (!isset($_POST['send']))
-{
-	header('Pragma: no-cache');
-	header("Content-Type: text/csv; name=\"$export_file\"");
-	header("Content-disposition: attachment; filename=$export_file");
-
-//	header('Content-Type: text/x-csv');
-//	header('Expires: ' . gmdate('D, d M Y H:i:m') . ' GMT');
-//	header('Content-Disposition: attachment; filename='. $export_file);
-	$phpbb_root_path = './../';
-}
-else
-{
-	$phpbb_root_path = './../../';
-}
+$phpbb_root_path = './../../';
 
 $sql_users = 'SELECT DISTINCT
 				b.user_id,
@@ -96,16 +79,16 @@ foreach ($rows_users as $row_user)
 	$bet_column[$row_user['user_id']] = $lastcolumn;
 	$j++;
 }
-$export_row_users = "\"\";\"\";\"\";\"\";\"\";\"\";";
+$csv_data_row_users = "\"\";\"\";\"\";\"\";\"\";\"\";";
 for($j = 8; $j <= $lastcolumn; $j = $j + 3)
 {
-	$export_row_users .= "\"\";\"\";\"" . $column[$j] . "\"";
+	$csv_data_row_users .= "\"\";\"\";\"" . $column[$j] . "\"";
 	if($j != $lastcolumn)
 	{
-		$export_row_users .= ';';
+		$csv_data_row_users .= ';';
 	}
 }
-$export_row_users .= $newline;
+$csv_data_row_users .= $newline;
 
 if( !$result_results = $db->sql_query($sql_results) )
 {
@@ -138,16 +121,16 @@ foreach ($rows_bets as $row_bet)
 	{
 		if ($lastcolumn > 0) 
 		{
-			$export_bets[$last_match_num] = '';
+			$csv_data_bets[$last_match_num] = '';
 			for($j=8; $j<=$lastcolumn; $j++)
 			{
-				$export_bets[$last_match_num] .= "\"" . $column[$j] . "\"";
+				$csv_data_bets[$last_match_num] .= "\"" . $column[$j] . "\"";
 				if($j!=$lastcolumn)
 				{
-					$export_bets[$last_match_num] .= ';';
+					$csv_data_bets[$last_match_num] .= ';';
 				}
 			}
-			$export_bets[$last_match_num] .= $newline;
+			$csv_data_bets[$last_match_num] .= $newline;
 		}
 		$column = array();
 		$last_match_num = $row_bet['match_no'];
@@ -157,21 +140,21 @@ foreach ($rows_bets as $row_bet)
 		$lastcolumn = $bet_column[$row_bet['user_id']] + 2;
 	}
 }
-$export_bets[$last_match_num] = '';
+$csv_data_bets[$last_match_num] = '';
 for($j = 8; $j <= $lastcolumn; $j++)
 {
-	$export_bets[$last_match_num] .= "\"" . $column[$j] . "\"";
+	$csv_data_bets[$last_match_num] .= "\"" . $column[$j] . "\"";
 	if($j != $lastcolumn)
 	{
-		$export_bets[$last_match_num] .= ';';
+		$csv_data_bets[$last_match_num] .= ';';
 	}
 }
-$export_bets[$last_match_num] .= $newline;
+$csv_data_bets[$last_match_num] .= $newline;
 
 $last_matchday = 0;
 
-$export= '';
-$export .= 'CSV;'. $league. ';'. $season. $newline;
+$csv_data= '';
+$csv_data .= 'CSV;'. $league. ';'. $season. $newline;
 
 $i = 0;
 foreach ($rows_results as $row_result)
@@ -180,32 +163,32 @@ foreach ($rows_results as $row_result)
 	{
 		if ($last_matchday != 0)
 		{
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= ";;". str_replace("\"", "\"\"", $row_result['match_time']). $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= ";;". str_replace("\"", "\"\"", $row_result['match_time']). $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
 		}
 		else
 		{
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= ";;". str_replace("\"", "\"\"", $row_result['match_time']). $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
-			$export .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= ";;". str_replace("\"", "\"\"", $row_result['match_time']). $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
+			$csv_data .= $newline;
 		}
-		$export .= $export_row_users;
+		$csv_data .= $csv_data_row_users;
 		$column = array();
 		$last_matchday = $row_result['matchday'];
 	}
@@ -242,29 +225,31 @@ foreach ($rows_results as $row_result)
 		$column[2] = '';
 		$column[4] = '';
 	}
-	$export .= "\"" . $column[0] . "\";\"" . $column[1] . "\";\"" . $column[2] . "\";\"\";\"" . $column[4] . "\";\"\";\"\";\"\";";
-	if ($export_bets[$row_result['match_no']] == '') 
+	$csv_data .= "\"" . $column[0] . "\";\"" . $column[1] . "\";\"" . $column[2] . "\";\"\";\"" . $column[4] . "\";\"\";\"\";\"\";";
+	if ($csv_data_bets[$row_result['match_no']] == '') 
 	{
-		$export .= $newline;
+		$csv_data .= $newline;
 	}
 	else
 	{
-		$export .= $export_bets[$row_result['match_no']];
+		$csv_data .= $csv_data_bets[$row_result['match_no']];
 	}
 	$column = array();
 	$i++;
 }
 
-if (isset($_POST['send']))
-{
-	$fp = fopen($path_attachment , "b");
-	ftruncate ($fp, 0);
-	rewind($fp);
-	fwrite ($fp, $export);
-	fclose($fp);
-}
-else
-{
-	echo utf8_decode($export);
-	exit;
-}
+// Output the csv file
+$filename = $league_short . '_'. $season. '_Tipps.csv';
+$fp = fopen('php://output', 'w');
+
+header('Content-Type: application/octet-stream');
+header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Cache-Control: private', false);
+header('Pragma: public');
+header('Content-Transfer-Encoding: binary');
+
+fwrite($fp, "\xEF\xBB\xBF"); // UTF-8 BOM
+fwrite($fp, $csv_data);
+fclose($fp);

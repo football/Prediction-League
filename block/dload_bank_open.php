@@ -50,14 +50,10 @@ else
 		}
 		$user_rows = $db->sql_fetchrowset($result);
 		$db->sql_freeresult($result);
-		$export_file = $season. '_bank.csv';
 		$newline = "\r\n";
-		header('Pragma: no-cache');
-		header("Content-Type: text/csv; name=\"$export_file\"");
-		header("Content-disposition: attachment; filename=$export_file");
-		$export= '';
-		$export .= sprintf($user->lang['SEASON']) . ' ' . $season. $newline;
-		$export .= sprintf($user->lang['NAME']) . ';' . sprintf($user->lang['SEASON']) . ';' . sprintf($user->lang['LEAGUE']) . ';Saldo;' . $newline;
+		$csv_data= '';
+		$csv_data .= sprintf($user->lang['SEASON']) . ' ' . $season. $newline;
+		$csv_data .= sprintf($user->lang['NAME']) . ';' . sprintf($user->lang['SEASON']) . ';' . sprintf($user->lang['LEAGUE']) . ';Saldo;' . $newline;
 
 		$last_username = '';
 		$sum_saldo = 0.0;
@@ -65,11 +61,11 @@ else
 		{
 			if ($last_username != '' AND $last_username != $user_row['username'])
 			{
-				$export .= str_replace("\"", "\"\"", $last_username) . ';Summe;;' . 
+				$csv_data .= str_replace("\"", "\"\"", $last_username) . ';Summe;;' . 
 						str_replace('.', ',', $sum_saldo) . ';' . $newline;
 				$sum_saldo = 0.0;
 			}
-			$export .= str_replace("\"", "\"\"", $user_row['username']) . ';' . 
+			$csv_data .= str_replace("\"", "\"\"", $user_row['username']) . ';' . 
 						$user_row['season'] . ';' .
 						$user_row['league'] . ';' .
 						str_replace('.', ',', $user_row['saldo']) . ';' . $newline;
@@ -78,11 +74,26 @@ else
 		}
 		if ($last_username != '')
 		{
-			$export .= str_replace("\"", "\"\"", $last_username) . ';Summe;;' . 
+			$csv_data .= str_replace("\"", "\"\"", $last_username) . ';Summe;;' . 
 					str_replace('.', ',', $sum_saldo) . ';' . $newline;
 		}
-		echo utf8_decode($export);
-		exit;
+		// Output the csv file
+		$filename = $season. '_bank.csv';
+		$fp = fopen('php://output', 'w');
+		
+		header('Content-Type: application/octet-stream');
+		header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Cache-Control: private', false);
+		header('Pragma: public');
+		header('Content-Transfer-Encoding: binary');
+		
+		fwrite($fp, "\xEF\xBB\xBF"); // UTF-8 BOM
+		
+		fwrite($fp, utf8_decode($csv_data));
+		fclose($fp);
+		exit_handler();
 	}
 }
 ?>

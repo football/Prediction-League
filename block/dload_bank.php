@@ -16,7 +16,7 @@ if ( !$this->auth->acl_get('u_use_football') )
 }
 
 $action='';
-	$phpbb_root_path = './../../';
+$phpbb_root_path = './../../';
 
 if (!$season OR !$league)
 {
@@ -90,14 +90,10 @@ else
 			}
 			$user_rows = $db->sql_fetchrowset($result);
 			$db->sql_freeresult($result);
-			$export_file = $league_short . '_' . $season . '_bank.csv';
 			$newline = "\r\n";
-			header('Pragma: no-cache');
-			header("Content-Type: text/csv; name=\"$export_file\"");
-			header("Content-disposition: attachment; filename=$export_file");
-			$export= '';
-			$export .= $league_name . ' ' . sprintf($user->lang['SEASON']) . ' ' . $season. $newline;
-			$export .= sprintf($user->lang['NAME']) . ';' . $config['football_win_name'] . ';' . sprintf($user->lang['BET_POINTS']) . ';' . 
+			$csv_data= '';
+			$csv_data .= $league_name . ' ' . sprintf($user->lang['SEASON']) . ' ' . $season. $newline;
+			$csv_data .= sprintf($user->lang['NAME']) . ';' . $config['football_win_name'] . ';' . sprintf($user->lang['BET_POINTS']) . ';' . 
 						sprintf($user->lang['DEPOSITED']) . ';' . sprintf($user->lang['DEPOSIT']) . ';' . sprintf($user->lang['WINS']) . ';' . 
 						sprintf($user->lang['PAID']) . ';' . sprintf($user->lang['PAYOUT']) . ';' . $newline;
 
@@ -118,7 +114,7 @@ else
 					$no_cash_wins = '';
 					$no_cash_paid = '';
 				}
-				$export .= str_replace("\"", "\"\"", $user_row['username']) . ';' . 
+				$csv_data .= str_replace("\"", "\"\"", $user_row['username']) . ';' . 
 							str_replace('.', ',', $user_row['user_points']) . ';' .
 							str_replace('.', ',', $user_row['bet_points']) . $no_cash_bet_points . ';' .
 							str_replace('.', ',', $user_row['deposit']) . $no_cash_deposit . ';' .
@@ -127,9 +123,24 @@ else
 							str_replace('.', ',', $user_row['paid']) . $no_cash_paid . ';' .
 							str_replace('.', ',', $user_row['new_pay']) . ';' . $newline;
 			}
-			echo utf8_decode($export);
-			exit;
+
+			// Output the csv file
+			$filename = $league_short . '_' . $season . '_bank.csv';
+			$fp = fopen('php://output', 'w');
+			
+			header('Content-Type: application/octet-stream');
+			header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Cache-Control: private', false);
+			header('Pragma: public');
+			header('Content-Transfer-Encoding: binary');
+			
+			fwrite($fp, "\xEF\xBB\xBF"); // UTF-8 BOM
+			
+			fwrite($fp, utf8_decode($csv_data));
+			fclose($fp);
+			exit_handler();
 		}
 	}
 }
-?>
