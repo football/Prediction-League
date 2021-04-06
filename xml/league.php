@@ -40,26 +40,37 @@ if (!defined('IN_PHPBB'))
 	}
 	
 	$download = $request->variable('d', false);
-	$string = xml_data($season, $league);
+	$xml_string = xml_data($season, $league);
 	
-	if ( $string == '')
+	if ( $xml_string == '')
 	{
 		trigger_error('Fehler! Die XML-Datei konnte nicht erzeugt werden.');
 	}
 
 	if ($download)
 	{
-		// Download header
+		// Download XML-File
+		$filename = 'league_' . $season . '_' . $league . '.xml';
+		$fp = fopen('php://output', 'w');
+		
 		header('Pragma: no-cache');
-		header('Content-Type: application/xml name=\"league_' . $season . '_' . $league . '.xml');
-		header('Content-disposition: attachment; filename=league_' . $season . '_' . $league . '.xml');
+		header("Content-Type: application/xml name=\"" . basename($filename) . "\"");
+		header("Content-disposition: attachment; filename=\"" . basename($filename) . "\"");
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Cache-Control: private', false);
+		header('Pragma: public');
+		
+		fwrite($fp, $xml_string);
+		fclose($fp);
+		exit_handler();
 	}
 	else
 	{
 		// XML header
 		header ("content-type: text/xml");
+		echo $xml_string;
 	}
-	echo $string;
 }
 
 function xml_data($season, $league)
